@@ -87,6 +87,7 @@
     <Compile Include="Vec2.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="AnimationSpriteCustom.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

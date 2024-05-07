@@ -8,9 +8,9 @@ using GXPEngine.Core;
 using TiledMapParser;
 
 /*
-*Same as a AnimationSpriteCustom class, but does the animtion logic.
+*Same as a AnimationSprite class, but does the animtion logic.
 *This class also allows an animated sprite or an animated sprite that acts like sprite to have
-*their properties such as image source name, scale, frame and more to be customized (from Tiled).  
+*their properties such as image source name, scale, frame and more to be customized from Tiled.  
 */
 public class AnimationSpriteCustom : AnimationSprite
 {
@@ -45,33 +45,6 @@ public class AnimationSpriteCustom : AnimationSprite
         }
     }
 
-
-    public AnimationSpriteCustom(string filenName, int columns, int rows, TiledObject obj = null) :
-    base(filenName, columns, rows, obj.GetIntProperty("i_numberOfFrame", 1), obj.GetBoolProperty("i_textureKeepInCache", false)
-        , obj.GetBoolProperty("p_hasCollision", false))
-    {
-        singleFrameID = obj.GetIntProperty("i_singleFrameID", 1);
-        SetNextFrameDelay(obj.GetIntProperty("i_nextFrameDelay", 1));
-        id = obj.GetStringProperty("f_theID", "none");
-        groupID = obj.GetStringProperty("f_theGroupID", "");
-
-        if (singleFrameID != -1)
-        {
-            SetFrame(singleFrameID);
-        }
-
-        else
-        {
-            SetAnimationCycle(obj.GetIntProperty("i_startFrame", 1), obj.GetIntProperty("i_startNumberOfFrames", 1));
-        }
-
-        if (obj.GetBoolProperty("p_hasCollision", false) == true && obj.GetBoolProperty("p_isTrigger", false))
-        {
-            collider.isTrigger = true;
-        }
-
-    }
-
     protected virtual void Update()
     {
         DoAnimation();
@@ -86,6 +59,7 @@ public class AnimationSpriteCustom : AnimationSprite
         Animate();
     }
 
+    //set the animmation delay
     void SetNextFrameDelay(int delay)
     {
         if (delay > 255)
