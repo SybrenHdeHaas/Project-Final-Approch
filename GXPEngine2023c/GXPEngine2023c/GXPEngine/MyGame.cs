@@ -5,20 +5,9 @@ using System.Drawing;                           // System.Drawing contains drawi
 public class MyGame : Game {
 	public MyGame() : base(800, 600, false)     // Create a window that's 800x600 and NOT fullscreen
 	{
-		// Draw some things on a canvas:
-		EasyDraw canvas = new EasyDraw(800, 600);
-		canvas.Clear(Color.MediumPurple);
-		canvas.Fill(Color.Yellow);
-		canvas.Ellipse(width / 2, height / 2, 200, 200);
-		canvas.Fill(50);
-		canvas.TextSize(32);
-		canvas.TextAlign(CenterMode.Center, CenterMode.Center);
-		canvas.Text("Welcome!", width / 2, height / 2);
-
-		// Add the canvas to the engine to display it:
-		AddChild(canvas);
-		Console.WriteLine("MyGame initialized");
-	}
+        Level theLevel = new Level("map1.tmx");
+        AddChild(theLevel);
+    }
 
 	// For every game object, Update is called every frame, by the engine:
 	void Update() {
