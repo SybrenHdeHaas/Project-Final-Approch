@@ -19,7 +19,7 @@ public class Level : GameObject
     float boundaryValueX; //Should be width / 2 to display the player at the center of the screen
     float boundaryValueY; //Should be height / 2 to display the player at the center of the screen
 
-    List<Fan> fanList = new List<Fan>();
+    Dictionary<string, Fan> fanList = new Dictionary<string, Fan>();
     List<FanArea> fanAreaList = new List<FanArea>();
     public Level(string theMapfileName)
     {
@@ -38,17 +38,18 @@ public class Level : GameObject
 
         //find the player object
         thePlayer = FindObjectOfType<Player>();
+        thePlayer.UpdatePos();
 
 
         //Extracting all Fan objects
         foreach (Fan theFan in FindObjectsOfType<Fan>())
         {
-            fanList.Add(theFan);
+            fanList.Add(theFan.id, theFan);
         }
 
         foreach (FanArea theFanArea in FindObjectsOfType<FanArea>())
         {
-            theFanArea.visible = false;
+         //   theFanArea.visible = false;
             fanAreaList.Add(theFanArea);
         }
 
@@ -65,8 +66,11 @@ public class Level : GameObject
             UseCamera();
         }
 
+        thePlayer.ResetFanVelocityList();
         CheckFanAreas();
     }
+
+
 
     void CheckFanAreas()
     {
@@ -74,7 +78,12 @@ public class Level : GameObject
         {
             if (SharedFunctions.IntersectsAnimationSpriteCustom(theFanArea, thePlayer))
             {
-                Console.WriteLine("fan player meet");
+                Fan theFan;
+                if (fanList.TryGetValue(theFanArea.TheFanID, out theFan))
+                {
+                    thePlayer.AddFanVelocity(theFan.GetVelocity());
+                    Console.WriteLine(theFan.GetVelocity());
+                }
             }
         }
     }
@@ -171,6 +180,7 @@ public class Level : GameObject
                 }
             }
         }
+
         background.Freeze(); //Freeze all the background tiles. Creating better performance
     }
 }

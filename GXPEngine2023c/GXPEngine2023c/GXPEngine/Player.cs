@@ -18,10 +18,44 @@ public class Player : AnimationSpriteCustom
     private Boolean inshell;
     private Boolean onGround;
 
+
+    List<Vec2> fanVelocityList = new List<Vec2>();
+    Vec2 fanVelocity;
+
+    Vec2 position;
+
+    float friction = 0.5f;
+
     public Player(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
         index = obj.GetIntProperty("int_index", 1);
         SetAnimationCycle(0, 1);
+    }
+
+    public void UpdatePos()
+    {
+        position.x = x;
+        position.y = y;
+    }
+
+    public void ResetFanVelocityList()
+    {
+        fanVelocityList.Clear();
+    }
+
+    public void AddFanVelocity(Vec2 theFanVelocity)
+    {
+        fanVelocityList.Add(theFanVelocity);
+    }
+
+    void CalcFanVeclotiy()
+    {
+        fanVelocity.x = 0;
+        fanVelocity.y = 0;
+        foreach (Vec2 theFanVelocity in fanVelocityList)
+        {
+            fanVelocity += theFanVelocity;
+        }
     }
 
 
@@ -51,24 +85,12 @@ public class Player : AnimationSpriteCustom
 
     private void Moving()
     {
-        if (!inshell)
-        {
-
-            if (Input.GetKey(Key.D)) { acceleration.x = 1; }
-            if (Input.GetKey(Key.A)) { acceleration.x = -1; }
-
-        }
-
         velocity += acceleration;
-
-        if (velocity.x >= maxSpeed) { velocity.x = maxSpeed; }
-        if (velocity.x <= -maxSpeed) { velocity.x = -maxSpeed; }
-
-        if (velocity.x >= 0.15f) { acceleration.x -= 0.1f; }
-        if (velocity.x <= -0.15f) { acceleration.x += 0.1f; }
-        if (velocity.x > -0.15f && velocity.x < 0.15f) { velocity.x = 0; acceleration.x = 0; }
-
-        Move(velocity.x, velocity.y);
+        CalcFanVeclotiy();
+        velocity += fanVelocity;
+        position += velocity;
+        x = position.x;
+        y = position.y;
     }
 
     private void shellState()
@@ -83,7 +105,6 @@ public class Player : AnimationSpriteCustom
 
             }
 
-
             if (!inshell)
             {
                 SetAnimationCycle(0, 1);
@@ -91,15 +112,34 @@ public class Player : AnimationSpriteCustom
                 if (Input.GetKey(Key.S)) { inshell = true; }
 
             }
+
+            if (Input.GetKey(Key.A) == true)
+            {
+                acceleration = new Vec2(-1, 0);
+                acceleration += velocity * -friction;
+            }
+
+            if (Input.GetKey(Key.D) == true)
+            {
+                acceleration = new Vec2(1, 0);
+                acceleration += velocity * -friction;
+            }
+
+            //no player move control so no acceleration
+            if (Input.GetKey(Key.A) == false && Input.GetKey(Key.D) == false)
+            {
+                acceleration = new Vec2(0, 0);
+                acceleration += velocity * -friction;
+            }
+
         }
 
         if (index == 1)
         {
-
             if (inshell && Input.GetKey(Key.I)) { inshell = false; }
             if (!inshell && Input.GetKey(Key.K)) { inshell = true; }
-
         }
+
     }
     void Update()
     {

@@ -53,7 +53,7 @@ public class AnimationSpriteCustom : AnimationSprite
         singleFrameID = obj.GetIntProperty("int_singleFrameID", 1);
         SetNextFrameDelay(obj.GetIntProperty("int_nextFrameDelay", 1));
 
-        id = obj.GetStringProperty("float_theID", "none");
+        id = obj.GetStringProperty("string_theID", "none");
         groupID = obj.GetStringProperty("f_theGroupID", "");
 
         if (singleFrameID != -1)

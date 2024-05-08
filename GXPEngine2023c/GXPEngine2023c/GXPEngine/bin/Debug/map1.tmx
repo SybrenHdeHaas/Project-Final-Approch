@@ -14,7 +14,7 @@
  </tileset>
  <layer id="1" name="Tile Layer 1" width="40" height="40">
   <data encoding="csv">
-0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -106,12 +106,12 @@
   </properties>
   <object id="9" name="test fan" type="Fan" gid="2" x="12.333" y="230.334" width="129" height="155.667">
    <properties>
-    <property name="float_theForce" type="float" value="3"/>
-    <property name="int_theDirection" type="int" value="1"/>
-    <property name="string_fanID" value="fan1"/>
+    <property name="float_theForce" type="float" value="0.6"/>
+    <property name="int_theDirection" type="int" value="2"/>
+    <property name="string_theID" value="fan1"/>
    </properties>
   </object>
-  <object id="4" name="Fan area1" type="FanArea" gid="3" x="164.788" y="429.228" width="217.333" height="182.833">
+  <object id="4" name="Fan area1" type="FanArea" gid="3" x="196.454" y="502.228" width="205.333" height="177.5">
    <properties>
     <property name="string_fanID" value="fan1"/>
    </properties>

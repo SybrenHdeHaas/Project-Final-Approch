@@ -11,8 +11,7 @@ public class Fan : AnimationSpriteCustom
     Vec2 pushVelocity; //any object impacted by fan would be applied with this velocity if the fan is on
     float theForce;
     int theDirection;
-    bool isOn;
-    string theID;
+    bool isOn = true;
     public Fan(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
         theForce = obj.GetFloatProperty("float_theForce", 1);
