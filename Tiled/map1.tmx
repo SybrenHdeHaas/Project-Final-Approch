@@ -127,7 +127,7 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="11" name="Fan area1" type="FanArea" gid="3" x="686" y="381.917" width="146.666" height="42.833">
+  <object id="11" name="Fan area2" type="FanArea" gid="3" x="686" y="381.917" width="146.666" height="42.833">
    <properties>
     <property name="string_fanID" value="fan1"/>
    </properties>
