@@ -64,9 +64,9 @@ namespace GXPEngine
             if (velocity.x >= maxSpeed) { velocity.x = maxSpeed; }
             if (velocity.x <= -maxSpeed) { velocity.x = -maxSpeed; }
 
-            if (velocity.x >= 0.25f) { acceleration.x -= 0.1f; }
-            if (velocity.x <= -0.25f) { acceleration.x += 0.1f; }
-            if (velocity.x > -0.25f && velocity.x < 0.25f) { velocity.x = 0; acceleration.x = 0; }
+            if (velocity.x >= 0.15f) { acceleration.x -= 0.1f; }
+            if (velocity.x <= -0.15f) { acceleration.x += 0.1f; }
+            if (velocity.x > -0.15f && velocity.x < 0.15f) { velocity.x = 0; acceleration.x = 0; }
 
             Move(velocity.x, velocity.y);
         }
