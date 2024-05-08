@@ -18,6 +18,9 @@ public class Level : GameObject
     //Determine the position the player will be displayed in the game camera
     float boundaryValueX; //Should be width / 2 to display the player at the center of the screen
     float boundaryValueY; //Should be height / 2 to display the player at the center of the screen
+
+    List<Fan> fanList = new List<Fan>();
+    List<FanArea> fanAreaList = new List<FanArea>();
     public Level(string theMapfileName)
     {
         Map mapData = MapParser.ReadMap(theMapfileName);
@@ -31,14 +34,22 @@ public class Level : GameObject
         loader.autoInstance = true;
         loader.rootObject = this;
         loader.LoadImageLayers();
-        loader.LoadObjectGroups(0);
+        loader.LoadObjectGroups(0); //loading game objects
 
         //find the player object
         thePlayer = FindObjectOfType<Player>();
-        /*
-        GameData.thePlayer = thePlayer;
-        thePlayer.setJumpHeightAndSpeed(GameData.playerJumpHeightAndSpeed);
-        */
+
+
+        //Extracting all Fan objects
+        foreach (Fan theFan in FindObjectsOfType<Fan>())
+        {
+            fanList.Add(theFan);
+        }
+
+        foreach (FanArea theFanArea in FindObjectsOfType<FanArea>())
+        {
+            fanAreaList.Add(theFanArea);
+        }
 
         //Setting up the camera boundary (player at center for these values)
         boundaryValueX = game.width / 2;
