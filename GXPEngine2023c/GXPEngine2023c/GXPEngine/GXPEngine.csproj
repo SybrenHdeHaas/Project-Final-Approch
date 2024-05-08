@@ -82,10 +82,10 @@
     <Compile Include="GXPEngine\FMOD\FMODSoundSystem.cs" />
     <Compile Include="GXPEngine\SoLoud\Soloud.cs" />
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
-    <Compile Include="Tile.cs" />
     <Compile Include="Vec2.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Tile.cs" />
     <Compile Include="AnimationSpriteCustom.cs" />
   </ItemGroup>
   <ItemGroup>
