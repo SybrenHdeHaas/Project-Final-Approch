@@ -11,8 +11,8 @@ public class MyGame : Game {
         Level theLevel = new Level("map1.tmx");
         AddChild(theLevel);
 
-		player1 = new Player(0);
-		AddChild(player1);
+	//	player1 = new Player(0);
+//		AddChild(player1);
 
     }
 

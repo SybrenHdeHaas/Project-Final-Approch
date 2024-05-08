@@ -24,7 +24,6 @@ public class AnimationSpriteCustom : AnimationSprite
     public string id;     //a unique id a gameobject can have (for help finding a specific gameobject)
     public string groupID; //a group id a gameobject can have (for help finding a specific gameobject group)
 
-
     //constrcutor for tile class
     public AnimationSpriteCustom(string filenName, float scaleX, float scaleY, int singleFrameID, int columns, int rows,
         int numberOfFrames, int startFrame, int endFrame, int nextFrameDelay, bool textureKeepInCache, bool hasCollision) :
@@ -51,9 +50,10 @@ public class AnimationSpriteCustom : AnimationSprite
     base(filenName, columns, rows, obj.GetIntProperty("i_numberOfFrame", 1), obj.GetBoolProperty("i_textureKeepInCache", false)
     , obj.GetBoolProperty("p_hasCollision", false))
     {
-        singleFrameID = obj.GetIntProperty("i_singleFrameID", 1);
-        SetNextFrameDelay(obj.GetIntProperty("i_nextFrameDelay", 1));
-        id = obj.GetStringProperty("f_theID", "none");
+        singleFrameID = obj.GetIntProperty("int_singleFrameID", 1);
+        SetNextFrameDelay(obj.GetIntProperty("int_nextFrameDelay", 1));
+
+        id = obj.GetStringProperty("float_theID", "none");
         groupID = obj.GetStringProperty("f_theGroupID", "");
 
         if (singleFrameID != -1)

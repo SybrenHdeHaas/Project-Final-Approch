@@ -84,6 +84,7 @@
     <Compile Include="GXPEngine\FMOD\FMODSoundSystem.cs" />
     <Compile Include="GXPEngine\SoLoud\Soloud.cs" />
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
+    <Compile Include="SharedFunctions.cs" />
     <Compile Include="Vec2.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Player.cs" />

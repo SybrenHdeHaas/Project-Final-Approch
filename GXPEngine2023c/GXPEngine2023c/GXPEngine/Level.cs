@@ -48,6 +48,7 @@ public class Level : GameObject
 
         foreach (FanArea theFanArea in FindObjectsOfType<FanArea>())
         {
+            theFanArea.visible = false;
             fanAreaList.Add(theFanArea);
         }
 
@@ -62,6 +63,19 @@ public class Level : GameObject
         if (thePlayer != null)
         {
             UseCamera();
+        }
+
+        CheckFanAreas();
+    }
+
+    void CheckFanAreas()
+    {
+        foreach (FanArea theFanArea in fanAreaList)
+        {
+            if (SharedFunctions.IntersectsAnimationSpriteCustom(theFanArea, thePlayer))
+            {
+                Console.WriteLine("fan player meet");
+            }
         }
     }
 
