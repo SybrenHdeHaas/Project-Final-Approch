@@ -25,6 +25,7 @@ public class AnimationSpriteCustom : AnimationSprite
     public string groupID; //a group id a gameobject can have (for help finding a specific gameobject group)
 
 
+    //constrcutor for tile class
     public AnimationSpriteCustom(string filenName, float scaleX, float scaleY, int singleFrameID, int columns, int rows,
         int numberOfFrames, int startFrame, int endFrame, int nextFrameDelay, bool textureKeepInCache, bool hasCollision) :
         base(filenName, columns, rows, numberOfFrames, textureKeepInCache, hasCollision)
@@ -42,6 +43,32 @@ public class AnimationSpriteCustom : AnimationSprite
         else
         {
             SetAnimationCycle(startFrame, endFrame);
+        }
+    }
+
+    //contructor for game objects
+    public AnimationSpriteCustom(string filenName, int columns, int rows, TiledObject obj = null) :
+    base(filenName, columns, rows, obj.GetIntProperty("i_numberOfFrame", 1), obj.GetBoolProperty("i_textureKeepInCache", false)
+    , obj.GetBoolProperty("p_hasCollision", false))
+    {
+        singleFrameID = obj.GetIntProperty("i_singleFrameID", 1);
+        SetNextFrameDelay(obj.GetIntProperty("i_nextFrameDelay", 1));
+        id = obj.GetStringProperty("f_theID", "none");
+        groupID = obj.GetStringProperty("f_theGroupID", "");
+
+        if (singleFrameID != -1)
+        {
+            SetFrame(singleFrameID);
+        }
+
+        else
+        {
+            SetAnimationCycle(obj.GetIntProperty("i_startFrame", 1), obj.GetIntProperty("i_startNumberOfFrames", 1));
+        }
+
+        if (obj.GetBoolProperty("p_hasCollision", false) == true && obj.GetBoolProperty("p_isTrigger", false))
+        {
+            collider.isTrigger = true;
         }
     }
 

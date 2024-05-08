@@ -9,13 +9,26 @@
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "map1.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 1430,
-                "y": 1471
+                "x": 296,
+                "y": 202.33333333333334
             }
+        },
+        "map1.tmx#Fan area": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#fan": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#placeholdertile1": {
+            "scaleInDock": 1
         },
         "placeholdertile1.tsx": {
             "scaleInDock": 1,
@@ -31,18 +44,18 @@
     "map.tileWidth": 64,
     "map.width": 40,
     "openFiles": [
-        "map1.tmx",
-        "placeholdertile1.tsx"
+        "map1.tmx"
     ],
     "project": "final-approach.tiled-project",
+    "property.type": "string",
     "recentFiles": [
-        "placeholdertile1.tsx",
-        "map1.tmx"
+        "map1.tmx",
+        "placeholdertile1.tsx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 64,
-        "width": 64
+        "height": 400,
+        "width": 400
     }
 }
