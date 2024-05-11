@@ -18,11 +18,45 @@ namespace GXPEngine
         private int index;
         private Boolean inshell;
         private Boolean onGround;
+        private Detection detectionRange = new Detection();
         
         public Player(int index) : base("Player.png", 2, 1) 
         {
+            SetOrigin(width / 2, height / 2);
             Animate(0);
+            AddChild(detectionRange);
+            detectionRange.scale = 2.5f;
+            
         }
+
+
+        private void ShellUpdate() 
+        {
+            if (inshell) 
+            {
+                detectionRange.scaleY = 1.25f;
+                detectionRange.y = 16f;
+            }
+            if (!inshell) 
+            { 
+                detectionRange.scaleY = 2.5f;
+                detectionRange.y = 0;
+            }
+        
+        
+        
+        }
+
+
+        private void CollisionDetection() 
+        { 
+            
+        
+        
+        
+        
+        }
+
 
 
         private void Actions()
@@ -68,7 +102,7 @@ namespace GXPEngine
             if (velocity.x <= -0.15f) { acceleration.x += 0.1f; }
             if (velocity.x > -0.15f && velocity.x < 0.15f) { velocity.x = 0; acceleration.x = 0; }
 
-            Move(velocity.x, velocity.y);
+            MoveUntilCollision(velocity.x, velocity.y);
         }
 
         private void shellState()
@@ -79,7 +113,7 @@ namespace GXPEngine
                 {
                     SetCycle(1, 1);
                     
-                    if (Input.GetKey(Key.W)) { inshell = false; } 
+                    if (Input.GetKey(Key.W)) { inshell = false; ShellUpdate(); } 
 
                 }
 
@@ -88,7 +122,7 @@ namespace GXPEngine
                 {
                     SetCycle(0, 1);
 
-                    if (Input.GetKey(Key.S)) { inshell = true; } 
+                    if (Input.GetKey(Key.S)) { inshell = true; ShellUpdate(); } 
 
                 }
             }

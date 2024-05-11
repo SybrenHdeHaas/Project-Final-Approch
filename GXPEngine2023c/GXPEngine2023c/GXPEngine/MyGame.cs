@@ -13,6 +13,7 @@ public class MyGame : Game {
 
 		player1 = new Player(0);
 		AddChild(player1);
+		player1.SetXY(64, 64);
 
     }
 
