@@ -121,15 +121,24 @@ public class Player : AnimationSpriteCustom
 
             }
 
-        }
-        
+            //no player move control so no acceleration
+            if (Input.GetKey(Key.A) == false && Input.GetKey(Key.D) == false && Input.GetKey(Key.W) == false)
+            {
+                acceleration = new Vec2(0, 0);
+                acceleration += velocity * -friction;
+            }
 
-        //no player move control so no acceleration
-        if (Input.GetKey(Key.A) == false && Input.GetKey(Key.D) == false && Input.GetKey(Key.W) == false)
+        }
+
+        if (inshell) 
         {
             acceleration = new Vec2(0, 0);
-            acceleration += velocity * -friction;
+            velocity += velocity * -friction;
+
+
         }
+        
+        
 
 
         velocity += acceleration;

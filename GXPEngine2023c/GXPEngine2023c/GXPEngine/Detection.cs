@@ -17,7 +17,9 @@ internal class Detection : Sprite
     { 
         GameObject[] colls = GetCollisions();
 
-        foreach (GameObject coll in colls) { Console.WriteLine("detectionRange collision"); }
+        foreach (GameObject coll in colls) { 
+            //Console.WriteLine("detectionRange collision"); 
+        }
     
     
     }

@@ -297,7 +297,7 @@ public class ColliderRect : ColliderObject
 
                
                 Vec2 centerOfMass = (Mass * velocity + theTile.Mass * new Vec2(0, 0)) / (Mass + theTile.Mass);
-                Vec2 momentum = centerOfMass - bounciness * (velocity - centerOfMass);
+                Vec2 momentum = -bounciness * velocity;
                 Vec2 POI = _oldPosition + (col.timeOfImpact * velocity);
                 
 
