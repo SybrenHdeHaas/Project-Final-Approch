@@ -41,12 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColliderObject.cs" />
-    <Compile Include="ColliderRect.cs" />
-    <Compile Include="CollisionInfo.cs" />
+    <Compile Include="Breakable.cs" />
+    <Compile Include="Detection.cs" />
     <Compile Include="Fan.cs" />
     <Compile Include="FanArea.cs" />
-    <Compile Include="GameData.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />
@@ -88,7 +86,6 @@
     <Compile Include="GXPEngine\FMOD\FMODSoundSystem.cs" />
     <Compile Include="GXPEngine\SoLoud\Soloud.cs" />
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
-    <Compile Include="SharedFunctions.cs" />
     <Compile Include="Vec2.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Player.cs" />
