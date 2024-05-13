@@ -13,7 +13,8 @@ using TiledMapParser;
 public class Level : GameObject
 {
     TiledLoader loader;
-    Player thePlayer;
+    Player[] thePlayer;
+
     //Determine the position the player will be displayed in the game camera
     float boundaryValueX; //Should be width / 2 to display the player at the center of the screen
     float boundaryValueY; //Should be height / 2 to display the player at the center of the screen
@@ -36,8 +37,13 @@ public class Level : GameObject
         loader.LoadObjectGroups(0); //loading game objects
 
         //find the player object
-        thePlayer = FindObjectOfType<Player>();
-        thePlayer.UpdatePos();
+        thePlayer = FindObjectsOfType<Player>();
+        foreach (Player player in thePlayer) 
+        { 
+            player.UpdatePos();
+            
+        }
+        
 
 
         //Extracting all Fan objects
@@ -65,7 +71,9 @@ public class Level : GameObject
             UseCamera();
         }
 
-        thePlayer.ResetFanVelocityList();
+
+        foreach (Player player in thePlayer) { player.ResetFanVelocityList(); }
+            
         CheckFanAreas();
     }
 
@@ -75,13 +83,18 @@ public class Level : GameObject
     {
         foreach (FanArea theFanArea in fanAreaList)
         {
-            if (SharedFunctions.IntersectsAnimationSpriteCustom(theFanArea, thePlayer))
+            foreach (Player player in thePlayer)
             {
-                Fan theFan;
-                if (fanList.TryGetValue(theFanArea.TheFanID, out theFan))
+
+                if (SharedFunctions.IntersectsAnimationSpriteCustom(theFanArea, player))
                 {
-                    thePlayer.AddFanVelocity(theFan.GetVelocity());
-                    Console.WriteLine(theFan.GetVelocity());
+                    Fan theFan;
+                    if (fanList.TryGetValue(theFanArea.TheFanID, out theFan))
+                    {
+
+                        player.AddFanVelocity(theFan.GetVelocity());
+                        Console.WriteLine(theFan.GetVelocity());
+                    }
                 }
             }
         }
@@ -95,27 +108,33 @@ public class Level : GameObject
 
         //first determine if the camera moves, then determine the max distance the camera can move
         //handling player moving right
-        if (thePlayer.x + x > boundaryValueX && x > -1 * ((game.width * 6) - 800))
-        {
-            x = boundaryValueX - thePlayer.x;
-        }
 
-        //handling player moving left
-        if (thePlayer.x + x < game.width - boundaryValueX && x < 0)
-        {
-            x = game.width - boundaryValueX - thePlayer.x;
-        }
 
-        //handling player moving up
-        if (thePlayer.y + y < game.height - boundaryValueY && y < 0)
+        foreach (Player player in thePlayer)
         {
-            y = game.height - boundaryValueY - thePlayer.y;
-        }
 
-        //handling player moving down
-        if (thePlayer.y + y > boundaryValueY && y > -1 - (game.height * 2) - 100)
-        {
-            y = boundaryValueY - thePlayer.y;
+            if (player.x + x > boundaryValueX && x > -1 * ((game.width * 6) - 800))
+            {
+                x = boundaryValueX - player.x;
+            }
+
+            //handling player moving left
+            if (player.x + x < game.width - boundaryValueX && x < 0)
+            {
+                x = game.width - boundaryValueX - player.x;
+            }
+
+            //handling player moving up
+            if (player.y + y < game.height - boundaryValueY && y < 0)
+            {
+                y = game.height - boundaryValueY - player.y;
+            }
+
+            //handling player moving down
+            if (player.y + y > boundaryValueY && y > -1 - (game.height * 2) - 100)
+            {
+                y = boundaryValueY - player.y;
+            }
         }
     }
 
