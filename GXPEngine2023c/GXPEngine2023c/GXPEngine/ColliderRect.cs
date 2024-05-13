@@ -7,10 +7,10 @@ using System.Text;
 //physcis for a ball object
 public class ColliderRect : ColliderObject
 {
-    GameObject thisBallObject;
+    AnimationSpriteCustom thisBallObject;
     float width;
     float height;
-    public ColliderRect(GameObject pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
+    public ColliderRect(AnimationSpriteCustom pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
     {
         thisBallObject = pRectObject;
         width = pWidth / 2;
@@ -26,6 +26,7 @@ public class ColliderRect : ColliderObject
         {
             Tile theTile = GameData.tileList[i];
 
+            /*
             float xOverlap = Math.Min(position.x + width, theTile.x + theTile.width) - Math.Max(position.x, theTile.x);
             float yOverlap = Math.Min(position.y + height, theTile.y + theTile.height) - Math.Max(position.y, theTile.y);
 
@@ -100,9 +101,8 @@ public class ColliderRect : ColliderObject
                     }
                 }
             }
+            */
             
-
-            /*
             if (Math.Abs(position.x - theTile.x) <= theTile.width
                 && Math.Abs(position.y - theTile.y) <= theTile.height)
             {
@@ -175,105 +175,6 @@ public class ColliderRect : ColliderObject
                 }
             
             }
-            */
-        }
-    }
-
-    //AABB collision detection with this and tile
-    protected void CheckCollisionTilesUpAndDown(MyGame myGame)
-    {
-        //checking the bricks
-        for (int i = 0; i < GameData.tileList.Count(); i++)
-        {
-            Tile theTile = GameData.tileList[i];
-
-            if (Math.Abs(position.x - theTile.x) <= theTile.width
-                && Math.Abs(position.y - theTile.y) <= theTile.height)
-            {
-                float timeOfImpact = -1;
-
-                if (position.y > theTile.y)
-                {
-                    timeOfImpact = Math.Abs(_oldPosition.y - (theTile.y + theTile.height)) / Math.Abs(_oldPosition.y - position.y);
-
-                    if (timeOfImpact <= 1 && timeOfImpact >= 0)
-                    {
-                        if (wordy1)
-                        {
-                            Console.WriteLine("down: " + timeOfImpact);
-                        }
-
-                        _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theTile, timeOfImpact, 2));
-                    }
-                }
-
-                else if (position.y < theTile.y)
-                {
-                    timeOfImpact = Math.Abs((_oldPosition.y + height) - theTile.y) / Math.Abs(_oldPosition.y - position.y);
-                    if (wordy1)
-                    {
-                        Console.WriteLine("up: " + timeOfImpact);
-                    }
-
-                    if (timeOfImpact <= 1 && timeOfImpact >= 0)
-                    {
-                        _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theTile, timeOfImpact, 1));
-                    }
-                }
-            }
-        }
-    }
-
-    //AABB collision detection with this and tile
-    protected void CheckCollisionTilesLeftAndRight(MyGame myGame)
-    {
-        //checking the bricks
-        for (int i = 0; i < GameData.tileList.Count(); i++)
-        {
-            Tile theTile = GameData.tileList[i];
-
-            if (Math.Abs(position.x - theTile.x) <= theTile.width
-                && Math.Abs(position.y - theTile.y) <= theTile.height)
-            {
-                float timeOfImpact = -1;
-                
-                if (position.x > theTile.x)
-                {
-                    timeOfImpact = Math.Abs((_oldPosition.x + width) - theTile.x) / Math.Abs(position.x - _oldPosition.x);
-                    //  timeOfImpact = Math.Abs(_oldPosition.x - (theTile.x + width)) / Math.Abs(position.x - _oldPosition.x);
-
-                    if (wordy4)
-                    {
-                        Console.WriteLine("right:" + timeOfImpact);
-                    }
-
-                    if (timeOfImpact <= 1 && timeOfImpact >= 0)
-                    {
-
-
-                        _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theTile, timeOfImpact, 4));
-                    }
-                }
-
-                else if (position.x < theTile.x)
-                {
-                    //    timeOfImpact = Math.Abs((_oldPosition.x + width) - theTile.x) / Math.Abs(position.x - _oldPosition.x);
-                    timeOfImpact = Math.Abs(_oldPosition.x - (theTile.x + theTile.width)) / Math.Abs(position.x - _oldPosition.x);
-
-                    if (wordy4)
-                    {
-                        Console.WriteLine("left: " + timeOfImpact);
-                    }
-
-                    if (timeOfImpact <= 1 && timeOfImpact >= 0)
-                    {
-
-                        _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theTile, timeOfImpact, 3));
-                    }
-                }
-
-            }
-
 
         }
     }
@@ -319,7 +220,7 @@ public class ColliderRect : ColliderObject
                         Console.WriteLine("resolving down");
                     }
 
-                    position.y += POI.y - position.y;
+                    position.y = POI.y - thisBallObject.height;
                     velocity.y = momentum.y;
                 }
 

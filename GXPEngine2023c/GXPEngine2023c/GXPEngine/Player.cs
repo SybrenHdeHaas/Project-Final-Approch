@@ -145,11 +145,13 @@ public class Player : AnimationSpriteCustom
 
     }
 
+  
     void UpdateCollision()
     {
         playerCollision.Position = position;
         playerCollision.Velocity = velocity;
     }
+  
 
     void Update()
     {
