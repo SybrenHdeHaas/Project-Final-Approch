@@ -21,7 +21,7 @@ internal class Breakable : Sprite
     {
         if (Input.GetKey(Key.G)) {
             Console.WriteLine(x);
-            Console.WriteLine(detectionRange.x);
+            
         }
         
         

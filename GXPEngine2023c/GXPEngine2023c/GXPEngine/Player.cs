@@ -102,7 +102,12 @@ namespace GXPEngine
             if (velocity.x <= -0.15f) { acceleration.x += 0.1f; }
             if (velocity.x > -0.15f && velocity.x < 0.15f) { velocity.x = 0; acceleration.x = 0; }
 
-            MoveUntilCollision(velocity.x, velocity.y);
+
+            
+
+            x += velocity.x;
+            y += velocity.y;
+
         }
 
         private void shellState()
@@ -138,9 +143,9 @@ namespace GXPEngine
 
         void Update()
         {
+
             shellState();
             Moving();
-
 
         }
 
