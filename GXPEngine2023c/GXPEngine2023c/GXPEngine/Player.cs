@@ -17,10 +17,7 @@ public class Player : AnimationSpriteCustom
     private Vec2 velocity;
     private Vec2 acceleration;
     private int playerIndex; //renamed from index to playerIndex for better naming. 1 = player1, 2 = player2
-
-
-
-
+    
     private Boolean inshell;
     private Boolean onGround;
 
