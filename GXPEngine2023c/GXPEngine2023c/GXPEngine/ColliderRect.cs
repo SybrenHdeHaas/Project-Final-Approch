@@ -100,7 +100,6 @@ public class ColliderRect : ColliderObject
                     }
                 }
             }
-            
 
             /*
             if (Math.Abs(position.x - theTile.x) <= theTile.width
@@ -291,15 +290,16 @@ public class ColliderRect : ColliderObject
         
         foreach (CollisionInfo col in _collisionList)
         {
-            //brick resolve logic
             if (col.other is Tile)
             {
 
                 Tile theTile = (Tile)col.other;
 
+               
                 Vec2 centerOfMass = (Mass * velocity + theTile.Mass * new Vec2(0, 0)) / (Mass + theTile.Mass);
                 Vec2 momentum = centerOfMass - bounciness * (velocity - centerOfMass);
                 Vec2 POI = _oldPosition + (col.timeOfImpact * velocity);
+                
 
                 if (col.AABBDirection == 1)
                 {
