@@ -73,14 +73,14 @@ public class ColliderRect : ColliderObject
                     if (position.y < theTile.y)
                     {
                         timeOfImpact = Math.Abs((_oldPosition.y + height) - theTile.y) / Math.Abs(_oldPosition.y - position.y);
-                        if (wordy4)
+                        if (wordy2)
                         {
-                            Console.WriteLine("up: " + timeOfImpact);
+                            Console.WriteLine("down: " + timeOfImpact);
                         }
 
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theTile, timeOfImpact, 1));
+                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theTile, timeOfImpact, 2));
                         }
                     }
 
@@ -92,10 +92,10 @@ public class ColliderRect : ColliderObject
                         {
                             if (wordy2)
                             {
-                                Console.WriteLine("down: " + timeOfImpact);
+                                Console.WriteLine("up: " + timeOfImpact);
                             }
 
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theTile, timeOfImpact, 2));
+                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theTile, timeOfImpact, 1));
                         }
                     }
                 }
@@ -180,7 +180,7 @@ public class ColliderRect : ColliderObject
     }
 
     //AABB collision detection with this and tile
-    protected void CheckCollisionTilesUpAndDown(MyGame myGame)
+    /*protected void CheckCollisionTilesUpAndDown(MyGame myGame)
     {
         //checking the bricks
         for (int i = 0; i < GameData.tileList.Count(); i++)
@@ -222,10 +222,10 @@ public class ColliderRect : ColliderObject
                 }
             }
         }
-    }
+    }*/
 
     //AABB collision detection with this and tile
-    protected void CheckCollisionTilesLeftAndRight(MyGame myGame)
+    /*protected void CheckCollisionTilesLeftAndRight(MyGame myGame)
     {
         //checking the bricks
         for (int i = 0; i < GameData.tileList.Count(); i++)
@@ -276,7 +276,7 @@ public class ColliderRect : ColliderObject
 
 
         }
-    }
+    }*/
 
     protected override void ResolveCollision(CollisionInfo coll)
     {

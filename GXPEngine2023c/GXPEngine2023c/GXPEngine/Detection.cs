@@ -1,4 +1,6 @@
 ﻿using GXPEngine;
+using System;
+using System.CodeDom;
 
 internal class Detection : Sprite
 {
@@ -11,7 +13,14 @@ internal class Detection : Sprite
 
 
 
-    private void CollisionCheck() { GameObject[] colls = GetCollisions(); }
+    private void CollisionCheck() 
+    { 
+        GameObject[] colls = GetCollisions();
+
+        foreach (GameObject coll in colls) { Console.WriteLine("detectionRange collision"); }
+    
+    
+    }
 
 
     void Update()

@@ -17,7 +17,7 @@ public class Player : AnimationSpriteCustom
     private Vec2 velocity;
     private Vec2 acceleration;
     private int playerIndex; //renamed from index to playerIndex for better naming. 1 = player1, 2 = player2
-    
+    private Detection detectionRange = new Detection();
     private Boolean inshell;
     private Boolean onGround;
 
@@ -35,6 +35,8 @@ public class Player : AnimationSpriteCustom
         playerIndex = obj.GetIntProperty("int_index", 1);
         SetAnimationCycle(0, 1);
         playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), width, height, true);
+        AddChild(detectionRange);
+        detectionRange.scale = 2.5f;
     }
 
     public void UpdatePos()
@@ -53,7 +55,7 @@ public class Player : AnimationSpriteCustom
         fanVelocityList.Add(theFanVelocity);
     }
 
-    void CalcFanVeclotiy()
+    private void CalcFanVeclotiy()
     {
         fanVelocity.x = 0;
         fanVelocity.y = 0;
@@ -62,6 +64,12 @@ public class Player : AnimationSpriteCustom
             fanVelocity += theFanVelocity;
         }
     }
+
+
+
+
+
+
 
 
     private void Actions()
@@ -90,6 +98,40 @@ public class Player : AnimationSpriteCustom
 
     private void Moving()
     {
+
+        if (!inshell) 
+        {
+            if (Input.GetKey(Key.A) == true)
+            {
+                acceleration = new Vec2(-1, 0);
+                acceleration += velocity * -friction;
+            }
+
+            if (Input.GetKey(Key.D) == true)
+            {
+                acceleration = new Vec2(1, 0);
+                acceleration += velocity * -friction;
+            }
+
+
+            if (Input.GetKey(Key.W) == true)
+            {
+                acceleration += new Vec2(0, -5);
+                acceleration += velocity * -friction;
+
+            }
+
+        }
+        
+
+        //no player move control so no acceleration
+        if (Input.GetKey(Key.A) == false && Input.GetKey(Key.D) == false && Input.GetKey(Key.W) == false)
+        {
+            acceleration = new Vec2(0, 0);
+            acceleration += velocity * -friction;
+        }
+
+
         velocity += acceleration;
         CalcFanVeclotiy();
         velocity += fanVelocity;
@@ -116,24 +158,9 @@ public class Player : AnimationSpriteCustom
 
             }
 
-            if (Input.GetKey(Key.A) == true)
-            {
-                acceleration = new Vec2(-1, 0);
-                acceleration += velocity * -friction;
-            }
+            
 
-            if (Input.GetKey(Key.D) == true)
-            {
-                acceleration = new Vec2(1, 0);
-                acceleration += velocity * -friction;
-            }
-
-            //no player move control so no acceleration
-            if (Input.GetKey(Key.A) == false && Input.GetKey(Key.D) == false)
-            {
-                acceleration = new Vec2(0, 0);
-                acceleration += velocity * -friction;
-            }
+            
 
         }
 
@@ -159,7 +186,14 @@ public class Player : AnimationSpriteCustom
         playerCollision.Step();
         velocity = playerCollision.Velocity;
         position += velocity;
+
+
+
+        
+
         x = position.x;
         y = position.y;
+
+        
     }
 }

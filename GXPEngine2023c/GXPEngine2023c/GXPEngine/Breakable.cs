@@ -19,16 +19,9 @@ internal class Breakable : Sprite
 
     void Update() 
     {
-        if (Input.GetKey(Key.G)) {
+        /*if (Input.GetKey(Key.G)) {
             Console.WriteLine(x);
-            
-        }
-        
-        
-        
-        
-
-
+        }*/
 
     }
 
