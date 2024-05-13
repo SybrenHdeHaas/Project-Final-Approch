@@ -10,26 +10,34 @@ using TiledMapParser;
 
 public class Player : AnimationSpriteCustom
 {
+    public static Vec2 gravity = new Vec2(0, 1);
+
     private float maxSpeed = 2;
+
     private Vec2 velocity;
-    private Vec2 newVelocity;
     private Vec2 acceleration;
-    private int index;
+    private int playerIndex; //renamed from index to playerIndex for better naming. 1 = player1, 2 = player2
+
+
+
+
     private Boolean inshell;
     private Boolean onGround;
 
 
     List<Vec2> fanVelocityList = new List<Vec2>();
     Vec2 fanVelocity;
-
     Vec2 position;
 
     float friction = 0.5f;
 
+    ColliderRect playerCollision; //handles the player's collision
+
     public Player(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
-        index = obj.GetIntProperty("int_index", 1);
+        playerIndex = obj.GetIntProperty("int_index", 1);
         SetAnimationCycle(0, 1);
+        playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), width, height, true);
     }
 
     public void UpdatePos()
@@ -88,14 +96,12 @@ public class Player : AnimationSpriteCustom
         velocity += acceleration;
         CalcFanVeclotiy();
         velocity += fanVelocity;
-        position += velocity;
-        x = position.x;
-        y = position.y;
+        velocity += gravity;
     }
 
     private void shellState()
     {
-        if (index == 0)
+        if (playerIndex == 0)
         {
             if (inshell)
             {
@@ -134,16 +140,29 @@ public class Player : AnimationSpriteCustom
 
         }
 
-        if (index == 1)
+        if (playerIndex == 1)
         {
             if (inshell && Input.GetKey(Key.I)) { inshell = false; }
             if (!inshell && Input.GetKey(Key.K)) { inshell = true; }
         }
 
     }
+
+    void UpdateCollision()
+    {
+        playerCollision.Position = position;
+        playerCollision.Velocity = velocity;
+    }
+
     void Update()
     {
         shellState();
         Moving();
+        UpdateCollision();
+        playerCollision.Step();
+        velocity = playerCollision.Velocity;
+        position += velocity;
+        x = position.x;
+        y = position.y;
     }
 }

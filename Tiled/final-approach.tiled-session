@@ -17,18 +17,22 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 351,
-                "y": 337.5
+                "x": 348,
+                "y": 334.5
             }
         },
         "map1.tmx#Fan area": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#Player": {
             "scaleInDock": 1
         },
         "map1.tmx#fan": {
             "scaleInDock": 1
         },
         "map1.tmx#placeholdertile1": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "placeholdertile1.tsx": {
             "scaleInDock": 1,

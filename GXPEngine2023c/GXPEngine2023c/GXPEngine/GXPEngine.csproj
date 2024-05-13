@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColliderObject.cs" />
+    <Compile Include="ColliderRect.cs" />
+    <Compile Include="CollisionInfo.cs" />
     <Compile Include="Fan.cs" />
     <Compile Include="FanArea.cs" />
+    <Compile Include="GameData.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />

@@ -163,8 +163,9 @@ public class Level : GameObject
                         theTile = new Tile(theTilesSet.Image.FileName, 1, 1, theTileNumber - theTilesSet.FirstGId,
                             theTilesSet.Columns, theTilesSet.Rows, -1, 1, 1, 10, false, true);
                         theTile.x = j * theTile.width;
-                        theTile.y = i * theTile.height;
+                        theTile.y = (i) * theTile.height;
                         AddChild(theTile);
+                        GameData.tileList.Add(theTile);
 
                     }
 
