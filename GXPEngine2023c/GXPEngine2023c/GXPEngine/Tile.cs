@@ -17,12 +17,13 @@ public class Tile : AnimationSpriteCustom
     {
         get
         {
-            return 4 * widthHalf * heightHalf * 1;
+            return 4 * widthHalf * heightHalf;
         }
     }
 
     public Tile(string theImageName, float scaleX, float scaleY, int singleFrameID, int columns, int rows,
         int numberOfFrame, int startFrame, int endFrame, int nextFrameDelay, bool textureKeepInCache, bool hasCollision) :
+        
         base(theImageName, scaleX, scaleY, singleFrameID, columns, rows,
          numberOfFrame, startFrame, endFrame, nextFrameDelay, textureKeepInCache, hasCollision)
     {
