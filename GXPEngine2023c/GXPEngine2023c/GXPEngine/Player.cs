@@ -1,6 +1,7 @@
 ﻿using GXPEngine;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting;
 using TiledMapParser;
 
 public class Player : AnimationSpriteCustom
@@ -8,7 +9,6 @@ public class Player : AnimationSpriteCustom
     public static Vec2 gravity;
     private float gravForce = 0.5f;
 
-    private float maxspeed = 2f;
     private Vec2 playerVelocity = new Vec2();
     private Vec2 velocity;
     private Vec2 acceleration;
@@ -23,13 +23,13 @@ public class Player : AnimationSpriteCustom
     private Boolean[] movementDirection = new Boolean[3];
 
 
-    private float playerMoveVeloctity;
-    private float standUpFriction = 0.5f;
-    private float inShellFriction = 0.1f;
+    private Vec2 frictionForce;
     private float friction;
+    private float standUpFriction = 0.5f; //max speed is now determined by friction. can be overruled by external forces not from the player
+    private float inShellFriction = 0.01f;
+    private float drag = 0.25f; //friction when not touching the ground aswell as up/down movement
+   
 
-
-    private float drag = 0.25f; //friction for up and down movement
 
     ColliderRect playerCollision; //handles the player's collision
 
@@ -99,6 +99,9 @@ public class Player : AnimationSpriteCustom
 
     private void PlayerInput()
     {
+        movementDirection[0] = false;
+        movementDirection[1] = false;
+        movementDirection[2] = false;
 
         if (!inshell)
         {
@@ -108,9 +111,7 @@ public class Player : AnimationSpriteCustom
                 case 0:
 
                     //ARRAY for movement directions
-                    movementDirection[0] = false;
-                    movementDirection[1] = false;
-                    movementDirection[2] = false;
+                    
 
                     if (Input.GetKey(Key.A))
                     {
@@ -129,9 +130,7 @@ public class Player : AnimationSpriteCustom
                     break;
                 case 1:
 
-                    movementDirection[0] = false;
-                    movementDirection[1] = false;
-                    movementDirection[2] = false;
+                   
 
                     if (Input.GetKey(Key.J))
                     {
@@ -158,20 +157,23 @@ public class Player : AnimationSpriteCustom
     }
 
 
+
+
+
     private void Moving(bool[] moveDir)
     {
         Boolean BlockMovementRight = false;
         Boolean BlockMovementLeft = false;
-        
+
 
         if (!inshell)
         {
 
-            if (moveDir[0] && !BlockMovementLeft) 
+            if (moveDir[0] && !BlockMovementLeft)
             {
-                
+
                 acceleration = new Vec2(-1, 0);
-                
+
             }
             if (moveDir[1] && !BlockMovementRight)
             {
@@ -180,7 +182,7 @@ public class Player : AnimationSpriteCustom
             if (moveDir[2])
             {
                 acceleration = new Vec2(0, -25);
-                
+
             }
 
             if (!moveDir[0] && !moveDir[1] && !moveDir[2])
@@ -188,12 +190,11 @@ public class Player : AnimationSpriteCustom
                 acceleration = new Vec2(0, 0);
             }
         }
+        else { acceleration = new Vec2(0, 0); }
 
         if (inshell)
         {
-            
             friction = inShellFriction;
-            
         }
 
         if (!inshell)
@@ -203,37 +204,43 @@ public class Player : AnimationSpriteCustom
 
         CalcFanVeclotiy();
 
+        //fix for infinite small forces
+        if (playerVelocity.x > -0.01f && playerVelocity.x < 0.01f) 
+        { 
+            playerVelocity.x = 0f;
+        }
 
+        if (playerVelocity.y > -0.01f && playerVelocity.y < 0.01f)
+        {
+            playerVelocity.y = 0f;
+        }
+
+
+
+        frictionForce = -friction * playerVelocity;
+        acceleration += frictionForce;
         playerVelocity += acceleration;
 
-        if (playerVelocity.x <= -maxspeed)
-        {
-            playerVelocity.x = -maxspeed;
-            BlockMovementLeft = true;
-
-        }
-        else { BlockMovementLeft = false; }
-
-        if (playerVelocity.x >= maxspeed)
-        {
-            playerVelocity.x = maxspeed;
-            BlockMovementRight = true;
-
-        }
-        else { BlockMovementRight = false; }
-
-        velocity = playerVelocity;
         
-        velocity += fanVelocity;
-        velocity += gravity;
 
+        velocity = playerVelocity + fanVelocity + gravity;
+        if (velocity.x < 0.01f && velocity.x > -0.01f) 
+        {
+            velocity.x = 0f;
+            frictionForce.x = 0f;
+        
+        }
+
+        //movement information
         if (Input.GetKeyDown(Key.G)) 
         { 
-            Console.WriteLine("velocity  {0}, playerVelocity {1},  fanVelocty {2 }, gravity {3}", velocity, playerVelocity,  fanVelocity, gravity);
+            Console.WriteLine("velocity  {0}, playerVelocity {1},  fanVelocty {2}, gravity {3}, frictionForce {4}", velocity, playerVelocity, fanVelocity, gravity, frictionForce);
             Console.WriteLine("blockLeft {0}, blockRight {1}", BlockMovementLeft, BlockMovementRight);
+            Console.WriteLine(friction);
         }
         
     }
+
 
     private void shellState()
     {
