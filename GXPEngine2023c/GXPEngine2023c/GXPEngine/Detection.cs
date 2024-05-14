@@ -10,8 +10,7 @@ public class Detection : Sprite
     ColliderRect playerCollision;
     Player player;
 
-    public Detection() : base("detector.png")
-    public float mass;
+    float mass;
     public Detection(float offSetX, float offSetY, float mass) : base("detector.png")
     {
         
@@ -29,11 +28,16 @@ public class Detection : Sprite
 
     Boolean FloorCheck() 
     {
-        
+      
         GameObject[] colls = GetCollisions();
-        foreach (Tile coll in colls) 
+        
+        foreach (GameObject coll in colls) 
         {
-            if (coll.y > player.y) { return player.OnGround = true; }
+            if (coll is Tile) 
+            {
+                if (coll.y > player.y) { return player.OnGround = true; }
+            }
+            
         }
 
         return player.OnGround = false;
@@ -42,10 +46,12 @@ public class Detection : Sprite
     Boolean CeilingCheck()
     {
         GameObject[] colls = GetCollisions();
-        foreach (Tile coll in colls)
+        foreach (GameObject coll in colls)
         {
-            if (coll.y < player.y) { return player.OnCeiling = true; }
-
+            if (coll is Tile)
+            {
+                if (coll.y < player.y) { return player.OnCeiling = true; }
+            }
         }
 
 

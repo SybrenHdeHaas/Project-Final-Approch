@@ -9,8 +9,15 @@ using System.Text;
 public class ColliderRect : ColliderObject
 {
     GameObject thisBallObject;
-    public float getWidth() { return width; }
-    public float getHeight() { return height; }
+    public float Width { 
+        get { return width; }
+        set { width = value; }
+    }
+    public float Height
+    {
+        get { return height; }
+        set { height = value; }
+    }
     private float width;
     private float height;
     GameObject thisObject;
@@ -123,8 +130,8 @@ public class ColliderRect : ColliderObject
         }
     }
 
-        }
-    }
+        
+    
 
     protected override void ResolveCollision(CollisionInfo coll) //contineu from ColliderObject (fifth step)
     {
