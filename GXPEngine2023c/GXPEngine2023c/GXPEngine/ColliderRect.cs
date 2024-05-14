@@ -8,8 +8,10 @@ using System.Text;
 public class ColliderRect : ColliderObject
 {
     GameObject thisBallObject;
-    float width;
-    float height;
+    public float getWidth() { return width; }
+    public float getHeight() { return height; }
+    private float width;
+    private float height;
     public ColliderRect(GameObject pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
     {
         thisBallObject = pRectObject;

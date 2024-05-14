@@ -1,32 +1,35 @@
 ﻿using GXPEngine;
-using GXPEngine.Managers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 using TiledMapParser;
 
 public class Player : AnimationSpriteCustom
 {
-    public static Vec2 gravity = new Vec2(0, 1);
+    public static Vec2 gravity;
+    private float gravForce = 0.5f;
 
-    private float maxSpeed = 2;
-
+    private float maxspeed = 2f;
+    private Vec2 playerVelocity = new Vec2();
     private Vec2 velocity;
     private Vec2 acceleration;
     private int playerIndex; //renamed from index to playerIndex for better naming. 1 = player1, 2 = player2
     private Detection detectionRange = new Detection();
     private Boolean inshell;
     private Boolean onGround;
-
-
+    private string collisionDirection;
     List<Vec2> fanVelocityList = new List<Vec2>();
-    Vec2 fanVelocity;
-    Vec2 position;
+    private Vec2 fanVelocity;
+    private Vec2 position;
+    private Boolean[] movementDirection = new Boolean[3];
 
-    float friction = 0.5f;
+
+    private float playerMoveVeloctity;
+    private float standUpFriction = 0.5f;
+    private float inShellFriction = 0.1f;
+    private float friction;
+
+
+    private float drag = 0.25f; //friction for up and down movement
 
     ColliderRect playerCollision; //handles the player's collision
 
@@ -35,6 +38,9 @@ public class Player : AnimationSpriteCustom
         playerIndex = obj.GetIntProperty("int_index", 1);
         SetAnimationCycle(0, 1);
         playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), width, height, true);
+        gravity = new Vec2(0, gravForce);
+
+
         AddChild(detectionRange);
         detectionRange.scale = 2.5f;
     }
@@ -66,85 +72,167 @@ public class Player : AnimationSpriteCustom
     }
 
 
-
-
-
-
-
-
-    private void Actions()
+    private void CollisionDirection()
     {
-
-
-
-    }
-
-    private void Pickup()
-    {
-
-
-
-    }
-
-    private void Kick()
-    {
-
-
-
-    }
-
-
-
-
-    private void Moving()
-    {
-
-        if (!inshell) 
+        List<CollisionInfo> coll = playerCollision.GetCollisionList();
+        collisionDirection = "none";
+        foreach (CollisionInfo theCollision in coll)
         {
-            if (Input.GetKey(Key.A) == true)
-            {
-                acceleration = new Vec2(-1, 0);
-                acceleration += velocity * -friction;
-            }
+            if (theCollision.AABBDirection == 1) { collisionDirection = "up"; }
+            else if (theCollision.AABBDirection == 2) { collisionDirection = "down"; }
+            else if (theCollision.AABBDirection == 3) { collisionDirection = "left"; }
+            else if (theCollision.AABBDirection == 4) { collisionDirection = "right"; }
+        }
 
-            if (Input.GetKey(Key.D) == true)
+    }
+
+    private void groundCheck()
+    {
+        if (collisionDirection == "down")
+        {
+            onGround = true;
+        }
+        else onGround = false;
+
+    }
+
+
+    private void PlayerInput()
+    {
+
+        if (!inshell)
+        {
+
+            switch (playerIndex)
+            {
+                case 0:
+
+                    //ARRAY for movement directions
+                    movementDirection[0] = false;
+                    movementDirection[1] = false;
+                    movementDirection[2] = false;
+
+                    if (Input.GetKey(Key.A))
+                    {
+                        movementDirection[0] = true;
+                        
+                    } else { movementDirection[0] = false; }
+                    if (Input.GetKey(Key.D))
+                    {
+                        movementDirection[1] = true;
+                    } else { movementDirection[1] = false; }
+                    if (Input.GetKeyDown(Key.W) && onGround)
+                    {
+                        movementDirection[2] = true;
+                    } else { movementDirection[2] = false; }
+
+                    break;
+                case 1:
+
+                    movementDirection[0] = false;
+                    movementDirection[1] = false;
+                    movementDirection[2] = false;
+
+                    if (Input.GetKey(Key.J))
+                    {
+                        movementDirection[0] = true;
+                    }
+                    else { movementDirection[0] = false; }
+                    if (Input.GetKey(Key.L))
+                    {
+                        movementDirection[1] = true;
+                    }
+                    else { movementDirection[1] = false; }
+                    if (Input.GetKeyDown(Key.I) && onGround)
+                    {
+                        movementDirection[2] = true;
+                    }
+                    else { movementDirection[2] = false; }
+
+                    break;
+            }   
+        }
+
+        Moving(movementDirection);
+
+    }
+
+
+    private void Moving(bool[] moveDir)
+    {
+        Boolean BlockMovementRight = false;
+        Boolean BlockMovementLeft = false;
+        
+
+        if (!inshell)
+        {
+
+            if (moveDir[0] && !BlockMovementLeft) 
+            {
+                
+                acceleration = new Vec2(-1, 0);
+                
+            }
+            if (moveDir[1] && !BlockMovementRight)
             {
                 acceleration = new Vec2(1, 0);
-                acceleration += velocity * -friction;
             }
-
-
-            if (Input.GetKey(Key.W) == true)
+            if (moveDir[2])
             {
-                acceleration += new Vec2(0, -5);
-                acceleration += velocity * -friction;
-
+                acceleration = new Vec2(0, -25);
+                
             }
 
-            //no player move control so no acceleration
-            if (Input.GetKey(Key.A) == false && Input.GetKey(Key.D) == false && Input.GetKey(Key.W) == false)
+            if (!moveDir[0] && !moveDir[1] && !moveDir[2])
             {
                 acceleration = new Vec2(0, 0);
-                acceleration += velocity * -friction;
             }
-
         }
 
-        if (inshell) 
+        if (inshell)
         {
-            acceleration = new Vec2(0, 0);
-            velocity += velocity * -friction;
+            
+            friction = inShellFriction;
+            
+        }
 
+        if (!inshell)
+        {
+            friction = standUpFriction;
+        }
+
+        CalcFanVeclotiy();
+
+
+        playerVelocity += acceleration;
+
+        if (playerVelocity.x <= -maxspeed)
+        {
+            playerVelocity.x = -maxspeed;
+            BlockMovementLeft = true;
 
         }
-        
-        
+        else { BlockMovementLeft = false; }
 
+        if (playerVelocity.x >= maxspeed)
+        {
+            playerVelocity.x = maxspeed;
+            BlockMovementRight = true;
 
-        velocity += acceleration;
-        CalcFanVeclotiy();
+        }
+        else { BlockMovementRight = false; }
+
+        velocity = playerVelocity;
+        
         velocity += fanVelocity;
         velocity += gravity;
+
+        if (Input.GetKeyDown(Key.G)) 
+        { 
+            Console.WriteLine("velocity  {0}, playerVelocity {1},  fanVelocty {2 }, gravity {3}", velocity, playerVelocity,  fanVelocity, gravity);
+            Console.WriteLine("blockLeft {0}, blockRight {1}", BlockMovementLeft, BlockMovementRight);
+        }
+        
     }
 
     private void shellState()
@@ -167,44 +255,54 @@ public class Player : AnimationSpriteCustom
 
             }
 
-            
-
-            
 
         }
 
         if (playerIndex == 1)
         {
-            if (inshell && Input.GetKey(Key.I)) { inshell = false; }
-            if (!inshell && Input.GetKey(Key.K)) { inshell = true; }
+            if (inshell)
+            {
+                SetAnimationCycle(1, 1);
+                if (Input.GetKey(Key.I)) { inshell = false; }
+
+            }
+            if (!inshell)
+            {
+                SetAnimationCycle(0, 1);
+                if (Input.GetKey(Key.K)) { inshell = true; }
+
+            }
         }
 
     }
 
-  
+
     void UpdateCollision()
     {
-        playerCollision.Position = position;
         playerCollision.Velocity = velocity;
+        playerCollision.Position = position;
     }
-  
+
 
     void Update()
     {
-        shellState();
-        Moving();
-        UpdateCollision();
-        playerCollision.Step();
-        velocity = playerCollision.Velocity;
-        position += velocity;
-
-
 
         
+        PlayerInput();
+        shellState();
+        CollisionDirection();
+        groundCheck();
+
+        UpdateCollision();
+        playerCollision.Step();
+
+
+        velocity = playerCollision.Velocity;
+        position += velocity;
 
         x = position.x;
         y = position.y;
 
-        
+
     }
 }

@@ -1,10 +1,10 @@
 ﻿using GXPEngine;
 using System;
-using System.CodeDom;
 
 internal class Detection : Sprite
 {
-
+    private string collisionDirection;
+    public string getCollisionDirection() { return collisionDirection; }
     public Detection() : base("detector.png")
     {
         collider.isTrigger = true;
@@ -13,15 +13,13 @@ internal class Detection : Sprite
 
 
 
-    private void CollisionCheck() 
-    { 
+    private void CollisionCheck()
+    {
         GameObject[] colls = GetCollisions();
+        
+        
 
-        foreach (GameObject coll in colls) { 
-            //Console.WriteLine("detectionRange collision"); 
-        }
-    
-    
+
     }
 
 

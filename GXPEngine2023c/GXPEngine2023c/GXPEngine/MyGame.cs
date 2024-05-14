@@ -4,15 +4,13 @@ using System.Drawing;                           // System.Drawing contains drawi
 
 public class MyGame : Game {
 
-	private Player player1;
+	
 
 	public MyGame() : base(800, 600, false)     // Create a window that's 800x600 and NOT fullscreen
 	{
         Level theLevel = new Level("map1.tmx");
         AddChild(theLevel);
 
-	//	player1 = new Player(0);
-//		AddChild(player1);
 
     }
 

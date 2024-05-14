@@ -183,6 +183,7 @@ public class Level : GameObject
                         theTile.x = j * theTile.width;
                         theTile.y = (i) * theTile.height;
                         AddChild(theTile);
+                        
                         GameData.tileList.Add(theTile);
 
                     }
