@@ -14,11 +14,11 @@
             "scaleInEditor": 1
         },
         "map1.tmx": {
-            "scale": 1,
-            "selectedLayer": 2,
+            "scale": 0.5,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 399.5,
-                "y": 216.5
+                "x": 295,
+                "y": 391
             }
         },
         "map1.tmx#Fan area": {
@@ -33,6 +33,9 @@
         "map1.tmx#placeholdertile1": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "map1.tmx#woodCrate": {
+            "scaleInDock": 1
         },
         "placeholdertile1.tsx": {
             "scaleInDock": 1,

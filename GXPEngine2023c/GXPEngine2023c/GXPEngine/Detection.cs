@@ -2,16 +2,18 @@
 using System;
 using System.CodeDom;
 
-internal class Detection : Sprite
+/* the actual hitbox of player */
+public class Detection : Sprite
 {
-
-    public Detection() : base("detector.png")
+    public float mass;
+    public Detection(float offSetX, float offSetY, float mass) : base("detector.png")
     {
+        x = offSetX;
+        y = offSetY;
         collider.isTrigger = true;
-        SetOrigin(width / 2, height / 2);
+        this.mass = mass;
+
     }
-
-
 
     private void CollisionCheck() 
     { 
@@ -20,15 +22,19 @@ internal class Detection : Sprite
         foreach (GameObject coll in colls) { 
             //Console.WriteLine("detectionRange collision"); 
         }
-    
-    
+    }
+    public float GetX()
+    {
+        return parent.x + x;
     }
 
+    public float GetY() 
+    {
+        return parent.y + y;
+    }
 
     void Update()
     {
-
         CollisionCheck();
-
     }
 }
