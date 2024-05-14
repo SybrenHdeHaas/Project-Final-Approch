@@ -55,31 +55,34 @@ public class ColliderRect : ColliderObject
                     if (position.x < theTile.x)
                     {
                         timeOfImpact = Math.Abs((_oldPosition.x + width) - theTile.x) / Math.Abs(position.x - _oldPosition.x);
-                        Console.WriteLine("pos.x < tile.x {0}",timeOfImpact);
+                        
 
                         if (wordy2)
                         {
                             Console.WriteLine("right:" + timeOfImpact);
                         }
 
-                        if (timeOfImpact <= 1 && timeOfImpact >= 0)
+                        if (timeOfImpact <= 1 && timeOfImpact > 0)
                         {
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theTile, timeOfImpact, 4));
+                            _collisionList.Add(new CollisionInfo(new Vec2(0f, 0f), theTile, timeOfImpact, 4));
                         }
+
+
                     }
                     else
                     {
 
                         timeOfImpact = Math.Abs(_oldPosition.x - (theTile.x + theTile.width)) / Math.Abs(position.x - _oldPosition.x);
-                        Console.WriteLine("pos.x < tile.x else {0}", timeOfImpact);
+                        
+
                         if (wordy2)
                         {
                             Console.WriteLine("left: " + timeOfImpact);
                         }
 
-                        if (timeOfImpact <= 1 && timeOfImpact >= 0)
+                        if (timeOfImpact <= 1 && timeOfImpact > 0)
                         {
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theTile, timeOfImpact, 3));
+                            _collisionList.Add(new CollisionInfo(new Vec2(0f, 0f), theTile, timeOfImpact, 3));
                         }
                     }
                 }
@@ -89,7 +92,7 @@ public class ColliderRect : ColliderObject
                     if (position.y < theTile.y)
                     {
                         timeOfImpact = Math.Abs((_oldPosition.y + height) - theTile.y) / Math.Abs(_oldPosition.y - position.y);
-                        Console.WriteLine("pos.y < tile.y {0}", timeOfImpact);
+                        
                         if (wordy2)
                         {
                             Console.WriteLine("down: " + timeOfImpact);
@@ -104,7 +107,7 @@ public class ColliderRect : ColliderObject
                     else
                     {
                         timeOfImpact = Math.Abs(_oldPosition.y - (theTile.y + theTile.height)) / Math.Abs(_oldPosition.y - position.y);
-                        Console.WriteLine("pos.y < tile.y else {0} ", timeOfImpact);
+                        
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
                             if (wordy2)

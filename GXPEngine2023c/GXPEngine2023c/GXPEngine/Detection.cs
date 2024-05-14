@@ -53,7 +53,7 @@ internal class Detection : Sprite
         CastPlayer();
         FloorCheck();
         
-/*        UpdateCollision();
+/*      UpdateCollision();
         playerCollision.Step();
 
 

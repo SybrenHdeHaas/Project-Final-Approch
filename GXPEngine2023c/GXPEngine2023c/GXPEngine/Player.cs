@@ -6,9 +6,7 @@ using TiledMapParser;
 
 public class Player : AnimationSpriteCustom
 {
-    public static Vec2 gravity;
-    public static Vec2 antiGravity;
-    private float gravForce = 1f;
+
     public Vec2 Velocity 
     { 
       get { return velocity; }
@@ -42,7 +40,7 @@ public class Player : AnimationSpriteCustom
     private Vec2 fanVelocity;
     private Vec2 position;
     private Boolean[] movementDirection = new Boolean[3];
-
+    private Detection detectionRange;
 
     private Vec2 frictionForce;
     private float friction;
@@ -50,9 +48,14 @@ public class Player : AnimationSpriteCustom
     private float inShellFriction = 0.02f;
 
 
+    public static Vec2 gravityForce;
+    public static Vec2 antiGravity;
+    private float gravity = 1f;
 
     private Vec2 dragForce;
-    private float drag = 0.01f; 
+
+    private float drag = 0.01f;
+    
     private int i = 0;
 
 
@@ -69,8 +72,9 @@ public class Player : AnimationSpriteCustom
 
         playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), width, height, true);
 
-        gravity = new Vec2(0, gravForce);
-        antiGravity = new Vec2(0, -gravForce);
+        detectionRange = new Detection();
+        AddChild(detectionRange);
+        detectionRange.scale = 2.5f;
 
 
     }
@@ -140,12 +144,12 @@ public class Player : AnimationSpriteCustom
                 case 0:
 
                     //ARRAY for movement directions
-                    if (Input.GetKey(Key.A) && onGround)
+                    if (Input.GetKey(Key.A))
                     {
                         movementDirection[0] = true;
                         
                     } else { movementDirection[0] = false; }
-                    if (Input.GetKey(Key.D) && onGround)
+                    if (Input.GetKey(Key.D))
                     {
                         movementDirection[1] = true;
 
@@ -159,12 +163,12 @@ public class Player : AnimationSpriteCustom
                 break;
                 case 1:
 
-                    if (Input.GetKey(Key.J) && onGround)
+                    if (Input.GetKey(Key.J))
                     {
                         movementDirection[0] = true;
                     }
                     else { movementDirection[0] = false; }
-                    if (Input.GetKey(Key.L) && onGround)
+                    if (Input.GetKey(Key.L))
                     {
                         movementDirection[1] = true;
                     }
@@ -186,9 +190,6 @@ public class Player : AnimationSpriteCustom
 
     private void Moving(bool[] moveDir)
     {
-        
-
-
         if (!inshell)
         {
 
@@ -232,7 +233,13 @@ public class Player : AnimationSpriteCustom
 
         frictionForce = -friction * playerVelocity;
 
-        acceleration += frictionForce + dragForce + gravity; 
+        if (!onGround) { gravity = 1f; } 
+        if (onGround)  { gravity = 0f; }
+
+
+        gravityForce = new Vec2(0, gravity);
+
+        acceleration += frictionForce + gravityForce; 
 
         playerVelocity += acceleration; 
 
