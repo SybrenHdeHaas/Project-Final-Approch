@@ -185,7 +185,7 @@ public class Player : AnimationSpriteCustom
                         movementDirection[1] = true;
                     }
                     else { movementDirection[1] = false; }
-                    if (Input.GetKeyDown(Key.I) && onGround)
+                    if (Input.GetKeyDown(Key.I) && onGround && !onCeiling)
                     {
                         movementDirection[2] = true;
                     }
@@ -270,7 +270,9 @@ public class Player : AnimationSpriteCustom
             if (inshell)
             {
                 SetAnimationCycle(1, 1);
-
+                detectionRange.scaleX = 2.5f;
+                detectionRange.scaleY = 1.75f;
+                detectionRange.y = 16f;
                 if (Input.GetKey(Key.W)) { inshell = false; }
 
             }
@@ -278,7 +280,9 @@ public class Player : AnimationSpriteCustom
             if (!inshell)
             {
                 SetAnimationCycle(0, 1);
-
+                detectionRange.scaleX = 1.75f;
+                detectionRange.scaleY = 2.5f;
+                detectionRange.y = 0;
                 if (Input.GetKey(Key.S)) { inshell = true; }
 
             }
