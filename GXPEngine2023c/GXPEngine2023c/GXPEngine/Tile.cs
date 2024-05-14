@@ -29,7 +29,6 @@ public class Tile : AnimationSpriteCustom
     {
         widthHalf = width / 2;
         heightHalf = height / 2;
-        Console.WriteLine(theImageName);
     }
 
 }
