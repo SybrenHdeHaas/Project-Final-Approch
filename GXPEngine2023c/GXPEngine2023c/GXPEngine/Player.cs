@@ -196,7 +196,6 @@ public class Player : AnimationSpriteCustom
         }
 
         Moving(movementDirection);
-
     }
 
 
@@ -229,6 +228,9 @@ public class Player : AnimationSpriteCustom
             }
         }
         else { acceleration = new Vec2(0, 0); }
+
+
+
 
         if (inshell)
         {

@@ -9,6 +9,9 @@ public class Detection : Sprite
     public string getCollisionDirection() { return collisionDirection; }
     ColliderRect playerCollision;
     Player player;
+    Boolean[] collisionSides = new Boolean[4]; //wich sides are colliding (up, down, left, right)
+
+
 
     float mass;
     public Detection(float offSetX, float offSetY, float mass) : base("detector.png")
@@ -50,20 +53,40 @@ public class Detection : Sprite
         {
             if (coll is Tile)
             {
-                if (coll.y < player.y) { return player.OnCeiling = true; }
+                if (coll.y < player.y) { return player.OnCeiling = true;  }
             }
         }
 
-
         return player.OnCeiling = false;
-
     }
+
+    void CollisionCheck() 
+    {
+        collisionSides[0] = false;
+        collisionSides[1] = false;
+        collisionSides[2] = false;
+        collisionSides[3] = false;
+
+        GameObject[] colls = GetCollisions();
+        foreach (GameObject coll in colls)
+        {
+            if (coll is Tile)
+            {
+                if (coll.y < player.y) { collisionSides[0] = true; }
+                if (coll.y > player.y) { collisionSides[1] = true; }
+                if (coll.x < player.x) { collisionSides[2] = true; }
+                if (coll.x > player.x) { collisionSides[3] = true; }
+
+            } 
+        }
+    }
+
 
 
     void ToggleVisable() 
     {
 
-        if (Input.GetKeyDown(Key.G)) 
+        if (Input.GetKeyDown(Key.TAB)) 
         {
             if (visible) { visible = false; } else visible = true;
         }
@@ -90,6 +113,9 @@ public class Detection : Sprite
         CastPlayer();
         FloorCheck();
         CeilingCheck();
+        CollisionCheck();
+
+
 /*      UpdateCollision();
         playerCollision.Step();
 
