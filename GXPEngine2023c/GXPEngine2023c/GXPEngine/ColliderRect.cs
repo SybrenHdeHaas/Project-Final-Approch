@@ -42,9 +42,6 @@ public class ColliderRect : ColliderObject
             float xOverlap = Math.Min(position.x + width, theTile.x + theTile.width) - Math.Max(position.x, theTile.x);
             float yOverlap = Math.Min(position.y + height, theTile.y + theTile.height) - Math.Max(position.y, theTile.y);
 
-            
-
-
             if (xOverlap > 0 && yOverlap > 0)
             {
                

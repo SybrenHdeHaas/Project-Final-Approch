@@ -26,11 +26,26 @@ internal class Detection : Sprite
         GameObject[] colls = GetCollisions();
         foreach (Tile coll in colls) 
         {
-            if (coll.y > y) { return player.OnGround = true; }
+            if (coll.y > player.y) { return player.OnGround = true; }
         }
 
         return player.OnGround = false;
     }
+
+    Boolean CeilingCheck()
+    {
+        GameObject[] colls = GetCollisions();
+        foreach (Tile coll in colls)
+        {
+            if (coll.y < player.y) { return player.OnCeiling = true; }
+
+        }
+
+
+        return player.OnCeiling = false;
+
+    }
+
 
     void ToggleVisable() 
     {
@@ -52,7 +67,7 @@ internal class Detection : Sprite
         ToggleVisable();
         CastPlayer();
         FloorCheck();
-        
+        CeilingCheck();
 /*      UpdateCollision();
         playerCollision.Step();
 

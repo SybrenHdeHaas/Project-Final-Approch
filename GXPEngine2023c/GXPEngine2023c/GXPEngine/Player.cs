@@ -33,8 +33,18 @@ public class Player : AnimationSpriteCustom
         set { onGround = value; }
     }
 
+    public Boolean OnCeiling
+    {
+        get { return onCeiling; }
+        set { onCeiling = value; }
+    
+    }
+
 
     private Boolean onGround;
+    private Boolean onCeiling;
+
+
     private string collisionDirection;
     List<Vec2> fanVelocityList = new List<Vec2>();
     private Vec2 fanVelocity;
@@ -47,13 +57,12 @@ public class Player : AnimationSpriteCustom
     private float standUpFriction = 0.25f; //max speed is now determined by friction. can be overruled by external forces not from the player
     private float inShellFriction = 0.02f;
 
+
     private static Vec2 externalForces;
     private static Vec2 gravityForce;
     private static Vec2 antiGravity;
     private float gravity = 1f;
-
     private Vec2 dragForce;
-
     private float drag = 0.01f;
     
     private int i = 0;
@@ -74,7 +83,7 @@ public class Player : AnimationSpriteCustom
 
         detectionRange = new Detection();
         AddChild(detectionRange);
-        detectionRange.scaleX = 2f;
+        detectionRange.scaleX = 1.75f;
         detectionRange.scaleY = 2.5f;
 
     }
@@ -154,7 +163,7 @@ public class Player : AnimationSpriteCustom
                         movementDirection[1] = true;
 
                     } else { movementDirection[1] = false; }
-                    if (Input.GetKeyDown(Key.W) && onGround)
+                    if (Input.GetKeyDown(Key.W) && onGround && !onCeiling)
                     {
                         movementDirection[2] = true;
 
@@ -237,16 +246,15 @@ public class Player : AnimationSpriteCustom
         if (onGround)  { gravity = 0f; }
 
 
+
+
         gravityForce = new Vec2(0, gravity);
 
         acceleration += frictionForce + gravityForce; 
 
         playerVelocity += acceleration; 
 
-
         velocity = playerVelocity + fanVelocity;
-
-
     }
 
 
@@ -305,7 +313,7 @@ public class Player : AnimationSpriteCustom
         PlayerInput();
         shellState();
         CollisionDirection();
-        groundCheck();
+        //groundCheck();
 
         UpdateCollision();
         playerCollision.Step();
@@ -320,6 +328,7 @@ public class Player : AnimationSpriteCustom
         if (Input.GetKeyDown(Key.G))
         {
             Console.WriteLine("velocity  {0}, playerVelocity {1},  fanVelocty {2}, gravityForce {3}, frictionForce {4}", velocity, playerVelocity, fanVelocity, gravityForce, frictionForce);
+            Console.WriteLine("onCeiling {0}, onGround {1}",onCeiling, onGround);
         }
 
 
