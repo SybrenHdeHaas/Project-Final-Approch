@@ -14,7 +14,7 @@ using TiledMapParser;
 public class Level : GameObject
 {
     TiledLoader loader;
-    Player[] thePlayer;
+    List<Player> thePlayers = new List<Player>();
 
     //Determine the position the player will be displayed in the game camera
     float boundaryValueX; //Should be width / 2 to display the player at the center of the screen
@@ -37,14 +37,15 @@ public class Level : GameObject
         loader.LoadImageLayers();
         loader.LoadObjectGroups(0); //loading game objects
 
-        //find the player object
-        thePlayer = FindObjectsOfType<Player>();
-        foreach (Player player in thePlayer) 
+        //find the player objects (should only be 2)
+        foreach (Player thePlayer in FindObjectsOfType<Player>()) 
         {
-            Console.WriteLine(player.x + "a," + player.y);
-            player.UpdatePos();
-  
+            Console.WriteLine("player spawn position: " + thePlayer.x + "|" + thePlayer.y);
+            thePlayer.UpdatePos();
+            thePlayers.Add(thePlayer);
         }
+
+        GameData.playerList = thePlayers;
 
         //Extracting all Fan objects
         foreach (Fan theFan in FindObjectsOfType<Fan>())
@@ -54,7 +55,6 @@ public class Level : GameObject
 
         foreach (FanArea theFanArea in FindObjectsOfType<FanArea>())
         {
-            Console.WriteLine(theFanArea.x + "," + theFanArea.y);
          //   theFanArea.visible = false;
             fanAreaList.Add(theFanArea);
         }
@@ -66,25 +66,21 @@ public class Level : GameObject
 
     void Update()
     {
-        //Use camera if player is found
-        if (thePlayer != null)
-        {
-            UseCamera();
-        }
+        GameData.playerList = thePlayers;
 
+        UseCamera();
 
-        foreach (Player player in thePlayer) { player.ResetFanVelocityList(); }
+        foreach (Player player in thePlayers) { player.ResetFanVelocityList(); }
             
         CheckFanAreas();
     }
-
 
 
     void CheckFanAreas()
     {
         foreach (FanArea theFanArea in fanAreaList)
         {
-            foreach (Player player in thePlayer)
+            foreach (Player player in thePlayers)
             {
                 /* intersection btw player model (not red box) and fan area [working] --> SharedFunctions.CheckIntersectSprites(player, theFanArea) */
 
@@ -110,10 +106,13 @@ public class Level : GameObject
 
         //first determine if the camera moves, then determine the max distance the camera can move
         //handling player moving right
-
-
-        foreach (Player player in thePlayer)
+        foreach (Player player in thePlayers)
         {
+            //for now, camera only follow player1
+            if (player.playerIndex != 0)
+            {
+                return;
+            }
 
             if (player.x + x > boundaryValueX && x > -1 * ((game.width * 6) - 800))
             {

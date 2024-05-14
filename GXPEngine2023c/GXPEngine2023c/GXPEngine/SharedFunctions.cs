@@ -23,8 +23,8 @@ public static class SharedFunctions
         double rect2HalfHeight = thatObject.height / 2;
 
         // Calculate the centers of the rectangles
-        double rect1CenterX = thisObject.x + rect1HalfWidth;
-        double rect1CenterY = thisObject.y + rect1HalfHeight;
+        double rect1CenterX = thisObject.detectionRange.GetX() + rect1HalfWidth;
+        double rect1CenterY = thisObject.detectionRange.GetY() + rect1HalfHeight;
         double rect2CenterX = thatObject.x;
         double rect2CenterY = thatObject.y;
 
