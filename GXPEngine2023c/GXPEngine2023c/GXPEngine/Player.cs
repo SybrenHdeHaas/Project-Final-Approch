@@ -1,16 +1,15 @@
 using GXPEngine;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting;
 using TiledMapParser;
 
 public class Player : AnimationSpriteCustom
 {
 
-    public Vec2 Velocity 
-    { 
-      get { return velocity; }
-      set { velocity = value; } 
+    public Vec2 Velocity
+    {
+        get { return velocity; }
+        set { velocity = value; }
     }
 
     public Vec2 Position
@@ -24,7 +23,7 @@ public class Player : AnimationSpriteCustom
     private Vec2 acceleration;
     private int playerIndex; //renamed from index to playerIndex for better naming. 1 = player1, 2 = player2
 
-    
+
     private Boolean inshell;
 
     public Boolean OnGround
@@ -37,7 +36,7 @@ public class Player : AnimationSpriteCustom
     {
         get { return onCeiling; }
         set { onCeiling = value; }
-    
+
     }
 
 
@@ -50,7 +49,7 @@ public class Player : AnimationSpriteCustom
     private Vec2 fanVelocity;
     private Vec2 position;
     private Boolean[] movementDirection = new Boolean[3];
-    private Detection detectionRange;
+    public Detection detectionRange;
 
     private Vec2 frictionForce;
     private float friction;
@@ -64,7 +63,7 @@ public class Player : AnimationSpriteCustom
     private float gravity = 1f;
     private Vec2 dragForce;
     private float drag = 0.01f;
-    
+
     private int i = 0;
 
 
@@ -126,7 +125,7 @@ public class Player : AnimationSpriteCustom
             else if (theCollision.AABBDirection == 3) { collisionDirection = "left"; }
             else if (theCollision.AABBDirection == 4) { collisionDirection = "right"; }
         }
-        
+
     }
 
     private void groundCheck()
@@ -156,20 +155,23 @@ public class Player : AnimationSpriteCustom
                     if (Input.GetKey(Key.A))
                     {
                         movementDirection[0] = true;
-                        
-                    } else { movementDirection[0] = false; }
+
+                    }
+                    else { movementDirection[0] = false; }
                     if (Input.GetKey(Key.D))
                     {
                         movementDirection[1] = true;
 
-                    } else { movementDirection[1] = false; }
+                    }
+                    else { movementDirection[1] = false; }
                     if (Input.GetKeyDown(Key.W) && onGround && !onCeiling)
                     {
                         movementDirection[2] = true;
 
-                    } else { movementDirection[2] = false; }
+                    }
+                    else { movementDirection[2] = false; }
 
-                break;
+                    break;
                 case 1:
 
                     if (Input.GetKey(Key.J))
@@ -188,8 +190,8 @@ public class Player : AnimationSpriteCustom
                     }
                     else { movementDirection[2] = false; }
 
-                break;
-            }   
+                    break;
+            }
         }
 
         Moving(movementDirection);
@@ -222,51 +224,51 @@ public class Player : AnimationSpriteCustom
             {
                 acceleration = new Vec2(0, -25);
 
-            if (Input.GetKey(Key.I) == true && playerIndex == 1)
+                if (Input.GetKey(Key.I) == true && playerIndex == 1)
+                {
+                    acceleration += new Vec2(0, -5);
+                    acceleration += velocity * -friction;
+                }
+
+                if (!moveDir[0] && !moveDir[1] && !moveDir[2])
+                {
+                    acceleration = new Vec2(0, 0);
+                }
+            }
+            else { acceleration = new Vec2(0, 0); }
+
+            if (inshell)
             {
-                acceleration += new Vec2(0, -5);
-                acceleration += velocity * -friction;
+                friction = inShellFriction;
             }
 
-            if (!moveDir[0] && !moveDir[1] && !moveDir[2])
+            if (!inshell)
             {
-                acceleration = new Vec2(0, 0);
+                friction = standUpFriction;
             }
+
+            CalcFanVeclotiy();
+
+            if (inshell) { friction = inShellFriction; }
+            if (!inshell) { friction = standUpFriction; }
+
+            frictionForce = -friction * playerVelocity;
+
+            if (!onGround) { gravity = 1f; }
+            if (onGround) { gravity = 0f; }
+
+
+
+
+            gravityForce = new Vec2(0, gravity);
+
+            acceleration += frictionForce + gravityForce;
+
+            playerVelocity += acceleration;
+
+            velocity = playerVelocity + fanVelocity;
         }
-        else { acceleration = new Vec2(0, 0); }
-
-        if (inshell)
-        {
-            friction = inShellFriction;
-        }
-
-        if (!inshell)
-        {
-            friction = standUpFriction;
-        }
-
-        CalcFanVeclotiy();
-
-        if (inshell) { friction = inShellFriction; }
-        if (!inshell) { friction = standUpFriction; }
-
-        frictionForce = -friction * playerVelocity;
-
-        if (!onGround) { gravity = 1f; } 
-        if (onGround)  { gravity = 0f; }
-
-
-
-
-        gravityForce = new Vec2(0, gravity);
-
-        acceleration += frictionForce + gravityForce; 
-
-        playerVelocity += acceleration; 
-
-        velocity = playerVelocity + fanVelocity;
     }
-
 
 
     private void shellState()
@@ -277,18 +279,18 @@ public class Player : AnimationSpriteCustom
 
             if (Input.GetKey(Key.W) && playerIndex == 0) { inshell = false; }
 
-            }
+        }
 
-            if (!inshell)
-            {
-                SetAnimationCycle(0, 1);
+        if (!inshell)
+        {
+            SetAnimationCycle(0, 1);
 
-                if (Input.GetKey(Key.S)) { inshell = true; }
-
-            }
-
+            if (Input.GetKey(Key.S)) { inshell = true; }
 
         }
+
+
+
 
         if (!inshell)
         {
@@ -306,10 +308,10 @@ public class Player : AnimationSpriteCustom
             }
         }
 
-            if (Input.GetKey(Key.S) && playerIndex == 0) { inshell = true; }
+        if (Input.GetKey(Key.S) && playerIndex == 0) { inshell = true; }
 
-            if (Input.GetKey(Key.K) && playerIndex == 1) { inshell = true; }
-        }
+        if (Input.GetKey(Key.K) && playerIndex == 1) { inshell = true; }
+
     }
 
 
@@ -343,7 +345,7 @@ public class Player : AnimationSpriteCustom
         if (Input.GetKeyDown(Key.G))
         {
             Console.WriteLine("velocity  {0}, playerVelocity {1},  fanVelocty {2}, gravityForce {3}, frictionForce {4}", velocity, playerVelocity, fanVelocity, gravityForce, frictionForce);
-            Console.WriteLine("onCeiling {0}, onGround {1}",onCeiling, onGround);
+            Console.WriteLine("onCeiling {0}, onGround {1}", onCeiling, onGround);
         }
 
 

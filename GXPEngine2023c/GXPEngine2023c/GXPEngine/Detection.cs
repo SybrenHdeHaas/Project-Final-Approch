@@ -1,6 +1,5 @@
 using GXPEngine;
 using System;
-using System.Collections.Generic;
 
 /* the actual hitbox of player */
 public class Detection : Sprite
@@ -13,24 +12,24 @@ public class Detection : Sprite
     public float mass;
     public Detection(float offSetX, float offSetY, float mass) : base("detector.png")
     {
-        
+
         x = offSetX;
         y = offSetY;
         collider.isTrigger = true;
         SetOrigin(width / 2, height / 2);
         playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), width, height, true);
-        
+
         this.mass = mass;
 
     }
 
     void CastPlayer() { player = parent as Player; }
 
-    Boolean FloorCheck() 
+    Boolean FloorCheck()
     {
-        
+
         GameObject[] colls = GetCollisions();
-        foreach (Tile coll in colls) 
+        foreach (Tile coll in colls)
         {
             if (coll.y > player.y) { return player.OnGround = true; }
         }
@@ -38,64 +37,64 @@ public class Detection : Sprite
         return player.OnGround = false;
     }
 
-    Boolean CeilingCheck()
-    {
-    private void CollisionCheck() 
-    { 
-        GameObject[] colls = GetCollisions();
-        foreach (Tile coll in colls)
+ 
+        private Boolean CeilingCheck()
         {
-            if (coll.y < player.y) { return player.OnCeiling = true; }
+            GameObject[] colls = GetCollisions();
+            foreach (Tile coll in colls)
+            {
+                if (coll.y < player.y) { return player.OnCeiling = true; }
+
+            }
+
+
+            return player.OnCeiling = false;
 
         }
 
 
-        return player.OnCeiling = false;
-
-    }
-
-
-    void ToggleVisable() 
-    {
-
-        if (Input.GetKeyDown(Key.G)) 
+        void ToggleVisable()
         {
-            if (visible) { visible = false; } else visible = true;
+
+            if (Input.GetKeyDown(Key.G))
+            {
+                if (visible) { visible = false; } else visible = true;
+            }
+
         }
-    
-    }
-    void UpdateCollision()
-    {
-        playerCollision.Velocity = player.Velocity;
-        playerCollision.Position = player.Position;
-    }
-    public float GetX()
-    {
-        return parent.x + x;
-    }
+        void UpdateCollision()
+        {
+            playerCollision.Velocity = player.Velocity;
+            playerCollision.Position = player.Position;
+        }
+         float GetX()
+        {
+            return parent.x + x;
+        }
 
-    public float GetY() 
-    {
-        return parent.y + y;
-    }
+         float GetY()
+        {
+            return parent.y + y;
+        }
 
-    void Update()
-    {
-        ToggleVisable();
-        CastPlayer();
-        FloorCheck();
-        CeilingCheck();
-/*      UpdateCollision();
-        playerCollision.Step();
+        void Update()
+        {
+            ToggleVisable();
+            CastPlayer();
+            FloorCheck();
+            CeilingCheck();
+            /*      UpdateCollision();
+                    playerCollision.Step();
 
 
-        player.Velocity = playerCollision.Velocity;
-        player.Position += player.Velocity;
+                    player.Velocity = playerCollision.Velocity;
+                    player.Position += player.Velocity;
 
-        player.x = player.Position.x;
-        player.y = player.Position.y;*/
+                    player.x = player.Position.x;
+                    player.y = player.Position.y;*/
 
 
-        CollisionCheck();
+            
+        }
     }
 }

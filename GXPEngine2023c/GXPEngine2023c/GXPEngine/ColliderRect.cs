@@ -9,28 +9,25 @@ using System.Text;
 public class ColliderRect : ColliderObject
 {
     GameObject thisBallObject;
-    public float getWidth() { return width; }
-    public float getHeight() { return height; }
+    public float Width 
+    { 
+        get { return width; }
+        set { width = value; } 
+    }
+    public float Height
+    {
+        get { return height; }
+        set { height = value; }
+    }
     private float width;
     private float height;
     GameObject thisObject;
-    public float width;
-    public float height;
     public ColliderRect(GameObject pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
     {
         thisObject = pRectObject;
         width = pWidth / 2;
         height = pHeight / 2;
         mass = 4 * width * height * _density;
-
-    }
-
-    protected override CollisionInfo FindEarliestCollision() //Overriden from third step in colliderObject?
-    {
-        MyGame myGame = (MyGame)game;
-        CheckCollisionTiles(myGame);
-
-        return FindLowestTOICollision();
     }
 
 
