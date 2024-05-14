@@ -8,8 +8,8 @@ using System.Text;
 public class ColliderRect : ColliderObject
 {
     GameObject thisBallObject;
-    float width;
-    float height;
+    public float width;
+    public float height;
     public ColliderRect(GameObject pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
     {
         thisBallObject = pRectObject;
@@ -286,8 +286,6 @@ public class ColliderRect : ColliderObject
         }
         */
 
-
-        
         foreach (CollisionInfo col in _collisionList)
         {
             if (col.other is Tile)

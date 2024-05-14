@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography;
 using System.Text;
 using GXPEngine;
 using TiledMapParser;
@@ -39,12 +40,11 @@ public class Level : GameObject
         //find the player object
         thePlayer = FindObjectsOfType<Player>();
         foreach (Player player in thePlayer) 
-        { 
+        {
+            Console.WriteLine(player.x + "a," + player.y);
             player.UpdatePos();
-            
+  
         }
-        
-
 
         //Extracting all Fan objects
         foreach (Fan theFan in FindObjectsOfType<Fan>())
@@ -54,6 +54,7 @@ public class Level : GameObject
 
         foreach (FanArea theFanArea in FindObjectsOfType<FanArea>())
         {
+            Console.WriteLine(theFanArea.x + "," + theFanArea.y);
          //   theFanArea.visible = false;
             fanAreaList.Add(theFanArea);
         }
@@ -85,13 +86,14 @@ public class Level : GameObject
         {
             foreach (Player player in thePlayer)
             {
+                /* intersection btw player model (not red box) and fan area [working] --> SharedFunctions.CheckIntersectSprites(player, theFanArea) */
 
-                if (SharedFunctions.IntersectsAnimationSpriteCustom(theFanArea, player))
+                //check intersection btw player red box and fan area
+                if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theFanArea))
                 {
                     Fan theFan;
                     if (fanList.TryGetValue(theFanArea.TheFanID, out theFan))
                     {
-
                         player.AddFanVelocity(theFan.GetVelocity());
                         Console.WriteLine(theFan.GetVelocity());
                     }
@@ -175,8 +177,8 @@ public class Level : GameObject
                      * Layer 0 represents wall tiles, layer 1 represents background tiles
                      */
 
-                    // A wall tile. collision on
-                    if (theLayer == 0)
+                // A wall tile. collision on
+                if (theLayer == 0)
                     {
                         theTile = new Tile(theTilesSet.Image.FileName, 1, 1, theTileNumber - theTilesSet.FirstGId,
                             theTilesSet.Columns, theTilesSet.Rows, -1, 1, 1, 10, false, true);
