@@ -47,9 +47,9 @@ public class Player : AnimationSpriteCustom
     private float standUpFriction = 0.25f; //max speed is now determined by friction. can be overruled by external forces not from the player
     private float inShellFriction = 0.02f;
 
-
-    public static Vec2 gravityForce;
-    public static Vec2 antiGravity;
+    private static Vec2 externalForces;
+    private static Vec2 gravityForce;
+    private static Vec2 antiGravity;
     private float gravity = 1f;
 
     private Vec2 dragForce;
@@ -74,8 +74,8 @@ public class Player : AnimationSpriteCustom
 
         detectionRange = new Detection();
         AddChild(detectionRange);
-        detectionRange.scale = 2.5f;
-
+        detectionRange.scaleX = 2f;
+        detectionRange.scaleY = 2.5f;
 
     }
 
@@ -319,14 +319,9 @@ public class Player : AnimationSpriteCustom
         //movement information
         if (Input.GetKeyDown(Key.G))
         {
-            Console.WriteLine("velocity  {0}, playerVelocity {1},  fanVelocty {2}, gravity {3}, frictionForce {4}", velocity, playerVelocity, fanVelocity, gravity, frictionForce);
+            Console.WriteLine("velocity  {0}, playerVelocity {1},  fanVelocty {2}, gravityForce {3}, frictionForce {4}", velocity, playerVelocity, fanVelocity, gravityForce, frictionForce);
         }
 
-
-        if(Input.GetKeyDown(Key.V))
-        {
-            Console.WriteLine("x coord {0}, y coord {1}", x, y);
-        }
 
     }
 }
