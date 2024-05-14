@@ -1,6 +1,7 @@
-﻿using GXPEngine;
+using GXPEngine;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 
@@ -12,10 +13,12 @@ public class ColliderRect : ColliderObject
     public float getHeight() { return height; }
     private float width;
     private float height;
+    GameObject thisObject;
     public ColliderRect(GameObject pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
     {
 
         thisBallObject = pRectObject;
+        thisObject = pRectObject;
         width = pWidth / 2;
         height = pHeight / 2;
         mass = 4 * width * height * _density;
@@ -117,6 +120,8 @@ public class ColliderRect : ColliderObject
                     }
                 }
             }
+        }
+    }
 
         }
     }

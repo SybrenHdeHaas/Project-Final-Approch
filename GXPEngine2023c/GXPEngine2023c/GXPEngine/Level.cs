@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography;
 using System.Text;
 using GXPEngine;
 using TiledMapParser;
@@ -13,7 +14,7 @@ using TiledMapParser;
 public class Level : GameObject
 {
     TiledLoader loader;
-    Player[] thePlayer;
+    List<Player> thePlayers = new List<Player>();
 
     //Determine the position the player will be displayed in the game camera
     float boundaryValueX; //Should be width / 2 to display the player at the center of the screen
@@ -36,15 +37,15 @@ public class Level : GameObject
         loader.LoadImageLayers();
         loader.LoadObjectGroups(0); //loading game objects
 
-        //find the player object
-        thePlayer = FindObjectsOfType<Player>();
-        foreach (Player player in thePlayer) 
-        { 
-            player.UpdatePos();
-            
+        //find the player objects (should only be 2)
+        foreach (Player thePlayer in FindObjectsOfType<Player>()) 
+        {
+            Console.WriteLine("player spawn position: " + thePlayer.x + "|" + thePlayer.y);
+            thePlayer.UpdatePos();
+            thePlayers.Add(thePlayer);
         }
-        
 
+        GameData.playerList = thePlayers;
 
         //Extracting all Fan objects
         foreach (Fan theFan in FindObjectsOfType<Fan>())
@@ -65,33 +66,30 @@ public class Level : GameObject
 
     void Update()
     {
-        //Use camera if player is found
-        if (thePlayer != null)
-        {
-            UseCamera();
-        }
+        GameData.playerList = thePlayers;
 
+        UseCamera();
 
-        foreach (Player player in thePlayer) { player.ResetFanVelocityList(); }
+        foreach (Player player in thePlayers) { player.ResetFanVelocityList(); }
             
         CheckFanAreas();
     }
-
 
 
     void CheckFanAreas()
     {
         foreach (FanArea theFanArea in fanAreaList)
         {
-            foreach (Player player in thePlayer)
+            foreach (Player player in thePlayers)
             {
+                /* intersection btw player model (not red box) and fan area [working] --> SharedFunctions.CheckIntersectSprites(player, theFanArea) */
 
-                if (SharedFunctions.IntersectsAnimationSpriteCustom(theFanArea, player))
+                //check intersection btw player red box and fan area
+                if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theFanArea))
                 {
                     Fan theFan;
                     if (fanList.TryGetValue(theFanArea.TheFanID, out theFan))
                     {
-
                         player.AddFanVelocity(theFan.GetVelocity());
                         Console.WriteLine(theFan.GetVelocity());
                     }
@@ -108,10 +106,13 @@ public class Level : GameObject
 
         //first determine if the camera moves, then determine the max distance the camera can move
         //handling player moving right
-
-
-        foreach (Player player in thePlayer)
+        foreach (Player player in thePlayers)
         {
+            //for now, camera only follow player1
+            if (player.playerIndex != 0)
+            {
+                return;
+            }
 
             if (player.x + x > boundaryValueX && x > -1 * ((game.width * 6) - 800))
             {
@@ -175,8 +176,8 @@ public class Level : GameObject
                      * Layer 0 represents wall tiles, layer 1 represents background tiles
                      */
 
-                    // A wall tile. collision on
-                    if (theLayer == 0)
+                // A wall tile. collision on
+                if (theLayer == 0)
                     {
                         theTile = new Tile(theTilesSet.Image.FileName, 1, 1, theTileNumber - theTilesSet.FirstGId,
                             theTilesSet.Columns, theTilesSet.Rows, -1, 1, 1, 10, false, true);

@@ -1,8 +1,9 @@
-﻿using GXPEngine;
+using GXPEngine;
 using System;
 using System.Collections.Generic;
 
-internal class Detection : Sprite
+/* the actual hitbox of player */
+public class Detection : Sprite
 {
     private string collisionDirection;
     public string getCollisionDirection() { return collisionDirection; }
@@ -10,12 +11,18 @@ internal class Detection : Sprite
     Player player;
 
     public Detection() : base("detector.png")
+    public float mass;
+    public Detection(float offSetX, float offSetY, float mass) : base("detector.png")
     {
         
+        x = offSetX;
+        y = offSetY;
         collider.isTrigger = true;
         SetOrigin(width / 2, height / 2);
         playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), width, height, true);
         
+        this.mass = mass;
+
     }
 
     void CastPlayer() { player = parent as Player; }
@@ -60,6 +67,15 @@ internal class Detection : Sprite
     {
         playerCollision.Velocity = player.Velocity;
         playerCollision.Position = player.Position;
+    }
+    public float GetX()
+    {
+        return parent.x + x;
+    }
+
+    public float GetY() 
+    {
+        return parent.y + y;
     }
 
     void Update()
