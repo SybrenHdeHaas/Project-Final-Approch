@@ -43,7 +43,7 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="2" name="Player 2" type="Player" gid="1" x="128" y="64" width="64" height="64">
+  <object id="2" name="Player 2" type="Player" gid="1" x="128" y="64" width="128" height="128">
    <properties>
     <property name="int_index" type="int" value="1"/>
     <property name="int_nextFrameDelay" type="int" value="30"/>
