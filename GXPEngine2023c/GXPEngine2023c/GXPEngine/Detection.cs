@@ -11,8 +11,9 @@ public class Detection : Sprite
     Player player;
     Boolean[] collisionSides = new Boolean[4]; //wich sides are colliding (up, down, left, right)
     
-
-
+    private Detection dete;
+    public Detection GetDete() { return dete; }
+    public Player GetPlayer() { return player; }
     float mass;
     public Detection(float offSetX, float offSetY, float mass) : base("detector.png")
     {
@@ -67,10 +68,10 @@ public class Detection : Sprite
         {
             if (coll is Detection)
             {
-                Detection dete = (Detection)coll;
+                dete = (Detection)coll;
                 if (dete.player.InShell == true) 
                 {
-                    Console.WriteLine("this player {0}, colliding Player {1}", this.player.PlayerIndex, dete.player.PlayerIndex);
+                    
                     return true;
                 }
 

@@ -18,12 +18,12 @@ public class Player : AnimationSpriteCustom
         set { position = value; }
     }
 
-    private Vec2 playerVelocity = new Vec2();
+    private Vec2 playerVelocity;
     private Vec2 velocity;
     private Vec2 acceleration;
 
     public int GetPlyaerIndex() { return playerIndex; }
-    public int PlayerIndex { get { return playerIndex; } }
+    
     private int playerIndex; //renamed from index to playerIndex for better naming. 0 = player1, 1 = player2
 
 
@@ -60,6 +60,16 @@ public class Player : AnimationSpriteCustom
     public Hitbox playerHitBox;
 
     private Vec2 frictionForce;
+    private Vec2 playerForce;
+
+
+    private Vec2 kickForce = new Vec2(15, 0);
+    private Vec2 throwForce = new Vec2(15, -15);
+    float kickStrenghtX = 15;
+    float kickStrengthY = 0;
+    float throwStrenghtX = 15;
+    float throwStrengthY = -15;
+
     private float friction;
     private float standUpFriction = 0.25f; //max speed is now determined by friction. can be overruled by external forces not from the player
     private float inShellFriction = 0.02f;
@@ -148,9 +158,49 @@ public class Player : AnimationSpriteCustom
         return false;
     }
 
+    
+    private void Action() 
+    {
+        if (playerIndex == 0)
+        {
+            if (Input.GetKeyDown(Key.Q) && ActionPossible())
+            {
+                Kick();
+                
 
-    private void Kick() { }
-    private void Throw() { }
+            }
+
+
+        }
+
+        if (playerIndex == 1)
+        {
+            if (Input.GetKeyDown(Key.O) && ActionPossible())
+            {
+                Throw();
+
+            }
+        
+        
+        }
+    
+    
+    }
+
+
+    private void Kick() 
+    {
+        
+        Console.WriteLine("kick");
+        detectionRange.GetDete().GetPlayer().playerForce += kickForce;
+
+    }
+    private void Throw() 
+    {
+        Console.WriteLine("Throw");
+        detectionRange.GetDete().GetPlayer().playerForce += throwForce;
+
+    }
 
     private void PlayerInput()
     {
@@ -269,7 +319,9 @@ public class Player : AnimationSpriteCustom
 
         acceleration += frictionForce + gravityForce;
 
-        playerVelocity += acceleration;
+        playerVelocity += acceleration + playerForce;
+
+        playerForce = new Vec2(0f, 0f);
 
         velocity = playerVelocity + fanVelocity;
     }
@@ -352,7 +404,7 @@ public class Player : AnimationSpriteCustom
         PlayerInput();
         shellState();
         ActionPossible();
-
+        Action();
         UpdateCollision();
         playerCollision.Step();
 
