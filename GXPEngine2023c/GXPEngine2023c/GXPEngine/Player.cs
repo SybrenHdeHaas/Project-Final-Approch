@@ -86,6 +86,13 @@ public class Player : AnimationSpriteCustom
         AddChild(detectionRange);
 
         mass = 4 * width * height;
+        
+
+        playerHitBox = new Hitbox(-60, -60, mass); //the player's actual hit box.
+        playerHitBox.scale = 2.5f;
+        AddChild(playerHitBox);
+
+        playerCollision = new ColliderRect(playerHitBox, new Vec2(0, 0), new Vec2(0, 0), playerHitBox.width, playerHitBox.height, true);
     }
 
     public void UpdatePos()
@@ -314,10 +321,9 @@ public class Player : AnimationSpriteCustom
 
     void UpdateCollision()
     {
-
-        /*        playerCollision.Width = detectionRange.width;
-                playerCollision.Height = detectionRange.height;*/
-        playerCollision.Position = position + new Vec2(detectionRange.x, detectionRange.y);
+        playerCollision.width = playerHitBox.width;
+        playerCollision.height = playerHitBox.height;
+        playerCollision.Position = position + new Vec2(playerHitBox.x, playerHitBox.y);
 
         playerCollision.Velocity = velocity;
     }
