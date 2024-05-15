@@ -14,7 +14,7 @@ public class ColliderObject : GameObject
     public static bool wordy4 = false; //if true, enable debug messages 4
     public List<CollisionInfo> GetCollisionList() { return _collisionList; } 
 
-    public static bool wordy5 = true;
+    public static bool wordy5 = false;
 
     protected Vec2 position;
     protected Vec2 _oldPosition;

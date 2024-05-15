@@ -7,31 +7,99 @@ using TiledMapParser;
 
 public class Button : AnimationSpriteCustom
 {
-    int theType;
-    //1 --> The first type will reverse whatever effect it had, when there is no player colliding with it
-    //2 --> the other type’s effects will stay indefinitely after a player has collided with it.
+    public bool isTypeOne;
+    //true --> The first type will reverse whatever effect it had, when there is no player colliding with it
+    //false --> the other type’s effects will stay indefinitely after a player has collided with it.
+
+    public bool hasPressed;
+    public bool isPressedPlayer1;
+    public bool isPressedPlayer2;
 
     List<Effect> effects = new List<Effect>();
 
-    //tiled to get the action name, action parameter A, action parameter B
-
+    TiledObject theObj;
+    bool firstTime = true;
 
     public Button(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
+        isTypeOne = obj.GetBoolProperty("isTypeOne");
+        hasPressed = false;
+        theObj = obj;
+    }
+
+    public Button(TiledObject obj = null) : base("player.png", 1, 1, obj)
+    {
+        isTypeOne = obj.GetBoolProperty("isTypeOne");
+        hasPressed = false;
+        theObj = obj;
+    }
+
+    public void AddNewAction(String pEffectName, String pParameterStringOne = "")
+    {
+        switch (pEffectName)
+        {
+            case "action_doorOpenClose":
+                AddEffect(new EffectOpenCloseDoor(pParameterStringOne));
+                break;
+        }
     }
 
     //do all effects the button has
-    public void addEffect()
+    public void Action()
     {
         foreach (Effect effect in effects)
         {
-            effect.tryAction();
+            effect.TryAction();
+        }
+    }
+
+    public void ActionOpposite()
+    {
+        foreach (Effect effect in effects)
+        {
+            effect.TryActionOpposite();
         }
     }
 
     public void AddEffect(Effect theEffect)
     {
-
+        effects.Add(theEffect);
     }
+    void Update()
+    {
+        //We can't continue if the doors are not finished loading
+        if (GameData.doorList.Count == 0)
+        {
+            return;
+        }
 
+        //We can only add the effects if the door are loaded (aka when game data door list has values)
+        //and when the doors are loaded we just want to add the effects once
+        if (firstTime)
+        {
+            firstTime = false;
+            AddNewAction(theObj.GetStringProperty("string_effectName"), theObj.GetStringProperty("string_para"));
+            AddNewAction(theObj.GetStringProperty("string_effectName1"), theObj.GetStringProperty("string_para1"));
+            AddNewAction(theObj.GetStringProperty("string_effectName2"), theObj.GetStringProperty("string_para2"));
+            AddNewAction(theObj.GetStringProperty("string_effectName3"), theObj.GetStringProperty("string_para3"));
+        }
+
+
+        if (isTypeOne)
+        {
+            if (!isPressedPlayer1 && !isPressedPlayer2)
+            {
+                //  ActionOpposite();
+            }
+        }
+
+        else
+        {
+            if ((isPressedPlayer1 || isPressedPlayer2) && hasPressed == false)
+            {
+                hasPressed = true;
+                Action();
+            }
+        }
+    }
 }

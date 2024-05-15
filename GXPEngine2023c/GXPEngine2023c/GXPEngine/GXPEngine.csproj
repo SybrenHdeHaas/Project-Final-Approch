@@ -48,7 +48,9 @@
     <Compile Include="ColliderRect.cs" />
     <Compile Include="CollisionInfo.cs" />
     <Compile Include="Detection.cs" />
+    <Compile Include="Door.cs" />
     <Compile Include="Effect.cs" />
+    <Compile Include="Effects\EffectOpenCloseDoor.cs" />
     <Compile Include="Fan.cs" />
     <Compile Include="FanArea.cs" />
     <Compile Include="GameData.cs" />

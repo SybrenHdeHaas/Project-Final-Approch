@@ -24,7 +24,7 @@ public class Player : AnimationSpriteCustom
 
     public int GetPlyaerIndex() { return playerIndex; }
     
-    private int playerIndex; //renamed from index to playerIndex for better naming. 0 = player1, 1 = player2
+    public int playerIndex; //renamed from index to playerIndex for better naming. 0 = player1, 1 = player2
 
 
     public Boolean InShell {get { return inshell; }

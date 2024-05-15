@@ -13,29 +13,77 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
-        "map1.tmx": {
-            "scale": 0.5,
+        "Levels.tmx": {
+            "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 295,
-                "y": 391
+                "x": 1486.3636363636363,
+                "y": 766.6666666666667
             }
+        },
+        "level_6.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2501.5151515151515,
+                "y": 875.7575757575756
+            }
+        },
+        "map1.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 461.5,
+                "y": 423.5
+            }
+        },
+        "map1.tmx#Button": {
+            "dynamicWrapping": false
         },
         "map1.tmx#Fan area": {
             "scaleInDock": 1
         },
         "map1.tmx#Player": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "map1.tmx#Spike": {
+            "dynamicWrapping": false
+        },
+        "map1.tmx#Tilesheet": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "map1.tmx#button": {
             "scaleInDock": 1
         },
         "map1.tmx#fan": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "map1.tmx#flag": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "map1.tmx#placeholdertile1": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "map1.tmx#spike": {
+            "scaleInDock": 1
+        },
         "map1.tmx#woodCrate": {
             "scaleInDock": 1
+        },
+        "placeholder-tiles ideas.tsx": {
+            "dynamicWrapping": true
+        },
+        "placeholder_tile.tsx": {
+            "dynamicWrapping": true
         },
         "placeholdertile1.tsx": {
             "scaleInDock": 1,
