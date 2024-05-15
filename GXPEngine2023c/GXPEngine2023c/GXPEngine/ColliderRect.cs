@@ -34,7 +34,9 @@ public class ColliderRect : ColliderObject
     {
         MyGame myGame = (MyGame)game;
         CheckCollisionTiles(myGame);
+
         CheckCollisionHitbox(myGame);
+       
 
 
         return FindLowestTOICollision();
@@ -138,9 +140,19 @@ public class ColliderRect : ColliderObject
         {
             Hitbox theHitBox = GameData.playerList[i].playerHitBox;
 
-            if (thisObject == theHitBox)
+
+
+            if (thisObject is Hitbox) 
             {
-                continue;
+                Hitbox hitbox = (Hitbox)thisObject;
+
+               
+
+                if (thisObject == theHitBox)
+                {
+                    continue;
+                }
+
             }
 
             float xOverlap = Math.Min(position.x + width, theHitBox.GetX() + theHitBox.width) - Math.Max(position.x, theHitBox.GetX());
@@ -233,11 +245,6 @@ public class ColliderRect : ColliderObject
                 Vec2 centerOfMass = (Mass * velocity + theHitbox.mass * new Vec2(0, 0)) / (Mass + theHitbox.mass);
                 Vec2 momentum = -bounciness * velocity;
                 Vec2 POI = _oldPosition + (col.timeOfImpact * velocity);
-
-
-
-                
-
 
                 if (col.AABBDirection == 1)
                 {

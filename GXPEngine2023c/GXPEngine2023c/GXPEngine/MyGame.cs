@@ -8,7 +8,7 @@ public class MyGame : Game {
 
 	public MyGame() : base(800, 600, false)     // Create a window that's 800x600 and NOT fullscreen
 	{
-        Level theLevel = new Level("map2.tmx");
+        Level theLevel = new Level("Level_1_SS.tmx");
         AddChild(theLevel);
 
 

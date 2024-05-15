@@ -60,6 +60,28 @@ public class Detection : Sprite
         return player.OnCeiling = false;
     }
 
+    public Boolean PlayerInteractCheck()
+    {
+        GameObject[] colls = GetCollisions();
+        foreach (GameObject coll in colls)
+        {
+            if (coll is Detection)
+            {
+                Detection dete = (Detection)coll;
+                if (dete.player.InShell == true) 
+                {
+                    Console.WriteLine("this player {0}, colliding Player {1}", this.player.PlayerIndex, dete.player.PlayerIndex);
+                    return true;
+                }
+
+            }
+        }
+
+
+
+        return false;
+    }
+
     void CollisionCheck() 
     {
         collisionSides[0] = false;
@@ -114,18 +136,7 @@ public class Detection : Sprite
         FloorCheck();
         CeilingCheck();
         CollisionCheck();
-
-
-/*      UpdateCollision();
-        playerCollision.Step();
-
-
-        player.Velocity = playerCollision.Velocity;
-        player.Position += player.Velocity;
-
-        player.x = player.Position.x;
-        player.y = player.Position.y;*/
-
+        PlayerInteractCheck();
 
     }
 }

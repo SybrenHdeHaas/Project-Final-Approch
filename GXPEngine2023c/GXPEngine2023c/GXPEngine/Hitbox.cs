@@ -6,14 +6,15 @@ using System.CodeDom;
 public class Hitbox : Sprite
 {
     public float mass;
+    
     public Hitbox(float offSetX, float offSetY, float mass) : base("Hitbox.png")
     {
         x = offSetX;
         y = offSetY;
         this.mass = mass;
         alpha = 0.5f;
-
-    }
+        
+}
 
     public float GetX()
     {
