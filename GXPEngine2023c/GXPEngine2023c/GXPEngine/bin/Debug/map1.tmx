@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="26">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="8" nextobjectid="36">
  <tileset firstgid="1" name="placeholdertile1" tilewidth="64" tileheight="64" tilecount="1" columns="1">
   <image source="rr.png" width="64" height="64"/>
  </tileset>
@@ -12,13 +12,19 @@
  <tileset firstgid="4" name="Player" tilewidth="64" tileheight="64" tilecount="2" columns="2">
   <image source="Player.png" width="128" height="64"/>
  </tileset>
+ <tileset firstgid="6" name="flag" tilewidth="360" tileheight="360" tilecount="1" columns="1">
+  <image source="../../../../../../../../../Downloads/New folder (2)/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/flag.png" width="360" height="360"/>
+ </tileset>
+ <tileset firstgid="7" name="SS_Tilset" tilewidth="32" tileheight="32" tilecount="77" columns="11">
+  <image source="SS_Tilset.png" width="352" height="224"/>
+ </tileset>
  <layer id="7" name="Tile Layer 1" width="40" height="40">
   <data encoding="csv">
-1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,
-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,
-1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,
 1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,
 0,1,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,
 0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,
@@ -116,7 +122,7 @@
     <property name="string_fanID" value="fan1"/>
    </properties>
   </object>
-  <object id="10" name="Player 1" type="Player" gid="4" x="680.167" y="235.333" width="64" height="64">
+  <object id="10" name="Player 1" type="Player" gid="4" x="644.167" y="284.667" width="64" height="64">
    <properties>
     <property name="int_index" type="int" value="0"/>
     <property name="int_nextFrameDelay" type="int" value="30"/>
@@ -124,7 +130,7 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="23" name="Player 2" type="Player" gid="4" x="970.667" y="270.667" width="64" height="64">
+  <object id="23" name="Player 2" type="Player" gid="4" x="1064" y="285.333" width="64" height="64">
    <properties>
     <property name="int_index" type="int" value="1"/>
     <property name="int_nextFrameDelay" type="int" value="30"/>
@@ -138,9 +144,9 @@
     <property name="string_theID" value="door1"/>
    </properties>
   </object>
-  <object id="25" name="Button" type="Button" x="1342.67" y="77.3335" width="300" height="237.333">
+  <object id="25" name="Button" type="Button" x="1894.67" y="83.3335" width="300" height="237.333">
    <properties>
-    <property name="isTypeOne" type="bool" value="false"/>
+    <property name="isTypeOne" type="bool" value="true"/>
     <property name="string_effectName" value="action_doorOpenClose"/>
     <property name="string_effectName1" value=""/>
     <property name="string_effectName2" value=""/>
@@ -149,6 +155,17 @@
     <property name="string_para2" value=""/>
    </properties>
   </object>
+  <object id="29" name="Checkpoint 1" type="Checkpoint" x="236.5" y="254.5" width="134.5" height="120.5">
+   <properties>
+    <property name="float_spawnPositionX" type="float" value="297.83"/>
+    <property name="float_spawnPositionY" type="float" value="325"/>
+   </properties>
+  </object>
+  <object id="30" gid="6" x="248.5" y="358.833" width="117" height="82.3333"/>
+  <object id="32" name="Spike" type="Spike" x="1384.17" y="-100.167" width="146" height="90.5"/>
+  <object id="33" name="Spike" type="Spike" gid="81" x="1412" y="376" width="32" height="32"/>
+  <object id="34" name="Spike" type="Spike" gid="81" x="14.6667" y="319.333" width="32" height="32"/>
+  <object id="35" name="Spike" type="Spike" gid="81" x="73.3333" y="318.667" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="3" name="Object Layer 2"/>
 </map>

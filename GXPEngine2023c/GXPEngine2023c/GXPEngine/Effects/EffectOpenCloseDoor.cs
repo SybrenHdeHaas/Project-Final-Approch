@@ -32,8 +32,8 @@ public class EffectOpenCloseDoor : Effect
 
     public override void TryActionOpposite()
     {
-        theDoor.isOpened = !theDoor.isOpenedDefaultValue;
-        Console.WriteLine("default door value: " + theDoor.isOpened);
+        theDoor.isOpened = !theDoor.isOpened;
+        Console.WriteLine("oppsite effect: " + theDoor.isOpened);
     }
 }
 

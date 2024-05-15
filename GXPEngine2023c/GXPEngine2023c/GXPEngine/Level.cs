@@ -24,6 +24,9 @@ public class Level : GameObject
     Dictionary<string, Fan> fanList = new Dictionary<string, Fan>();
     List<FanArea> fanAreaList = new List<FanArea>();
     List<Button> buttonList = new List<Button>();
+
+    List<Checkpoint> checkpointList = new List<Checkpoint>();
+    List<Spike> spikeList = new List<Spike>();
     public Level(string theMapfileName)
     {
         Map mapData = MapParser.ReadMap(theMapfileName);
@@ -45,11 +48,12 @@ public class Level : GameObject
             Console.WriteLine("player spawn position: " + thePlayer.x + "|" + thePlayer.y);
             thePlayer.UpdatePos();
             thePlayers.Add(thePlayer);
+            thePlayer.spawnPoint = new Vec2(thePlayer.x, thePlayer.y); //the default player spawn point
         }
 
         GameData.playerList = thePlayers;
 
-        //Extracting all door objects
+        //extracting door objects
         foreach (Door theDoor in FindObjectsOfType<Door>())
         {
             doorList.Add(theDoor.theID, theDoor);
@@ -57,22 +61,35 @@ public class Level : GameObject
 
         GameData.doorList = doorList;
 
-        //Extracting all 
+        //extracting button objects
         foreach (Button theButton in FindObjectsOfType<Button>())
         {
             buttonList.Add(theButton);
         }
 
-        //Extracting all Fan objects
+        //extracting Fan objects
         foreach (Fan theFan in FindObjectsOfType<Fan>())
         {
             fanList.Add(theFan.id, theFan);
         }
 
+        //extracting Fanarea objects
         foreach (FanArea theFanArea in FindObjectsOfType<FanArea>())
         {
          //   theFanArea.visible = false;
             fanAreaList.Add(theFanArea);
+        }
+
+        //extracting checkpint objects
+        foreach (Checkpoint theCheckpoint in FindObjectsOfType<Checkpoint>())
+        {
+            checkpointList.Add(theCheckpoint);
+        }
+
+        //extracting spike objects
+        foreach (Spike theSpike in FindObjectsOfType<Spike>())
+        {
+            spikeList.Add(theSpike);
         }
 
         //Setting up the camera boundary (player at center for these values)
@@ -86,10 +103,15 @@ public class Level : GameObject
 
         UseCamera();
 
-        foreach (Player player in thePlayers) { player.ResetFanVelocityList(); }
+        foreach (Player player in thePlayers) 
+        {
+            player.ResetFanVelocityList();
+        }
             
         CheckFanAreas();
         CheckButtons();
+        CheckCheckpoint();
+        CheckSpike();
     }
 
 
@@ -99,9 +121,6 @@ public class Level : GameObject
         {
             foreach (Player player in thePlayers)
             {
-                /* intersection btw player model (not red box) and fan area [working] --> SharedFunctions.CheckIntersectSprites(player, theFanArea) */
-
-                //check intersection btw player red box and fan area
                 if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theFanArea))
                 {
                     Fan theFan;
@@ -121,9 +140,6 @@ public class Level : GameObject
         {
             foreach (Player player in thePlayers)
             {
-                /* intersection btw player model (not red box) and fan area [working] --> SharedFunctions.CheckIntersectSprites(player, theFanArea) */
-
-                //check intersection btw player red box and fan area
                 if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theButton))
                 {
                     if (player.playerIndex == 0 && theButton.hasPressed == false)
@@ -153,6 +169,37 @@ public class Level : GameObject
                     {
                         theButton.hasPressed = false;
                     }
+                }
+            }
+        }
+    }
+
+    void CheckCheckpoint()
+    {
+        foreach (Checkpoint theCheckpoint in checkpointList)
+        {
+            foreach (Player player in thePlayers)
+            {
+                if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theCheckpoint))
+                {
+                    player.spawnPoint = theCheckpoint.spawnPosition;
+                    Console.WriteLine("player spawn set to: " + player.spawnPoint.x + "|" + player.spawnPoint.y);
+                }
+            }
+        }
+    }
+
+    void CheckSpike()
+    {
+        foreach (Spike theSpike in spikeList)
+        {
+            foreach (Player player in thePlayers)
+            {
+                if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theSpike))
+                {
+                    Console.WriteLine("player touche spike move to: " + player.spawnPoint.x + "|" + player.spawnPoint.y);
+                    player.Position = player.spawnPoint;
+                    player.Velocity = new Vec2(0, 0);
                 }
             }
         }

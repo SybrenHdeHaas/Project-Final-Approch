@@ -102,7 +102,7 @@
         "map1.tmx"
     ],
     "project": "final-approach.tiled-project",
-    "property.type": "int",
+    "property.type": "float",
     "recentFiles": [
         "map1.tmx",
         "placeholdertile1.tsx"
@@ -110,7 +110,7 @@
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 64,
-        "width": 64
+        "height": 32,
+        "width": 32
     }
 }

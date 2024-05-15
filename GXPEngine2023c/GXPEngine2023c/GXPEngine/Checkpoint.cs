@@ -7,11 +7,18 @@ using TiledMapParser;
 
 public class Checkpoint : AnimationSpriteCustom
 {
-    bool isActivePlayer1; //if true, means this is the current spawn point p1 has
-    bool isActivePlayer2; 
-    Vec2 spawnPosition;
+    public Vec2 spawnPosition;
     public Checkpoint(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
+        spawnPosition.x = obj.GetFloatProperty("float_spawnPositionX");
+        spawnPosition.y = obj.GetFloatProperty("float_spawnPositionY");
+    }
+
+
+    //if there's no image in Tiled for this object
+    public Checkpoint(TiledObject obj = null) : base("player.png", 1, 1, obj)
+    {
+        alpha = 0;
         spawnPosition.x = obj.GetFloatProperty("float_spawnPositionX");
         spawnPosition.y = obj.GetFloatProperty("float_spawnPositionY");
     }

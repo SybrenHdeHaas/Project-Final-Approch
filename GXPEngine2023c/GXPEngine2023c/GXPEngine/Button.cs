@@ -20,6 +20,8 @@ public class Button : AnimationSpriteCustom
     TiledObject theObj;
     bool firstTime = true;
 
+    bool typeOneOppositeEffect;
+
     public Button(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
         isTypeOne = obj.GetBoolProperty("isTypeOne");
@@ -87,9 +89,17 @@ public class Button : AnimationSpriteCustom
 
         if (isTypeOne)
         {
-            if (!isPressedPlayer1 && !isPressedPlayer2)
+            if ((isPressedPlayer1 || isPressedPlayer2) && hasPressed == false)
             {
-                //  ActionOpposite();
+                hasPressed = true;
+                typeOneOppositeEffect = true;
+                Action();
+            }
+            //do opposite action if player no longer pressing the button
+            if (!isPressedPlayer1 && !isPressedPlayer2 && typeOneOppositeEffect)
+            {
+                typeOneOppositeEffect = false;
+                ActionOpposite();
             }
         }
 

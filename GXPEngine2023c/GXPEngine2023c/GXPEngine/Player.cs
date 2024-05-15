@@ -26,7 +26,6 @@ public class Player : AnimationSpriteCustom
     
     public int playerIndex; //renamed from index to playerIndex for better naming. 0 = player1, 1 = player2
 
-
     public Boolean InShell {get { return inshell; }
                             set { inshell = value; } 
     }
@@ -94,7 +93,7 @@ public class Player : AnimationSpriteCustom
     private Boolean PassThrough = false;
 
 
-
+    public Vec2 spawnPoint; //the crood the player will move to if player dies
 
 
 
