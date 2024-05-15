@@ -10,7 +10,7 @@ public class Detection : Sprite
     ColliderRect playerCollision;
     Player player;
     Boolean[] collisionSides = new Boolean[4]; //wich sides are colliding (up, down, left, right)
-
+    
 
 
     float mass;

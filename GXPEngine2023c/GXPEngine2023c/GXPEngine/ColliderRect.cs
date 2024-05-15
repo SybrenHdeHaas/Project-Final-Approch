@@ -1,15 +1,13 @@
 using GXPEngine;
 using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
 
 //physcis for a ball object
 public class ColliderRect : ColliderObject
 {
     GameObject thisBallObject;
-    public float Width { 
+    public float Width
+    {
         get { return width; }
         set { width = value; }
     }
@@ -54,7 +52,7 @@ public class ColliderRect : ColliderObject
 
             if (xOverlap > 0 && yOverlap > 0)
             {
-               
+
                 float timeOfImpact = -1;
 
                 if (xOverlap < yOverlap)
@@ -62,7 +60,7 @@ public class ColliderRect : ColliderObject
                     if (position.x < theTile.x)
                     {
                         timeOfImpact = Math.Abs((_oldPosition.x + width) - theTile.x) / Math.Abs(position.x - _oldPosition.x);
-                        
+
 
                         if (wordy2)
                         {
@@ -80,7 +78,7 @@ public class ColliderRect : ColliderObject
                     {
 
                         timeOfImpact = Math.Abs(_oldPosition.x - (theTile.x + theTile.width)) / Math.Abs(position.x - _oldPosition.x);
-                        
+
 
                         if (wordy2)
                         {
@@ -99,7 +97,7 @@ public class ColliderRect : ColliderObject
                     if (position.y < theTile.y)
                     {
                         timeOfImpact = Math.Abs((_oldPosition.y + height) - theTile.y) / Math.Abs(_oldPosition.y - position.y);
-                        
+
                         if (wordy2)
                         {
                             Console.WriteLine("down: " + timeOfImpact);
@@ -114,7 +112,7 @@ public class ColliderRect : ColliderObject
                     else
                     {
                         timeOfImpact = Math.Abs(_oldPosition.y - (theTile.y + theTile.height)) / Math.Abs(_oldPosition.y - position.y);
-                        
+
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
                             if (wordy2)
@@ -226,50 +224,6 @@ public class ColliderRect : ColliderObject
         //solving all collisions
         foreach (CollisionInfo col in _collisionList)
         {
-            if (col.other is Tile)
-            {
-
-                Tile theTile = (Tile)col.other;
-
-
-                    position.y -= POI.y - position.y;
-                    velocity.y = momentum.y;
-                }
-
-                else if (col.AABBDirection == 2)
-                {
-                    if (wordy4)
-                    {
-                        Console.WriteLine("resolving down");
-                    }
-
-                    position.y += POI.y - position.y;
-                    velocity.y = momentum.y;
-                }
-
-                else if (col.AABBDirection == 4)
-                {
-                    if (wordy4)
-                    {
-                        Console.WriteLine("resolving right");
-                    }
-
-                    position.x -= position.x - POI.x;
-                    velocity.x = momentum.x;
-                }
-
-                else if (col.AABBDirection == 3)
-                {
-                    if (wordy4)
-                    {
-                        Console.WriteLine("resolving left");
-                    }
-
-                    position.x += position.x - POI.x;
-                    velocity.x = momentum.x;
-                }
-            }
-
             //collision with detection
             if (col.other is Hitbox)
             {
@@ -312,6 +266,73 @@ public class ColliderRect : ColliderObject
                     velocity.x = momentum.x;
                 }
             }
+            if (col.other is Tile)
+            {
+
+                Tile theTile = (Tile)col.other;
+                Vec2 centerOfMass = (Mass * velocity + theTile.Mass * new Vec2(0, 0)) / (Mass + theTile.Mass);
+                Vec2 momentum = -bounciness * velocity;
+                Vec2 POI = _oldPosition + (col.timeOfImpact * velocity);
+
+                position.y -= POI.y - position.y;
+                velocity.y = momentum.y;
+
+
+
+                if (col.AABBDirection == 1)
+                {
+                    if (wordy4)
+                    {
+                        Console.WriteLine("resolving up");
+                    }
+
+                    position.y -= POI.y - position.y;
+                    velocity.y = momentum.y;
+                }
+
+
+                else if (col.AABBDirection == 2)
+                {
+                    if (wordy4)
+                    {
+                        Console.WriteLine("resolving down");
+                    }
+
+                    position.y += POI.y - position.y;
+                    velocity.y = momentum.y;
+                }
+
+                else if (col.AABBDirection == 4)
+                {
+                    if (wordy4)
+                    {
+                        Console.WriteLine("resolving right");
+                    }
+
+                    position.x -= position.x - POI.x;
+                    velocity.x = momentum.x;
+                }
+
+                else if (col.AABBDirection == 3)
+                {
+                    if (wordy4)
+                    {
+                        Console.WriteLine("resolving left");
+                    }
+
+                    position.x += position.x - POI.x;
+                    velocity.x = momentum.x;
+                }
+
+
+
+
+
+            }
+
+           
         }
+
+        
     }
 }

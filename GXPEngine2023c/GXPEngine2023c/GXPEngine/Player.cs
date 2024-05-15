@@ -52,6 +52,7 @@ public class Player : AnimationSpriteCustom
     private Vec2 position;
     private Boolean[] movementDirection = new Boolean[3];
     public Detection detectionRange;
+    public Hitbox playerHitBox;
 
     private Vec2 frictionForce;
     private float friction;
@@ -74,25 +75,20 @@ public class Player : AnimationSpriteCustom
     {
         playerIndex = obj.GetIntProperty("int_index");
         SetAnimationCycle(0, 1);
+        mass = 4 * width * height;
+        SetOrigin(width / 2, height / 2);
 
-        playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), width, height, true);
-
-
-
-        detectionRange = new Detection(0, 0, mass); //the player's actual hit box.
-        playerCollision = new ColliderRect(detectionRange, new Vec2(0, 0), new Vec2(0, 0), detectionRange.width, detectionRange.height, true);
+        detectionRange = new Detection(0, 0, mass); 
         detectionRange.scaleX = 1.75f;
         detectionRange.scaleY = 2.5f;
         AddChild(detectionRange);
 
-        mass = 4 * width * height;
-        
-
-        playerHitBox = new Hitbox(-60, -60, mass); //the player's actual hit box.
-        playerHitBox.scale = 2.5f;
+        playerHitBox = new Hitbox(-32, -32, mass); //the player's actual hit box.
+        playerHitBox.scaleX = 2f;
+        playerHitBox.scaleY = 2f;
         AddChild(playerHitBox);
-
         playerCollision = new ColliderRect(playerHitBox, new Vec2(0, 0), new Vec2(0, 0), playerHitBox.width, playerHitBox.height, true);
+
     }
 
     public void UpdatePos()
@@ -279,7 +275,7 @@ public class Player : AnimationSpriteCustom
                 SetAnimationCycle(1, 1);
                 detectionRange.scaleX = 2.5f;
                 detectionRange.scaleY = 1.75f;
-                detectionRange.y = 16f;
+                
                 if (Input.GetKey(Key.W)) { inshell = false; }
 
             }
@@ -289,7 +285,7 @@ public class Player : AnimationSpriteCustom
                 SetAnimationCycle(0, 1);
                 detectionRange.scaleX = 1.75f;
                 detectionRange.scaleY = 2.5f;
-                detectionRange.y = 0;
+                
                 if (Input.GetKey(Key.S)) { inshell = true; }
 
             }
@@ -321,8 +317,8 @@ public class Player : AnimationSpriteCustom
 
     void UpdateCollision()
     {
-        playerCollision.width = playerHitBox.width;
-        playerCollision.height = playerHitBox.height;
+        playerCollision.Width = playerHitBox.width;
+        playerCollision.Height = playerHitBox.height;
         playerCollision.Position = position + new Vec2(playerHitBox.x, playerHitBox.y);
 
         playerCollision.Velocity = velocity;
