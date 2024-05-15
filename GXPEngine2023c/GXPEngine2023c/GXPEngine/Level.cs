@@ -188,6 +188,7 @@ public class Level : GameObject
 
                     }
 
+                
                     //Background. collision off
                     else if (theLayer == 1)
                     {
@@ -197,6 +198,7 @@ public class Level : GameObject
                         theTile.y = i * theTile.height;
                         background.AddChild(theTile);
                     }
+                
                 }
             }
         }

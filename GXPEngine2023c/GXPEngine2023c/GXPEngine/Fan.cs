@@ -12,8 +12,18 @@ public class Fan : AnimationSpriteCustom
     float theForce;
     int theDirection;
     bool isOn = true;
+
+    //if there's image in Tiled for this object
     public Fan(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
+        theForce = obj.GetFloatProperty("float_theForce", 1);
+        theDirection = obj.GetIntProperty("int_theDirection", 1);
+    }
+
+    //if there's no image in Tiled for this object
+    public Fan(TiledObject obj = null) : base("player.png", 1, 1, obj)
+    {
+        alpha = 0;
         theForce = obj.GetFloatProperty("float_theForce", 1);
         theDirection = obj.GetIntProperty("int_theDirection", 1);
     }
