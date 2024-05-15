@@ -36,8 +36,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 469.5,
-                "y": -60.5
+                "x": 468.5,
+                "y": 430.5
             }
         },
         "map1.tmx#Button": {
@@ -54,7 +54,11 @@
             "dynamicWrapping": false
         },
         "map1.tmx#Tilesheet": {
-            "dynamicWrapping": false
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "map1.tmx#button": {
+            "scaleInDock": 1
         },
         "map1.tmx#fan": {
             "dynamicWrapping": false,
@@ -68,6 +72,9 @@
             "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "map1.tmx#spike": {
+            "scaleInDock": 1
         },
         "map1.tmx#woodCrate": {
             "scaleInDock": 1

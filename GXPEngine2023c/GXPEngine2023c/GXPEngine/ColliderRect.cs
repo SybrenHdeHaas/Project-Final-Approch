@@ -103,7 +103,7 @@ public class ColliderRect : ColliderObject
     }
 
     //AABB collision detection with this and tile
-    protected void CheckCollisionDetection(MyGame myGame)
+    protected void CheckCollisionHitBox(MyGame myGame)
     {
         //checking the bricks
         for (int i = 0; i < GameData.playerList.Count(); i++)
@@ -311,7 +311,7 @@ public class ColliderRect : ColliderObject
     {
         MyGame myGame = (MyGame)game;
         CheckCollisionTiles(myGame);
-        CheckCollisionDetection(myGame);
+        CheckCollisionHitBox(myGame);
 
         return FindLowestTOICollision();
     }

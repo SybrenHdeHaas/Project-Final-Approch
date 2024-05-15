@@ -20,8 +20,10 @@ public class Level : GameObject
     float boundaryValueX; //Should be width / 2 to display the player at the center of the screen
     float boundaryValueY; //Should be height / 2 to display the player at the center of the screen
 
+    Dictionary<string, Door> doorList = new Dictionary<string, Door>();
     Dictionary<string, Fan> fanList = new Dictionary<string, Fan>();
     List<FanArea> fanAreaList = new List<FanArea>();
+    List<Button> buttonList = new List<Button>();
     public Level(string theMapfileName)
     {
         Map mapData = MapParser.ReadMap(theMapfileName);
@@ -29,7 +31,7 @@ public class Level : GameObject
 
         //Manually generates the tile layers.
         CreateTile(mapData, 0); //Create the walls
-     //   CreateTile(mapData, 1); //Create background
+         CreateTile(mapData, 1); //Create background
 
         //using autoInstance to Automatically generates the game objects
         loader.autoInstance = true;
@@ -53,6 +55,20 @@ public class Level : GameObject
             fanList.Add(theFan.id, theFan);
         }
 
+        //Extracting all door objects
+        foreach (Door theDoor in FindObjectsOfType<Door>())
+        {
+            doorList.Add(theDoor.theID, theDoor);
+        }
+
+        GameData.doorList = doorList;
+
+        //Extracting all 
+        foreach (Button theButton in FindObjectsOfType<Button>())
+        {
+            buttonList.Add(theButton);
+        }
+
         foreach (FanArea theFanArea in FindObjectsOfType<FanArea>())
         {
          //   theFanArea.visible = false;
@@ -73,6 +89,7 @@ public class Level : GameObject
         foreach (Player player in thePlayers) { player.ResetFanVelocityList(); }
             
         CheckFanAreas();
+        CheckButtons();
     }
 
 
@@ -82,16 +99,62 @@ public class Level : GameObject
         {
             foreach (Player player in thePlayers)
             {
+              
                 /* intersection btw player model (not red box) and fan area [working] --> SharedFunctions.CheckIntersectSprites(player, theFanArea) */
 
                 //check intersection btw player red box and fan area
                 if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theFanArea))
                 {
+                   
+
                     Fan theFan;
                     if (fanList.TryGetValue(theFanArea.TheFanID, out theFan))
                     {
                         player.AddFanVelocity(theFan.GetVelocity());
                         Console.WriteLine(theFan.GetVelocity());
+                    }
+                }
+            }
+        }
+    }
+
+    void CheckButtons()
+    {
+        foreach (Button theButton in buttonList)
+        {
+            foreach (Player player in thePlayers)
+            {
+                /* intersection btw player model (not red box) and fan area [working] --> SharedFunctions.CheckIntersectSprites(player, theFanArea) */
+
+                //check intersection btw player red box and fan area
+                if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theButton))
+                {
+                    if (player.playerIndex == 0 && theButton.hasPressed == false)
+                    {
+                        theButton.isPressedPlayer1 = true;
+                    }
+
+                    if (player.playerIndex == 1 && theButton.hasPressed == false)
+                    {
+                        theButton.isPressedPlayer2 = true;
+                    }
+                }
+
+                else
+                {
+                    if (player.playerIndex == 0)
+                    {
+                        theButton.isPressedPlayer1 = false;
+                    }
+
+                    if (player.playerIndex == 1)
+                    {
+                        theButton.isPressedPlayer2 = false;
+                    }
+
+                    if (theButton.isPressedPlayer1 == false && theButton.isPressedPlayer2 == false)
+                    {
+                        theButton.hasPressed = false;
                     }
                 }
             }
@@ -188,7 +251,6 @@ public class Level : GameObject
 
                     }
 
-                
                     //Background. collision off
                     else if (theLayer == 1)
                     {

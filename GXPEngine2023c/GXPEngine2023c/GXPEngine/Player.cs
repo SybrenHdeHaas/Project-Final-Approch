@@ -40,7 +40,16 @@ public class Player : AnimationSpriteCustom
         
 
         playerHitBox = new Hitbox(-60, -60, mass); //the player's actual hit box.
-        playerHitBox.scale = 2.5f;
+
+        if (playerIndex == 1)
+        {
+            playerHitBox.scale = 4f;
+        }
+
+        else
+        {
+            playerHitBox.scale = 1f;
+        }
         AddChild(playerHitBox);
 
         playerCollision = new ColliderRect(playerHitBox, new Vec2(0, 0), new Vec2(0, 0), playerHitBox.width, playerHitBox.height, true);
