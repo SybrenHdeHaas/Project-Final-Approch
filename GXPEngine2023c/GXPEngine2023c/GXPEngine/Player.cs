@@ -21,6 +21,8 @@ public class Player : AnimationSpriteCustom
     private Vec2 playerVelocity = new Vec2();
     private Vec2 velocity;
     private Vec2 acceleration;
+
+    public int GetPlyaerIndex() { return playerIndex; }
     private int playerIndex; //renamed from index to playerIndex for better naming. 1 = player1, 2 = player2
 
 
@@ -50,6 +52,7 @@ public class Player : AnimationSpriteCustom
     private Vec2 position;
     private Boolean[] movementDirection = new Boolean[3];
     public Detection detectionRange;
+    public Hitbox playerHitBox;
 
     private Vec2 frictionForce;
     private float friction;
@@ -64,13 +67,6 @@ public class Player : AnimationSpriteCustom
     private Vec2 dragForce;
     private float drag = 0.01f;
 
-    private int i = 0;
-
-
-
-
-
-
     ColliderRect playerCollision; //handles the player's collision
 
     public float mass;
@@ -80,11 +76,19 @@ public class Player : AnimationSpriteCustom
         playerIndex = obj.GetIntProperty("int_index");
         SetAnimationCycle(0, 1);
         mass = 4 * width * height;
+        SetOrigin(width / 2, height / 2);
 
-        detectionRange = new Detection(-40, -30, mass); //the player's actual hit box.
-        detectionRange.scale = 2.5f;
+        detectionRange = new Detection(0, 0, mass); 
+        detectionRange.scaleX = 1.75f;
+        detectionRange.scaleY = 2.5f;
         AddChild(detectionRange);
-        playerCollision = new ColliderRect(detectionRange, new Vec2(0, 0), new Vec2(0, 0), detectionRange.width, detectionRange.height, true);
+
+        playerHitBox = new Hitbox(-32, -32, mass); //the player's actual hit box.
+        playerHitBox.scaleX = 2f;
+        playerHitBox.scaleY = 2f;
+        AddChild(playerHitBox);
+        playerCollision = new ColliderRect(playerHitBox, new Vec2(0, 0), new Vec2(0, 0), playerHitBox.width, playerHitBox.height, true);
+
     }
 
     public void UpdatePos()
@@ -184,7 +188,7 @@ public class Player : AnimationSpriteCustom
                         movementDirection[1] = true;
                     }
                     else { movementDirection[1] = false; }
-                    if (Input.GetKeyDown(Key.I) && onGround)
+                    if (Input.GetKeyDown(Key.I) && onGround && !onCeiling)
                     {
                         movementDirection[2] = true;
                     }
@@ -195,7 +199,6 @@ public class Player : AnimationSpriteCustom
         }
 
         Moving(movementDirection);
-
     }
 
 
@@ -212,88 +215,83 @@ public class Player : AnimationSpriteCustom
             }
             if (moveDir[1])
             {
-                acceleration = new Vec2(-1, 0);
-                acceleration += velocity * -friction;
-            }
-
-            if (Input.GetKey(Key.D) == true && playerIndex == 0)
-            {
                 acceleration = new Vec2(1, 0);
             }
+
+
             if (moveDir[2])
             {
                 acceleration = new Vec2(0, -25);
 
-                if (Input.GetKey(Key.I) == true && playerIndex == 1)
-                {
-                    acceleration += new Vec2(0, -5);
-                    acceleration += velocity * -friction;
-                }
-
-                if (!moveDir[0] && !moveDir[1] && !moveDir[2])
-                {
-                    acceleration = new Vec2(0, 0);
-                }
-            }
-            else { acceleration = new Vec2(0, 0); }
-
-            if (inshell)
-            {
-                friction = inShellFriction;
             }
 
-            if (!inshell)
+            if (!moveDir[0] && !moveDir[1] && !moveDir[2])
             {
                 friction = standUpFriction;
             }
-
-            CalcFanVeclotiy();
-
-            if (inshell) { friction = inShellFriction; }
-            if (!inshell) { friction = standUpFriction; }
-
-            frictionForce = -friction * playerVelocity;
-
-            if (!onGround) { gravity = 1f; }
-            if (onGround) { gravity = 0f; }
-
-
-
-
-            gravityForce = new Vec2(0, gravity);
-
-            acceleration += frictionForce + gravityForce;
-
-            playerVelocity += acceleration;
-
-            velocity = playerVelocity + fanVelocity;
         }
+        else { acceleration = new Vec2(0, 0); }
+
+
+
+
+        if (inshell)
+        {
+            friction = inShellFriction;
+        }
+
+        if (!inshell)
+        {
+            friction = standUpFriction;
+        }
+
+
+
+
+        if (!onGround) { gravity = 1f; }
+        if (onGround) { gravity = 0f; }
+
+        gravityForce = new Vec2(0, gravity);
+
+        acceleration += frictionForce + gravityForce;
+
+        playerVelocity += acceleration;
+
+        velocity = playerVelocity + fanVelocity;
     }
 
 
     private void shellState()
     {
-        if (inshell)
+        if (playerIndex == 0)
         {
-            SetAnimationCycle(1, 1);
-
-            if (Input.GetKey(Key.W) && playerIndex == 0) { inshell = false; }
+            if (inshell)
+            {
+                SetAnimationCycle(1, 1);
+                detectionRange.scaleX = 2.5f;
+                detectionRange.scaleY = 1.75f;
+                
+                if (Input.GetKey(Key.W)) { inshell = false; }
 
         }
 
-        if (!inshell)
-        {
-            SetAnimationCycle(0, 1);
+            if (!inshell)
+            {
+                SetAnimationCycle(0, 1);
+                detectionRange.scaleX = 1.75f;
+                detectionRange.scaleY = 2.5f;
+                
+                if (Input.GetKey(Key.S)) { inshell = true; }
 
-            if (Input.GetKey(Key.S)) { inshell = true; }
+        }
 
         }
 
 
 
-
-        if (!inshell)
+        if (playerIndex == 1)
         {
+
             if (inshell)
             {
                 SetAnimationCycle(1, 1);
@@ -306,20 +304,17 @@ public class Player : AnimationSpriteCustom
                 if (Input.GetKey(Key.K)) { inshell = true; }
 
             }
+
         }
-
-        if (Input.GetKey(Key.S) && playerIndex == 0) { inshell = true; }
-
-        if (Input.GetKey(Key.K) && playerIndex == 1) { inshell = true; }
-
     }
+
 
 
     void UpdateCollision()
     {
-        playerCollision.width = detectionRange.width;
-        playerCollision.height = detectionRange.height;
-        playerCollision.Position = position + new Vec2(detectionRange.x, detectionRange.y);
+        playerCollision.Width = playerHitBox.width;
+        playerCollision.Height = playerHitBox.height;
+        playerCollision.Position = position + new Vec2(playerHitBox.x, playerHitBox.y);
 
         playerCollision.Velocity = velocity;
     }
@@ -329,7 +324,7 @@ public class Player : AnimationSpriteCustom
     {
         PlayerInput();
         shellState();
-        CollisionDirection();
+        //CollisionDirection();
         //groundCheck();
 
         UpdateCollision();

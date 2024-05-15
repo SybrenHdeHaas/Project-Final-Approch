@@ -109,7 +109,7 @@ public class Level : GameObject
         foreach (Player player in thePlayers)
         {
             //for now, camera only follow player1
-            if (player.playerIndex != 0)
+            if (player.GetPlyaerIndex() != 0)
             {
                 return;
             }

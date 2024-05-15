@@ -16,15 +16,15 @@ public static class SharedFunctions
     public static bool CheckIntersectSpriteDetectionRange(Player thisObject, Sprite thatObject)
     {
         // Calculate half-width and half-height for each rectangle
-        double rect1HalfWidth = thisObject.detectionRange.width / 2;
-        double rect1HalfHeight = thisObject.detectionRange.height / 2;
+        double rect1HalfWidth = thisObject.playerHitBox.width / 2;
+        double rect1HalfHeight = thisObject.playerHitBox.height / 2;
 
         double rect2HalfWidth = thatObject.width / 2;
         double rect2HalfHeight = thatObject.height / 2;
 
         // Calculate the centers of the rectangles
-        double rect1CenterX = thisObject.detectionRange.GetX() + rect1HalfWidth;
-        double rect1CenterY = thisObject.detectionRange.GetY() + rect1HalfHeight;
+        double rect1CenterX = thisObject.playerHitBox.GetX() + rect1HalfWidth;
+        double rect1CenterY = thisObject.playerHitBox.GetY() + rect1HalfHeight;
         double rect2CenterX = thatObject.x;
         double rect2CenterY = thatObject.y;
 
@@ -46,20 +46,4 @@ public static class SharedFunctions
             return false;
         }
     }
-    
-
-    /*
-    public static bool CheckIntersectSpriteDetectionRange(Player thisObject, Sprite thatObject)
-    {
-        if (Math.Abs(thisObject.x - thatObject.x) <= (thisObject.detectionRange.width / 2) + (thatObject.width / 2) &&
-            Math.Abs(thisObject.y - thatObject.y) <= (thisObject.detectionRange.height / 2) + (thatObject.height / 2))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    */
 }

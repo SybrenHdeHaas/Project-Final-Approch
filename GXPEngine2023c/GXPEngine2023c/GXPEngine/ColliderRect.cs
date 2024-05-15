@@ -1,18 +1,15 @@
 using GXPEngine;
 using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
 
 //physcis for a ball object
 public class ColliderRect : ColliderObject
 {
     GameObject thisBallObject;
-    public float Width 
-    { 
+    public float Width
+    {
         get { return width; }
-        set { width = value; } 
+        set { width = value; }
     }
     public float Height
     {
@@ -24,6 +21,8 @@ public class ColliderRect : ColliderObject
     GameObject thisObject;
     public ColliderRect(GameObject pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
     {
+
+        thisBallObject = pRectObject;
         thisObject = pRectObject;
         width = pWidth / 2;
         height = pHeight / 2;
@@ -44,7 +43,7 @@ public class ColliderRect : ColliderObject
 
             if (xOverlap > 0 && yOverlap > 0)
             {
-               
+
                 float timeOfImpact = -1;
 
                 if (xOverlap < yOverlap)
@@ -52,6 +51,7 @@ public class ColliderRect : ColliderObject
                     if (position.x < theTile.x)
                     {
                         timeOfImpact = Math.Abs((_oldPosition.x + width) - theTile.x) / Math.Abs(position.x - _oldPosition.x);
+
 
                         if (wordy2)
                         {
@@ -67,10 +67,9 @@ public class ColliderRect : ColliderObject
                     }
                     else
                     {
-                       timeOfImpact = Math.Abs(_oldPosition.x - (theTile.x + theTile.width)) / Math.Abs(position.x - _oldPosition.x);
 
                         timeOfImpact = Math.Abs(_oldPosition.x - (theTile.x + theTile.width)) / Math.Abs(position.x - _oldPosition.x);
-                        
+
 
                         if (wordy2)
                         {
@@ -89,7 +88,7 @@ public class ColliderRect : ColliderObject
                     if (position.y < theTile.y)
                     {
                         timeOfImpact = Math.Abs((_oldPosition.y + height) - theTile.y) / Math.Abs(_oldPosition.y - position.y);
-                        
+
                         if (wordy2)
                         {
                             Console.WriteLine("down: " + timeOfImpact);
@@ -104,7 +103,7 @@ public class ColliderRect : ColliderObject
                     else
                     {
                         timeOfImpact = Math.Abs(_oldPosition.y - (theTile.y + theTile.height)) / Math.Abs(_oldPosition.y - position.y);
-                        
+
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
                             if (wordy2)
@@ -126,7 +125,7 @@ public class ColliderRect : ColliderObject
         //checking the bricks
         for (int i = 0; i < GameData.playerList.Count(); i++)
         {
-            Detection theDetection = GameData.playerList[i].detectionRange;
+            Hitbox theDetection = GameData.playerList[i].playerHitBox;
 
             if (thisObject == theDetection)
             {
@@ -208,110 +207,6 @@ public class ColliderRect : ColliderObject
         }
     }
 
-    /*
-    //AABB collision detection with this and player
-    protected void CheckCollisionPlayers(MyGame myGame)
-    {
-        for (int i = 0; i < GameData.playerList.Count(); i++)
-        {
-            Player theOtherPlayer = GameData.playerList[i];
-
-            if (theOtherPlayer == thisObject)
-            {
-                continue;
-            }
-
-            float xOverlap = Math.Min(position.x + width, theOtherPlayer.x + theOtherPlayer.width) - Math.Max(position.x, theOtherPlayer.x);
-            float yOverlap = Math.Min(position.y + height, theOtherPlayer.y + theOtherPlayer.height) - Math.Max(position.y, theOtherPlayer.y);
-
-            if (xOverlap > 0 && yOverlap > 0)
-            {
-
-                float timeOfImpact = -1;
-
-                Vec2 detectionPosThis = new Vec2(thisObject.detectionRange.x + position.x
-                    , thisObject.detectionRange.y + position.y);
-                Vec2 detectionPosOther = new Vec2(theOtherPlayer.detectionRange.GetX()
-                    , theOtherPlayer.detectionRange.GetY());
-
-                Vec2 oldPos = _oldPosition + new Vec2(thisObject.detectionRange.x
-                    , thisObject.detectionRange.y);
-
-                float widthDetectionThis = thisObject.detectionRange.width;
-                float widthDetectionOther = theOtherPlayer.detectionRange.width;
-                float heightDetectionThis = thisObject.detectionRange.height;
-                float heightDetectionOther = theOtherPlayer.detectionRange.height;
-
-
-                if (xOverlap < yOverlap)
-                {
-                    if (detectionPosThis.x < detectionPosOther.x)
-                    {
-                        timeOfImpact = Math.Abs((oldPos.x + widthDetectionThis) - theOtherPlayer.x) / Math.Abs(detectionPosThis.x - oldPos.x);
-
-                        if (wordy5)
-                        {
-                            Console.WriteLine("right:" + timeOfImpact);
-                        }
-
-                        if (timeOfImpact <= 1 && timeOfImpact >= 0)
-                        {
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theOtherPlayer, timeOfImpact, 4));
-                        }
-                    }
-                    else
-                    {
-                        timeOfImpact = Math.Abs(oldPos.x - (theOtherPlayer.x + widthDetectionOther)) / Math.Abs(detectionPosThis.x - oldPos.x);
-
-                        if (wordy5)
-                        {
-                            Console.WriteLine("left: " + timeOfImpact);
-                        }
-
-                        if (timeOfImpact <= 1 && timeOfImpact >= 0)
-                        {
-
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theOtherPlayer, timeOfImpact, 3));
-                        }
-                    }
-                }
-
-                else
-                {
-                    if (detectionPosThis.y < detectionPosOther.y)
-                    {
-                        timeOfImpact = Math.Abs((oldPos.y + heightDetectionThis) - theOtherPlayer.y) / Math.Abs(oldPos.y - detectionPosThis.y);
-                        if (wordy5)
-                        {
-                            Console.WriteLine("down: " + timeOfImpact);
-                        }
-
-                        if (timeOfImpact <= 1 && timeOfImpact >= 0)
-                        {
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theOtherPlayer, timeOfImpact, 2));
-                        }
-                    }
-
-                    else
-                    {
-                        timeOfImpact = Math.Abs(oldPos.y - (detectionPosOther.y + heightDetectionOther)) / Math.Abs(oldPos.y - detectionPosThis.y);
-
-                        if (timeOfImpact <= 1 && timeOfImpact >= 0)
-                        {
-                            if (wordy5)
-                            {
-                                Console.WriteLine("up: " + timeOfImpact);
-                            }
-
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theOtherPlayer, timeOfImpact, 1));
-                        }
-                    }
-                }
-            }
-        }
-    }
-    */
-
     protected override void ResolveCollision(CollisionInfo earilstCollision)
     {
 
@@ -320,7 +215,48 @@ public class ColliderRect : ColliderObject
         //solving all collisions
         foreach (CollisionInfo col in _collisionList)
         {
-            //collision with a tile
+            //collision with detection
+            if (col.other is Hitbox)
+            {
+                Hitbox theHitbox = (Hitbox)col.other;
+                Vec2 centerOfMass = (Mass * velocity + theHitbox.mass * new Vec2(0, 0)) / (Mass + theHitbox.mass);
+                Vec2 momentum = -bounciness * velocity;
+                Vec2 POI = _oldPosition + (col.timeOfImpact * velocity);
+
+
+                if (col.AABBDirection == 1)
+                {
+                    if (wordy4)
+                    {
+                        Console.WriteLine("resolving up");
+                    }
+
+                    position.y -= POI.y - position.y;
+                    velocity.y = momentum.y;
+                }
+
+                else if (col.AABBDirection == 2)
+                {
+                    if (wordy4)
+                    {
+                        Console.WriteLine("resolving down");
+                    }
+
+                    position.y += POI.y - position.y;
+                    velocity.y = momentum.y;
+                }
+
+                else if (col.AABBDirection == 3)
+                {
+                    if (wordy4)
+                    {
+                        Console.WriteLine("resolving left");
+                    }
+
+                    position.x += position.x - POI.x;
+                    velocity.x = momentum.x;
+                }
+            }
             if (col.other is Tile)
             {
 
@@ -329,58 +265,9 @@ public class ColliderRect : ColliderObject
                 Vec2 momentum = -bounciness * velocity;
                 Vec2 POI = _oldPosition + (col.timeOfImpact * velocity);
 
-                if (col.AABBDirection == 1)
-                {
-                    if (wordy4)
-                    {
-                        Console.WriteLine("resolving up");
-                    }
+                position.y -= POI.y - position.y;
+                velocity.y = momentum.y;
 
-                    position.y -= POI.y - position.y;
-                    velocity.y = momentum.y;
-                }
-
-                else if (col.AABBDirection == 2)
-                {
-                    if (wordy4)
-                    {
-                        Console.WriteLine("resolving down");
-                    }
-
-                    position.y += POI.y - position.y;
-                    velocity.y = momentum.y;
-                }
-
-                else if (col.AABBDirection == 4)
-                {
-                    if (wordy4)
-                    {
-                        Console.WriteLine("resolving right");
-                    }
-
-                    position.x -= position.x - POI.x;
-                    velocity.x = momentum.x;
-                }
-
-                else if (col.AABBDirection == 3)
-                {
-                    if (wordy4)
-                    {
-                        Console.WriteLine("resolving left");
-                    }
-
-                    position.x += position.x - POI.x;
-                    velocity.x = momentum.x;
-                }
-            }
-
-            //collision with detection
-            if (col.other is Detection)
-            {
-                Detection theDetection = (Detection)col.other;
-                Vec2 centerOfMass = (Mass * velocity + theDetection.mass * new Vec2(0, 0)) / (Mass + theDetection.mass);
-                Vec2 momentum = -bounciness * velocity;
-                Vec2 POI = _oldPosition + (col.timeOfImpact * velocity);
 
 
                 if (col.AABBDirection == 1)
@@ -393,6 +280,7 @@ public class ColliderRect : ColliderObject
                     position.y -= POI.y - position.y;
                     velocity.y = momentum.y;
                 }
+
 
                 else if (col.AABBDirection == 2)
                 {
@@ -415,83 +303,16 @@ public class ColliderRect : ColliderObject
                     position.x += position.x - POI.x;
                     velocity.x = momentum.x;
                 }
+
+
+
+
+
             }
 
-            /*
-            //collision with another player
-            if (col.other is Player)
-            {
-
-                if (col.other == thisObject)
-                {
-                    continue;
-                }
-
-                Player thePlayer = (Player)col.other;
-
-                Vec2 oldPos = _oldPosition + new Vec2(thisObject.detectionRange.x
-    , thisObject.detectionRange.y);
-
-                Vec2 centerOfMass = (Mass * velocity + thePlayer.mass * new Vec2(0, 0)) / (Mass + thePlayer.mass);
-                Vec2 momentum = -bounciness * velocity;
-                Vec2 POI = oldPos + (col.timeOfImpact * velocity);
-
-
-                if (col.AABBDirection == 1)
-                {
-                    if (wordy4)
-                    {
-                        Console.WriteLine("resolving up");
-                    }
-
-                    position.y -= POI.y - position.y;
-                    velocity.y = momentum.y;
-                }
-
-                else if (col.AABBDirection == 2)
-                {
-                    if (wordy4)
-                    {
-                        Console.WriteLine("resolving down");
-                    }
-
-                    position.y += POI.y - position.y;
-                    velocity.y = momentum.y;
-                }
-
-                else if (col.AABBDirection == 4)
-                {
-                    if (wordy4)
-                    {
-                        Console.WriteLine("resolving right");
-                    }
-
-                    position.x -= position.x - POI.x;
-                    velocity.x = momentum.x;
-                }
-
-                else if (col.AABBDirection == 3)
-                {
-                    if (wordy4)
-                    {
-                        Console.WriteLine("resolving left");
-                    }
-
-                    position.x += position.x - POI.x;
-                    velocity.x = momentum.x;
-                }
-            }
+           
         }
-            */
-        }
-    }
 
-    protected override CollisionInfo FindEarliestCollision()
-    {
-        MyGame myGame = (MyGame)game;
-        CheckCollisionTiles(myGame);
-        CheckCollisionDetection(myGame);
-
-        return FindLowestTOICollision();
+        
     }
 }
