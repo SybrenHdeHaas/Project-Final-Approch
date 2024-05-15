@@ -118,29 +118,7 @@ public class Player : AnimationSpriteCustom
     }
 
 
-    public void CollisionDirection()
-    {
-        List<CollisionInfo> coll = playerCollision.GetCollisionList();
-        collisionDirection = "none";
-        foreach (CollisionInfo theCollision in coll)
-        {
-            if (theCollision.AABBDirection == 1) { collisionDirection = "up"; }
-            else if (theCollision.AABBDirection == 2) { collisionDirection = "down"; }
-            else if (theCollision.AABBDirection == 3) { collisionDirection = "left"; }
-            else if (theCollision.AABBDirection == 4) { collisionDirection = "right"; }
-        }
 
-    }
-
-    private void groundCheck()
-    {
-        if (collisionDirection == "down")
-        {
-            onGround = true;
-        }
-        else onGround = false;
-
-    }
 
     private void PlayerInput()
     {
@@ -329,8 +307,7 @@ public class Player : AnimationSpriteCustom
     {
         PlayerInput();
         shellState();
-        //CollisionDirection();
-        //groundCheck();
+
 
         UpdateCollision();
         playerCollision.Step();

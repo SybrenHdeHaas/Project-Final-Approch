@@ -22,7 +22,7 @@ public class ColliderRect : ColliderObject
     public ColliderRect(GameObject pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
     {
 
-        thisBallObject = pRectObject;
+        
         thisObject = pRectObject;
         width = pWidth / 2;
         height = pHeight / 2;
@@ -34,6 +34,8 @@ public class ColliderRect : ColliderObject
     {
         MyGame myGame = (MyGame)game;
         CheckCollisionTiles(myGame);
+        CheckCollisionHitbox(myGame);
+
 
         return FindLowestTOICollision();
     }
@@ -129,20 +131,20 @@ public class ColliderRect : ColliderObject
     }
 
     //AABB collision detection with this and tile
-    protected void CheckCollisionDetection(MyGame myGame)
+    protected void CheckCollisionHitbox(MyGame myGame)
     {
         //checking the bricks
         for (int i = 0; i < GameData.playerList.Count(); i++)
         {
-            Hitbox theDetection = GameData.playerList[i].playerHitBox;
+            Hitbox theHitBox = GameData.playerList[i].playerHitBox;
 
-            if (thisObject == theDetection)
+            if (thisObject == theHitBox)
             {
                 continue;
             }
 
-            float xOverlap = Math.Min(position.x + width, theDetection.GetX() + theDetection.width) - Math.Max(position.x, theDetection.GetX());
-            float yOverlap = Math.Min(position.y + height, theDetection.GetY() + theDetection.height) - Math.Max(position.y, theDetection.GetY());
+            float xOverlap = Math.Min(position.x + width, theHitBox.GetX() + theHitBox.width) - Math.Max(position.x, theHitBox.GetX());
+            float yOverlap = Math.Min(position.y + height, theHitBox.GetY() + theHitBox.height) - Math.Max(position.y, theHitBox.GetY());
 
             if (xOverlap > 0 && yOverlap > 0)
             {
@@ -150,9 +152,9 @@ public class ColliderRect : ColliderObject
 
                 if (xOverlap < yOverlap)
                 {
-                    if (position.x < theDetection.GetX())
+                    if (position.x < theHitBox.GetX())
                     {
-                        timeOfImpact = Math.Abs((_oldPosition.x + width) - theDetection.GetX()) / Math.Abs(position.x - _oldPosition.x);
+                        timeOfImpact = Math.Abs((_oldPosition.x + width) - theHitBox.GetX()) / Math.Abs(position.x - _oldPosition.x);
 
                         if (wordy5)
                         {
@@ -161,12 +163,12 @@ public class ColliderRect : ColliderObject
 
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theDetection, timeOfImpact, 4));
+                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theHitBox, timeOfImpact, 4));
                         }
                     }
                     else
                     {
-                        timeOfImpact = Math.Abs(_oldPosition.x - (theDetection.GetX() + theDetection.width)) / Math.Abs(position.x - _oldPosition.x);
+                        timeOfImpact = Math.Abs(_oldPosition.x - (theHitBox.GetX() + theHitBox.width)) / Math.Abs(position.x - _oldPosition.x);
 
                         if (wordy5)
                         {
@@ -176,16 +178,16 @@ public class ColliderRect : ColliderObject
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
 
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theDetection, timeOfImpact, 3));
+                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theHitBox, timeOfImpact, 3));
                         }
                     }
                 }
 
                 else
                 {
-                    if (position.y < theDetection.GetY())
+                    if (position.y < theHitBox.GetY())
                     {
-                        timeOfImpact = Math.Abs((_oldPosition.y + height) - theDetection.GetY()) / Math.Abs(_oldPosition.y - position.y);
+                        timeOfImpact = Math.Abs((_oldPosition.y + height) - theHitBox.GetY()) / Math.Abs(_oldPosition.y - position.y);
                         if (wordy5)
                         {
                             Console.WriteLine("down: " + timeOfImpact);
@@ -193,13 +195,13 @@ public class ColliderRect : ColliderObject
 
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theDetection, timeOfImpact, 2));
+                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theHitBox, timeOfImpact, 2));
                         }
                     }
 
                     else
                     {
-                        timeOfImpact = Math.Abs(_oldPosition.y - (theDetection.GetY() + theDetection.height)) / Math.Abs(_oldPosition.y - position.y);
+                        timeOfImpact = Math.Abs(_oldPosition.y - (theHitBox.GetY() + theHitBox.height)) / Math.Abs(_oldPosition.y - position.y);
 
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
@@ -208,7 +210,7 @@ public class ColliderRect : ColliderObject
                                 Console.WriteLine("up: " + timeOfImpact);
                             }
 
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theDetection, timeOfImpact, 1));
+                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theHitBox, timeOfImpact, 1));
                         }
                     }
                 }
@@ -231,6 +233,10 @@ public class ColliderRect : ColliderObject
                 Vec2 centerOfMass = (Mass * velocity + theHitbox.mass * new Vec2(0, 0)) / (Mass + theHitbox.mass);
                 Vec2 momentum = -bounciness * velocity;
                 Vec2 POI = _oldPosition + (col.timeOfImpact * velocity);
+
+
+
+                
 
 
                 if (col.AABBDirection == 1)
@@ -263,6 +269,19 @@ public class ColliderRect : ColliderObject
                     }
 
                     position.x += position.x - POI.x;
+                    velocity.x = momentum.x;
+                }
+
+
+
+                else if (col.AABBDirection == 4)
+                {
+                    if (wordy4)
+                    {
+                        Console.WriteLine("resolving right");
+                    }
+
+                    position.x -= position.x - POI.x;
                     velocity.x = momentum.x;
                 }
             }
