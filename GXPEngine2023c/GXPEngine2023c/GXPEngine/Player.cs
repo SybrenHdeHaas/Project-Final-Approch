@@ -18,7 +18,8 @@ public class Player : AnimationSpriteCustom
     private Vec2 velocity;
     private Vec2 acceleration;
     public int playerIndex; //renamed from index to playerIndex for better naming. 0 = player1, 1 = player2
-    public Detection detectionRange;
+    Detection detectionRange;
+    public Hitbox playerHitBox;
     List<Vec2> fanVelocityList = new List<Vec2>();
     Vec2 fanVelocity;
     Vec2 position;
@@ -36,7 +37,13 @@ public class Player : AnimationSpriteCustom
         detectionRange = new Detection(-40, -30, mass); //the player's actual hit box.
         detectionRange.scale = 2.5f;
         AddChild(detectionRange);
-        playerCollision = new ColliderRect(detectionRange, new Vec2(0, 0), new Vec2(0, 0), detectionRange.width, detectionRange.height, true);
+        
+
+        playerHitBox = new Hitbox(-60, -60, mass); //the player's actual hit box.
+        playerHitBox.scale = 2.5f;
+        AddChild(playerHitBox);
+
+        playerCollision = new ColliderRect(playerHitBox, new Vec2(0, 0), new Vec2(0, 0), playerHitBox.width, playerHitBox.height, true);
     }
 
     public void UpdatePos()
@@ -170,9 +177,9 @@ public class Player : AnimationSpriteCustom
   
     void UpdateCollision()
     {
-        playerCollision.width = detectionRange.width;
-        playerCollision.height = detectionRange.height;
-        playerCollision.Position = position + new Vec2(detectionRange.x, detectionRange.y);
+        playerCollision.width = playerHitBox.width;
+        playerCollision.height = playerHitBox.height;
+        playerCollision.Position = position + new Vec2(playerHitBox.x, playerHitBox.y);
 
         playerCollision.Velocity = velocity;
     }
