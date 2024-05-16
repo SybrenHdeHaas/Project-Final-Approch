@@ -107,8 +107,8 @@ public class Player : AnimationSpriteCustom
     {
         playerIndex = obj.GetIntProperty("int_index");
 
-        hitboxWorkingWidth = obj.GetIntProperty("Width")/2;
-        hitboxWorkingHeight = obj.GetIntProperty("Height")/2;
+        hitboxWorkingWidth = obj.GetIntProperty("Width");
+        hitboxWorkingHeight = obj.GetIntProperty("Height");
 
         mass = 4 * width * height;
 
@@ -397,7 +397,7 @@ public class Player : AnimationSpriteCustom
     {
         playerHitBox.playerCollision.Width = hitboxWorkingWidth;
         playerHitBox.playerCollision.Height = hitboxWorkingHeight;
-        playerHitBox.playerCollision.Position = position;
+        playerHitBox.playerCollision.Position = position + new Vec2(-32, -32);
         playerHitBox.playerCollision.Velocity = velocity;
     }
 

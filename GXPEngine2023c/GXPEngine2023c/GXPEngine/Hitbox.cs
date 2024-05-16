@@ -16,19 +16,19 @@ public class Hitbox : Sprite
         x = offSetX;
         y = offSetY;
         this.mass = mass;
-        playerCollision = new ColliderRect(this, new Vec2(objX, objY), new Vec2(0, 0), width, height, true);
+        playerCollision = new ColliderRect(this, new Vec2(objX, objY), new Vec2(0, 0), offSetX, offSetY, width, height, true);
         visible = false;
     }
 
     public float GetX()
     {
-        return parent.x;
+        return parent.x + x;
         
     }
 
     public float GetY()
     {
-        return parent.y;
+        return parent.y + y; 
     }
 
 
