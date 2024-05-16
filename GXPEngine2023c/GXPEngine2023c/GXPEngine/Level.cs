@@ -126,10 +126,10 @@ public class Level : GameObject
             goalList.Add(theGoal);
         }
 
-
         //extracting goal objects
         foreach (Breakable theBreakable in FindObjectsOfType<Breakable>())
         {
+            Console.WriteLine("bx: " + theBreakable.x + " | by: " + theBreakable.y);
             breakableList.Add(theBreakable);
         }
 
@@ -278,7 +278,7 @@ public class Level : GameObject
             {
                 if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theBreakable))
                 {
-                    Console.WriteLine("Player velocity length: " + player.Velocity.Length());
+                  //  Console.WriteLine("Player velocity length: " + player.Velocity.Length());
                     if (theBreakable.TryDamage(player.Velocity) == true)
                     {
                         breakableList.Remove(theBreakable);

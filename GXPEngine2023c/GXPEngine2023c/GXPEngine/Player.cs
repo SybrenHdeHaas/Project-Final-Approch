@@ -112,7 +112,6 @@ public class Player : AnimationSpriteCustom
         playerHitBox = new Hitbox(-32, -32, mass); //the player's actual hit box.
         playerHitBox.scaleX = width/32;
         playerHitBox.scaleY = height/32;
-
         
         AddChild(playerHitBox);
         playerCollision = new ColliderRect(playerHitBox, new Vec2(0, 0), new Vec2(0, 0), playerHitBox.width, playerHitBox.height, true);

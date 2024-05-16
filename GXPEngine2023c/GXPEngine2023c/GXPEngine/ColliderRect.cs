@@ -6,7 +6,6 @@ using System.Linq;
 //physcis for a ball object
 public class ColliderRect : ColliderObject
 {
-    GameObject thisBallObject;
     public float Width
     {
         get { return width; }
@@ -19,16 +18,13 @@ public class ColliderRect : ColliderObject
     }
     private float width;
     private float height;
-    GameObject thisObject;
-    public ColliderRect(GameObject pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
-    {
-
-        
+    Sprite thisObject;
+    public ColliderRect(Sprite pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
+    {   
         thisObject = pRectObject;
         width = pWidth / 2;
         height = pHeight / 2;
         mass = 4 * width * height * _density;
-
     }
 
     protected override CollisionInfo FindEarliestCollision() //Overriden from third step in colliderObject?
@@ -228,75 +224,96 @@ public class ColliderRect : ColliderObject
         }
     }
 
-    //AABB collision detection with this and tile
-    protected void CheckCollisionDoor(MyGame myGame)
+    //AABB collision detection with THIS and tile
+    protected void CheckCollisionDoor(MyGame myGame) //possible fourth step
     {
         //checking the bricks
         foreach (KeyValuePair<string, Door> theDoorEntry in GameData.doorList)
         {
             Door theDoor = theDoorEntry.Value;
 
+            double dx = Math.Abs((position.x + Width / 2) - (theDoor.x));
+            double dy = Math.Abs((position.y + Height / 2) - (theDoor.y));
+
+            double overlapX = (Width + theDoor.width) / 2 - dx;
+            double overlapY = (Height + theDoor.height) / 2 - dy;
+
+            double rect1HalfWidth = width / 2;
+            double rect1HalfHeight = height / 2;
+
+            double rect2HalfWidth = theDoor.width / 2;
+            double rect2HalfHeight = theDoor.height / 2;
+
+            // Calculate the centers of the rectangles
+            double rect1CenterX = position.x + rect1HalfWidth;
+            double rect1CenterY = position.y + rect1HalfHeight;
+            double rect2CenterX = theDoor.x;
+            double rect2CenterY = theDoor.y;
+
+            // Calculate the distance between the centers of the rectangles
+            double distanceX = Math.Abs(rect1CenterX - rect2CenterX);
+            double distanceY = Math.Abs(rect1CenterY - rect2CenterY);
+
+            // Calculate the sum of half-widths and half-heights of the rectangles
+            double sumHalfWidth = rect1HalfWidth + rect2HalfWidth;
+            double sumHalfHeight = rect1HalfHeight + rect2HalfHeight;
 
 
-            if (thisObject is Hitbox)
-            {
-                Hitbox hitbox = (Hitbox)thisObject;
-
-                if (thisObject == theDoor)
-                {
-                    continue;
-                }
-
-            }
-
-            float xOverlap = Math.Min(position.x + width, theDoor.x + theDoor.width) - Math.Max(position.x, theDoor.x);
-            float yOverlap = Math.Min(position.y + height, theDoor.y + theDoor.height) - Math.Max(position.y, theDoor.y);
-
-            if (xOverlap > 0 && yOverlap > 0)
+            if (distanceX < (rect1HalfWidth + rect2HalfWidth) && distanceY < (rect1HalfHeight + rect2HalfHeight))
             {
                 float timeOfImpact = -1;
 
-                if (xOverlap < yOverlap)
+
+                if (wordy6)
+                {
+                    Console.WriteLine("aaaaaa");
+                }
+
+                if (overlapX < overlapY)
                 {
                     if (position.x < theDoor.x)
                     {
-                        timeOfImpact = Math.Abs((_oldPosition.x + width) - theDoor.x) / Math.Abs(position.x - _oldPosition.x);
+                        timeOfImpact = Math.Abs((_oldPosition.x + width) - (theDoor.x - theDoor.width / 2)) / Math.Abs(position.x - _oldPosition.x);
 
-                        if (wordy5)
+
+                        if (wordy6)
                         {
                             Console.WriteLine("right:" + timeOfImpact);
                         }
 
-                        if (timeOfImpact <= 1 && timeOfImpact >= 0)
+                        if (timeOfImpact <= 1 && timeOfImpact > 0)
                         {
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theDoor, timeOfImpact, 4));
+                            _collisionList.Add(new CollisionInfo(new Vec2(0f, 0f), theDoor, timeOfImpact, 4));
                         }
+
+
                     }
                     else
                     {
-                        timeOfImpact = Math.Abs(_oldPosition.x - (theDoor.x + theDoor.width)) / Math.Abs(position.x - _oldPosition.x);
 
-                        if (wordy5)
+                        timeOfImpact = Math.Abs(_oldPosition.x - (theDoor.x + theDoor.width / 2)) / Math.Abs(position.x - _oldPosition.x);
+
+
+                        if (wordy6)
                         {
                             Console.WriteLine("left: " + timeOfImpact);
                         }
 
-                        if (timeOfImpact <= 1 && timeOfImpact >= 0)
+                        if (timeOfImpact <= 1 && timeOfImpact > 0)
                         {
-
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theDoor, timeOfImpact, 3));
+                            _collisionList.Add(new CollisionInfo(new Vec2(0f, 0f), theDoor, timeOfImpact, 3));
                         }
                     }
                 }
 
                 else
                 {
-                    if (position.y < theDoor.y)
+                    if (position.y < theDoor.y - theDoor.height)
                     {
-                        timeOfImpact = Math.Abs((_oldPosition.y + height) - theDoor.y) / Math.Abs(_oldPosition.y - position.y);
-                        if (wordy5)
+                        timeOfImpact = Math.Abs((_oldPosition.y + height) - (theDoor.y - theDoor.height / 2)) / Math.Abs(_oldPosition.y - position.y);
+                        if (wordy6)
                         {
-                            Console.WriteLine("down: " + timeOfImpact);
+                            Console.WriteLine("up: " + timeOfImpact);
                         }
 
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
@@ -307,14 +324,16 @@ public class ColliderRect : ColliderObject
 
                     else
                     {
-                        timeOfImpact = Math.Abs(_oldPosition.y - (theDoor.y + theDoor.height)) / Math.Abs(_oldPosition.y - position.y);
+
+                        timeOfImpact = Math.Abs(_oldPosition.y - (theDoor.y + theDoor.height / 2)) / Math.Abs(_oldPosition.y - position.y);
+
+                        if (wordy6)
+                        {
+                            Console.WriteLine("down: " + timeOfImpact);
+                        }
 
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
-                            if (wordy5)
-                            {
-                                Console.WriteLine("up: " + timeOfImpact);
-                            }
 
                             _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theDoor, timeOfImpact, 1));
                         }
@@ -332,22 +351,51 @@ public class ColliderRect : ColliderObject
         {
             Breakable theBreakable = GameData.breakableList[i];
 
-            float xOverlap = Math.Min(position.x + width, theBreakable.x + theBreakable.width) - Math.Max(position.x, theBreakable.x);
-            float yOverlap = Math.Min(position.y + height, theBreakable.y + theBreakable.height) - Math.Max(position.y, theBreakable.y);
+            double dx = Math.Abs((position.x + Width / 2) - (theBreakable.x));
+            double dy = Math.Abs((position.y + Height / 2) - (theBreakable.y));
 
-            if (xOverlap > 0 && yOverlap > 0)
+            double overlapX = (Width + theBreakable.width) / 2 - dx;
+            double overlapY = (Height + theBreakable.height) / 2 - dy;
+
+            double rect1HalfWidth = width / 2;
+            double rect1HalfHeight = height / 2;
+
+            double rect2HalfWidth = theBreakable.width / 2;
+            double rect2HalfHeight = theBreakable.height / 2;
+
+            // Calculate the centers of the rectangles
+            double rect1CenterX = position.x + rect1HalfWidth;
+            double rect1CenterY = position.y + rect1HalfHeight;
+            double rect2CenterX = theBreakable.x;
+            double rect2CenterY = theBreakable.y;
+
+            // Calculate the distance between the centers of the rectangles
+            double distanceX = Math.Abs(rect1CenterX - rect2CenterX);
+            double distanceY = Math.Abs(rect1CenterY - rect2CenterY);
+
+            // Calculate the sum of half-widths and half-heights of the rectangles
+            double sumHalfWidth = rect1HalfWidth + rect2HalfWidth;
+            double sumHalfHeight = rect1HalfHeight + rect2HalfHeight;
+
+
+            if (distanceX < (rect1HalfWidth + rect2HalfWidth) && distanceY < (rect1HalfHeight + rect2HalfHeight))
             {
-
                 float timeOfImpact = -1;
 
-                if (xOverlap < yOverlap)
+
+                if (wordy6)
+                {
+                    Console.WriteLine("aaaaaa");
+                }
+
+                if (overlapX < overlapY)
                 {
                     if (position.x < theBreakable.x)
                     {
-                        timeOfImpact = Math.Abs((_oldPosition.x + width) - theBreakable.x) / Math.Abs(position.x - _oldPosition.x);
+                        timeOfImpact = Math.Abs((_oldPosition.x + width) - (theBreakable.x - theBreakable.width / 2)) / Math.Abs(position.x - _oldPosition.x);
 
 
-                        if (wordy2)
+                        if (wordy6)
                         {
                             Console.WriteLine("right:" + timeOfImpact);
                         }
@@ -362,10 +410,10 @@ public class ColliderRect : ColliderObject
                     else
                     {
 
-                        timeOfImpact = Math.Abs(_oldPosition.x - (theBreakable.x + theBreakable.width)) / Math.Abs(position.x - _oldPosition.x);
+                        timeOfImpact = Math.Abs(_oldPosition.x - (theBreakable.x + theBreakable.width / 2)) / Math.Abs(position.x - _oldPosition.x);
 
 
-                        if (wordy2)
+                        if (wordy6)
                         {
                             Console.WriteLine("left: " + timeOfImpact);
                         }
@@ -379,13 +427,12 @@ public class ColliderRect : ColliderObject
 
                 else
                 {
-                    if (position.y < theBreakable.y)
+                    if (position.y < theBreakable.y - theBreakable.height)
                     {
-                        timeOfImpact = Math.Abs((_oldPosition.y + height) - theBreakable.y) / Math.Abs(_oldPosition.y - position.y);
-
-                        if (wordy2)
+                        timeOfImpact = Math.Abs((_oldPosition.y + height) - (theBreakable.y - theBreakable.height / 2)) / Math.Abs(_oldPosition.y - position.y);
+                        if (wordy6)
                         {
-                            Console.WriteLine("down: " + timeOfImpact);
+                            Console.WriteLine("up: " + timeOfImpact);
                         }
 
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
@@ -396,14 +443,16 @@ public class ColliderRect : ColliderObject
 
                     else
                     {
-                        timeOfImpact = Math.Abs(_oldPosition.y - (theBreakable.y + theBreakable.height)) / Math.Abs(_oldPosition.y - position.y);
+
+                        timeOfImpact = Math.Abs(_oldPosition.y - (theBreakable.y + theBreakable.height / 2)) / Math.Abs(_oldPosition.y - position.y);
+
+                        if (wordy6)
+                        {
+                            Console.WriteLine("down: " + timeOfImpact);
+                        }
 
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
-                            if (wordy2)
-                            {
-                                Console.WriteLine("up: " + timeOfImpact);
-                            }
 
                             _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theBreakable, timeOfImpact, 1));
                         }

@@ -13,8 +13,7 @@ public class Hitbox : Sprite
         y = offSetY;
         this.mass = mass;
         alpha = 0.5f;
-        
-}
+    }
 
     public float GetX()
     {
