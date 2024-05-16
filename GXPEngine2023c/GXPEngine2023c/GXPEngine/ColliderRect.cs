@@ -349,16 +349,7 @@ public class ColliderRect : ColliderObject
                     position.x += position.x - POI.x;
                     velocity.x = momentum.x;
                 }
-
-
-
-
-
             }
-
-           
         }
-
-        
     }
 }

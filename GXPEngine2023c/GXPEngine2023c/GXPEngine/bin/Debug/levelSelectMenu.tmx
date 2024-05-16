@@ -4,11 +4,11 @@
   <image source="400x400Orange.png" width="400" height="400"/>
  </tileset>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="5" type="ButtonMenu" gid="1" x="118.167" y="320.833" width="193" height="85">
+  <object id="5" type="ButtonMenu" gid="1" x="178.834" y="298.166" width="69" height="63">
    <properties>
     <property name="bool_paraBool2" type="bool" value="false"/>
     <property name="string_actionName" value="loadLevel"/>
-    <property name="string_stringPara1" value="map1.tmx"/>
+    <property name="string_stringPara1" value="Level 1 SS.tmx"/>
    </properties>
   </object>
   <object id="6" type="ButtonMenu" gid="1" x="6.83333" y="54.8333" width="70.3333" height="53">
@@ -27,11 +27,7 @@
    </properties>
    <text fontfamily="Segoe UI" pixelsize="45" wrap="1" color="#00ff00" halign="center">Select Level</text>
   </object>
-  <object id="2" type="ButtonMenu" x="163.5" y="236" width="95" height="90">
-   <properties>
-    <property name="string_actionName" value="loadLevel"/>
-    <property name="string_stringPara1" value="map1.tmx"/>
-   </properties>
+  <object id="2" x="167.833" y="229" width="95" height="90">
    <text fontfamily="Segoe UI" pixelsize="45" wrap="1" color="#00ff00" halign="center">1</text>
   </object>
   <object id="3" type="ButtonMenu" x="-0.166667" y="12.6667" width="84" height="39">

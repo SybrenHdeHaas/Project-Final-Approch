@@ -18,6 +18,13 @@ public class Fan : AnimationSpriteCustom
         theDirection = obj.GetIntProperty("int_theDirection", 1);
     }
 
+    public Fan(TiledObject obj = null) : base("Player.png", 1, 1, obj)
+    {
+        alpha = 0;
+        theForce = obj.GetFloatProperty("float_theForce", 1);
+        theDirection = obj.GetIntProperty("int_theDirection", 1);
+    }
+
     void CalculateVelocity()
     {
         pushVelocity = pushVelocityDefault;

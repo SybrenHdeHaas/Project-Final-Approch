@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography;
 using System.Text;
 using GXPEngine;
@@ -131,6 +132,12 @@ public class Level : GameObject
         CheckSpike();
         CheckGoal();
         CheckBreakable();
+
+        if (Input.GetKey(Key.R))
+        {
+            MyGame myGame = (MyGame)game;
+            myGame.LoadLevel();
+        }
     }
 
 
