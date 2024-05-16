@@ -81,8 +81,6 @@ public class Player : AnimationSpriteCustom
     private  Vec2 dragForce;
     private float drag = 0.01f;
 
-    ColliderRect playerCollision; //handles the player's collision
-
     public float mass;
 
     private float standUpHitBoxCoordX = 0f;
@@ -109,21 +107,15 @@ public class Player : AnimationSpriteCustom
     {
         playerIndex = obj.GetIntProperty("int_index");
 
+        hitboxWorkingWidth = obj.GetIntProperty("Width")/2;
+        hitboxWorkingHeight = obj.GetIntProperty("Height")/2;
 
-        hitboxWorkingWidth = obj.GetIntProperty("Width");
-        hitboxWorkingHeight = obj.GetIntProperty("Height");
-
-
-       
-        Console.WriteLine("Player index {0}", obj.GetIntProperty("int_index"));
-        Console.WriteLine("Player Width {0}, Player Height {1}", width, height);
         mass = 4 * width * height;
 
-        playerHitBox = new Hitbox(-96, -96, mass); //the player's actual hit box.
+        playerHitBox = new Hitbox(-96, -96, x, y, width, height, mass); //the player's actual hit box.
         AddChild(playerHitBox);
 
-
-        detectionRange = new Detection(-100, -100, mass);
+        detectionRange = new Detection(-110, -110, mass);
         AddChild(detectionRange);
 
 
@@ -327,8 +319,8 @@ public class Player : AnimationSpriteCustom
         if (inshell) { friction = inShellFriction; }
         if (!inshell) { friction = standUpFriction; }
         frictionForce = -friction * playerVelocity;
-/*        if (!onGround) { gravity = 1f; }
-        if (onGround || movementLock) { gravity = 0f; }*/
+        if (!onGround) { gravity = 1f; }
+        if (onGround || movementLock) { gravity = 0f; }
 
         gravityForce = new Vec2(0, gravity);
         acceleration += frictionForce + gravityForce;
@@ -386,16 +378,13 @@ public class Player : AnimationSpriteCustom
 
             if (inshell)
             {                
-                playerHitBox.x = inShellHitBoxCoordX;
-                playerHitBox.y = inShellHitBoxCoordY;
+
                 if (Input.GetKey(Key.I)) { SetAnimationCycle(0, 1); inshell = false; }
 
             }
             if (!inshell)
             {
-                
-                playerHitBox.x = standUpHitBoxCoordX;
-                playerHitBox.y = standUpHitBoxCoordY;
+
                 if (Input.GetKey(Key.K)) { SetAnimationCycle(25, 1); inshell = true; }
 
             }
@@ -406,7 +395,7 @@ public class Player : AnimationSpriteCustom
     {
         playerHitBox.playerCollision.Width = hitboxWorkingWidth;
         playerHitBox.playerCollision.Height = hitboxWorkingHeight;
-        playerHitBox.playerCollision.Position = position + new Vec2(playerHitBox.x, playerHitBox.y);
+        playerHitBox.playerCollision.Position = position;
         playerHitBox.playerCollision.Velocity = velocity;
     }
 
@@ -423,6 +412,7 @@ public class Player : AnimationSpriteCustom
         ActionPossible();
         Action();
         UpdateCollision();
+
         playerHitBox.playerCollision.Step();
         velocity = playerHitBox.playerCollision.Velocity;
         position += velocity;
@@ -435,12 +425,14 @@ public class Player : AnimationSpriteCustom
         if (Input.GetKeyDown(Key.G))
         {
             Console.WriteLine();
-            Console.WriteLine("PlayerIndex {0}, width {1}, height {2}, scaleX {3}, scaleY {4}", playerIndex, width, height, scaleX, scaleY);
+            Console.WriteLine("Player:          x {1}, y {2}, width {3}, height {4}", playerIndex, x, y, width, height);
+            Console.WriteLine("Hitbox:          x {0}, y {1}, width {2}, height {3}", playerHitBox.GetX(), playerHitBox.GetY(), playerHitBox.width, playerHitBox.height);
+            Console.WriteLine("ColliderRect:    x {0}, y {1}, width {2}, height {3}", playerHitBox.playerCollision.Position.x, playerHitBox.playerCollision.Position.y, playerHitBox.playerCollision.Width, playerHitBox.playerCollision.Height);
+            Console.WriteLine();
+
             Console.WriteLine("velocity  {0}, playerVelocity {1},  fanVelocty {2}, gravityForce {3}, frictionForce {4}", velocity, playerVelocity, fanVelocity, gravityForce, frictionForce);
             Console.WriteLine("onCeiling {0}, onGround {1}", onCeiling, onGround);
-            Console.WriteLine("player x {0}, y {1}, width {2}, height {3}", x, y, playerHitBox.playerCollision.Width, playerHitBox.playerCollision.Height);
-            Console.WriteLine(GetChildCount());
-            Console.WriteLine(GetChildren());
+            
         }
 
 

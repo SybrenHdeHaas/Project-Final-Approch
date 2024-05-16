@@ -22,11 +22,11 @@ public class ColliderRect : ColliderObject
     Sprite thisObject;
     public ColliderRect(Sprite pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
     {   
+        position = pPosition;
         thisObject = pRectObject;
-        width = pWidth / 2;
-        height = pHeight / 2;
+        width = pWidth /3;
+        height = pHeight/3;
         mass = 4 * width * height * _density;
-        Console.WriteLine("collider raect {4}, x {0}, y {1}, width {2}, height {3}", x, y, width, height, thisObject);
     }
 
     protected override CollisionInfo FindEarliestCollision() //Overriden from third step in colliderObject?
@@ -36,7 +36,7 @@ public class ColliderRect : ColliderObject
         CheckCollisionHitbox(myGame);
         CheckCollisionDoor(myGame);
         CheckCollisionBreakable(myGame);
-
+        
         return FindLowestTOICollision();
     }
 

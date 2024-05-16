@@ -8,12 +8,12 @@ using System.Text;
 public class ColliderObject : GameObject
 {
     public static float bounciness = 0.0f;
-    public static bool wordy = true; //if true, enable debug messages 
-    public static bool wordy1 = true; //if true, enable debug messages 1
-    public static bool wordy2 = true; //if true, enable debug messages 2 CheckCollisionTiles
-    public static bool wordy4 = true; //if true, enable debug messages 4
-    public static bool wordy5 = true; //if true, enable debug message 5 CheckCollisionHitbox
-    public static bool wordy6 = true;
+    public static bool wordy = false; //if true, enable debug messages 
+    public static bool wordy1 = false; //if true, enable debug messages 1
+    public static bool wordy2 = false; //if true, enable debug messages 2 CheckCollisionTiles
+    public static bool wordy4 = false; //if true, enable debug messages 4
+    public static bool wordy5 = false; //if true, enable debug message 5 CheckCollisionHitbox
+    public static bool wordy6 = false;
     public static bool wordy7 = false; //if true, enable debug message 7 CheckCollisionTiles extra once
     public static bool wordy8 = false; //if true, enable debug messages 8 CheckCollisionHitbox 
     public List<CollisionInfo> GetCollisionList() { return _collisionList; }
