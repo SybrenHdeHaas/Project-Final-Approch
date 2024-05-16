@@ -6,27 +6,29 @@ using TiledMapParser;
 
 public class Breakable : AnimationSpriteCustom
 {
-    Vec2 thresholdVelocity; //if the player collides with this over this velocity amount, it's health will be damaged by 1
+    float thresholdVelocityLength; //the threshold length
     int theHealth;
 
     public Breakable(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
-        thresholdVelocity.x = obj.GetFloatProperty("float_thresholdVelocityX");
-        thresholdVelocity.y = obj.GetFloatProperty("float_thresholdVelocityy");
+        thresholdVelocityLength = obj.GetFloatProperty("float_thresholdVelocityLength");
         theHealth = obj.GetIntProperty("int_theHealth");
     }
 
-    public void tryDamage(Vec2 otherVelocity)
+    public Boolean TryDamage(Vec2 otherVelocity)
     {
-        if (otherVelocity.Length() > thresholdVelocity.Length())
+        //comparing player velocity length and the threshold length;
+        if (otherVelocity.Length() > thresholdVelocityLength)
         {
             theHealth--;
 
             if (theHealth < 0)
             {
-                //TODO: remove the wall
+                return true;
             }
         }
+
+        return false;
     }
 }
 

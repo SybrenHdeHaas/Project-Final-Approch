@@ -29,6 +29,7 @@ public class Level : GameObject
     List<Spike> spikeList = new List<Spike>();
 
     List<Goal> goalList = new List<Goal>();
+    List<Breakable> breakableList = new List<Breakable>();
     public Level(string theMapfileName, bool isMenu)
     {
         Map mapData = MapParser.ReadMap(theMapfileName);
@@ -103,6 +104,13 @@ public class Level : GameObject
             goalList.Add(theGoal);
         }
 
+
+        //extracting goal objects
+        foreach (Breakable theBreakable in FindObjectsOfType<Breakable>())
+        {
+            breakableList.Add(theBreakable);
+        }
+
         //Setting up the camera boundary (player at center for these values)
         boundaryValueX = game.width / 2;
         boundaryValueY = game.height / 2;
@@ -122,6 +130,7 @@ public class Level : GameObject
         CheckButtons();
         CheckSpike();
         CheckGoal();
+        CheckBreakable();
     }
 
 
@@ -226,6 +235,26 @@ public class Level : GameObject
                 {
                     theGoal.switchLevel();
                     return;
+                }
+            }
+        }
+    }
+
+    void CheckBreakable()
+    {
+        foreach (Breakable theBreakable in breakableList)
+        {
+            foreach (Player player in thePlayers)
+            {
+                if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theBreakable))
+                {
+                    Console.WriteLine("Player velocity length: " + player.Velocity.Length());
+                    if (theBreakable.TryDamage(player.Velocity) == true)
+                    {
+                        breakableList.Remove(theBreakable);
+                        theBreakable.Destroy();
+                        return;
+                    }
                 }
             }
         }

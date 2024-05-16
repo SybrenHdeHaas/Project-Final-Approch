@@ -168,7 +168,7 @@
         "levelSelectMenu.tmx"
     ],
     "project": "final-approach.tiled-project",
-    "property.type": "string",
+    "property.type": "int",
     "recentFiles": [
         "mainMenu.tmx",
         "levelSelectMenu.tmx",
