@@ -17,17 +17,24 @@ public class ColliderRect : ColliderObject
         get { return height; }
         set { height = value; }
     }
+    
     private float width;
     private float height;
     Sprite thisObject;
-    public ColliderRect(Sprite pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
+    public ColliderRect(Sprite pRectObject, Vec2 pPosition, Vec2 pVelocity,float offsetX, float offsetY, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
     {   
+        position = pPosition;
         thisObject = pRectObject;
-        width = pWidth / 2;
-        height = pHeight / 2;
+
+        width = pWidth/3;
+        height = pHeight/3;
         mass = 4 * width * height * _density;
-        Console.WriteLine("collider raect {4}, x {0}, y {1}, width {2}, height {3}", x, y, width, height, thisObject);
     }
+
+
+
+
+
 
     protected override CollisionInfo FindEarliestCollision() //Overriden from third step in colliderObject?
     {
@@ -36,7 +43,7 @@ public class ColliderRect : ColliderObject
         CheckCollisionHitbox(myGame);
         CheckCollisionDoor(myGame);
         CheckCollisionBreakable(myGame);
-
+        
         return FindLowestTOICollision();
     }
 
@@ -50,7 +57,9 @@ public class ColliderRect : ColliderObject
             Tile theTile = GameData.tileList[i];
 
             float xOverlap = Math.Min(position.x + width, theTile.x + theTile.width) - Math.Max(position.x, theTile.x);
+
             float yOverlap = Math.Min(position.y + height, theTile.y + theTile.height) - Math.Max(position.y, theTile.y);
+
 
 
             if (xOverlap > 0 && yOverlap > 0)
@@ -60,7 +69,7 @@ public class ColliderRect : ColliderObject
 
                 if (xOverlap < yOverlap)
                 {
-                    if (position.x < theTile.x)
+                    if (position.x <= theTile.x)
                     {
                         timeOfImpact = Math.Abs((_oldPosition.x + width) - theTile.x) / Math.Abs(position.x - _oldPosition.x);
 
@@ -68,6 +77,7 @@ public class ColliderRect : ColliderObject
                         if (wordy2)
                         {
                             Console.WriteLine("right:" + timeOfImpact);
+                            Console.WriteLine("oldPosition {0}, newPosition {1}, width{2}", _oldPosition, position.x, width);
                         }
 
                         if (timeOfImpact <= 1 && timeOfImpact > 0)
@@ -86,6 +96,7 @@ public class ColliderRect : ColliderObject
                         if (wordy2)
                         {
                             Console.WriteLine("left: " + timeOfImpact);
+                            Console.WriteLine("oldPosition {0}, newPosition {1}, width{2}", _oldPosition, position.x, width);
                         }
 
                         if (timeOfImpact <= 1 && timeOfImpact > 0)
@@ -123,7 +134,11 @@ public class ColliderRect : ColliderObject
                                 Console.WriteLine("up: " + timeOfImpact);
                             }
 
-                            _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theTile, timeOfImpact, 1));
+                            if (timeOfImpact <= 1 && timeOfImpact >= 0) 
+                            {
+                                _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theTile, timeOfImpact, 1));
+                            }
+                            
                         }
                     }
                 }
@@ -149,8 +164,8 @@ public class ColliderRect : ColliderObject
 
             }
 
-            float xOverlap = Math.Min(position.x + width, theHitBox.GetX() + theHitBox.width) - Math.Max(position.x, theHitBox.GetX());
-            float yOverlap = Math.Min(position.y + height, theHitBox.GetY() + theHitBox.height) - Math.Max(position.y, theHitBox.GetY());
+            float xOverlap = Math.Min(position.x + width, theHitBox.GetX() + width) - Math.Max(position.x, theHitBox.GetX());
+            float yOverlap = Math.Min(position.y + height, theHitBox.GetY() + height) - Math.Max(position.y, theHitBox.GetY());
 
             if (xOverlap > 0 && yOverlap > 0)
             {

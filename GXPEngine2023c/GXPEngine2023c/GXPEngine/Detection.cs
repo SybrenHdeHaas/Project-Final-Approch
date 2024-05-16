@@ -18,12 +18,12 @@ public class Detection : Sprite
     public Detection(float offSetX, float offSetY, float mass) : base("detector.png")
     {
         
+        
         x = offSetX;
         y = offSetY;
         this.mass = mass;
-        SetOrigin(width / 2, height / 2);
-        playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), width, height, true);
-
+        //playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), objWidth, objHeight, true);
+        visible = false;
     }
 
     void CastPlayer() { player = parent as Player; }
@@ -130,6 +130,8 @@ public class Detection : Sprite
         CeilingCheck();
         CollisionCheck();
         PlayerInteractCheck();
+
+        if (Input.GetKeyDown(Key.BACKSPACE)) { Console.WriteLine(GetChildCount()); }
 
     }
 }

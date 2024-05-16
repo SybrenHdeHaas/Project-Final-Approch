@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Media;
@@ -428,7 +428,7 @@ public class Level : GameObject
                  else if (theLayer == 1)
                     {
                         theTile = new Tile(theTilesSet.Image.FileName, 1, 1, theTileNumber - theTilesSet.FirstGId,
-                         theTilesSet.Columns, theTilesSet.Rows, -1, 1, 1, 10, false, false);
+                        theTilesSet.Columns, theTilesSet.Rows, -1, 1, 1, 10, false, false);
                         theTile.x = j * theTile.width;
                         theTile.y = i * theTile.height;
                         background.AddChild(theTile);
