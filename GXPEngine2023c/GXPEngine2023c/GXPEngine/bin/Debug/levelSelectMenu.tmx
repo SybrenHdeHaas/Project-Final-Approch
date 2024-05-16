@@ -8,7 +8,7 @@
    <properties>
     <property name="bool_paraBool2" type="bool" value="false"/>
     <property name="string_actionName" value="loadLevel"/>
-    <property name="string_stringPara1" value="Level 1 SS.tmx"/>
+    <property name="string_stringPara1" value="Level1SS.tmx"/>
    </properties>
   </object>
   <object id="6" type="ButtonMenu" gid="1" x="6.83333" y="54.8333" width="70.3333" height="53">
@@ -27,7 +27,7 @@
    </properties>
    <text fontfamily="Segoe UI" pixelsize="45" wrap="1" color="#00ff00" halign="center">Select Level</text>
   </object>
-  <object id="2" x="167.833" y="229" width="95" height="90">
+  <object id="2" x="165.833" y="231" width="95" height="90">
    <text fontfamily="Segoe UI" pixelsize="45" wrap="1" color="#00ff00" halign="center">1</text>
   </object>
   <object id="3" type="ButtonMenu" x="-0.166667" y="12.6667" width="84" height="39">

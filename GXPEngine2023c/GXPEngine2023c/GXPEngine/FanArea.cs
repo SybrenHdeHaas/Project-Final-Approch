@@ -19,6 +19,7 @@ public class FanArea : AnimationSpriteCustom
 
     public FanArea(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
+        alpha = 0;
         theFanID = obj.GetStringProperty("string_fanID");
     }
 }

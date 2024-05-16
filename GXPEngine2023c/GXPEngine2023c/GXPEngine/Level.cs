@@ -31,8 +31,27 @@ public class Level : GameObject
 
     List<Goal> goalList = new List<Goal>();
     List<Breakable> breakableList = new List<Breakable>();
+
+
+    float cameraMaxButtom;
+    float cameraMaxRight;
     public Level(string theMapfileName, bool isMenu)
     {
+        Console.WriteLine("aa:" + (-1 - (game.height * 2) - 100));
+
+        switch(GameData.mapName)
+        {
+            case "Level1SS.tmx":
+                cameraMaxButtom = (-1 * 32 * 20) + game.height;
+                cameraMaxRight = (-1 * 32 * 43) + game.width;
+                break;
+            default:
+                cameraMaxButtom = -1 - (game.height * 2) - 100;
+                cameraMaxRight = -1 - (game.height * 2) - 100;
+                break;
+        }
+
+
         Map mapData = MapParser.ReadMap(theMapfileName);
         loader = new TiledLoader(theMapfileName);
 
@@ -80,6 +99,8 @@ public class Level : GameObject
             fanList.Add(theFan.id, theFan);
         }
 
+        GameData.fanList = fanList;
+
         //extracting Fanarea objects
         foreach (FanArea theFanArea in FindObjectsOfType<FanArea>())
         {
@@ -111,6 +132,8 @@ public class Level : GameObject
         {
             breakableList.Add(theBreakable);
         }
+
+        GameData.breakableList = breakableList;
 
         //Setting up the camera boundary (player at center for these values)
         boundaryValueX = game.width / 2;
@@ -282,7 +305,7 @@ public class Level : GameObject
                 return;
             }
 
-            if (player.x + x > boundaryValueX && x > -1 * ((game.width * 6) - 800))
+            if (player.x + x > boundaryValueX && x > cameraMaxRight)
             {
                 x = boundaryValueX - player.x;
             }
@@ -300,7 +323,7 @@ public class Level : GameObject
             }
 
             //handling player moving down
-            if (player.y + y > boundaryValueY && y > -1 - (game.height * 2) - 100)
+            if (player.y + y > boundaryValueY && y > cameraMaxButtom)
             {
                 y = boundaryValueY - player.y;
             }
@@ -358,10 +381,10 @@ public class Level : GameObject
                     }
 
                     //Background. collision off
-                    else if (theLayer == 1)
+                 else if (theLayer == 1)
                     {
                         theTile = new Tile(theTilesSet.Image.FileName, 1, 1, theTileNumber - theTilesSet.FirstGId,
-                            theTilesSet.Columns, theTilesSet.Rows, -1, 1, 1, 10, false, false);
+                         theTilesSet.Columns, theTilesSet.Rows, -1, 1, 1, 10, false, false);
                         theTile.x = j * theTile.width;
                         theTile.y = i * theTile.height;
                         background.AddChild(theTile);
