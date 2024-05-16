@@ -148,7 +148,9 @@ public class Level : GameObject
         {
             player.ResetFanVelocityList();
         }
-            
+
+        breakableList = GameData.breakableList;
+
         CheckFanAreas();
         CheckCheckpoint();
         CheckButtons();
@@ -176,7 +178,7 @@ public class Level : GameObject
                     if (fanList.TryGetValue(theFanArea.TheFanID, out theFan))
                     {
                         player.AddFanVelocity(theFan.GetVelocity());
-                        Console.WriteLine(theFan.GetVelocity());
+                    //    Console.WriteLine(theFan.GetVelocity());
                     }
                 }
             }
@@ -279,12 +281,7 @@ public class Level : GameObject
                 if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theBreakable))
                 {
                   //  Console.WriteLine("Player velocity length: " + player.Velocity.Length());
-                    if (theBreakable.TryDamage(player.Velocity) == true)
-                    {
-                        breakableList.Remove(theBreakable);
-                        theBreakable.Destroy();
-                        return;
-                    }
+
                 }
             }
         }

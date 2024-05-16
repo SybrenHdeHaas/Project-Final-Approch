@@ -2,6 +2,7 @@ using GXPEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TiledMapParser;
 
 //physcis for a ball object
 public class ColliderRect : ColliderObject
@@ -394,7 +395,6 @@ public class ColliderRect : ColliderObject
                     {
                         timeOfImpact = Math.Abs((_oldPosition.x + width) - (theBreakable.x - theBreakable.width / 2)) / Math.Abs(position.x - _oldPosition.x);
 
-
                         if (wordy6)
                         {
                             Console.WriteLine("right:" + timeOfImpact);
@@ -692,6 +692,20 @@ public class ColliderRect : ColliderObject
 
                     position.x += position.x - POI.x;
                     velocity.x = momentum.x;
+                }
+
+                if (col.AABBDirection >= 0 && col.AABBDirection <= 4)
+                {
+                    Player thePlayer = (Player)thisObject.parent;
+
+                  //  Console.WriteLine("attempt break: " + thePlayer.Velocity.Length());
+
+                    if (theBreakable.TryDamage(thePlayer.Velocity) == true)
+                    {
+                        GameData.breakableList.Remove(theBreakable);
+                        theBreakable.Destroy();
+                        return;
+                    }
                 }
             }
         }
