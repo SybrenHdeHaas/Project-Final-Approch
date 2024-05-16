@@ -13,7 +13,7 @@
   <image source="Player.png" width="128" height="64"/>
  </tileset>
  <tileset firstgid="6" name="flag" tilewidth="360" tileheight="360" tilecount="1" columns="1">
-  <image source="../../../../../../../../../Downloads/New folder (2)/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/flag.png" width="360" height="360"/>
+  <image source="flag.png" width="360" height="360"/>
  </tileset>
  <tileset firstgid="7" name="SS_Tilset" tilewidth="32" tileheight="32" tilecount="77" columns="11">
   <image source="SS_Tilset.png" width="352" height="224"/>

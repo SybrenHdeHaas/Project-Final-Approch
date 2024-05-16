@@ -62,9 +62,9 @@ public class Player : AnimationSpriteCustom
     private Vec2 playerForce;
 
 
-    private Vec2 kickForce = new Vec2(15, 0);
-    private Vec2 throwForce = new Vec2(15, -15);
-    float kickStrenghtX = 15;
+    private Vec2 kickForce;
+    private Vec2 throwForce;
+    float kickStrenghtX = -15;
     float kickStrengthY = 0;
     float throwStrenghtX = 15;
     float throwStrengthY = -15;
@@ -189,13 +189,14 @@ public class Player : AnimationSpriteCustom
 
     private void Kick() 
     {
-        
+        kickForce = new Vec2(kickStrenghtX, kickStrengthY);
         Console.WriteLine("kick");
         detectionRange.GetDete().GetPlayer().playerForce += kickForce;
 
     }
     private void Throw() 
     {
+        throwForce = new Vec2(throwStrenghtX, throwStrengthY);
         Console.WriteLine("Throw");
         detectionRange.GetDete().GetPlayer().playerForce += throwForce;
 
@@ -327,10 +328,16 @@ public class Player : AnimationSpriteCustom
 
     private void velocityFix()
     {
-        if (playerVelocity.y >= -0.1f && playerVelocity.y <= 0.01f)
+        if (playerVelocity.y >= -0.01f && playerVelocity.y <= 0.01f)
         { 
             playerVelocity.y = 0f;
         }
+
+        if (playerVelocity.x >= -0.01f && playerVelocity.x <0.01f)
+        {
+            playerVelocity.x = 0f;
+        }
+
     }
 
 
