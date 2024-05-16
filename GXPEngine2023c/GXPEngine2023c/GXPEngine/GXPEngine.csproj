@@ -51,6 +51,7 @@
     <Compile Include="Door.cs" />
     <Compile Include="Effect.cs" />
     <Compile Include="Effects\EffectOpenCloseDoor.cs" />
+    <Compile Include="Effects\EffectTurnOnOffFan.cs" />
     <Compile Include="Fan.cs" />
     <Compile Include="FanArea.cs" />
     <Compile Include="GameData.cs" />
@@ -98,7 +99,6 @@
     <Compile Include="GXPEngine\SoLoud\Soloud.cs" />
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
     <Compile Include="SharedFunctions.cs" />
-    <Compile Include="Shell.cs" />
     <Compile Include="Spike.cs" />
     <Compile Include="UI\ButtonMenu.cs" />
     <Compile Include="Vec2.cs" />

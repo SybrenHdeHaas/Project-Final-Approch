@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map1.tmx",
+    "activeFile": "TileSheet_Final.tsx",
     "expandedProjectPaths": [
         "."
     ],
@@ -31,39 +31,171 @@
             "dynamicWrapping": true,
             "scaleInDock": 1
         },
+        "C:/Users/seanb/Documents/Github Projects/TileSheet_Final.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Documents/Github Projects/placeholder-tiles ideas.tsx": {
+            "scaleInDock": 1
+        },
+        "Level 1 SS.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.75,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 646.6666666666665,
+                "y": 316.6666666666667
+            }
+        },
+        "Level 1 SS.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "Level 1 SS.tmx#Door": {
+            "scaleInDock": 1
+        },
+        "Level 1 SS.tmx#Player": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "Level 1 SS.tmx#TileSheet_Final": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Level 2 SS..tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 634.6666666666665,
+                "y": 186
+            }
+        },
+        "Level 2 SS..tmx#TileSheet_Final": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.33,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 562.1212121212121,
+                "y": 321.21212121212113
+            }
+        },
+        "Level 2 SS.tmx#Player": {
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx#TileSheet_Final": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Level 3 SS.tmx": {
+            "scale": 0.39929687499999994,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 800.1565251418509,
+                "y": 257.95343377029934
+            }
+        },
+        "Level 3 SS.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "Level 4 SS.tmx": {
+            "scale": 0.624625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 799.6798078847307,
+                "y": 336.2017210326195
+            }
+        },
+        "Level 4 SS.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "Level 5 SS.tmx": {
+            "scale": 0.6944293478260869,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 667.4545098806498,
+                "y": 365.7679514772061
+            }
+        },
+        "Level 6 SS.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 799.3333333333333,
+                "y": 640
+            }
+        },
+        "Level1SS.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 687.75,
+                "y": 320
+            }
+        },
+        "Level1SS.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "Level1SS.tmx#BreakableWood": {
+            "scaleInDock": 1
+        },
+        "Level1SS.tmx#Door": {
+            "scaleInDock": 1
+        },
+        "Level1SS.tmx#Player": {
+            "scaleInDock": 1
+        },
+        "Level1SS.tmx#TileSheet_Final": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
         "Levels.tmx": {
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1486.3636363636363,
-                "y": 766.6666666666667
+                "x": 2395.4545454545455,
+                "y": 496.9696969696969
             }
         },
         "MainMenu.tmx": {
             "expandedObjectLayers": [
-                3,
-                5
+                5,
+                3
             ],
             "scale": 3,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 421.8333333333333,
-                "y": 180.83333333333331
+                "x": 421.16666666666663,
+                "y": 180.16666666666663
             }
         },
         "MainMenu.tmx#400x400Orange": {
             "scaleInDock": 1
+        },
+        "TileSheet_Final.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "levelSelectMenu.tmx": {
             "expandedObjectLayers": [
                 2,
                 3
             ],
-            "scale": 1,
+            "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 340.5,
-                "y": 369.5
+                "x": 399.25,
+                "y": 299.25
             }
         },
         "levelSelectMenu.tmx#400x400Orange": {
@@ -82,8 +214,8 @@
             "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 408,
-                "y": 312
+                "x": 400,
+                "y": 296
             }
         },
         "mainMenu.tmx#400x400Orange": {
@@ -93,11 +225,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.5,
-            "selectedLayer": 0,
+            "scale": 0.75,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 665,
-                "y": 629
+                "x": 1064.6666666666665,
+                "y": 331.33333333333337
             }
         },
         "map1.tmx#Button": {
@@ -143,10 +275,13 @@
             "scaleInDock": 1
         },
         "placeholder-tiles ideas.tsx": {
-            "dynamicWrapping": true
+            "dynamicWrapping": true,
+            "scaleInDock": 1
         },
         "placeholder_tile.tsx": {
-            "dynamicWrapping": true
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "placeholdertile1.tsx": {
             "scaleInDock": 1,
@@ -154,6 +289,7 @@
         }
     },
     "last.exportedFilePath": "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug",
+    "last.externalTilesetPath": "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/Tiled",
     "last.imagePath": "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug",
     "map.height": 30,
     "map.lastUsedExportFilter": "All Files (*)",
@@ -163,24 +299,37 @@
     "map.width": 40,
     "openFiles": [
         "map1.tmx",
-        "mainMenu.tmx",
-        "MainMenu.tmx",
-        "levelSelectMenu.tmx"
+        "placeholder_tile.tsx",
+        "TileSheet_Final.tsx",
+        "levelSelectMenu.tmx",
+        "Levels.tmx",
+        "Level 2 SS.tmx",
+        "Level 3 SS.tmx",
+        "Level 6 SS.tmx",
+        "Level 5 SS.tmx",
+        "Level 4 SS.tmx",
+        "Level1SS.tmx"
     ],
     "project": "final-approach.tiled-project",
-    "property.type": "int",
+    "property.type": "bool",
     "recentFiles": [
-        "mainMenu.tmx",
-        "levelSelectMenu.tmx",
-        "MainMenu.tmx",
         "map1.tmx",
-        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Level_1_SS.tmx",
-        "placeholdertile1.tsx"
+        "placeholder_tile.tsx",
+        "Level1SS.tmx",
+        "Level 4 SS.tmx",
+        "Level 5 SS.tmx",
+        "Level 6 SS.tmx",
+        "Level 3 SS.tmx",
+        "Level 2 SS.tmx",
+        "Levels.tmx",
+        "levelSelectMenu.tmx",
+        "TileSheet_Final.tsx",
+        "Level 1 SS.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 400,
-        "width": 400
+        "height": 32,
+        "width": 32
     }
 }

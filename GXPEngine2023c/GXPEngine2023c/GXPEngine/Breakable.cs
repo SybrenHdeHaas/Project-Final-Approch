@@ -9,6 +9,14 @@ public class Breakable : AnimationSpriteCustom
     float thresholdVelocityLength; //the threshold length
     int theHealth;
 
+    public float Mass
+    {
+        get
+        {
+            return 4 * width / 2 * height / 2;
+        }
+    }
+
     public Breakable(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
         thresholdVelocityLength = obj.GetFloatProperty("float_thresholdVelocityLength");

@@ -44,6 +44,9 @@ public class Button : AnimationSpriteCustom
             case "action_doorOpenClose":
                 AddEffect(new EffectOpenCloseDoor(pParameterStringOne));
                 break;
+            case "action_fanTurnOnOff":
+                AddEffect(new EffectTurnOnOffFan(pParameterStringOne));
+                break;
         }
     }
 

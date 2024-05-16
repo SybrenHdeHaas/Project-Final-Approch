@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography;
 using System.Text;
 using GXPEngine;
@@ -30,8 +31,27 @@ public class Level : GameObject
 
     List<Goal> goalList = new List<Goal>();
     List<Breakable> breakableList = new List<Breakable>();
+
+
+    float cameraMaxButtom;
+    float cameraMaxRight;
     public Level(string theMapfileName, bool isMenu)
     {
+        Console.WriteLine("aa:" + (-1 - (game.height * 2) - 100));
+
+        switch(GameData.mapName)
+        {
+            case "Level1SS.tmx":
+                cameraMaxButtom = (-1 * 32 * 20) + game.height;
+                cameraMaxRight = (-1 * 32 * 43) + game.width;
+                break;
+            default:
+                cameraMaxButtom = -1 - (game.height * 2) - 100;
+                cameraMaxRight = -1 - (game.height * 2) - 100;
+                break;
+        }
+
+
         Map mapData = MapParser.ReadMap(theMapfileName);
         loader = new TiledLoader(theMapfileName);
 
@@ -79,6 +99,8 @@ public class Level : GameObject
             fanList.Add(theFan.id, theFan);
         }
 
+        GameData.fanList = fanList;
+
         //extracting Fanarea objects
         foreach (FanArea theFanArea in FindObjectsOfType<FanArea>())
         {
@@ -104,12 +126,14 @@ public class Level : GameObject
             goalList.Add(theGoal);
         }
 
-
         //extracting goal objects
         foreach (Breakable theBreakable in FindObjectsOfType<Breakable>())
         {
+            Console.WriteLine("bx: " + theBreakable.x + " | by: " + theBreakable.y);
             breakableList.Add(theBreakable);
         }
+
+        GameData.breakableList = breakableList;
 
         //Setting up the camera boundary (player at center for these values)
         boundaryValueX = game.width / 2;
@@ -124,13 +148,21 @@ public class Level : GameObject
         {
             player.ResetFanVelocityList();
         }
-            
+
+        breakableList = GameData.breakableList;
+
         CheckFanAreas();
         CheckCheckpoint();
         CheckButtons();
         CheckSpike();
         CheckGoal();
         CheckBreakable();
+
+        if (Input.GetKey(Key.R))
+        {
+            MyGame myGame = (MyGame)game;
+            myGame.LoadLevel();
+        }
     }
 
 
@@ -146,7 +178,7 @@ public class Level : GameObject
                     if (fanList.TryGetValue(theFanArea.TheFanID, out theFan))
                     {
                         player.AddFanVelocity(theFan.GetVelocity());
-                        Console.WriteLine(theFan.GetVelocity());
+                    //    Console.WriteLine(theFan.GetVelocity());
                     }
                 }
             }
@@ -248,13 +280,8 @@ public class Level : GameObject
             {
                 if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theBreakable))
                 {
-                    Console.WriteLine("Player velocity length: " + player.Velocity.Length());
-                    if (theBreakable.TryDamage(player.Velocity) == true)
-                    {
-                        breakableList.Remove(theBreakable);
-                        theBreakable.Destroy();
-                        return;
-                    }
+                  //  Console.WriteLine("Player velocity length: " + player.Velocity.Length());
+
                 }
             }
         }
@@ -275,7 +302,7 @@ public class Level : GameObject
                 return;
             }
 
-            if (player.x + x > boundaryValueX && x > -1 * ((game.width * 6) - 800))
+            if (player.x + x > boundaryValueX && x > cameraMaxRight)
             {
                 x = boundaryValueX - player.x;
             }
@@ -293,7 +320,7 @@ public class Level : GameObject
             }
 
             //handling player moving down
-            if (player.y + y > boundaryValueY && y > -1 - (game.height * 2) - 100)
+            if (player.y + y > boundaryValueY && y > cameraMaxButtom)
             {
                 y = boundaryValueY - player.y;
             }
@@ -351,10 +378,10 @@ public class Level : GameObject
                     }
 
                     //Background. collision off
-                    else if (theLayer == 1)
+                 else if (theLayer == 1)
                     {
                         theTile = new Tile(theTilesSet.Image.FileName, 1, 1, theTileNumber - theTilesSet.FirstGId,
-                            theTilesSet.Columns, theTilesSet.Rows, -1, 1, 1, 10, false, false);
+                         theTilesSet.Columns, theTilesSet.Rows, -1, 1, 1, 10, false, false);
                         theTile.x = j * theTile.width;
                         theTile.y = i * theTile.height;
                         background.AddChild(theTile);

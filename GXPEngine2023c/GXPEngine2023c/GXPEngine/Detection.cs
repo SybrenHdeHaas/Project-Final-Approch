@@ -67,6 +67,12 @@ public class Detection : Sprite
             if (coll is Detection)
             {
                 dete = (Detection)coll;
+
+                if (dete.player == null)
+                {
+                    return false;
+                }
+
                 if (dete.player.InShell == true) 
                 {
                     

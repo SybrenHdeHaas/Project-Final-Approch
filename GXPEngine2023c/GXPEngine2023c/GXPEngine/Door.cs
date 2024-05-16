@@ -11,6 +11,14 @@ public class Door : AnimationSpriteCustom
     public bool isOpened;
     public string theID;
 
+    public float Mass
+    {
+        get
+        {
+            return 4 * width / 2 * height / 2;
+        }
+    }
+
     //if there's image in Tiled for this object
     public Door(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
