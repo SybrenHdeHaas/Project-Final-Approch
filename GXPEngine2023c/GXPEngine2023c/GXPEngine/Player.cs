@@ -374,7 +374,7 @@ public class Player : AnimationSpriteCustom
             {
                 playerHitBox.x = inShellHitBoxCoordX;
                 playerHitBox.y = inShellHitBoxCoordY;
-                if (Input.GetKey(Key.W)) { inshell = false; }
+                if (Input.GetKey(Key.W)) { SetAnimationCycle(0, 1);  inshell = false; }
 
             }
 
@@ -382,7 +382,7 @@ public class Player : AnimationSpriteCustom
             {
                 playerHitBox.x = standUpHitBoxCoordX;
                 playerHitBox.y = standUpHitBoxCoordY;
-                if (Input.GetKey(Key.S)) { inshell = true; }
+                if (Input.GetKey(Key.S)) { SetAnimationCycle(25, 1); inshell = true; }
 
             }
 
@@ -397,7 +397,7 @@ public class Player : AnimationSpriteCustom
             {                
                 playerHitBox.x = inShellHitBoxCoordX;
                 playerHitBox.y = inShellHitBoxCoordY;
-                if (Input.GetKey(Key.I)) { inshell = false; }
+                if (Input.GetKey(Key.I)) { SetAnimationCycle(0, 1); inshell = false; }
 
             }
             if (!inshell)
@@ -405,7 +405,7 @@ public class Player : AnimationSpriteCustom
                 
                 playerHitBox.x = standUpHitBoxCoordX;
                 playerHitBox.y = standUpHitBoxCoordY;
-                if (Input.GetKey(Key.K)) { inshell = true; }
+                if (Input.GetKey(Key.K)) { SetAnimationCycle(25, 1); inshell = true; }
 
             }
         }
