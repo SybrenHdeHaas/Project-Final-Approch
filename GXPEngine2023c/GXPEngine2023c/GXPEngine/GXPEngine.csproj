@@ -99,6 +99,7 @@
     <Compile Include="SharedFunctions.cs" />
     <Compile Include="Shell.cs" />
     <Compile Include="Spike.cs" />
+    <Compile Include="UI\ButtonMenu.cs" />
     <Compile Include="Vec2.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Player.cs" />

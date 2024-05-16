@@ -21,6 +21,36 @@
                 "y": 766.6666666666667
             }
         },
+        "MainMenu.tmx": {
+            "expandedObjectLayers": [
+                3,
+                5
+            ],
+            "scale": 3,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 422.66666666666663,
+                "y": 181.5
+            }
+        },
+        "MainMenu.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "levelSelectMenu.tmx": {
+            "expandedObjectLayers": [
+                3,
+                2
+            ],
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 224.66666666666669,
+                "y": 204.33333333333334
+            }
+        },
+        "levelSelectMenu.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
         "level_6.tmx": {
             "scale": 0.33,
             "selectedLayer": 0,
@@ -29,15 +59,23 @@
                 "y": 875.7575757575756
             }
         },
+        "mainMenu.tmx": {
+            "scale": 0.0625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 6800,
+                "y": 7032
+            }
+        },
         "map1.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1,
-            "selectedLayer": 1,
+            "scale": 1.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 461.5,
-                "y": 423.5
+                "x": 494,
+                "y": 249
             }
         },
         "map1.tmx#Button": {
@@ -48,6 +86,9 @@
         },
         "map1.tmx#Player": {
             "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "map1.tmx#SS_Tilset": {
             "scaleInDock": 1
         },
         "map1.tmx#Spike": {
@@ -92,25 +133,26 @@
     },
     "last.exportedFilePath": "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug",
     "last.imagePath": "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug",
-    "map.height": 40,
+    "map.height": 30,
     "map.lastUsedExportFilter": "All Files (*)",
     "map.lastUsedFormat": "tmx",
-    "map.tileHeight": 64,
-    "map.tileWidth": 64,
+    "map.tileHeight": 20,
+    "map.tileWidth": 20,
     "map.width": 40,
     "openFiles": [
         "map1.tmx"
     ],
     "project": "final-approach.tiled-project",
-    "property.type": "float",
+    "property.type": "bool",
     "recentFiles": [
+        "mainMenu.tmx",
         "map1.tmx",
         "placeholdertile1.tsx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 32,
-        "width": 32
+        "height": 400,
+        "width": 400
     }
 }

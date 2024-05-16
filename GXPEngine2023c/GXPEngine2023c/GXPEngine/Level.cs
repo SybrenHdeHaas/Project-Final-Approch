@@ -27,20 +27,24 @@ public class Level : GameObject
 
     List<Checkpoint> checkpointList = new List<Checkpoint>();
     List<Spike> spikeList = new List<Spike>();
-    public Level(string theMapfileName)
+    public Level(string theMapfileName, bool isMenu)
     {
         Map mapData = MapParser.ReadMap(theMapfileName);
         loader = new TiledLoader(theMapfileName);
 
-        //Manually generates the tile layers.
-        CreateTile(mapData, 0); //Create the walls
-        CreateTile(mapData, 1); //Create background
+        if (!isMenu)
+        {
+            //Manually generates the tile layers.
+            CreateTile(mapData, 0); //Create the walls
+            CreateTile(mapData, 1); //Create background
+        }
 
         //using autoInstance to Automatically generates the game objects
         loader.autoInstance = true;
         loader.rootObject = this;
         loader.LoadImageLayers();
         loader.LoadObjectGroups(0); //loading game objects
+        loader.LoadObjectGroups(1); //loading game objects
 
         //find the player objects (should only be 2)
         foreach (Player thePlayer in FindObjectsOfType<Player>()) 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="20" tileheight="20" infinite="0" nextlayerid="6" nextobjectid="9">
+ <tileset firstgid="1" name="400x400Orange" tilewidth="400" tileheight="400" tilecount="1" columns="1">
+  <image source="400x400Orange.png" width="400" height="400"/>
+ </tileset>
+ <objectgroup id="3" name="Object Layer 1">
+  <object id="5" type="ButtonMenu" gid="1" x="282" y="214" width="193" height="85">
+   <properties>
+    <property name="bool_paraBool2" type="bool" value="true"/>
+    <property name="string_actionName" value="loadLevel"/>
+    <property name="string_stringPara1" value="levelSelectMenu.tmx"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="Object Layer 2">
+  <object id="7" x="89.5" y="134" width="575" height="90">
+   <text fontfamily="Segoe UI" pixelsize="45" wrap="1" color="#00ff00" halign="center">Play</text>
+  </object>
+  <object id="8" type="ButtonMenu" x="105.5" y="35" width="575" height="90">
+   <properties>
+    <property name="string_actionName" value="loadLevel"/>
+    <property name="string_stringPara1" value="map1.tmx"/>
+   </properties>
+   <text fontfamily="Segoe UI" pixelsize="45" wrap="1" color="#00ff00" halign="center">Main Menu</text>
+  </object>
+ </objectgroup>
+</map>
