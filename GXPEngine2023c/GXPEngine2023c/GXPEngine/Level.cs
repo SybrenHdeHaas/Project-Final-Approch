@@ -284,11 +284,13 @@ public class Level : GameObject
                 {
                     if (player.GetPlyaerIndex() == 0)
                     {
+                        Console.WriteLine("playe 1 entered");
                         theGoal.player1Entered = true;
                     }
 
                     else
                     {
+                        Console.WriteLine("playe 2 entered");
                         theGoal.player2Enterted = true;
                     }
 

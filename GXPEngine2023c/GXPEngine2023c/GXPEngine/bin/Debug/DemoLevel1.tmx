@@ -131,7 +131,7 @@
     <property name="string_theMapID" value="redoneLevel2SS.tmx"/>
    </properties>
   </object>
-  <object id="13" name="Player 2" type="Player" gid="98" x="765.997" y="240.667" width="64" height="64">
+  <object id="13" name="Player 2" type="Player" gid="98" x="59.997" y="245.334" width="64" height="64">
    <properties>
     <property name="Height" type="int" value="64"/>
     <property name="Width" type="int" value="64"/>
@@ -141,7 +141,7 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="14" name="Player 1" type="Player" gid="98" x="946.67" y="208.334" width="64" height="64">
+  <object id="14" name="Player 1" type="Player" gid="98" x="154.67" y="250.334" width="64" height="64">
    <properties>
     <property name="Height" type="int" value="64"/>
     <property name="Width" type="int" value="64"/>
