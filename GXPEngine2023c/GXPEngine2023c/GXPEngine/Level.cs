@@ -27,6 +27,8 @@ public class Level : GameObject
 
     List<Checkpoint> checkpointList = new List<Checkpoint>();
     List<Spike> spikeList = new List<Spike>();
+
+    List<Goal> goalList = new List<Goal>();
     public Level(string theMapfileName, bool isMenu)
     {
         Map mapData = MapParser.ReadMap(theMapfileName);
@@ -49,7 +51,6 @@ public class Level : GameObject
         //find the player objects (should only be 2)
         foreach (Player thePlayer in FindObjectsOfType<Player>()) 
         {
-            Console.WriteLine("player spawn position: " + thePlayer.x + "|" + thePlayer.y);
             thePlayer.UpdatePos();
             thePlayers.Add(thePlayer);
             thePlayer.spawnPoint = new Vec2(thePlayer.x, thePlayer.y); //the default player spawn point
@@ -96,6 +97,12 @@ public class Level : GameObject
             spikeList.Add(theSpike);
         }
 
+        //extracting goal objects
+        foreach (Goal theGoal in FindObjectsOfType<Goal>())
+        {
+            goalList.Add(theGoal);
+        }
+
         //Setting up the camera boundary (player at center for these values)
         boundaryValueX = game.width / 2;
         boundaryValueY = game.height / 2;
@@ -103,8 +110,6 @@ public class Level : GameObject
 
     void Update()
     {
-        GameData.playerList = thePlayers;
-
         UseCamera();
 
         foreach (Player player in thePlayers) 
@@ -113,9 +118,10 @@ public class Level : GameObject
         }
             
         CheckFanAreas();
-        CheckButtons();
         CheckCheckpoint();
+        CheckButtons();
         CheckSpike();
+        CheckGoal();
     }
 
 
@@ -204,6 +210,22 @@ public class Level : GameObject
                     Console.WriteLine("player touche spike move to: " + player.spawnPoint.x + "|" + player.spawnPoint.y);
                     player.Position = player.spawnPoint;
                     player.Velocity = new Vec2(0, 0);
+                }
+            }
+        }
+    }
+
+
+    void CheckGoal()
+    {
+        foreach (Goal theGoal in goalList)
+        {
+            foreach (Player player in thePlayers)
+            {
+                if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theGoal))
+                {
+                    theGoal.switchLevel();
+                    return;
                 }
             }
         }

@@ -19,7 +19,7 @@ public class MyGame : Game {
             child.LateDestroy();
         }
 
-		//load level
+        //load level
         Level theLevel = new Level(GameData.mapName, GameData.mapIsMenu);
         AddChild(theLevel);
     }

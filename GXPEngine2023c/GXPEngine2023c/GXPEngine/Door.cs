@@ -21,9 +21,22 @@ public class Door : AnimationSpriteCustom
     //if there's no image in Tiled for this object
     public Door(TiledObject obj = null) : base("player.png", 1, 1, obj)
     {
-        //alpha = 0;
+        alpha = 0;
         isOpened = obj.GetBoolProperty("isOpened");
         theID = obj.GetStringProperty("string_theID");
+    }
+
+    void Update(){
+
+        if (isOpened)
+        {
+            alpha = 0;
+        }
+
+        else
+        {
+            alpha = 100;
+        }
     }
 
 }

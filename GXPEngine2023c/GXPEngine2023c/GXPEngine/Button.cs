@@ -31,6 +31,7 @@ public class Button : AnimationSpriteCustom
 
     public Button(TiledObject obj = null) : base("player.png", 1, 1, obj)
     {
+        alpha = 0;
         isTypeOne = obj.GetBoolProperty("isTypeOne");
         hasPressed = false;
         theObj = obj;

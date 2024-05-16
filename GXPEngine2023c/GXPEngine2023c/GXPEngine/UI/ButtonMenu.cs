@@ -37,7 +37,7 @@ public class ButtonMenu : AnimationSpriteCustom
                 {
                     case "loadLevel":
                         GameData.mapName = stringPara1;
-                        GameData.mapIsMenu = false;
+                        GameData.mapIsMenu = paraBool2;
                         MyGame myGame = (MyGame)game;
                         myGame.LoadLevel();
                         break;

@@ -13,6 +13,24 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Level_1_SS.tmx": {
+            "scale": 0.5640625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 801.3296398891968,
+                "y": 320.88642659279776
+            }
+        },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Level_1_SS.tmx#Player": {
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Level_1_SS.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/placeholder-tiles ideas.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
         "Levels.tmx": {
             "scale": 0.33,
             "selectedLayer": 0,
@@ -29,8 +47,8 @@
             "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 422.66666666666663,
-                "y": 181.5
+                "x": 421.8333333333333,
+                "y": 180.83333333333331
             }
         },
         "MainMenu.tmx#400x400Orange": {
@@ -38,17 +56,18 @@
         },
         "levelSelectMenu.tmx": {
             "expandedObjectLayers": [
-                3,
-                2
+                2,
+                3
             ],
-            "scale": 1.5,
-            "selectedLayer": 0,
+            "scale": 1,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 224.66666666666669,
-                "y": 204.33333333333334
+                "x": 340.5,
+                "y": 369.5
             }
         },
         "levelSelectMenu.tmx#400x400Orange": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "level_6.tmx": {
@@ -63,19 +82,22 @@
             "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 6800,
-                "y": 7032
+                "x": 408,
+                "y": 312
             }
+        },
+        "mainMenu.tmx#400x400Orange": {
+            "scaleInDock": 1
         },
         "map1.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.5,
-            "selectedLayer": 2,
+            "scale": 0.5,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 494,
-                "y": 249
+                "x": 665,
+                "y": 629
             }
         },
         "map1.tmx#Button": {
@@ -140,13 +162,19 @@
     "map.tileWidth": 20,
     "map.width": 40,
     "openFiles": [
-        "map1.tmx"
+        "map1.tmx",
+        "mainMenu.tmx",
+        "MainMenu.tmx",
+        "levelSelectMenu.tmx"
     ],
     "project": "final-approach.tiled-project",
-    "property.type": "bool",
+    "property.type": "string",
     "recentFiles": [
         "mainMenu.tmx",
+        "levelSelectMenu.tmx",
+        "MainMenu.tmx",
         "map1.tmx",
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Level_1_SS.tmx",
         "placeholdertile1.tsx"
     ],
     "tileset.embedInMap": true,
