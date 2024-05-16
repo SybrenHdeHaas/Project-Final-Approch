@@ -13,12 +13,14 @@ public class Hitbox : Sprite
         y = offSetY;
         this.mass = mass;
         alpha = 0.5f;
+        SetOrigin(width / 2, height / 2);
         
-}
+    }
 
     public float GetX()
     {
         return parent.x + x;
+        
     }
 
     public float GetY()

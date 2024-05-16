@@ -21,24 +21,19 @@ public class ColliderRect : ColliderObject
     GameObject thisObject;
     public ColliderRect(GameObject pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
     {
-
         
         thisObject = pRectObject;
         width = pWidth / 2;
         height = pHeight / 2;
         mass = 4 * width * height * _density;
-
+        Console.WriteLine("collider raect {4}, x {0}, y {1}, width {2}, height {3}", x, y, width, height, thisObject);
     }
 
     protected override CollisionInfo FindEarliestCollision() //Overriden from third step in colliderObject?
     {
         MyGame myGame = (MyGame)game;
         CheckCollisionTiles(myGame);
-
         CheckCollisionHitbox(myGame);
-       
-
-
         return FindLowestTOICollision();
     }
 
@@ -53,6 +48,7 @@ public class ColliderRect : ColliderObject
 
             float xOverlap = Math.Min(position.x + width, theTile.x + theTile.width) - Math.Max(position.x, theTile.x);
             float yOverlap = Math.Min(position.y + height, theTile.y + theTile.height) - Math.Max(position.y, theTile.y);
+
 
             if (xOverlap > 0 && yOverlap > 0)
             {
@@ -139,9 +135,6 @@ public class ColliderRect : ColliderObject
         for (int i = 0; i < GameData.playerList.Count(); i++)
         {
             Hitbox theHitBox = GameData.playerList[i].playerHitBox;
-
-
-
             if (thisObject is Hitbox) 
             {
                 Hitbox hitbox = (Hitbox)thisObject;

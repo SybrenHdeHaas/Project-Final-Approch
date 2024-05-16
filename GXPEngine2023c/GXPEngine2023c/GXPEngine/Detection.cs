@@ -20,11 +20,9 @@ public class Detection : Sprite
         
         x = offSetX;
         y = offSetY;
-        collider.isTrigger = true;
+        this.mass = mass;
         SetOrigin(width / 2, height / 2);
         playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), width, height, true);
-        
-        this.mass = mass;
 
     }
 
@@ -115,20 +113,8 @@ public class Detection : Sprite
         }
     
     }
-    void UpdateCollision()
-    {
-        playerCollision.Velocity = player.Velocity;
-        playerCollision.Position = player.Position;
-    }
-    public float GetX()
-    {
-        return parent.x + x;
-    }
 
-    public float GetY() 
-    {
-        return parent.y + y;
-    }
+ 
 
     void Update()
     {
