@@ -106,7 +106,7 @@ public class Button : AnimationSpriteCustom
             {
                 hasPressed = true;
                 typeOneOppositeEffect = true;
-                Console.WriteLine("action");
+          //      Console.WriteLine("action");
                 Action();
             }
             //do opposite action if player no longer pressing the button

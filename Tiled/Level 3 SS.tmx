@@ -76,7 +76,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,30,31,34,35,101,102,103,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,33,34,0,31,32,33,107,108,34,33,34,31,107,108,34,34,34,34,30,31,32,33,34,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,107,108,0,33,34,0,31,32,33,107,108,34,33,34,31,107,108,34,34,34,34,30,31,32,33,34,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -156,19 +156,19 @@
   </object>
   <object id="13" name="Breakable" type="Breakable" gid="196" x="173.667" y="443.167" width="40.6667" height="41.6667">
    <properties>
-    <property name="float_thresholdVelocityLength" type="float" value="5"/>
+    <property name="float_thresholdVelocityLength" type="float" value="7"/>
     <property name="int_theHealth" type="int" value="1"/>
    </properties>
   </object>
   <object id="14" name="Breakable" type="Breakable" gid="196" x="111.667" y="185.167" width="40.6667" height="41.6667">
    <properties>
-    <property name="float_thresholdVelocityLength" type="float" value="5"/>
+    <property name="float_thresholdVelocityLength" type="float" value="7"/>
     <property name="int_theHealth" type="int" value="1"/>
    </properties>
   </object>
-  <object id="15" name="Breakable" type="Breakable" gid="196" x="560" y="418.167" width="40.6667" height="41.6667">
+  <object id="15" name="Breakable" type="Breakable" gid="196" x="631" y="423.167" width="40.6667" height="41.6667">
    <properties>
-    <property name="float_thresholdVelocityLength" type="float" value="5"/>
+    <property name="float_thresholdVelocityLength" type="float" value="7"/>
     <property name="int_theHealth" type="int" value="1"/>
    </properties>
   </object>
@@ -184,7 +184,7 @@
     <property name="string_theID" value="door2"/>
    </properties>
   </object>
-  <object id="21" name="Big Button3" type="Button" x="75" y="413.333" width="64" height="32">
+  <object id="21" name="Big Button3" type="Button" x="66" y="415" width="64" height="32">
    <properties>
     <property name="isTypeOne" type="bool" value="true"/>
     <property name="string_effectName" value=""/>

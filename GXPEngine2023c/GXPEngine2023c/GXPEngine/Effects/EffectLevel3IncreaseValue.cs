@@ -34,7 +34,7 @@ public class EffectLevel3IncreaseValue : Effect
 
         Console.WriteLine("value: " + GameData.level3Value);
 
-        if (GameData.level3Value == 3)
+        if (GameData.level3Value == 2)
         {
             theDoor.isOpened = true;
         }

@@ -251,8 +251,6 @@ public class ColliderBreakable : ColliderObject
 
             if (col.other is Hitbox)
             {
-                Console.WriteLine("the player ic oming");
-
                 Hitbox theHitbox = (Hitbox)col.other;
                 Vec2 centerOfMass = (Mass * velocity + theHitbox.mass * new Vec2(0, 0)) / (Mass + theHitbox.mass);
                 Vec2 momentum = -bounciness * velocity;

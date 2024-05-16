@@ -263,8 +263,6 @@ public class ColliderRect : ColliderObject
             {
                 float timeOfImpact = -1;
 
-                Console.WriteLine("door collide");
-
                 if (theDoor.isOpened)
                 {
                     continue;

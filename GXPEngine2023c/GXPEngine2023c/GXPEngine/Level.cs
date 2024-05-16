@@ -232,11 +232,13 @@ public class Level : GameObject
                 if (SharedFunctions.CheckIntersectSpriteSprite(theBreakable, theButton))
                 {
                     theButton.breakableIsPressing = true;
+                    theButton.hasPressed = true;
                 }
 
                 else
                 {
                     theButton.breakableIsPressing = false;
+
                 }
             }
         }

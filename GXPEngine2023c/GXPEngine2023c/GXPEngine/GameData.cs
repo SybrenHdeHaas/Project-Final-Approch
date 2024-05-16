@@ -14,7 +14,7 @@ public static class GameData
     public static Dictionary<string, Door> doorList = new Dictionary<string, Door>();
     public static Dictionary<string, Fan> fanList = new Dictionary<string, Fan>();
 
-    public static String mapName = "DemoLevel1.tmx";
+    public static String mapName = "redoneLevel3SS.tmx";
     public static bool mapIsMenu = false;
 
     public static int level3Value;
