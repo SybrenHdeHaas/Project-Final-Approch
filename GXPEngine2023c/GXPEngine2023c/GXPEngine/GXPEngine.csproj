@@ -44,6 +44,7 @@
     <Compile Include="Breakable.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Checkpoint.cs" />
+    <Compile Include="ColliderBreakable.cs" />
     <Compile Include="ColliderObject.cs" />
     <Compile Include="ColliderRect.cs" />
     <Compile Include="CollisionInfo.cs" />

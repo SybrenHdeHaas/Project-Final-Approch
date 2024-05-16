@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="18">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="20">
  <tileset firstgid="1" source="placeholder_tile.tsx"/>
  <tileset firstgid="29" name="TileSheet_Final" tilewidth="32" tileheight="32" tilecount="96" columns="12">
   <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/TileSheet_Final.png" width="384" height="256"/>
  </tileset>
  <tileset firstgid="125" name="Player" tilewidth="64" tileheight="64" tilecount="2" columns="2">
   <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Player.png" width="128" height="64"/>
+ </tileset>
+ <tileset firstgid="127" name="Turtles_NoTrim" tilewidth="192" tileheight="192" tilecount="70" columns="10">
+  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Turtles_NoTrim.png" width="1920" height="1344"/>
  </tileset>
  <layer id="1" name="Tile Layer 1" width="35" height="20">
   <data encoding="csv">
@@ -69,17 +72,21 @@
   <object id="11" name="Door" x="480" y="384" width="32" height="64" rotation="90"/>
   <object id="12" name="Door" x="256" y="288" width="32" height="64" rotation="90"/>
   <object id="15" name="End" x="896" y="384" width="96" height="96"/>
-  <object id="16" name="Player 1" type="Player" gid="125" x="63.5" y="257" width="64" height="64">
+  <object id="18" name="Player 2" type="Player" gid="127" x="68.6635" y="268.667" width="64" height="64">
    <properties>
-    <property name="int_index" type="int" value="0"/>
+    <property name="Height" type="int" value="64"/>
+    <property name="Width" type="int" value="64"/>
+    <property name="int_index" type="int" value="1"/>
     <property name="int_nextFrameDelay" type="int" value="30"/>
     <property name="int_numberOfFrame" type="int" value="-1"/>
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="17" name="Player 2" type="Player" gid="125" x="127" y="258" width="64" height="64">
+  <object id="19" name="Player 1" type="Player" gid="127" x="137.337" y="267.334" width="64" height="64">
    <properties>
-    <property name="int_index" type="int" value="1"/>
+    <property name="Height" type="int" value="64"/>
+    <property name="Width" type="int" value="64"/>
+    <property name="int_index" type="int" value="0"/>
     <property name="int_nextFrameDelay" type="int" value="30"/>
     <property name="int_numberOfFrame" type="int" value="-1"/>
     <property name="int_singleFrameID" type="int" value="-1"/>

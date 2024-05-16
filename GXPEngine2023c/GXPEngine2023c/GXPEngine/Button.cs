@@ -53,6 +53,7 @@ public class Button : AnimationSpriteCustom
     //do all effects the button has
     public void Action()
     {
+        
         foreach (Effect effect in effects)
         {
             effect.TryAction();

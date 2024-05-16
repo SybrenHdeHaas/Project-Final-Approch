@@ -96,7 +96,7 @@ public class Level : GameObject
         //extracting Fan objects
         foreach (Fan theFan in FindObjectsOfType<Fan>())
         {
-            fanList.Add(theFan.id, theFan);
+                    fanList.Add(theFan.id, theFan);
         }
 
         GameData.fanList = fanList;
@@ -129,7 +129,7 @@ public class Level : GameObject
         //extracting goal objects
         foreach (Breakable theBreakable in FindObjectsOfType<Breakable>())
         {
-            Console.WriteLine("bx: " + theBreakable.x + " | by: " + theBreakable.y);
+            theBreakable.UpdatePos();
             breakableList.Add(theBreakable);
         }
 
@@ -193,6 +193,7 @@ public class Level : GameObject
             {
                 if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theButton))
                 {
+
                     if (player.playerIndex == 0 && theButton.hasPressed == false)
                     {
                         theButton.isPressedPlayer1 = true;

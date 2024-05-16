@@ -105,8 +105,6 @@ public class Player : AnimationSpriteCustom
     public Player(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
         playerIndex = obj.GetIntProperty("int_index");
-        Console.WriteLine("int index {0}", obj.GetIntProperty("int_index"));
-        Console.WriteLine("property Width {0}", obj.GetIntProperty("Width"));
         SetAnimationCycle(0, 1);
         mass = 4 * width * height;
         SetOrigin(width / 2, height / 2);
@@ -122,9 +120,6 @@ public class Player : AnimationSpriteCustom
         AddChild(playerHitBox);
 
         playerCollision = new ColliderRect(playerHitBox, new Vec2(0, 0), new Vec2(0, 0), playerHitBox.width, playerHitBox.height, true);
-        Console.WriteLine("player x {0}, y {1}, width {2}, height {3}", x, y, playerHitBox.width, playerHitBox.height);
-        Console.WriteLine("PlayerIndex {0}, width {1}, height {2}, scaleX {3}, scaleY {4}", playerIndex, width, height, scaleX, scaleY);
-
         Animate(0.085f);
 
     }
@@ -246,6 +241,8 @@ public class Player : AnimationSpriteCustom
                     //ARRAY for movement directions
                     if (Input.GetKey(Key.A))
                     {
+                        
+                        
                         movementDirection[0] = true;
 
                     }
@@ -417,6 +414,12 @@ public class Player : AnimationSpriteCustom
         playerCollision.Height = playerHitBox.height;
         playerCollision.Position = position + new Vec2(playerHitBox.x, playerHitBox.y);
         playerCollision.Velocity = velocity;
+    }
+
+    void SetAnimation()
+    {
+
+        SetAnimationCycle(31, 10);
     }
 
 

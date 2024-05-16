@@ -120,13 +120,13 @@
     <property name="string_theID" value="door1"/>
    </properties>
   </object>
-  <object id="14" name="Breakable" type="Breakable" gid="321" x="388.667" y="257" width="49.6667" height="50">
+  <object id="14" name="Breakable" type="Breakable" gid="321" x="394.834" y="102.833" width="49.6667" height="50">
    <properties>
-    <property name="float_thresholdVelocityLength" type="float" value="4"/>
+    <property name="float_thresholdVelocityLength" type="float" value="5"/>
     <property name="int_theHealth" type="int" value="1"/>
    </properties>
   </object>
-  <object id="15" name="Player 2" type="Player" gid="322" x="64" y="224" width="64" height="64">
+  <object id="15" name="Player 2" type="Player" gid="322" x="53.6635" y="227.167" width="64" height="64">
    <properties>
     <property name="Height" type="int" value="64"/>
     <property name="Width" type="int" value="64"/>
@@ -136,8 +136,10 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="16" name="Player 1" type="Player" gid="322" x="160" y="224" width="64" height="64">
+  <object id="16" name="Player 1" type="Player" gid="322" x="122.337" y="225.834" width="64" height="64">
    <properties>
+    <property name="Height" type="int" value="64"/>
+    <property name="Width" type="int" value="64"/>
     <property name="int_index" type="int" value="0"/>
     <property name="int_nextFrameDelay" type="int" value="30"/>
     <property name="int_numberOfFrame" type="int" value="-1"/>

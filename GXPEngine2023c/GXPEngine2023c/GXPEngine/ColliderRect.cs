@@ -263,6 +263,12 @@ public class ColliderRect : ColliderObject
             {
                 float timeOfImpact = -1;
 
+                Console.WriteLine("door collide");
+
+                if (theDoor.isOpened)
+                {
+                    continue;
+                }
 
                 if (wordy6)
                 {
@@ -639,12 +645,15 @@ public class ColliderRect : ColliderObject
             if (col.other is Breakable)
             {
                 Breakable theBreakable = (Breakable)col.other;
-                Vec2 centerOfMass = (Mass * velocity + theBreakable.Mass * new Vec2(0, 0)) / (Mass + theBreakable.Mass);
-                Vec2 momentum = -bounciness * velocity;
+                Vec2 centerOfMass = (Mass * velocity + theBreakable.Mass * theBreakable.velocity) / (Mass + theBreakable.Mass);
+                Vec2 momentum = centerOfMass - bounciness * (velocity - centerOfMass);
                 Vec2 POI = _oldPosition + (col.timeOfImpact * velocity);
 
                 position.y -= POI.y - position.y;
                 velocity.y = momentum.y;
+
+
+                float breakAbleForceMultiply = 0.85f;
 
 
 
@@ -657,6 +666,8 @@ public class ColliderRect : ColliderObject
 
                     position.y -= POI.y - position.y;
                     velocity.y = momentum.y;
+               //     theBreakable.position.y += POI.y - position.y;
+                    theBreakable.velocity.y = momentum.y * breakAbleForceMultiply;
                 }
 
 
@@ -668,7 +679,9 @@ public class ColliderRect : ColliderObject
                     }
 
                     position.y += POI.y - position.y;
+
                     velocity.y = momentum.y;
+                    theBreakable.velocity.y = momentum.y * breakAbleForceMultiply;
                 }
 
                 else if (col.AABBDirection == 4)
@@ -679,7 +692,9 @@ public class ColliderRect : ColliderObject
                     }
 
                     position.x -= position.x - POI.x;
+
                     velocity.x = momentum.x;
+                    theBreakable.velocity.x = momentum.x * breakAbleForceMultiply;
                 }
 
                 else if (col.AABBDirection == 3)
@@ -690,14 +705,14 @@ public class ColliderRect : ColliderObject
                     }
 
                     position.x += position.x - POI.x;
+
                     velocity.x = momentum.x;
+                    theBreakable.velocity.x = momentum.x * breakAbleForceMultiply;
                 }
 
                 if (col.AABBDirection >= 0 && col.AABBDirection <= 4)
                 {
                     Player thePlayer = (Player)thisObject.parent;
-
-                  //  Console.WriteLine("attempt break: " + thePlayer.Velocity.Length());
 
                     if (theBreakable.TryDamage(thePlayer.Velocity) == true)
                     {

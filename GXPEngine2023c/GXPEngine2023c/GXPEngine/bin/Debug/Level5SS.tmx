@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="42" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="24">
- <editorsettings>
-  <export target="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Level5SS.tmx" format="tmx"/>
- </editorsettings>
- <tileset firstgid="1" source="placeholder_tile.tsx"/>
- <tileset firstgid="29" source="TileSheet_Final.tsx"/>
+ <tileset firstgid="1" source="../../../../../Tiled/placeholder_tile.tsx"/>
+ <tileset firstgid="29" source="../../../../../Tiled/TileSheet_Final.tsx"/>
  <tileset firstgid="125" name="Turtles_NoTrim" tilewidth="192" tileheight="192" tilecount="70" columns="10">
-  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Turtles_NoTrim.png" width="1920" height="1344"/>
+  <image source="Turtles_NoTrim.png" width="1920" height="1344"/>
  </tileset>
  <layer id="1" name="Tile Layer 1" width="42" height="23">
   <data encoding="csv">

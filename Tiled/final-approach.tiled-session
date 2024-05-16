@@ -3,14 +3,14 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TileSheet_Final.tsx",
+    "activeFile": "",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 1,
+            "scaleInDock": 0.5,
             "scaleInEditor": 1
         },
         "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Level_1_SS.tmx": {
@@ -36,6 +36,56 @@
             "scaleInDock": 1
         },
         "C:/Users/seanb/Documents/Github Projects/placeholder-tiles ideas.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Tiled/TileSheet_Final.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Tiled/placeholder_tile.tsx": {
+            "scaleInDock": 1
+        },
+        "Characters.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Demo Level 1.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 1175,
+                "y": 537
+            }
+        },
+        "Demo Level 1.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "Demo Level 1.tmx#BreakableWood": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "Demo Level 1.tmx#Door": {
+            "scaleInDock": 1
+        },
+        "Demo Level 1.tmx#TileSheet_Final": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Demo Level 1.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Demo Level 1.tmx#doorHoz": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Demo Level 1.tmx#fanHoz": {
             "scaleInDock": 1
         },
         "Level 1 SS.tmx": {
@@ -79,11 +129,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.33,
+            "scale": 0.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 531.8181818181819,
-                "y": 401.5151515151515
+                "x": 509,
+                "y": 377
             }
         },
         "Level 2 SS.tmx#Player": {
@@ -93,59 +143,81 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "Level 2 SS.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1
+        },
         "Level 3 SS.tmx": {
-            "scale": 0.39929687499999994,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 800.1565251418509,
-                "y": 257.95343377029934
+                "x": 779,
+                "y": 529
             }
         },
         "Level 3 SS.tmx#TileSheet_Final": {
             "scaleInDock": 1
         },
+        "Level 3 SS.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1
+        },
         "Level 4 SS.tmx": {
-            "scale": 0.624625,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 796.4778867320392,
-                "y": 334.60076045627375
+                "x": 785,
+                "y": 559
             }
         },
         "Level 4 SS.tmx#TileSheet_Final": {
             "scaleInDock": 1
         },
+        "Level 4 SS.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1
+        },
         "Level 5 SS.tmx": {
-            "scale": 0.6944293478260869,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 670.3345724907064,
-                "y": 367.20798278223447
+                "x": 713,
+                "y": 687
             }
+        },
+        "Level 5 SS.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1
         },
         "Level 6 SS.tmx": {
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 604.6666666666667,
-                "y": 322.66666666666663
+                "x": 399.33333333333337,
+                "y": 338
             }
         },
         "Level1SS.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.5,
+            "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 749,
-                "y": 227
+                "x": 448.6666666666667,
+                "y": 328.6666666666667
             }
         },
         "Level1SS.tmx#400x400Orange": {
             "scaleInDock": 1
         },
         "Level1SS.tmx#BreakableWood": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "Level1SS.tmx#Door": {
@@ -158,12 +230,164 @@
             "dynamicWrapping": false,
             "scaleInDock": 1
         },
-        "Levels.tmx": {
-            "scale": 0.33,
+        "Level1SS.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1
+        },
+        "Level1SSSSS.tmx": {
+            "scale": 0.5640625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2398.4848484848485,
-                "y": 496.9696969696969
+                "x": 688.7534626038781,
+                "y": 319.99999999999994
+            }
+        },
+        "Level1SSSSS.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "Level1SSSSS.tmx#BreakableWood": {
+            "scaleInDock": 1
+        },
+        "Level1SSSSS.tmx#Door": {
+            "scaleInDock": 1
+        },
+        "Level1SSSSS.tmx#Player": {
+            "scaleInDock": 1
+        },
+        "Level1SSSSS.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "Level1SStest.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.5640625,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 688.753462603878,
+                "y": 47.8670360110803
+            }
+        },
+        "Level1SStest.tmx#400x400Orange": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Level1SStest.tmx#BreakableWood": {
+            "scaleInDock": 1
+        },
+        "Level1SStest.tmx#Door": {
+            "scaleInDock": 1
+        },
+        "Level1SStest.tmx#Player": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Level1SStest.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "Level1SStest.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Level_1_SS.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.75,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 532.6666666666667,
+                "y": 284.6666666666667
+            }
+        },
+        "Level_1_SS.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "Level_1_SSA.tmx": {
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 687.5,
+                "y": 240.5
+            }
+        },
+        "Level_1_SSA.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "Level_2_SS.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 251.25,
+                "y": 375.75
+            }
+        },
+        "Level_2_SS.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "Level_2_SS.tmx#Door": {
+            "scaleInDock": 1
+        },
+        "Level_2_SS.tmx#Player": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "Level_2_SS.tmx#TileSheet_Final": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "Level_2_SS.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1
+        },
+        "Level_3_SS.tmx": {
+            "scale": 0.6737413194444444,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 575.1465567222831,
+                "y": 241.1904915286994
+            }
+        },
+        "Level_3_SS.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "Level_4_SS.tmx": {
+            "scale": 0.48509375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 800.8761193068349,
+                "y": 337.04825098241315
+            }
+        },
+        "Level_4_SS.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "Level_5_SS.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 636.6666666666667,
+                "y": 550
+            }
+        },
+        "Level_6_SS.tmx": {
+            "scale": 0.63828125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 605.5324357405141,
+                "y": 287.4908200734394
+            }
+        },
+        "Levels.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2399.333333333333,
+                "y": 755.3333333333333
             }
         },
         "MainMenu.tmx": {
@@ -174,8 +398,8 @@
             "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 421.16666666666663,
-                "y": 180.16666666666663
+                "x": 420.5,
+                "y": 178.5
             }
         },
         "MainMenu.tmx#400x400Orange": {
@@ -188,14 +412,14 @@
         },
         "levelSelectMenu.tmx": {
             "expandedObjectLayers": [
-                2,
-                3
+                3,
+                2
             ],
-            "scale": 2,
+            "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 399.75,
-                "y": 299.75
+                "x": 497,
+                "y": 597
             }
         },
         "levelSelectMenu.tmx#400x400Orange": {
@@ -225,11 +449,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.75,
-            "selectedLayer": 2,
+            "scale": 0.5,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 1067.3333333333333,
-                "y": 332.6666666666667
+                "x": 1331,
+                "y": 1278
             }
         },
         "map1.tmx#Button": {
@@ -274,6 +498,32 @@
         "map1.tmx#woodCrate": {
             "scaleInDock": 1
         },
+        "map11.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1280.3030303030305,
+                "y": 1277.272727272727
+            }
+        },
+        "map11.tmx#Fan area": {
+            "scaleInDock": 1
+        },
+        "map11.tmx#Player": {
+            "scaleInDock": 1
+        },
+        "map11.tmx#SS_Tilset": {
+            "scaleInDock": 1
+        },
+        "map11.tmx#fan": {
+            "scaleInDock": 1
+        },
+        "map11.tmx#flag": {
+            "scaleInDock": 1
+        },
+        "map11.tmx#placeholdertile1": {
+            "scaleInDock": 1
+        },
         "placeholder-tiles ideas.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 1
@@ -286,6 +536,39 @@
         "placeholdertile1.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "real_DemoLevel.tmx": {
+            "scale": 4,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 863.875,
+                "y": 350.625
+            }
+        },
+        "real_DemoLevel.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#BreakableWood": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#Door": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#TileSheet_Final": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#doorHoz": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#fanHoz": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#fanVerRight": {
+            "scaleInDock": 1
         }
     },
     "last.exportedFilePath": "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug",
@@ -299,39 +582,44 @@
     "map.width": 40,
     "openFiles": [
         "map1.tmx",
-        "Level 1 SS.tmx",
         "placeholder_tile.tsx",
         "TileSheet_Final.tsx",
         "levelSelectMenu.tmx",
         "Levels.tmx",
-        "Level 2 SS.tmx",
-        "Level 3 SS.tmx",
-        "Level 6 SS.tmx",
-        "Level 5 SS.tmx",
-        "Level 2 SS..tmx",
-        "Level 4 SS.tmx",
-        "Level1SS.tmx"
+        "Level1SS.tmx",
+        "MainMenu.tmx",
+        "Level_1_SS.tmx",
+        "Level_2_SS.tmx",
+        "Level_3_SS.tmx",
+        "Characters.tsx",
+        "Level_5_SS.tmx",
+        "Level_1_SSA.tmx",
+        "map11.tmx",
+        "Level_6_SS.tmx",
+        "Level_4_SS.tmx",
+        "Level1SStest.tmx",
+        "Demo Level 1.tmx"
     ],
     "project": "final-approach.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "Level1SS.tmx",
+        "TileSheet_Final.tsx",
         "map1.tmx",
-        "Level 1 SS.tmx",
         "placeholder_tile.tsx",
-        "Level 4 SS.tmx",
-        "Level 2 SS..tmx",
-        "Level 5 SS.tmx",
-        "Level 6 SS.tmx",
-        "Level 3 SS.tmx",
-        "Level 2 SS.tmx",
+        "levelSelectMenu.tmx",
         "Levels.tmx",
-        "levelSelectMenu.tmx"
+        "Level1SS.tmx",
+        "MainMenu.tmx",
+        "Level_1_SS.tmx",
+        "Level_2_SS.tmx",
+        "Level_3_SS.tmx",
+        "Characters.tsx",
+        "Level_5_SS.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 32,
+        "height": 64,
         "width": 32
     }
 }

@@ -47,6 +47,19 @@ public class Fan : AnimationSpriteCustom
         }
     }
 
+    void Update()
+    {
+        if (isOn)
+        {
+            SetAnimationCycle(1, 1);
+        }
+
+        else
+        {
+            SetAnimationCycle(0, 1);
+        }
+    }
+
     public Vec2 GetVelocity()
     {
         if (isOn)

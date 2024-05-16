@@ -51,7 +51,7 @@ public class AnimationSpriteCustom : AnimationSprite
     , obj.GetBoolProperty("p_hasCollision", false))
     {
         singleFrameID = obj.GetIntProperty("int_singleFrameID", 1);
-        SetNextFrameDelay(obj.GetIntProperty("int_nextFrameDelay", 1));
+        SetNextFrameDelay(obj.GetIntProperty("int_nextFrameDelay", 30));
 
         id = obj.GetStringProperty("string_theID", "none");
         groupID = obj.GetStringProperty("f_theGroupID", "");

@@ -5,7 +5,7 @@ using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 public class MyGame : Game {
-	public MyGame() : base(800, 600, false)     // Create a window that's 800x600 and NOT fullscreen
+	public MyGame() : base(1800, 600, false)     // Create a window that's 800x600 and NOT fullscreen
 	{
 		LoadLevel();
     }

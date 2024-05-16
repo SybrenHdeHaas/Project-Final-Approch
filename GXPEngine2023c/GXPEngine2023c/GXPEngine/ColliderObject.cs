@@ -15,7 +15,7 @@ public class ColliderObject : GameObject
     public List<CollisionInfo> GetCollisionList() { return _collisionList; } 
 
     public static bool wordy5 = false;
-    public static bool wordy6 = false;
+    public static bool wordy6 = true;
 
     protected Vec2 position;
     protected Vec2 _oldPosition;
@@ -153,10 +153,5 @@ public class ColliderObject : GameObject
     protected virtual void ResolveCollision(CollisionInfo col)//fifth step in collison calculation
     {
     }
-
- 
-
-
-
 
 }
