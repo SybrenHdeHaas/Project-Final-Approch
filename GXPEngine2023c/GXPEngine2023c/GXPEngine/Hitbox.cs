@@ -35,7 +35,7 @@ public class Hitbox : Sprite
     void ToggleVisable()
     {
 
-        if (Input.GetKeyDown(Key.TAB))
+        if (Input.GetKeyDown(Key.BACKSLASH))
         {
             if (visible) { visible = false; } else visible = true;
         }

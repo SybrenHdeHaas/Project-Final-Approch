@@ -69,17 +69,15 @@ public class Player : AnimationSpriteCustom
     float throwStrenghtX = 15;
     float throwStrengthY = -15;
 
-    private float friction;
+    private float friction; //speed loss X
+    private float drag = 0.2f; //speed loss Y
     private float standUpFriction = 0.25f; //max speed is now determined by friction. can be overruled by external forces not from the player
     private float inShellFriction = 0.02f;
 
-
     private static Vec2 externalForces;
     private static Vec2 gravityForce;
-    private static Vec2 antiGravity;
     private float gravity = 1f;
-    private  Vec2 dragForce;
-    private float drag = 0.01f;
+    
 
     public float mass;
 
@@ -308,23 +306,22 @@ public class Player : AnimationSpriteCustom
 
         acceleration = new Vec2(accelerationX, accelerationY);
         animtaionAmountFrame = animationEndFrame - animationStartFrame + 1;
-        if (inshell)
-        {
-            friction = inShellFriction;
-        }
 
-        if (!inshell)
-        {
-            friction = standUpFriction;
-        }
+    }
+
+    private void ApplyForces()
+    {
         CalcFanVeclotiy();
         if (inshell) { friction = inShellFriction; }
         if (!inshell) { friction = standUpFriction; }
-        frictionForce = -friction * playerVelocity;
+
+        frictionForce.x = -friction * playerVelocity.x;
+        frictionForce.y = -drag * playerVelocity.y;
+
         if (!onGround) { gravity = 1f; }
         if (onGround || movementLock) { gravity = 0f; }
-
-        gravityForce = new Vec2(0, gravity);
+        gravityForce.y = gravity;
+        
         acceleration += frictionForce + gravityForce;
 
         playerVelocity += acceleration + playerForce;
@@ -332,11 +329,6 @@ public class Player : AnimationSpriteCustom
         playerForce = new Vec2(0f, 0f);
 
         velocity = playerVelocity + fanVelocity;
-    }
-
-    private void applyForces()
-    {
-
     }
     private void velocityFix()
     {
@@ -411,6 +403,7 @@ public class Player : AnimationSpriteCustom
             shellState();
         }
         Moving(movementDirection);
+        ApplyForces();
         ActionPossible();
         Action();
         UpdateCollision();
