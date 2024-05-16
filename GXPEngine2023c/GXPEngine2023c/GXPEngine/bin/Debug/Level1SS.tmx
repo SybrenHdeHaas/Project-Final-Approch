@@ -122,8 +122,8 @@
   </object>
   <object id="14" name="Breakable" type="Breakable" gid="321" x="388.667" y="257" width="49.6667" height="50">
    <properties>
-    <property name="float_thresholdVelocityLength" type="float" value="2.5"/>
-    <property name="int_theHealth" type="int" value="2"/>
+    <property name="float_thresholdVelocityLength" type="float" value="4"/>
+    <property name="int_theHealth" type="int" value="1"/>
    </properties>
   </object>
   <object id="15" name="Player 2" type="Player" gid="322" x="64" y="224" width="64" height="64">

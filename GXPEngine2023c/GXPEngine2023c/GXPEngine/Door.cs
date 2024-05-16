@@ -10,7 +10,6 @@ public class Door : AnimationSpriteCustom
 {
     public bool isOpened;
     public string theID;
-
     public float Mass
     {
         get

@@ -265,8 +265,34 @@ public class Level : GameObject
             {
                 if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theGoal))
                 {
-                    theGoal.switchLevel();
+                    if (player.GetPlyaerIndex() == 0)
+                    {
+                        theGoal.player1Entered = true;
+                    }
+
+                    else
+                    {
+                        theGoal.player2Enterted = true;
+                    }
+
+                    if (theGoal.player1Entered && theGoal.player2Enterted)
+                    {
+                        theGoal.switchLevel();
+                    }
                     return;
+                }
+
+                else
+                {
+                    if (player.GetPlyaerIndex() == 0)
+                    {
+                        theGoal.player1Entered = false;
+                    }
+
+                    else
+                    {
+                        theGoal.player2Enterted = false;
+                    }
                 }
             }
         }

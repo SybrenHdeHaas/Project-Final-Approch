@@ -11,6 +11,9 @@ public class Goal : AnimationSpriteCustom
     string mapID;
     bool isMenu;
 
+    public bool player1Entered;
+    public bool player2Enterted;
+
     //if there's image in Tiled for this object
     public Goal(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
