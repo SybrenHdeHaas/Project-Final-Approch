@@ -149,8 +149,8 @@ public class ColliderRect : ColliderObject
 
             }
 
-            float xOverlap = Math.Min(position.x + width, theHitBox.GetX() + theHitBox.width) - Math.Max(position.x, theHitBox.GetX());
-            float yOverlap = Math.Min(position.y + height, theHitBox.GetY() + theHitBox.height) - Math.Max(position.y, theHitBox.GetY());
+            float xOverlap = Math.Min(position.x + width, theHitBox.GetX() + width) - Math.Max(position.x, theHitBox.GetX());
+            float yOverlap = Math.Min(position.y + height, theHitBox.GetY() + height) - Math.Max(position.y, theHitBox.GetY());
 
             if (xOverlap > 0 && yOverlap > 0)
             {

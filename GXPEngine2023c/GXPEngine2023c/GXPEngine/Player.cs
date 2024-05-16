@@ -194,9 +194,11 @@ public class Player : AnimationSpriteCustom
         if (pickedUp)
         {
             interactPlayer.movementLock = true;
+            
             interactPlayer.position.x = x;
             interactPlayer.position.y = y + -height;
-        } else { interactPlayer.movementLock = false; }
+            
+        } else { interactPlayer.movementLock = false; interactPlayer.velocity = velocity; }
 
 
         if (Input.GetKeyDown(Key.U))
@@ -405,8 +407,8 @@ public class Player : AnimationSpriteCustom
 
         if (!movementLock) 
         {
-            shellState();
             PlayerInput();
+            shellState();
         }
         Moving(movementDirection);
         ActionPossible();
@@ -425,16 +427,20 @@ public class Player : AnimationSpriteCustom
         if (Input.GetKeyDown(Key.G))
         {
             Console.WriteLine();
-            Console.WriteLine("Player:          x {1}, y {2}, width {3}, height {4}", playerIndex, x, y, width, height);
+            Console.WriteLine("Player:          x {0}, y {1}, width {2}, height {3}", x, y, width, height);
             Console.WriteLine("Hitbox:          x {0}, y {1}, width {2}, height {3}", playerHitBox.GetX(), playerHitBox.GetY(), playerHitBox.width, playerHitBox.height);
             Console.WriteLine("ColliderRect:    x {0}, y {1}, width {2}, height {3}", playerHitBox.playerCollision.Position.x, playerHitBox.playerCollision.Position.y, playerHitBox.playerCollision.Width, playerHitBox.playerCollision.Height);
             Console.WriteLine();
 
-            Console.WriteLine("velocity  {0}, playerVelocity {1},  fanVelocty {2}, gravityForce {3}, frictionForce {4}", velocity, playerVelocity, fanVelocity, gravityForce, frictionForce);
-            Console.WriteLine("onCeiling {0}, onGround {1}", onCeiling, onGround);
-            
         }
 
+        if (Input.GetKeyDown(Key.H))
+        {
+            Console.WriteLine();
+            Console.WriteLine("velocity  {0}, playerVelocity {1},  fanVelocty {2}, gravityForce {3}, frictionForce {4}", velocity, playerVelocity, fanVelocity, gravityForce, frictionForce);
+            Console.WriteLine("onCeiling {0}, onGround {1}", onCeiling, onGround);
+            Console.WriteLine();
+        }
 
     }
 }

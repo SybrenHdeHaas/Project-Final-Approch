@@ -23,7 +23,7 @@ public class Detection : Sprite
         y = offSetY;
         this.mass = mass;
         //playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), objWidth, objHeight, true);
-
+        visible = false;
     }
 
     void CastPlayer() { player = parent as Player; }

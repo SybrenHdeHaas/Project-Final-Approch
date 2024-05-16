@@ -17,7 +17,7 @@ public class Hitbox : Sprite
         y = offSetY;
         this.mass = mass;
         playerCollision = new ColliderRect(this, new Vec2(objX, objY), new Vec2(0, 0), width, height, true);
-
+        visible = false;
     }
 
     public float GetX()
