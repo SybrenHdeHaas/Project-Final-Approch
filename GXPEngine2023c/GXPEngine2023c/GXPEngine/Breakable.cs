@@ -12,7 +12,6 @@ public class Breakable : AnimationSpriteCustom
 
     public static Vec2 gravity = new Vec2(0, 1);
     public Vec2 velocity;
-    private Vec2 acceleration;
     public Vec2 position;
     ColliderBreakable playerCollision; //handles the player's collision
 

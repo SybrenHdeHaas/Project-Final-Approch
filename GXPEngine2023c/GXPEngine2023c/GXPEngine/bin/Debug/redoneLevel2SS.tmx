@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="32">
- <editorsettings>
-  <export target="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneLevel2SS.tmx" format="tmx"/>
- </editorsettings>
- <tileset firstgid="1" source="placeholder_tile.tsx"/>
+ <tileset firstgid="1" source="../../../../../Tiled/placeholder_tile.tsx"/>
  <tileset firstgid="29" name="TileSheet_Final" tilewidth="32" tileheight="32" tilecount="96" columns="12">
-  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/TileSheet_Final.png" width="384" height="256"/>
+  <image source="TileSheet_Final.png" width="384" height="256"/>
  </tileset>
  <tileset firstgid="125" name="Player" tilewidth="64" tileheight="64" tilecount="2" columns="2">
-  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Player.png" width="128" height="64"/>
+  <image source="Player.png" width="128" height="64"/>
  </tileset>
  <tileset firstgid="127" name="Turtles_NoTrim" tilewidth="192" tileheight="192" tilecount="70" columns="10">
-  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Turtles_NoTrim.png" width="1920" height="1344"/>
+  <image source="Turtles_NoTrim.png" width="1920" height="1344"/>
  </tileset>
  <tileset firstgid="197" name="fanVerRight" tilewidth="32" tileheight="64" tilecount="2" columns="2">
-  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/fanVerRight.png" width="64" height="64"/>
+  <image source="fanVerRight.png" width="64" height="64"/>
  </tileset>
  <tileset firstgid="199" name="400x400Orange" tilewidth="400" tileheight="400" tilecount="1" columns="1">
-  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/400x400Orange.png" width="400" height="400"/>
+  <image source="400x400Orange.png" width="400" height="400"/>
  </tileset>
  <tileset firstgid="200" name="fanHoz" tilewidth="64" tileheight="32" tilecount="2" columns="2">
-  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/fanHoz.png" width="128" height="32"/>
+  <image source="fanHoz.png" width="128" height="32"/>
  </tileset>
  <tileset firstgid="202" name="doorHoz" tilewidth="65" tileheight="33" tilecount="1" columns="1">
-  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/doorHoz.png" width="65" height="33"/>
+  <image source="doorHoz.png" width="65" height="33"/>
  </tileset>
  <tileset firstgid="203" name="Door" tilewidth="32" tileheight="64" tilecount="1" columns="1">
-  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Door.png" width="32" height="64"/>
+  <image source="Door.png" width="32" height="64"/>
  </tileset>
  <layer id="1" name="Tile Layer 1" width="35" height="20">
   <data encoding="csv">

@@ -10,7 +10,7 @@
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 0.5,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Level_1_SS.tmx": {
@@ -54,11 +54,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.5,
+            "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1175,
-                "y": 537
+                "x": 1114,
+                "y": 412.6666666666667
             }
         },
         "Demo Level 1.tmx#400x400Orange": {
@@ -129,33 +129,56 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.5,
+            "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 509,
-                "y": 377
+                "x": 784.5,
+                "y": 494.5
             }
+        },
+        "Level 2 SS.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx#Door": {
+            "scaleInDock": 1
         },
         "Level 2 SS.tmx#Player": {
             "scaleInDock": 1
         },
         "Level 2 SS.tmx#TileSheet_Final": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "Level 2 SS.tmx#Turtles_NoTrim": {
             "scaleInDock": 1
         },
+        "Level 2 SS.tmx#doorHoz": {
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx#fanHoz": {
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx#fanVerRight": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
         "Level 3 SS.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.5,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 779,
-                "y": 529
+                "x": 209.66666666666669,
+                "y": 345
             }
+        },
+        "Level 3 SS.tmx#BreakableWood": {
+            "scaleInDock": 1
+        },
+        "Level 3 SS.tmx#Door": {
+            "scaleInDock": 1
         },
         "Level 3 SS.tmx#TileSheet_Final": {
             "scaleInDock": 1
@@ -167,11 +190,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.5,
+            "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 785,
-                "y": 559
+                "x": 943.3333333333333,
+                "y": 528.6666666666665
             }
         },
         "Level 4 SS.tmx#TileSheet_Final": {
@@ -210,7 +233,7 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 448.6666666666667,
-                "y": 328.6666666666667
+                "y": 164.66666666666669
             }
         },
         "Level1SS.tmx#400x400Orange": {
@@ -383,11 +406,11 @@
             }
         },
         "Levels.tmx": {
-            "scale": 0.75,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2399.333333333333,
-                "y": 755.3333333333333
+                "x": 2138.333333333333,
+                "y": 669.3333333333333
             }
         },
         "MainMenu.tmx": {
@@ -449,11 +472,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.5,
+            "scale": 0.33,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1331,
-                "y": 1278
+                "x": 1325.757575757576,
+                "y": 740.909090909091
             }
         },
         "map1.tmx#Button": {
@@ -538,11 +561,14 @@
             "scaleInEditor": 1
         },
         "real_DemoLevel.tmx": {
-            "scale": 4,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 1.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 863.875,
-                "y": 350.625
+                "x": 1463.6666666666665,
+                "y": 284.33333333333326
             }
         },
         "real_DemoLevel.tmx#400x400Orange": {

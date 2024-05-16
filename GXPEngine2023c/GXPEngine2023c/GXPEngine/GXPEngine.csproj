@@ -51,6 +51,8 @@
     <Compile Include="Detection.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="Effect.cs" />
+    <Compile Include="Effects\EffectLevel3IncreaseValue.cs" />
+    <Compile Include="Effects\EffectLevel3IncreaseValue2.cs" />
     <Compile Include="Effects\EffectOpenCloseDoor.cs" />
     <Compile Include="Effects\EffectTurnOnOffFan.cs" />
     <Compile Include="Fan.cs" />

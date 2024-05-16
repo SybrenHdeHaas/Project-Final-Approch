@@ -37,7 +37,8 @@ public class Level : GameObject
     float cameraMaxRight;
     public Level(string theMapfileName, bool isMenu)
     {
-        Console.WriteLine("aa:" + (-1 - (game.height * 2) - 100));
+        GameData.ResetValue();
+
 
         switch(GameData.mapName)
         {
@@ -217,10 +218,25 @@ public class Level : GameObject
                         theButton.isPressedPlayer2 = false;
                     }
 
-                    if (theButton.isPressedPlayer1 == false && theButton.isPressedPlayer2 == false)
+                    if (theButton.isPressedPlayer1 == false && theButton.isPressedPlayer2 == false && !theButton.breakableIsPressing)
                     {
                         theButton.hasPressed = false;
                     }
+                }
+            }
+
+            //BreakableIsPressing
+
+            foreach (Breakable theBreakable in breakableList)
+            {
+                if (SharedFunctions.CheckIntersectSpriteSprite(theBreakable, theButton))
+                {
+                    theButton.breakableIsPressing = true;
+                }
+
+                else
+                {
+                    theButton.breakableIsPressing = false;
                 }
             }
         }

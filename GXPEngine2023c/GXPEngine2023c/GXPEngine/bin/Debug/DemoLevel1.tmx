@@ -125,10 +125,10 @@
     <property name="string_para2" value=""/>
    </properties>
   </object>
-  <object id="6" name="End" type="Goal" x="1472" y="160" width="96" height="96">
+  <object id="6" name="End" type="Goal" x="1459.33" y="130" width="108.667" height="139.333">
    <properties>
     <property name="bool_mapIsMenu" type="bool" value="false"/>
-    <property name="string_theMapID" value="Level_2_SS.tmx"/>
+    <property name="string_theMapID" value="redoneLevel2SS.tmx"/>
    </properties>
   </object>
   <object id="13" name="Player 2" type="Player" gid="98" x="765.997" y="240.667" width="64" height="64">

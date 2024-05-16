@@ -16,4 +16,19 @@ public static class GameData
 
     public static String mapName = "DemoLevel1.tmx";
     public static bool mapIsMenu = false;
+
+    public static int level3Value;
+    public static int level3Value2;
+
+    public static void ResetValue()
+    {
+        tileList.Clear();
+        playerList.Clear();
+        breakableList.Clear();
+        doorList.Clear();
+        fanList.Clear();
+        level3Value = 0;
+        level3Value2 = 0;
+    }
+
 }

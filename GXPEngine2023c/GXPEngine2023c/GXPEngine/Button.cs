@@ -15,6 +15,8 @@ public class Button : AnimationSpriteCustom
     public bool isPressedPlayer1;
     public bool isPressedPlayer2;
 
+    public bool breakableIsPressing;
+
     List<Effect> effects = new List<Effect>();
 
     TiledObject theObj;
@@ -46,6 +48,12 @@ public class Button : AnimationSpriteCustom
                 break;
             case "action_fanTurnOnOff":
                 AddEffect(new EffectTurnOnOffFan(pParameterStringOne));
+                break;
+            case "action_level3IncreaseValue":
+                AddEffect(new EffectLevel3IncreaseValue(pParameterStringOne));
+                break;
+            case "action_level3IncreaseValue2":
+                AddEffect(new EffectLevel3IncreaseValue2(pParameterStringOne));
                 break;
         }
     }
@@ -94,14 +102,15 @@ public class Button : AnimationSpriteCustom
 
         if (isTypeOne)
         {
-            if ((isPressedPlayer1 || isPressedPlayer2) && hasPressed == false)
+            if (((isPressedPlayer1 || isPressedPlayer2) && hasPressed == false) || (breakableIsPressing && hasPressed == false))
             {
                 hasPressed = true;
                 typeOneOppositeEffect = true;
+                Console.WriteLine("action");
                 Action();
             }
             //do opposite action if player no longer pressing the button
-            if (!isPressedPlayer1 && !isPressedPlayer2 && typeOneOppositeEffect)
+            if (!isPressedPlayer1 && !isPressedPlayer2 && typeOneOppositeEffect && !breakableIsPressing)
             {
                 typeOneOppositeEffect = false;
                 ActionOpposite();
@@ -110,7 +119,7 @@ public class Button : AnimationSpriteCustom
 
         else
         {
-            if ((isPressedPlayer1 || isPressedPlayer2) && hasPressed == false)
+            if (((isPressedPlayer1 || isPressedPlayer2) && hasPressed == false) || (breakableIsPressing && hasPressed == false))
             {
                 hasPressed = true;
                 Action();

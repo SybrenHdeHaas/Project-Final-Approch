@@ -12,6 +12,8 @@ public class MyGame : Game {
 
     public void LoadLevel()
 	{
+        GameData.ResetValue();
+
         //Destroy old level
         List<GameObject> children = GetChildren();
         foreach (GameObject child in children)
