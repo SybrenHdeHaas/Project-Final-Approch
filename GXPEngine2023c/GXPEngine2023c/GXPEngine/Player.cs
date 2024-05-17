@@ -1,6 +1,7 @@
 using GXPEngine;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using TiledMapParser;
 
 public class Player : AnimationSpriteCustom
@@ -23,11 +24,13 @@ public class Player : AnimationSpriteCustom
     private Vec2 acceleration;
 
     public int GetPlyaerIndex() { return playerIndex; }
-    
+
     public int playerIndex; //renamed from index to playerIndex for better naming. 0 = player1, 1 = player2
 
-    public Boolean InShell {get { return inshell; }
-                            set { inshell = value; } 
+    public Boolean InShell
+    {
+        get { return inshell; }
+        set { inshell = value; }
     }
 
     private Boolean inshell;
@@ -77,7 +80,7 @@ public class Player : AnimationSpriteCustom
     private static Vec2 externalForces;
     private static Vec2 gravityForce;
     private float gravity = 1f;
-    
+
 
     public float mass;
 
@@ -93,12 +96,14 @@ public class Player : AnimationSpriteCustom
 
     public Vec2 spawnPoint; //the crood the player will move to if player dies
 
-    int animationStartFrame = 0;
-    int animationEndFrame = 1;
-    int animtaionAmountFrame;
-    
+    int baseFrame;
+
     public float hitboxWorkingWidth;
     public float hitboxWorkingHeight;
+
+
+    private Boolean animationTypeActive = false;
+
 
     public Player(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
@@ -116,11 +121,69 @@ public class Player : AnimationSpriteCustom
         detectionRange = new Detection(width, height, mass);
         AddChild(detectionRange);
 
-
-        SetAnimationCycle(0, 1);
-        Animate(0.085f);
-
     }
+
+    void animationController()
+    {
+        
+
+        if (playerIndex == 0)
+        {
+            if (playerVelocity.x > 0)
+            {
+                
+                if (!animationTypeActive)
+                {
+                    Console.WriteLine("activate animation left");
+                    SetAnimationCycle(30, 10);
+                    animationTypeActive = true;
+                    _mirrorX = false;
+                }
+
+                
+            }
+            else if (playerVelocity.x < 0)
+            {
+                if (!animationTypeActive)
+                {
+                    Console.WriteLine("activate animation right");
+                    SetAnimationCycle(30, 10);
+                    animationTypeActive = true;
+                    _mirrorX = true;
+
+                }
+            }
+
+
+            if ((base.currentFrame - base._startFrame) == base.frameCount-1) 
+            {
+                if (!inshell) { baseFrame = 0; }
+                if (inshell) { baseFrame = 25; }
+                SetAnimationCycle(baseFrame, 1);
+                animationTypeActive = false;
+            }
+
+        }
+
+        if (playerIndex == 1)
+        {
+        
+        }
+
+
+
+        base.Update();
+        
+    }
+
+
+
+
+
+
+
+
+
 
     public void UpdatePos()
     {
@@ -192,11 +255,12 @@ public class Player : AnimationSpriteCustom
         if (pickedUp)
         {
             interactPlayer.movementLock = true;
-            
+
             interactPlayer.position.x = x;
             interactPlayer.position.y = y + -height;
-            
-        } else { interactPlayer.movementLock = false; interactPlayer.velocity += velocity; }
+
+        }
+        else { interactPlayer.movementLock = false; interactPlayer.velocity += velocity; }
 
 
         if (Input.GetKeyDown(Key.U))
@@ -239,16 +303,12 @@ public class Player : AnimationSpriteCustom
                     //ARRAY for movement directions
                     if (Input.GetKey(Key.A))
                     {
-                        
-                        
                         movementDirection[0] = true;
-
                     }
                     else { movementDirection[0] = false; }
                     if (Input.GetKey(Key.D))
                     {
                         movementDirection[1] = true;
-
                     }
                     else { movementDirection[1] = false; }
                     if (Input.GetKeyDown(Key.W) && onGround && !onCeiling)
@@ -290,22 +350,23 @@ public class Player : AnimationSpriteCustom
         float accelerationY = 0;
         if (!inshell)
         {
-            if (moveDir[0])
+            if (moveDir[0]) //left
             {
+                _mirrorX = true;
                 accelerationX += -1;
             }
-            if (moveDir[1])
+            if (moveDir[1])//right
             {
+                _mirrorX = false;
                 accelerationX += 1;
             }
-            if (moveDir[2])
+            if (moveDir[2])//up
             {
                 accelerationY += -35;
             }
         }
 
         acceleration = new Vec2(accelerationX, accelerationY);
-        animtaionAmountFrame = animationEndFrame - animationStartFrame + 1;
 
     }
 
@@ -321,7 +382,7 @@ public class Player : AnimationSpriteCustom
         if (!onGround) { gravity = 1f; }
         if (onGround) { gravity = 0f; }
         gravityForce.y = gravity;
-        
+
         acceleration += frictionForce + gravityForce;
 
         playerVelocity += acceleration + playerForce;
@@ -333,11 +394,11 @@ public class Player : AnimationSpriteCustom
     private void velocityFix()
     {
         if (playerVelocity.y >= -0.01f && playerVelocity.y <= 0.01f)
-        { 
+        {
             playerVelocity.y = 0f;
         }
 
-        if (playerVelocity.x >= -0.01f && playerVelocity.x <0.01f)
+        if (playerVelocity.x >= -0.01f && playerVelocity.x < 0.01f)
         {
             playerVelocity.x = 0f;
         }
@@ -352,14 +413,26 @@ public class Player : AnimationSpriteCustom
             if (inshell)
             {
 
-                if (Input.GetKey(Key.W)) { SetAnimationCycle(0, 1);  inshell = false; }
+                if (Input.GetKey(Key.W)) 
+                { 
+                    SetAnimationCycle(0, 1); 
+                    inshell = false; 
+                    detectionRange.outShellChanges();
+                    playerHitBox.outShellChanges();
+                }
 
             }
 
             if (!inshell)
             {
 
-                if (Input.GetKey(Key.S)) { SetAnimationCycle(25, 1); inshell = true; }
+                if (Input.GetKey(Key.S)) 
+                { 
+                    SetAnimationCycle(15, 11); 
+                    inshell = true;
+                    detectionRange.inShellChanges();
+                    playerHitBox.inShellChanges();  
+                }
 
             }
 
@@ -371,15 +444,15 @@ public class Player : AnimationSpriteCustom
         {
 
             if (inshell)
-            {                
+            {
 
-                if (Input.GetKey(Key.I)) { SetAnimationCycle(0, 1); inshell = false; }
+                if (Input.GetKey(Key.I)) { inshell = false; }
 
             }
             if (!inshell)
             {
 
-                if (Input.GetKey(Key.K)) { SetAnimationCycle(25, 1); inshell = true; }
+                if (Input.GetKey(Key.K)) { inshell = true; }
 
             }
         }
@@ -393,17 +466,13 @@ public class Player : AnimationSpriteCustom
         playerHitBox.playerCollision.Velocity = velocity;
     }
 
-    void SetAnimation()
-    {
 
-        SetAnimationCycle(31, 10);
-    }
 
 
     void Update()
     {
 
-        if (!movementLock) 
+        if (!movementLock)
         {
             PlayerInput();
             shellState();
@@ -413,6 +482,8 @@ public class Player : AnimationSpriteCustom
         ActionPossible();
         Action();
         UpdateCollision();
+        animationController();
+        
 
         playerHitBox.playerCollision.Step();
         velocity = playerHitBox.playerCollision.Velocity;
@@ -421,7 +492,7 @@ public class Player : AnimationSpriteCustom
         y = position.y;
 
         velocityFix();
-        
+
         //movement information
         if (Input.GetKeyDown(Key.G))
         {

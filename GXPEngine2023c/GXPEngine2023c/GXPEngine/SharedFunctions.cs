@@ -63,8 +63,8 @@ public static class SharedFunctions
     public static bool CheckIntersectSpriteSprite(Sprite thisObject, Sprite thatObject)
     {
         // Calculate half-width and half-height for each rectangle
-        double rect1HalfWidth = thisObject.width / 2;
-        double rect1HalfHeight = thisObject.height / 2;
+        double rect1HalfWidth = thisObject.width / 3;
+        double rect1HalfHeight = thisObject.height / 3;
 
         double rect2HalfWidth = thatObject.width / 2;
         double rect2HalfHeight = thatObject.height / 2;
@@ -98,8 +98,8 @@ public static class SharedFunctions
     public static bool CheckIntersectSpriteCornerMiddle(Sprite thisObject, Sprite thatObject)
     {
         // Calculate half-width and half-height for each rectangle
-        double rect1HalfWidth = thisObject.width / 2;
-        double rect1HalfHeight = thisObject.height / 2;
+        double rect1HalfWidth = thisObject.width / 3;
+        double rect1HalfHeight = thisObject.height / 3;
 
         double rect2HalfWidth = thatObject.width / 2;
         double rect2HalfHeight = thatObject.height / 2;

@@ -38,7 +38,6 @@ public class AnimationSpriteCustom : AnimationSprite
         {
             SetFrame(singleFrameID);
         }
-
         else
         {
             SetAnimationCycle(startFrame, endFrame);
