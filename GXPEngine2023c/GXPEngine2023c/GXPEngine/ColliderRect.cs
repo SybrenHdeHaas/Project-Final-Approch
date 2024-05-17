@@ -38,8 +38,10 @@ public class ColliderRect : ColliderObject
         startStats[2] = width;
         startStats[3] = height;
 
+
+        Console.WriteLine("collider Rect pos Y {0}",position.y);
         shellsStats[0] = position.x;
-        shellsStats[1] = 0;
+        shellsStats[1] = 16;
         shellsStats[2] = width;
         shellsStats[3] = height / 3;
 
@@ -111,7 +113,7 @@ public class ColliderRect : ColliderObject
                         if (wordy2)
                         {
                             Console.WriteLine("right:" + timeOfImpact);
-                            Console.WriteLine("oldPosition {0}, newPosition {1}, width{2}", _oldPosition, position.x, width);
+                            Console.WriteLine("oldPosition {0}, newPosition {1}, width {2}", _oldPosition, position, width);
                         }
 
                         if (timeOfImpact <= 1 && timeOfImpact > 0)

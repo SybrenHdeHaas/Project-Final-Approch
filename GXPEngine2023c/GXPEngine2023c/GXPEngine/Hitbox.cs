@@ -12,7 +12,6 @@ public class Hitbox : Sprite
     private float[] startStats = new float[4];
     private float[] shellsStats = new float[4];
 
-
     public float trueWidth;
     public float trueHeight;
 
@@ -20,14 +19,20 @@ public class Hitbox : Sprite
     {
         trueWidth = width / 3;
         trueHeight = height / 3;
+
+        x = -width / 2;
+        y = -height / 2;
+
+
         Console.WriteLine(x);
+        Console.WriteLine(y);
         startStats[0] = x;
         startStats[1] = y;
         startStats[2] = width;
         startStats[3] = height;
-
+        
         shellsStats[0] = x;
-        shellsStats[1] = y;
+        shellsStats[1] = 0;
         shellsStats[2] = width;
         shellsStats[3] = height / 3;
 

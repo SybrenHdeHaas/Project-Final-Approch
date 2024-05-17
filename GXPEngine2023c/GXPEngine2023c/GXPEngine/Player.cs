@@ -110,10 +110,7 @@ public class Player : AnimationSpriteCustom
 
         mass = 4 * width * height;
 
-
         playerHitBox = new Hitbox((int)(width / 3), (int)(height / 3), (int)hitboxWorkingWidth, (int)hitboxWorkingHeight, mass);
-        playerHitBox.x = -playerHitBox.width / 2;
-        playerHitBox.y = -playerHitBox.height / 2;
         AddChild(playerHitBox);
 
 
@@ -174,7 +171,7 @@ public class Player : AnimationSpriteCustom
                 if (!animationTypeActive)
                 {
                     Console.WriteLine("activate animation left");
-                    SetAnimationCycle(40, 10);
+                    SetAnimationCycle(30, 10);
                     animationTypeActive = true;
                     _mirrorX = false;
                 }
@@ -186,7 +183,7 @@ public class Player : AnimationSpriteCustom
                 if (!animationTypeActive)
                 {
                     Console.WriteLine("activate animation right");
-                    SetAnimationCycle(40, 10);
+                    SetAnimationCycle(30, 10);
                     animationTypeActive = true;
                     _mirrorX = true;
 
@@ -406,7 +403,7 @@ public class Player : AnimationSpriteCustom
             }
             if (moveDir[2])//up
             {
-                accelerationY += -35;
+                accelerationY += -25;
             }
         }
 
@@ -460,8 +457,9 @@ public class Player : AnimationSpriteCustom
                 if (Input.GetKey(Key.W)) 
                 { 
                     SetAnimationCycle(40, 1); 
-                    inshell = false; 
-
+                    inshell = false;
+                    playerHitBox.outShellChanges();
+                    playerHitBox.playerCollision.outShellChanges();
                 }
 
             }
@@ -473,7 +471,8 @@ public class Player : AnimationSpriteCustom
                 { 
                     SetAnimationCycle(50, 8); 
                     inshell = true;
-
+                    playerHitBox.inShellChanges();
+                    playerHitBox.playerCollision.inShellChanges();
                 }
 
             }
@@ -490,6 +489,8 @@ public class Player : AnimationSpriteCustom
                 {
                     SetAnimationCycle(0, 1);
                     inshell = false;
+                    playerHitBox.outShellChanges();
+                    playerHitBox.playerCollision.outShellChanges();
 
                 }
             }
@@ -500,7 +501,8 @@ public class Player : AnimationSpriteCustom
                 {
                     SetAnimationCycle(15, 11);
                     inshell = true;
-
+                    playerHitBox.inShellChanges();
+                    playerHitBox.playerCollision.inShellChanges();
                 }
 
             }
