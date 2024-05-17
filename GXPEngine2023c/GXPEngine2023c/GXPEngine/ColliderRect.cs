@@ -85,7 +85,16 @@ public class ColliderRect : ColliderObject
         {
             // Calculate overlap on both axes
             float xOverlap = Math.Min(position.x + width, tile.x + tile.width) - Math.Max(position.x, tile.x);
-            float yOverlap = Math.Min(position.y + height, tile.y + tile.height) - Math.Max(position.y, tile.y);
+            float yOverlap = Math.Min(position.y + height, tile.y + tile.y) - Math.Max(position.y, tile.y);
+
+/*            if (Input.GetKeyDown(Key.P))
+            {
+                Console.WriteLine();
+                Console.WriteLine("pos X {0}, width {1}, tile.x {2}, tile.width {3}", position.x, width, tile.x, tile.width);
+                Console.WriteLine("pos y {0}, height {1}, tile.y {2}, tile.y {3}", position.y, height, tile.y, tile.y);
+                Console.WriteLine();
+            }*/
+
 
             // Check if there is an overlap
             if (xOverlap > 0 && yOverlap > 0)
@@ -175,8 +184,19 @@ public class ColliderRect : ColliderObject
             }
 
             // Calculate overlap on both axes
-            float xOverlap = Math.Min(position.x + width, theHitBox.GetX() + theHitBox.width) - Math.Max(position.x, theHitBox.GetX());
-            float yOverlap = Math.Min(position.y + height, theHitBox.GetY() + theHitBox.height) - Math.Max(position.y, theHitBox.GetY());
+            float xOverlap = Math.Min(position.x + width, theHitBox.GetTrueX()+ theHitBox.trueWidth) - Math.Max(position.x, theHitBox.GetTrueX());
+            float yOverlap = Math.Min(position.y + height + height, theHitBox.GetTrueY() + theHitBox.trueHeight) - Math.Max(position.y, theHitBox.GetTrueY());
+
+
+
+            if (Input.GetKeyDown(Key.P))
+            {
+                Console.WriteLine();
+                Console.WriteLine("xOverlap {0}, yOverlap {1}", xOverlap, yOverlap);
+                Console.WriteLine("pos X {0}, width {1}, GetX {2}, boxWidth {3}", position.x, width, theHitBox.GetTrueX(), theHitBox.trueWidth);
+                Console.WriteLine("pos y {0}, height {1}, GetY {2}, boxHeight {3}", position.y, height, theHitBox.GetTrueY(), theHitBox.trueHeight);
+                Console.WriteLine();
+            }
 
             // Check if there is an overlap
             if (xOverlap > 0 && yOverlap > 0)
@@ -187,9 +207,9 @@ public class ColliderRect : ColliderObject
                 if (isHorizontalCollision)
                 {
                     // Handle horizontal collisions
-                    if (position.x < theHitBox.GetX())
+                    if (position.x < theHitBox.GetTrueX())
                     {
-                        timeOfImpact = Math.Abs((_oldPosition.x + width) - theHitBox.GetX()) / Math.Abs(position.x - _oldPosition.x);
+                        timeOfImpact = Math.Abs((_oldPosition.x + width) - theHitBox.GetTrueX()) / Math.Abs(position.x - _oldPosition.x);
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
                             _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theHitBox, timeOfImpact, 4)); // Right collision
@@ -198,7 +218,7 @@ public class ColliderRect : ColliderObject
                     }
                     else
                     {
-                        timeOfImpact = Math.Abs(_oldPosition.x - (theHitBox.GetX() + theHitBox.width)) / Math.Abs(position.x - _oldPosition.x);
+                        timeOfImpact = Math.Abs(_oldPosition.x - (theHitBox.GetTrueX() + theHitBox.trueWidth)) / Math.Abs(position.x - _oldPosition.x);
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
                             _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theHitBox, timeOfImpact, 3)); // Left collision
@@ -209,9 +229,9 @@ public class ColliderRect : ColliderObject
                 else
                 {
                     // Handle vertical collisions
-                    if (position.y < theHitBox.GetY())
+                    if (position.y < theHitBox.GetTrueY())
                     {
-                        timeOfImpact = Math.Abs((_oldPosition.y + height) - theHitBox.GetY()) / Math.Abs(_oldPosition.y - position.y);
+                        timeOfImpact = Math.Abs((_oldPosition.y + height) - theHitBox.GetTrueY()) / Math.Abs(_oldPosition.y - position.y);
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
                             _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theHitBox, timeOfImpact, 2)); // Down collision
@@ -220,7 +240,7 @@ public class ColliderRect : ColliderObject
                     }
                     else
                     {
-                        timeOfImpact = Math.Abs(_oldPosition.y - (theHitBox.GetY() + theHitBox.height)) / Math.Abs(_oldPosition.y - position.y);
+                        timeOfImpact = Math.Abs(_oldPosition.y - (theHitBox.GetTrueY() + theHitBox.trueHeight)) / Math.Abs(_oldPosition.y - position.y);
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
                             _collisionList.Add(new CollisionInfo(new Vec2(0, 0), theHitBox, timeOfImpact, 1)); // Up collision

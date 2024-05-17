@@ -18,7 +18,9 @@ public class Hitbox : Sprite
 
     public Hitbox(float objX, float objY, int objWidth, int objHeight, float mass) : base("Hitbox.png")
     {
-        
+        trueWidth = width / 3;
+        trueHeight = height / 3;
+
         startStats[0] = x;
         startStats[1] = y;
         startStats[2] = width;
@@ -52,6 +54,15 @@ public class Hitbox : Sprite
         y = startStats[1];
         width = (int)startStats[2];
         height = (int)startStats[3];
+    }
+
+    public float GetTrueX() 
+    {
+        return parent.x - 32;
+    }
+    public float GetTrueY()
+    {
+        return parent.y + 32;
     }
 
     public float GetX()

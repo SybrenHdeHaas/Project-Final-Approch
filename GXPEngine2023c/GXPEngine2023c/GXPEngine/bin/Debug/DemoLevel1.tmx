@@ -131,7 +131,7 @@
     <property name="string_theMapID" value="redoneLevel2SS.tmx"/>
    </properties>
   </object>
-  <object id="13" name="Player 2" type="Player" gid="98" x="64" y="256" width="64" height="64">
+  <object id="13" name="Player 2" type="Player" gid="98" x="32" y="256" width="64" height="64">
    <properties>
     <property name="Height" type="int" value="64"/>
     <property name="Width" type="int" value="64"/>
