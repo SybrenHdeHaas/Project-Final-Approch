@@ -161,11 +161,6 @@
     <property name="string_fanID" value="fan2"/>
    </properties>
   </object>
-  <object id="21" name="Fan Area - fan3" type="FanArea" gid="168" x="800" y="384" width="608" height="64">
-   <properties>
-    <property name="string_fanID" value="fan3"/>
-   </properties>
-  </object>
   <object id="23" name="Fan - fan2" type="Fan" gid="171" x="1408" y="416.75" width="64" height="32">
    <properties>
     <property name="boolean_isOn" type="bool" value="true"/>
@@ -189,14 +184,6 @@
    <properties>
     <property name="isOpened" type="bool" value="false"/>
     <property name="string_theID" value="door1"/>
-   </properties>
-  </object>
-  <object id="31" name="Fan - fan3" type="Fan" gid="173" x="770" y="383.333" width="32" height="64">
-   <properties>
-    <property name="boolean_isOn" type="bool" value="true"/>
-    <property name="float_theForce" type="float" value="4.5"/>
-    <property name="int_theDirection" type="int" value="2"/>
-    <property name="string_theID" value="fan3"/>
    </properties>
   </object>
   <object id="32" name="Fan - fan1" type="Fan" gid="171" x="607.333" y="416.667" width="64" height="32">

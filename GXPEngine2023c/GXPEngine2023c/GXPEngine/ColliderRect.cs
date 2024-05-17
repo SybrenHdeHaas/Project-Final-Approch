@@ -23,6 +23,7 @@ public class ColliderRect : ColliderObject
     private float[] startStats = new float[4];
     private float[] shellsStats = new float[4];
 
+    Vec2 offset = new Vec2(-32, -32);
     Sprite thisObject;
     public ColliderRect(Sprite pRectObject, Vec2 pPosition, Vec2 pVelocity, float offsetX, float offsetY, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
     {
@@ -33,24 +34,31 @@ public class ColliderRect : ColliderObject
         height = pHeight / 3;
         mass = 4 * width * height * _density;
 
-        startStats[0] = position.x;
-        startStats[1] = position.y;
+        startStats[0] = -32;
+        startStats[1] = -32;
         startStats[2] = width;
         startStats[3] = height;
 
 
         Console.WriteLine("collider Rect pos Y {0}",position.y);
-        shellsStats[0] = position.x;
-        shellsStats[1] = position.y;
+        shellsStats[0] = -32;
+        shellsStats[1] = -16;
         shellsStats[2] = width;
-        shellsStats[3] = height / 3;
+        shellsStats[3] = 1f;
+    }
+
+
+
+    public void AddOffset(Vec2 pPosition) 
+    {
+        Position = pPosition + offset;
     }
 
     public void inShellChanges()
     {
         Console.WriteLine("inshell colliderRect");
-        position.x = shellsStats[0];
-        position.y = shellsStats[1];
+        offset.x = shellsStats[0];
+        offset.y = shellsStats[1];
         width = (int)shellsStats[2];
         height = (int)shellsStats[3];
 
@@ -58,8 +66,8 @@ public class ColliderRect : ColliderObject
 
     public void outShellChanges()
     {
-        position.x = startStats[0];
-        position.y = startStats[1];
+        offset.x = startStats[0];
+        offset.y = startStats[1];
         width = (int)startStats[2];
         height = (int)startStats[3];
     }

@@ -511,8 +511,9 @@ public class Player : AnimationSpriteCustom
 
     void UpdateCollision()
     {
-        playerHitBox.playerCollision.Position = position + new Vec2(-32, -32);
+        
         playerHitBox.playerCollision.Velocity = velocity;
+        playerHitBox.playerCollision.AddOffset(position);
     }
 
 
