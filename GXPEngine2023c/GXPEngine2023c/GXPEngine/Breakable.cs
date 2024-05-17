@@ -11,6 +11,7 @@ public class Breakable : AnimationSpriteCustom
 
 
     public static Vec2 gravity = new Vec2(0, 1);
+    
     public Vec2 velocity;
     public Vec2 position;
     ColliderBreakable playerCollision; //handles the player's collision
@@ -58,20 +59,19 @@ public class Breakable : AnimationSpriteCustom
 
     void UpdateCollision()
     {
-        playerCollision.Position = position;
         playerCollision.Velocity = velocity;
+        playerCollision.Position = position;
+       
     }
 
     void Update()
     {
-        velocity += gravity;
-
+        velocity += gravity * 0.2f; 
         UpdateCollision();
         playerCollision.Step();
 
 
         velocity = playerCollision.Velocity;
-
         position += velocity;
 
         x = position.x;

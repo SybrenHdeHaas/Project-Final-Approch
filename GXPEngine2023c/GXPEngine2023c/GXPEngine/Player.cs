@@ -46,8 +46,8 @@ public class Player : AnimationSpriteCustom
     }
 
 
-    private Boolean onGround;
-    private Boolean onCeiling;
+    private Boolean onGround = true;
+    private Boolean onCeiling = false;
 
 
     private string collisionDirection;
@@ -72,7 +72,7 @@ public class Player : AnimationSpriteCustom
     private float friction; //speed loss X
     private float drag = 0.2f; //speed loss Y
     private float standUpFriction = 0.25f; //max speed is now determined by friction. can be overruled by external forces not from the player
-    private float inShellFriction = 0.02f;
+    private float inShellFriction = 0.1f;
 
     private static Vec2 externalForces;
     private static Vec2 gravityForce;
@@ -96,8 +96,7 @@ public class Player : AnimationSpriteCustom
     int animationStartFrame = 0;
     int animationEndFrame = 1;
     int animtaionAmountFrame;
-    public float scalingX;
-    public float scalingY;
+    
     public float hitboxWorkingWidth;
     public float hitboxWorkingHeight;
 
@@ -110,10 +109,11 @@ public class Player : AnimationSpriteCustom
 
         mass = 4 * width * height;
 
-        playerHitBox = new Hitbox(-96, -96, x, y, width, height, mass); //the player's actual hit box.
+        playerHitBox = new Hitbox(x, y, width, height, mass); //the player's actual hit box.
         AddChild(playerHitBox);
 
-        detectionRange = new Detection(-110, -110, mass);
+
+        detectionRange = new Detection(width, height, mass);
         AddChild(detectionRange);
 
 
@@ -196,15 +196,13 @@ public class Player : AnimationSpriteCustom
             interactPlayer.position.x = x;
             interactPlayer.position.y = y + -height;
             
-        } else { interactPlayer.movementLock = false; interactPlayer.velocity = velocity; }
+        } else { interactPlayer.movementLock = false; interactPlayer.velocity += velocity; }
 
 
         if (Input.GetKeyDown(Key.U))
         {
             interactPlayer.movementLock = false;
             Throw();
-
-
         }
 
     }
@@ -321,7 +319,7 @@ public class Player : AnimationSpriteCustom
         frictionForce.y = -drag * playerVelocity.y;
 
         if (!onGround) { gravity = 1f; }
-        if (onGround || movementLock) { gravity = 0f; }
+        if (onGround) { gravity = 0f; }
         gravityForce.y = gravity;
         
         acceleration += frictionForce + gravityForce;

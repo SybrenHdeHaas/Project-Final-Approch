@@ -125,7 +125,7 @@
     <property name="string_para2" value=""/>
    </properties>
   </object>
-  <object id="10" name="Player 2" type="Player" gid="125" x="446.663" y="405.333" width="64" height="64">
+  <object id="10" name="Player 2" type="Player" gid="125" x="448" y="448" width="64" height="64">
    <properties>
     <property name="Height" type="int" value="64"/>
     <property name="Width" type="int" value="64"/>
@@ -135,7 +135,7 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="11" name="Player 1" type="Player" gid="125" x="61.0032" y="152.667" width="64" height="64">
+  <object id="11" name="Player 1" type="Player" gid="125" x="64" y="192" width="64" height="64">
    <properties>
     <property name="Height" type="int" value="64"/>
     <property name="Width" type="int" value="64"/>
@@ -157,13 +157,13 @@
     <property name="int_theHealth" type="int" value="1"/>
    </properties>
   </object>
-  <object id="14" name="Breakable" type="Breakable" gid="196" x="111.667" y="185.167" width="40.6667" height="41.6667">
+  <object id="14" name="Breakable" type="Breakable" gid="196" x="128" y="192" width="40.6667" height="41.6667">
    <properties>
-    <property name="float_thresholdVelocityLength" type="float" value="7"/>
+    <property name="float_thresholdVelocityLength" type="float" value="15"/>
     <property name="int_theHealth" type="int" value="1"/>
    </properties>
   </object>
-  <object id="15" name="Breakable" type="Breakable" gid="196" x="631" y="423.167" width="40.6667" height="41.6667">
+  <object id="15" name="Breakable" type="Breakable" gid="196" x="640" y="448" width="40.6667" height="41.6667">
    <properties>
     <property name="float_thresholdVelocityLength" type="float" value="7"/>
     <property name="int_theHealth" type="int" value="1"/>

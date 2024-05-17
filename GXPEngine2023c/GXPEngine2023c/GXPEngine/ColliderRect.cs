@@ -31,11 +31,6 @@ public class ColliderRect : ColliderObject
         mass = 4 * width * height * _density;
     }
 
-
-
-
-
-
     protected override CollisionInfo FindEarliestCollision() //Overriden from third step in colliderObject?
     {
         MyGame myGame = (MyGame)game;

@@ -7,22 +7,22 @@ public class Detection : Sprite
 {
     private string collisionDirection;
     public string getCollisionDirection() { return collisionDirection; }
-    ColliderRect playerCollision;
     Player player;
     Boolean[] collisionSides = new Boolean[4]; //wich sides are colliding (up, down, left, right)
     
+
     private Detection dete;
     public Detection GetDete() { return dete; }
     public Player GetPlayer() { return player; }
     float mass;
-    public Detection(float offSetX, float offSetY, float mass) : base("detector.png")
+    public Detection(int objWidth, int objHeight, float mass) : base("detector.png")
     {
+        width = objWidth + 30;
+        height = objHeight + 30;
+        x = -width/2;
+        y = -height/2;
         
-        
-        x = offSetX;
-        y = offSetY;
         this.mass = mass;
-        //playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), objWidth, objHeight, true);
         visible = false;
     }
 
@@ -30,7 +30,6 @@ public class Detection : Sprite
 
     Boolean FloorCheck() 
     {
-      
         GameObject[] colls = GetCollisions();
         
         foreach (GameObject coll in colls) 
@@ -41,7 +40,6 @@ public class Detection : Sprite
             }
             
         }
-
         return player.OnGround = false;
     }
 
@@ -130,8 +128,5 @@ public class Detection : Sprite
         CeilingCheck();
         CollisionCheck();
         PlayerInteractCheck();
-
-        if (Input.GetKeyDown(Key.BACKSPACE)) { Console.WriteLine(GetChildCount()); }
-
     }
 }

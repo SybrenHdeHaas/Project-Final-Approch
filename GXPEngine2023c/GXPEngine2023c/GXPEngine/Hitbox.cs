@@ -9,14 +9,14 @@ public class Hitbox : Sprite
     public float mass;
     public ColliderRect playerCollision;
 
-    public Hitbox(float offSetX, float offSetY, float objX, float objY, int objWidth, int objHeight, float mass) : base("Hitbox.png")
+    public Hitbox(float objX, float objY, int objWidth, int objHeight, float mass) : base("Hitbox.png")
     {
         width = objWidth;
         height = objHeight;
-        x = offSetX;
-        y = offSetY;
+        x = -width/2;
+        y = -height/2;
         this.mass = mass;
-        playerCollision = new ColliderRect(this, new Vec2(objX, objY), new Vec2(0, 0), offSetX, offSetY, width, height, true);
+        playerCollision = new ColliderRect(this, new Vec2(objX, objY), new Vec2(0, 0), x, y, width, height, true);
         visible = false;
     }
 
