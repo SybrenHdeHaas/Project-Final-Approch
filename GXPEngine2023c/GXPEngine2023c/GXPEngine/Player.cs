@@ -134,7 +134,7 @@ public class Player : AnimationSpriteCustom
                 if (!animationTypeActive)
                 {
                     Console.WriteLine("activate animation left");
-                    SetAnimationCycle(30, 10);
+                    SetAnimationCycle(60, 8);
                     animationTypeActive = true;
                     _mirrorX = false;
                 }
@@ -146,7 +146,7 @@ public class Player : AnimationSpriteCustom
                 if (!animationTypeActive)
                 {
                     Console.WriteLine("activate animation right");
-                    SetAnimationCycle(30, 10);
+                    SetAnimationCycle(60, 8);
                     animationTypeActive = true;
                     _mirrorX = true;
 
@@ -156,8 +156,8 @@ public class Player : AnimationSpriteCustom
 
             if ((base.currentFrame - base._startFrame) == base.frameCount-1) 
             {
-                if (!inshell) { baseFrame = 0; }
-                if (inshell) { baseFrame = 25; }
+                if (!inshell) { baseFrame = 40; }
+                if (inshell) { baseFrame = 59; }
                 SetAnimationCycle(baseFrame, 1);
                 animationTypeActive = false;
             }
@@ -166,7 +166,46 @@ public class Player : AnimationSpriteCustom
 
         if (playerIndex == 1)
         {
-        
+
+
+            if (playerVelocity.x > 0)
+            {
+
+                if (!animationTypeActive)
+                {
+                    Console.WriteLine("activate animation left");
+                    SetAnimationCycle(40, 10);
+                    animationTypeActive = true;
+                    _mirrorX = false;
+                }
+
+
+            }
+            else if (playerVelocity.x < 0)
+            {
+                if (!animationTypeActive)
+                {
+                    Console.WriteLine("activate animation right");
+                    SetAnimationCycle(40, 10);
+                    animationTypeActive = true;
+                    _mirrorX = true;
+
+                }
+            }
+            if ((base.currentFrame - base._startFrame) == base.frameCount - 1)
+            {
+                if (!inshell) { baseFrame = 0; }
+                if (inshell) { baseFrame = 25; }
+                SetAnimationCycle(baseFrame, 1);
+                animationTypeActive = false;
+            }
+
+
+
+
+
+
+
         }
 
 
@@ -414,10 +453,9 @@ public class Player : AnimationSpriteCustom
 
                 if (Input.GetKey(Key.W)) 
                 { 
-                    SetAnimationCycle(0, 1); 
+                    SetAnimationCycle(40, 1); 
                     inshell = false; 
-                    playerHitBox.outShellChanges();
-                    playerHitBox.playerCollision.outShellChanges();
+
                 }
 
             }
@@ -427,10 +465,9 @@ public class Player : AnimationSpriteCustom
 
                 if (Input.GetKey(Key.S)) 
                 { 
-                    SetAnimationCycle(15, 11); 
+                    SetAnimationCycle(50, 8); 
                     inshell = true;
-                    playerHitBox.inShellChanges(); 
-                    playerHitBox.playerCollision.inShellChanges();
+
                 }
 
             }
@@ -444,20 +481,20 @@ public class Player : AnimationSpriteCustom
             if (inshell)
             {
                 if (Input.GetKey(Key.I)) 
-                { 
+                {
+                    SetAnimationCycle(0, 1);
                     inshell = false;
-                    playerHitBox.outShellChanges();
-                    playerHitBox.playerCollision.outShellChanges();
+
                 }
             }
             if (!inshell)
             {
 
                 if (Input.GetKey(Key.K)) 
-                { 
+                {
+                    SetAnimationCycle(15, 11);
                     inshell = true;
-                    playerHitBox.inShellChanges();
-                    playerHitBox.playerCollision.inShellChanges();
+
                 }
 
             }

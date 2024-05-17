@@ -20,14 +20,14 @@ public class Hitbox : Sprite
     {
         trueWidth = width / 3;
         trueHeight = height / 3;
-
+        Console.WriteLine(x);
         startStats[0] = x;
         startStats[1] = y;
         startStats[2] = width;
         startStats[3] = height;
 
         shellsStats[0] = x;
-        shellsStats[1] = 16;
+        shellsStats[1] = y;
         shellsStats[2] = width;
         shellsStats[3] = height / 3;
 
