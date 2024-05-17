@@ -49,6 +49,7 @@ public class Breakable : AnimationSpriteCustom
 
             if (theHealth < 0)
             {
+                SoundChannel boxBreakSound = new Sound("box_break.wav", false).Play();
                 return true;
             }
         }

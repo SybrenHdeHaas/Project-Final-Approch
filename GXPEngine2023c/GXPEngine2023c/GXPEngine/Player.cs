@@ -292,6 +292,7 @@ public class Player : AnimationSpriteCustom
 
         if (pickedUp)
         {
+            SoundChannel sound = new Sound("pick sound.mp3", false).Play();
             interactPlayer.movementLock = true;
 
             interactPlayer.position.x = x;
@@ -312,6 +313,8 @@ public class Player : AnimationSpriteCustom
 
     private void Kick()
     {
+        SoundChannel sound = new Sound("kick.wav", false).Play();
+        sound.Volume = 1.3f;
         kickForce = new Vec2(kickStrenghtX, kickStrengthY);
         Console.WriteLine("kick");
         detectionRange.GetDete().GetPlayer().playerForce += kickForce;
@@ -319,6 +322,7 @@ public class Player : AnimationSpriteCustom
     }
     private void Throw()
     {
+        SoundChannel sound = new Sound("throw.wav", false).Play();
         throwForce = new Vec2(throwStrenghtX, throwStrengthY);
         Console.WriteLine("Throw");
         detectionRange.GetDete().GetPlayer().playerForce += throwForce;
@@ -351,6 +355,7 @@ public class Player : AnimationSpriteCustom
                     else { movementDirection[1] = false; }
                     if (Input.GetKeyDown(Key.W) && onGround && !onCeiling)
                     {
+                        SoundChannel sound = new Sound("jump.wav", false).Play();
                         movementDirection[2] = true;
 
                     }
@@ -371,6 +376,7 @@ public class Player : AnimationSpriteCustom
                     else { movementDirection[1] = false; }
                     if (Input.GetKeyDown(Key.I) && onGround && !onCeiling)
                     {
+                        SoundChannel sound = new Sound("jump.wav", false).Play();
                         movementDirection[2] = true;
                     }
                     else { movementDirection[2] = false; }

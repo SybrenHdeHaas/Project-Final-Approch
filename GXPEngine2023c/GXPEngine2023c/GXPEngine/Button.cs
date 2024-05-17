@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GXPEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -106,7 +107,9 @@ public class Button : AnimationSpriteCustom
             {
                 hasPressed = true;
                 typeOneOppositeEffect = true;
-          //      Console.WriteLine("action");
+                //      Console.WriteLine("action");
+
+                SoundChannel buttonSound = new Sound("button_pressed.wav", false).Play();
                 Action();
             }
             //do opposite action if player no longer pressing the button
@@ -114,6 +117,7 @@ public class Button : AnimationSpriteCustom
             {
                 typeOneOppositeEffect = false;
                 ActionOpposite();
+                SoundChannel buttonSound = new Sound("button_unpressed.wav", false).Play();
             }
         }
 
@@ -122,6 +126,7 @@ public class Button : AnimationSpriteCustom
             if (((isPressedPlayer1 || isPressedPlayer2) && hasPressed == false) || (breakableIsPressing && hasPressed == false))
             {
                 hasPressed = true;
+                SoundChannel buttonSound = new Sound("button_pressed.wav", false).Play();
                 Action();
             }
         }

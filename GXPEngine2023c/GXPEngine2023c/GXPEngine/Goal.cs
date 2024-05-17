@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GXPEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,7 @@ public class Goal : AnimationSpriteCustom
 
     public void switchLevel()
     {
+        SoundChannel sound = new Sound("win_sound.wav", false).Play();
         GameData.mapName = mapID;
         GameData.mapIsMenu = isMenu;
         MyGame myGame = (MyGame)game;
