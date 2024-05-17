@@ -528,14 +528,15 @@ public class Player : AnimationSpriteCustom
         Action();
         UpdateCollision();
         animationController();
-
+        playerHitBox.playerCollision.Step();
+        
         if (!movementLock)
         {
             PlayerInput();
             shellState();
         }
 
-        playerHitBox.playerCollision.Step();
+        
 
         velocity = playerHitBox.playerCollision.Velocity;
         position += velocity;

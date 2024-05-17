@@ -41,10 +41,9 @@ public class ColliderRect : ColliderObject
 
         Console.WriteLine("collider Rect pos Y {0}",position.y);
         shellsStats[0] = position.x;
-        shellsStats[1] = 16;
+        shellsStats[1] = position.y;
         shellsStats[2] = width;
         shellsStats[3] = height / 3;
-
     }
 
     public void inShellChanges()
