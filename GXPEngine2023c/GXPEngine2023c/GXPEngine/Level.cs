@@ -267,6 +267,7 @@ public class Level : GameObject
             {
                 if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theSpike))
                 {
+                    SoundChannel sound = new Sound("player_die.mp3", false).Play();
                     //Console.WriteLine("player touche spike move to: " + player.spawnPoint.x + "|" + player.spawnPoint.y);
                     player.Position = player.spawnPoint;
                     player.Velocity = new Vec2(0, 0);

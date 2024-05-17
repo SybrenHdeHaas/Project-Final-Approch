@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="33">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="34">
  <editorsettings>
   <export target="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/DemoLevel1.tmx" format="tmx"/>
  </editorsettings>

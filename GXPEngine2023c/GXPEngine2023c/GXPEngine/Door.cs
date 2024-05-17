@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GXPEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,7 @@ public class Door : AnimationSpriteCustom
 
         if (isOpened)
         {
+            SoundChannel sound = new Sound("gate_open.wav", false).Play();
             alpha = 0;
         }
 

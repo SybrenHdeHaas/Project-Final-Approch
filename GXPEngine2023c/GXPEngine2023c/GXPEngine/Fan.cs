@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GXPEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,12 @@ public class Fan : AnimationSpriteCustom
     float theForce;
     int theDirection;
     public bool isOn;
+
+    bool isOnCurrent;
+
+    public SoundChannel fanSound;
+
+
     public Fan(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
         theForce = obj.GetFloatProperty("float_theForce", 1);
@@ -58,12 +65,33 @@ public class Fan : AnimationSpriteCustom
         {
             SetAnimationCycle(0, 1);
         }
+
+
+        if (isOnCurrent != isOn)
+        {
+            isOnCurrent = isOn;
+            if (isOn)
+            {
+                fanSound = new Sound("fan_loop.wav", true).Play();
+                fanSound.Volume = 3f;
+            }
+
+            else
+            {
+                if (fanSound != null)
+                {
+                    fanSound.Stop();
+                }
+            }
+        }
+
     }
 
     public Vec2 GetVelocity()
     {
         if (isOn)
         {
+
             CalculateVelocity();
             return pushVelocity;
         }

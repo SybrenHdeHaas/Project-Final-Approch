@@ -167,11 +167,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 1,
-            "selectedLayer": 0,
+            "scale": 0.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 181.5,
-                "y": 387.5
+                "x": 625,
+                "y": 213
             }
         },
         "Level 3 SS.tmx#BreakableWood": {
@@ -207,11 +207,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.5,
+            "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 713,
-                "y": 687
+                "x": 412.6666666666667,
+                "y": 354
             }
         },
         "Level 5 SS.tmx#Turtles_NoTrim": {
@@ -567,7 +567,7 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 320.6666666666667,
+                "x": 1120.6666666666665,
                 "y": 350
             }
         },
