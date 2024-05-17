@@ -131,7 +131,7 @@
     <property name="string_theMapID" value="redoneLevel2SS.tmx"/>
    </properties>
   </object>
-  <object id="13" name="Player 2" type="Player" gid="98" x="64" y="192" width="64" height="64">
+  <object id="13" name="Player 2" type="Player" gid="98" x="64" y="256" width="64" height="64">
    <properties>
     <property name="Height" type="int" value="64"/>
     <property name="Width" type="int" value="64"/>
@@ -141,7 +141,7 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="14" name="Player 1" type="Player" gid="98" x="160" y="192" width="64" height="64">
+  <object id="14" name="Player 1" type="Player" gid="98" x="160" y="256" width="64" height="64">
    <properties>
     <property name="Height" type="int" value="64"/>
     <property name="Width" type="int" value="64"/>
@@ -159,12 +159,6 @@
   <object id="16" name="Fan Area - fan2" type="FanArea" gid="168" x="1408" y="384" width="64" height="160">
    <properties>
     <property name="string_fanID" value="fan2"/>
-   </properties>
-  </object>
-  <object id="17" name="Box" type="Breakable" gid="97" x="1184" y="256" width="32" height="32">
-   <properties>
-    <property name="float_thresholdVelocityLength" type="float" value="5"/>
-    <property name="int_theHealth" type="int" value="1"/>
    </properties>
   </object>
   <object id="21" name="Fan Area - fan3" type="FanArea" gid="168" x="800" y="384" width="608" height="64">

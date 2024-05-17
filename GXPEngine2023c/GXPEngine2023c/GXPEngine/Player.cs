@@ -67,7 +67,7 @@ public class Player : AnimationSpriteCustom
 
     private Vec2 kickForce;
     private Vec2 throwForce;
-    float kickStrenghtX = -15;
+    float kickStrenghtX = 15;
     float kickStrengthY = 0;
     float throwStrenghtX = 15;
     float throwStrengthY = -15;
@@ -84,10 +84,6 @@ public class Player : AnimationSpriteCustom
 
     public float mass;
 
-    private float standUpHitBoxCoordX = 0f;
-    private float standUpHitBoxCoordY = 0f;
-    private float inShellHitBoxCoordX = 0f;
-    private float inShellHitBoxCoordY = 0f;
 
     private Boolean PassThrough = false;
     private Boolean movementLock = false;
@@ -114,7 +110,10 @@ public class Player : AnimationSpriteCustom
 
         mass = 4 * width * height;
 
-        playerHitBox = new Hitbox(x, y, width, height, mass); //the player's actual hit box.
+
+        playerHitBox = new Hitbox((int)(width / 3), (int)(height / 3), (int)hitboxWorkingWidth, (int)hitboxWorkingHeight, mass);
+        playerHitBox.x = -playerHitBox.width / 2;
+        playerHitBox.y = -playerHitBox.height / 2;
         AddChild(playerHitBox);
 
 
@@ -417,8 +416,8 @@ public class Player : AnimationSpriteCustom
                 { 
                     SetAnimationCycle(0, 1); 
                     inshell = false; 
-                    detectionRange.outShellChanges();
                     playerHitBox.outShellChanges();
+                    playerHitBox.playerCollision.outShellChanges();
                 }
 
             }
@@ -430,8 +429,8 @@ public class Player : AnimationSpriteCustom
                 { 
                     SetAnimationCycle(15, 11); 
                     inshell = true;
-                    detectionRange.inShellChanges();
-                    playerHitBox.inShellChanges();  
+                    playerHitBox.inShellChanges(); 
+                    playerHitBox.playerCollision.inShellChanges();
                 }
 
             }
@@ -442,17 +441,24 @@ public class Player : AnimationSpriteCustom
 
         if (playerIndex == 1)
         {
-
             if (inshell)
             {
-
-                if (Input.GetKey(Key.I)) { inshell = false; }
-
+                if (Input.GetKey(Key.I)) 
+                { 
+                    inshell = false;
+                    playerHitBox.outShellChanges();
+                    playerHitBox.playerCollision.outShellChanges();
+                }
             }
             if (!inshell)
             {
 
-                if (Input.GetKey(Key.K)) { inshell = true; }
+                if (Input.GetKey(Key.K)) 
+                { 
+                    inshell = true;
+                    playerHitBox.inShellChanges();
+                    playerHitBox.playerCollision.inShellChanges();
+                }
 
             }
         }
@@ -460,8 +466,6 @@ public class Player : AnimationSpriteCustom
 
     void UpdateCollision()
     {
-        playerHitBox.playerCollision.Width = hitboxWorkingWidth;
-        playerHitBox.playerCollision.Height = hitboxWorkingHeight;
         playerHitBox.playerCollision.Position = position + new Vec2(-32, -32);
         playerHitBox.playerCollision.Velocity = velocity;
     }
@@ -472,26 +476,33 @@ public class Player : AnimationSpriteCustom
     void Update()
     {
 
-        if (!movementLock)
-        {
-            PlayerInput();
-            shellState();
-        }
+        
         Moving(movementDirection);
         ApplyForces();
         ActionPossible();
         Action();
         UpdateCollision();
         animationController();
-        
+
+        if (!movementLock)
+        {
+            PlayerInput();
+            shellState();
+        }
 
         playerHitBox.playerCollision.Step();
+
         velocity = playerHitBox.playerCollision.Velocity;
         position += velocity;
+
         x = position.x;
         y = position.y;
 
         velocityFix();
+
+
+
+
 
         //movement information
         if (Input.GetKeyDown(Key.G))

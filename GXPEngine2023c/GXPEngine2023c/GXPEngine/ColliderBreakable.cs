@@ -75,7 +75,7 @@ public class ColliderBreakable : ColliderObject
                         timeOfImpact = Math.Abs((_oldPosition.y + height) - theTile.y) / Math.Abs(_oldPosition.y - position.y);
                         if (wordy2)
                         {
-                            Console.WriteLine("down: " + timeOfImpact);
+                            Console.WriteLine("BreakAble down:  " + timeOfImpact);
                         }
 
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)

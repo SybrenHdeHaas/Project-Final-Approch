@@ -30,9 +30,9 @@ public class Detection : Sprite
         startStats[3] = height;
 
         shellsStats[0] = x;
-        shellsStats[1] = 0;
+        shellsStats[1] = 16;
         shellsStats[2] = width;
-        shellsStats[3] = height/2;
+        shellsStats[3] = height/3;
 
         this.mass = mass;
         visible = false;
