@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-/* the actual hitbox of player */
+//handles player-to-player detection
 public class Detection : Sprite
 {
     private string collisionDirection;
@@ -35,7 +35,7 @@ public class Detection : Sprite
         shellsStats[3] = height/3;
 
         this.mass = mass;
-        visible = false;
+        visible = true;
     }
 
     void CastPlayer() { player = parent as Player; }
@@ -108,9 +108,6 @@ public class Detection : Sprite
 
             }
         }
-
-
-
         return false;
     }
 
@@ -134,9 +131,6 @@ public class Detection : Sprite
             } 
         }
     }
-
-
-
     void ToggleVisable() 
     {
 
@@ -146,9 +140,6 @@ public class Detection : Sprite
         }
     
     }
-
- 
-
     void Update()
     {
         ToggleVisable();

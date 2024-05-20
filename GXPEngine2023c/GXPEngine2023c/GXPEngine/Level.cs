@@ -285,7 +285,7 @@ public class Level : GameObject
             {
                 if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theGoal))
                 {
-                    if (player.GetPlyaerIndex() == 0)
+                    if (player.GetPlayerIndex() == 0)
                     {
                         Console.WriteLine("playe 1 entered");
                         theGoal.player1Entered = true;
@@ -306,7 +306,7 @@ public class Level : GameObject
 
                 else
                 {
-                    if (player.GetPlyaerIndex() == 0)
+                    if (player.GetPlayerIndex() == 0)
                     {
                         theGoal.player1Entered = false;
                     }
@@ -345,7 +345,7 @@ public class Level : GameObject
         foreach (Player player in thePlayers)
         {
             //for now, camera only follow player1
-            if (player.GetPlyaerIndex() != 0)
+            if (player.GetPlayerIndex() != 0)
             {
                 return;
             }

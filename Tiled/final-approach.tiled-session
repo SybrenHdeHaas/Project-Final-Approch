@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "map1.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -232,8 +232,8 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 448.6666666666667,
-                "y": 164.66666666666669
+                "x": 687.3333333333333,
+                "y": 320
             }
         },
         "Level1SS.tmx#400x400Orange": {
@@ -409,8 +409,8 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2138.333333333333,
-                "y": 669.3333333333333
+                "x": 2399.6666666666665,
+                "y": 857.3333333333333
             }
         },
         "MainMenu.tmx": {
@@ -421,8 +421,8 @@
             "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 420.5,
-                "y": 178.5
+                "x": 399.8333333333333,
+                "y": 299.8333333333333
             }
         },
         "MainMenu.tmx#400x400Orange": {
@@ -435,14 +435,14 @@
         },
         "levelSelectMenu.tmx": {
             "expandedObjectLayers": [
-                3,
-                2
+                2,
+                3
             ],
             "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 497,
-                "y": 597
+                "x": 401,
+                "y": 301
             }
         },
         "levelSelectMenu.tmx#400x400Orange": {
@@ -473,10 +473,10 @@
                 2
             ],
             "scale": 0.33,
-            "selectedLayer": 3,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 1325.757575757576,
-                "y": 740.909090909091
+                "x": 995.4545454545455,
+                "y": 1025.7575757575758
             }
         },
         "map1.tmx#Button": {
@@ -564,11 +564,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.75,
+            "scale": 3,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1120.6666666666665,
-                "y": 350
+                "x": 959.8333333333333,
+                "y": 640
             }
         },
         "real_DemoLevel.tmx#400x400Orange": {
@@ -585,7 +585,9 @@
             "scaleInDock": 1
         },
         "real_DemoLevel.tmx#Turtles_NoTrim": {
-            "scaleInDock": 1
+            "dynamicWrapping": false,
+            "scaleInDock": 0.25,
+            "scaleInEditor": 1
         },
         "real_DemoLevel.tmx#doorHoz": {
             "scaleInDock": 1
@@ -594,6 +596,7 @@
             "scaleInDock": 1
         },
         "real_DemoLevel.tmx#fanVerRight": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         }
     },
@@ -614,38 +617,29 @@
         "Levels.tmx",
         "Level1SS.tmx",
         "MainMenu.tmx",
-        "Level_1_SS.tmx",
-        "Level_2_SS.tmx",
-        "Level_3_SS.tmx",
         "Characters.tsx",
-        "Level_5_SS.tmx",
-        "Level_1_SSA.tmx",
-        "map11.tmx",
-        "Level_6_SS.tmx",
-        "Level_4_SS.tmx",
-        "Level1SStest.tmx",
-        "Demo Level 1.tmx"
+        "real_DemoLevel.tmx"
     ],
     "project": "final-approach.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "TileSheet_Final.tsx",
-        "map1.tmx",
-        "placeholder_tile.tsx",
-        "levelSelectMenu.tmx",
-        "Levels.tmx",
-        "Level1SS.tmx",
+        "real_DemoLevel.tmx",
+        "Characters.tsx",
         "MainMenu.tmx",
+        "Level1SS.tmx",
+        "Levels.tmx",
+        "levelSelectMenu.tmx",
+        "TileSheet_Final.tsx",
+        "placeholder_tile.tsx",
+        "map1.tmx",
         "Level_1_SS.tmx",
         "Level_2_SS.tmx",
-        "Level_3_SS.tmx",
-        "Characters.tsx",
-        "Level_5_SS.tmx"
+        "Level_3_SS.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 64,
-        "width": 32
+        "width": 64
     }
 }

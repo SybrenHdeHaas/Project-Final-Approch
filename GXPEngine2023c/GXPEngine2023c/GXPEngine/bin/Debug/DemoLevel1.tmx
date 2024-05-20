@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="34">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="35">
  <tileset firstgid="1" name="TileSheet_Final" tilewidth="32" tileheight="32" tilecount="96" columns="12">
   <image source="TileSheet_Final.png" width="384" height="256"/>
  </tileset>
@@ -114,7 +114,7 @@
  </layer>
  <objectgroup id="3" name="Object Layer 1">
   <object id="2" name="Spikes" type="Spike" x="256" y="256" width="96" height="32"/>
-  <object id="4" name="Button" type="Button" x="1312" y="233" width="32" height="23">
+  <object id="4" name="Button" type="Button" x="1312" y="224" width="32" height="32">
    <properties>
     <property name="isTypeOne" type="bool" value="false"/>
     <property name="string_effectName" value="action_doorOpenClose"/>
@@ -125,13 +125,13 @@
     <property name="string_para2" value=""/>
    </properties>
   </object>
-  <object id="6" name="End" type="Goal" x="1480.5" y="160" width="78.75" height="96">
+  <object id="6" name="End" type="Goal" x="1459.33" y="130" width="108.667" height="139.333">
    <properties>
     <property name="bool_mapIsMenu" type="bool" value="false"/>
     <property name="string_theMapID" value="redoneLevel2SS.tmx"/>
    </properties>
   </object>
-  <object id="13" name="Player 2" type="Player" gid="98" x="1056" y="256" width="64" height="64">
+  <object id="13" name="Player 2" type="Player" gid="98" x="70.6637" y="126.001" width="64" height="64">
    <properties>
     <property name="Height" type="int" value="64"/>
     <property name="Width" type="int" value="64"/>
@@ -141,7 +141,7 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="14" name="Player 1" type="Player" gid="98" x="960" y="256" width="64" height="64">
+  <object id="14" name="Player 1" type="Player" gid="98" x="166.67" y="128.334" width="64" height="64">
    <properties>
     <property name="Height" type="int" value="64"/>
     <property name="Width" type="int" value="64"/>
@@ -151,14 +151,25 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="15" name="Fan Area - fan1" type="FanArea" gid="168" x="608" y="384" width="64" height="160">
+  <object id="15" name="Fan Area - fan1" type="FanArea" gid="168" x="601.667" y="381.833" width="70.3333" height="153.334">
    <properties>
     <property name="string_fanID" value="fan1"/>
    </properties>
   </object>
-  <object id="16" name="Fan Area - fan2" type="FanArea" gid="168" x="1408" y="384" width="64" height="160">
+  <object id="16" name="Fan Area - fan2" type="FanArea" gid="168" x="1404.83" y="371" width="66.3333" height="116.667">
    <properties>
     <property name="string_fanID" value="fan2"/>
+   </properties>
+  </object>
+  <object id="17" name="Box" type="Breakable" gid="97" x="1183.67" y="255" width="32" height="32">
+   <properties>
+    <property name="float_thresholdVelocityLength" type="float" value="5"/>
+    <property name="int_theHealth" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="21" name="Fan Area - fan3" type="FanArea" gid="168" x="766.833" y="359.667" width="649.333" height="24.667">
+   <properties>
+    <property name="string_fanID" value="fan3"/>
    </properties>
   </object>
   <object id="23" name="Fan - fan2" type="Fan" gid="171" x="1408" y="416.75" width="64" height="32">
@@ -169,7 +180,7 @@
     <property name="string_theID" value="fan2"/>
    </properties>
   </object>
-  <object id="24" name="Button1" type="Button" x="704" y="233.091" width="32" height="22.9091">
+  <object id="24" name="Button1" type="Button" x="702.75" y="227.5" width="37" height="32.75">
    <properties>
     <property name="isTypeOne" type="bool" value="false"/>
     <property name="string_effectName" value="action_fanTurnOnOff"/>
@@ -186,12 +197,26 @@
     <property name="string_theID" value="door1"/>
    </properties>
   </object>
+  <object id="31" name="Fan - fan3" type="Fan" gid="173" x="770" y="383.333" width="32" height="64">
+   <properties>
+    <property name="boolean_isOn" type="bool" value="true"/>
+    <property name="float_theForce" type="float" value="4.5"/>
+    <property name="int_theDirection" type="int" value="2"/>
+    <property name="string_theID" value="fan3"/>
+   </properties>
+  </object>
   <object id="32" name="Fan - fan1" type="Fan" gid="171" x="607.333" y="416.667" width="64" height="32">
    <properties>
     <property name="boolean_isOn" type="bool" value="false"/>
     <property name="float_theForce" type="float" value="4.5"/>
     <property name="int_theDirection" type="int" value="4"/>
     <property name="string_theID" value="fan1"/>
+   </properties>
+  </object>
+  <object id="34" name="Box" type="Breakable" gid="97" x="377" y="85" width="32" height="32">
+   <properties>
+    <property name="float_thresholdVelocityLength" type="float" value="5"/>
+    <property name="int_theHealth" type="int" value="1"/>
    </properties>
   </object>
  </objectgroup>

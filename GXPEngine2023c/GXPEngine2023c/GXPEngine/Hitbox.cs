@@ -3,77 +3,36 @@ using System;
 using System.CodeDom;
 using System.Runtime.InteropServices;
 
-/* the actual hitbox of player */
+//the collision hitbox of player
 public class Hitbox : Sprite
 {
     public float mass;
     public ColliderRect playerCollision;
-
-    private float[] startStats = new float[4];
-    private float[] shellsStats = new float[4];
-
-    public float trueWidth;
-    public float trueHeight;
-
-    public Hitbox(float objX, float objY, int objWidth, int objHeight, float mass) : base("Hitbox.png")
+    public Hitbox(float mass) : base("Hitbox.png")
     {
-        trueWidth = width / 3;
-        trueHeight = height / 3;
-
-        x = -width / 2;
-        y = -height / 2;
-
-
-        Console.WriteLine(x);
-        Console.WriteLine(y);
-        startStats[0] = x;
-        startStats[1] = y;
-        startStats[2] = width;
-        startStats[3] = height;
-        
-        shellsStats[0] = x;
-        shellsStats[1] = 0;
-        shellsStats[2] = width;
-        shellsStats[3] = height / 3;
-
-
         this.mass = mass;
-        playerCollision = new ColliderRect(this, new Vec2(objX, objY), new Vec2(0, 0), x, y, width, height, true);
-        visible = false;
+        alpha = 0.5f;
+        playerCollision = new ColliderRect(this, new Vec2(0, 0), new Vec2(0, 0), width, height, true);
     }
 
-
-
-    public void inShellChanges()
+    public void ChangeOffSetAndSize(float[] theStats)
     {
-        x = shellsStats[0];
-        y = shellsStats[1];
-        width = (int)shellsStats[2];
-        height = (int)shellsStats[3];
-
+        x = theStats[0];
+        y = theStats[1];
+        width = (int)theStats[2];
+        height = (int)theStats[3];
     }
 
-    public void outShellChanges()
+    public void UpdateCollision(Vec2 pPosition)
     {
-        x = startStats[0];
-        y = startStats[1];
-        width = (int)startStats[2];
-        height = (int)startStats[3];
-    }
-
-    public float GetTrueX() 
-    {
-        return parent.x - 32;
-    }
-    public float GetTrueY()
-    {
-        return parent.y + 32;
+        playerCollision.Width = width;
+        playerCollision.Height = height;
+        playerCollision.Position = pPosition + new Vec2(x, y);
     }
 
     public float GetX()
     {
         return parent.x + x;
-        
     }
 
     public float GetY()
@@ -81,15 +40,12 @@ public class Hitbox : Sprite
         return parent.y + y; 
     }
 
-
     void ToggleVisable()
     {
-
         if (Input.GetKeyDown(Key.BACKSLASH))
         {
             if (visible) { visible = false; } else visible = true;
         }
-
     }
     void Update() 
     {
@@ -98,8 +54,6 @@ public class Hitbox : Sprite
         { 
            Console.WriteLine("HITBOX x {0}, y {1}", GetX(), GetY());
            Console.WriteLine(GetChildCount());
-        }
-        
+        }   
     }
-
 }
