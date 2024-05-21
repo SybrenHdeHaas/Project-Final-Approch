@@ -233,7 +233,7 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 687.3333333333333,
-                "y": 320
+                "y": 320.66666666666663
             }
         },
         "Level1SS.tmx#400x400Orange": {
@@ -409,20 +409,20 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2399.6666666666665,
-                "y": 857.3333333333333
+                "x": 2394,
+                "y": 874
             }
         },
         "MainMenu.tmx": {
             "expandedObjectLayers": [
-                5,
-                3
+                3,
+                5
             ],
             "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 399.8333333333333,
-                "y": 299.8333333333333
+                "y": 300
             }
         },
         "MainMenu.tmx#400x400Orange": {
@@ -441,8 +441,8 @@
             "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 401,
-                "y": 301
+                "x": 399,
+                "y": 300
             }
         },
         "levelSelectMenu.tmx#400x400Orange": {
@@ -473,10 +473,10 @@
                 2
             ],
             "scale": 0.33,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 995.4545454545455,
-                "y": 1025.7575757575758
+                "x": 1251.5151515151515,
+                "y": 1251.5151515151515
             }
         },
         "map1.tmx#Button": {
@@ -564,11 +564,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 3,
+            "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 959.8333333333333,
-                "y": 640
+                "x": 212.99999999999997,
+                "y": 212.33333333333334
             }
         },
         "real_DemoLevel.tmx#400x400Orange": {

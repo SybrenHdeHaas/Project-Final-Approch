@@ -206,6 +206,8 @@ public class Player : AnimationSpriteCustom
         fanVelocityList.Add(theFanVelocity);
     }
 
+    //
+
     private void CalcFanVeclotiy()
     {
         fanVelocity.x = 0;
