@@ -12,7 +12,14 @@ public class Hitbox : Sprite
         y = offSetY;
         this.mass = mass;
         alpha = 0.5f;
+    }
 
+    public void ChangeOffSetAndSize(float[] theStats)
+    {
+        x = theStats[0];
+        y = theStats[1];
+        width = (int)theStats[2];
+        height = (int)theStats[3];
     }
 
     public float GetX()

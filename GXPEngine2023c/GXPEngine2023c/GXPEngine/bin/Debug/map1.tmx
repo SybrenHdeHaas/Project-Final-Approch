@@ -119,16 +119,6 @@
    <property name="string_effectName" value="action_doorOpenClose"/>
    <property name="string_para" value=""/>
   </properties>
-  <object id="15" name="Fan area1" type="FanArea" gid="3" x="472.787" y="775.228" width="115.333" height="177.5">
-   <properties>
-    <property name="string_fanID" value="fan1"/>
-   </properties>
-  </object>
-  <object id="20" name="Fan area - fan1" type="FanArea" gid="3" x="-1.87933" y="-118.439" width="115.333" height="177.5">
-   <properties>
-    <property name="string_fanID" value="fan1"/>
-   </properties>
-  </object>
   <object id="10" name="Player 1" type="Player" gid="4" x="28.8337" y="78.5" width="64" height="64">
    <properties>
     <property name="int_index" type="int" value="0"/>
@@ -137,7 +127,7 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="23" name="Player 2" type="Player" gid="4" x="280.834" y="19" width="64" height="64">
+  <object id="23" name="Player 2" type="Player" gid="4" x="336.834" y="313" width="64" height="64">
    <properties>
     <property name="int_index" type="int" value="1"/>
     <property name="int_nextFrameDelay" type="int" value="30"/>
@@ -145,47 +135,5 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="17" name="Fan area1" type="FanArea" gid="3" x="181.333" y="727.25" width="205.333" height="30.1667">
-   <properties>
-    <property name="string_fanID" value="fan1"/>
-   </properties>
-  </object>
-  <object id="24" name="Checkpoint 1" type="Checkpoint" gid="6" x="288.333" y="-139.667" width="131.667" height="119">
-   <properties>
-    <property name="float_spawnPositionX" type="float" value="0"/>
-    <property name="float_spawnPositionY" type="float" value="0"/>
-   </properties>
-  </object>
-  <object id="43" name="Checkpoint 1" type="Checkpoint" gid="6" x="288.333" y="-139.667" width="131.667" height="119">
-   <properties>
-    <property name="float_spawnPositionX" type="float" value="0"/>
-    <property name="float_spawnPositionY" type="float" value="0"/>
-   </properties>
-  </object>
-  <object id="33" name="test fan" type="Fan" x="898" y="-361" width="300" height="237.333">
-   <properties>
-    <property name="float_theForce" type="float" value="6"/>
-    <property name="int_theDirection" type="int" value="2"/>
-    <property name="string_theID" value="fan1"/>
-   </properties>
-  </object>
-  <object id="42" name="Door" type="Door" x="568" y="-363" width="300" height="237.333">
-   <properties>
-    <property name="isOpened" type="bool" value="false"/>
-    <property name="string_theID" value="door1"/>
-   </properties>
-  </object>
-  <object id="45" name="Button" type="Button" x="353.273" y="169.242" width="300" height="237.333">
-   <properties>
-    <property name="isTypeOne" type="bool" value="false"/>
-    <property name="string_effectName" value="action_doorOpenClose"/>
-    <property name="string_effectName1" value=""/>
-    <property name="string_effectName2" value=""/>
-    <property name="string_para" value="door1"/>
-    <property name="string_para1" value=""/>
-    <property name="string_para2" value=""/>
-   </properties>
-  </object>
-  <object id="36" gid="29" x="295" y="-530" width="32" height="32"/>
  </objectgroup>
 </map>
