@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 
 //physcis for a ball object
-public class ColliderRect : ColliderObject
+public class ColliderPlayer : ColliderObject
 {
-    GameObject thisObject;
+    Hitbox thisObject;
     public float width;
     public float height;
-    public ColliderRect(GameObject pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
+    public ColliderPlayer(Hitbox pRectObject, Vec2 pPosition, Vec2 pVelocity, float pWidth, float pHeight, bool pMoving, float pDensity = 1) : base(pPosition, pVelocity, pMoving, pDensity)
     {
         thisObject = pRectObject;
         width = pWidth / 2;
@@ -192,6 +192,8 @@ public class ColliderRect : ColliderObject
 
     protected override void ResolveCollision(CollisionInfo earilstCollision)
     {
+        Player hitboxPArent = (Player)thisObject.parent;
+
 
         //earilstCollision is not used. Maybe for now.
 
@@ -214,6 +216,9 @@ public class ColliderRect : ColliderObject
                         Console.WriteLine("resolving up");
                     }
 
+                    hitboxPArent.onCeiling = true;
+
+                    //         hitboxPArent.onGround = true;
                     position.y -= POI.y - position.y;
                     velocity.y = momentum.y;
                 }
@@ -225,6 +230,8 @@ public class ColliderRect : ColliderObject
                         Console.WriteLine("resolving down");
                     }
 
+                    //      hitboxPArent.onCeiling = true;
+                    hitboxPArent.onGround = true;
                     position.y += POI.y - position.y;
                     velocity.y = momentum.y;
                 }

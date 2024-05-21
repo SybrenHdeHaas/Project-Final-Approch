@@ -45,7 +45,7 @@
     <Compile Include="Button.cs" />
     <Compile Include="Checkpoint.cs" />
     <Compile Include="ColliderObject.cs" />
-    <Compile Include="ColliderRect.cs" />
+    <Compile Include="ColliderPlayer.cs" />
     <Compile Include="CollisionInfo.cs" />
     <Compile Include="Detection.cs" />
     <Compile Include="Door.cs" />

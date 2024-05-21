@@ -11,7 +11,7 @@ public class ColliderObject : GameObject
     public static bool wordy = false; //if true, enable debug messages
     public static bool wordy1 = false; //if true, enable debug messages 1
     public static bool wordy2 = false; //if true, enable debug messages 1
-    public static bool wordy4 = false; //if true, enable debug messages 1
+    public static bool wordy4 = true; //if true, enable debug messages 1
 
     public static bool wordy5 = false;
 

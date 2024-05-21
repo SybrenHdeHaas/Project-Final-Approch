@@ -25,7 +25,7 @@ public class Player : AnimationSpriteCustom
     Vec2 fanVelocity;
     Vec2 position;
 
-    ColliderRect playerCollision; //handles the player's collision
+    ColliderPlayer playerCollision; //handles the player's collision
 
     public float mass;
 
@@ -41,8 +41,8 @@ public class Player : AnimationSpriteCustom
     private float gravity = 1f;
     private Boolean movementLock = false; //if true, ignore inputs
 
-    private Boolean onGround = true;
-    private Boolean onCeiling = false;
+    public Boolean onGround = false;
+    public Boolean onCeiling = false;
 
     private float[] inShellStats; //posx, posy, width, height of player in shell
     private float[] outShellStats; //posx, posy, width, height of player not in shell
@@ -73,8 +73,10 @@ public class Player : AnimationSpriteCustom
         SetAnimationCycle(0, 1);
         mass = 4 * width * height;
 
-        detectionRange = new Detection(192, 192, mass);
-        AddChild(detectionRange);
+
+        //we no longer use dection range, but leaving this here just in case
+   //     detectionRange = new Detection(192, 192, mass);
+   //     AddChild(detectionRange);
 
         playerHitBox = new Hitbox(0, 0, mass); //the player's actual hit box.
         AddChild(playerHitBox);
@@ -85,7 +87,7 @@ public class Player : AnimationSpriteCustom
         outShellStats = outShellStatsArray;
 
         playerHitBox.ChangeOffSetAndSize(outShellStats);
-        playerCollision = new ColliderRect(playerHitBox, new Vec2(0, 0), new Vec2(0, 0), playerHitBox.width, playerHitBox.height, true);
+        playerCollision = new ColliderPlayer(playerHitBox, new Vec2(0, 0), new Vec2(0, 0), playerHitBox.width, playerHitBox.height, true);
     }
 
     public void UpdatePos()
@@ -127,7 +129,7 @@ public class Player : AnimationSpriteCustom
         frictionForce.y = -drag * playerVelocity.y;
 
         //don't apply gravity if player is on ground
-        if (!onGround) { gravity = 1f; }
+        if (!onGround || onCeiling) { gravity = 1f; }
         if (onGround) { gravity = 0f; }
 
         gravityForce.y = gravity;
@@ -317,6 +319,9 @@ public class Player : AnimationSpriteCustom
             ShellState(); //player shell control
         }
 
+        //We will let player collision decide if the player is on ground or on ceiliing or neither
+        onCeiling = false;
+        onGround = false;
 
         UpdateCollision(); //updates collision hitbox info
         playerCollision.Step(); //performs collision
