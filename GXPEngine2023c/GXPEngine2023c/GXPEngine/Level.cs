@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography;
 using System.Text;
 using GXPEngine;
@@ -24,38 +25,64 @@ public class Level : GameObject
     Dictionary<string, Fan> fanList = new Dictionary<string, Fan>();
     List<FanArea> fanAreaList = new List<FanArea>();
     List<Button> buttonList = new List<Button>();
-    public Level(string theMapfileName)
+
+    List<Checkpoint> checkpointList = new List<Checkpoint>();
+    List<Spike> spikeList = new List<Spike>();
+
+    List<Goal> goalList = new List<Goal>();
+    List<Breakable> breakableList = new List<Breakable>();
+
+
+    float cameraMaxButtom;
+    float cameraMaxRight;
+    public Level(string theMapfileName, bool isMenu)
     {
+        GameData.ResetValue();
+
+
+        switch (GameData.mapName)
+        {
+            case "Level1SS.tmx":
+                cameraMaxButtom = (-1 * 32 * 20) + game.height;
+                cameraMaxRight = (-1 * 32 * 43) + game.width;
+                break;
+            default:
+                cameraMaxButtom = -1 - (game.height * 2) - 100;
+                cameraMaxRight = -1 - (game.height * 2) - 100;
+                break;
+        }
+
+
         Map mapData = MapParser.ReadMap(theMapfileName);
         loader = new TiledLoader(theMapfileName);
 
-        //Manually generates the tile layers.
-        CreateTile(mapData, 0); //Create the walls
-         CreateTile(mapData, 1); //Create background
+        if (!isMenu)
+        {
+            //Manually generates the tile layers.
+            CreateTile(mapData, 0); //Create the walls
+            CreateTile(mapData, 1); //Create background
+        }
 
         //using autoInstance to Automatically generates the game objects
         loader.autoInstance = true;
         loader.rootObject = this;
         loader.LoadImageLayers();
         loader.LoadObjectGroups(0); //loading game objects
+        loader.LoadObjectGroups(1); //loading game objects
+
+
 
         //find the player objects (should only be 2)
-        foreach (Player thePlayer in FindObjectsOfType<Player>()) 
+        foreach (Player thePlayer in FindObjectsOfType<Player>())
         {
-            Console.WriteLine("player spawn position: " + thePlayer.x + "|" + thePlayer.y);
             thePlayer.UpdatePos();
             thePlayers.Add(thePlayer);
+            thePlayer.spawnPoint = new Vec2(thePlayer.x, thePlayer.y); //the default player spawn point
         }
 
         GameData.playerList = thePlayers;
 
-        //Extracting all Fan objects
-        foreach (Fan theFan in FindObjectsOfType<Fan>())
-        {
-            fanList.Add(theFan.id, theFan);
-        }
-
-        //Extracting all door objects
+        //extracting door objects
         foreach (Door theDoor in FindObjectsOfType<Door>())
         {
             doorList.Add(theDoor.theID, theDoor);
@@ -63,17 +90,53 @@ public class Level : GameObject
 
         GameData.doorList = doorList;
 
-        //Extracting all 
+        //extracting button objects
         foreach (Button theButton in FindObjectsOfType<Button>())
         {
             buttonList.Add(theButton);
         }
 
+        //extracting Fan objects
+        foreach (Fan theFan in FindObjectsOfType<Fan>())
+        {
+            fanList.Add(theFan.id, theFan);
+        }
+
+        GameData.fanList = fanList;
+
+        //extracting Fanarea objects
         foreach (FanArea theFanArea in FindObjectsOfType<FanArea>())
         {
-         //   theFanArea.visible = false;
+            //   theFanArea.visible = false;
             fanAreaList.Add(theFanArea);
         }
+
+        //extracting checkpint objects
+        foreach (Checkpoint theCheckpoint in FindObjectsOfType<Checkpoint>())
+        {
+            checkpointList.Add(theCheckpoint);
+        }
+
+        //extracting spike objects
+        foreach (Spike theSpike in FindObjectsOfType<Spike>())
+        {
+            spikeList.Add(theSpike);
+        }
+
+        //extracting goal objects
+        foreach (Goal theGoal in FindObjectsOfType<Goal>())
+        {
+            goalList.Add(theGoal);
+        }
+
+        //extracting goal objects
+        foreach (Breakable theBreakable in FindObjectsOfType<Breakable>())
+        {
+            theBreakable.UpdatePos();
+            breakableList.Add(theBreakable);
+        }
+
+        GameData.breakableList = breakableList;
 
         //Setting up the camera boundary (player at center for these values)
         boundaryValueX = game.width / 2;
@@ -82,14 +145,27 @@ public class Level : GameObject
 
     void Update()
     {
-        GameData.playerList = thePlayers;
-
         UseCamera();
 
-        foreach (Player player in thePlayers) { player.ResetFanVelocityList(); }
-            
+        foreach (Player player in thePlayers)
+        {
+            player.ResetFanVelocityList();
+        }
+
+        breakableList = GameData.breakableList;
+
         CheckFanAreas();
+        CheckCheckpoint();
         CheckButtons();
+        CheckSpike();
+        CheckGoal();
+        CheckBreakable();
+
+        if (Input.GetKey(Key.R))
+        {
+            MyGame myGame = (MyGame)game;
+            myGame.LoadLevel();
+        }
     }
 
 
@@ -99,19 +175,13 @@ public class Level : GameObject
         {
             foreach (Player player in thePlayers)
             {
-              
-                /* intersection btw player model (not red box) and fan area [working] --> SharedFunctions.CheckIntersectSprites(player, theFanArea) */
-
-                //check intersection btw player red box and fan area
                 if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theFanArea))
                 {
-                   
-
                     Fan theFan;
                     if (fanList.TryGetValue(theFanArea.TheFanID, out theFan))
                     {
                         player.AddFanVelocity(theFan.GetVelocity());
-                        Console.WriteLine(theFan.GetVelocity());
+                        //    Console.WriteLine(theFan.GetVelocity());
                     }
                 }
             }
@@ -124,11 +194,9 @@ public class Level : GameObject
         {
             foreach (Player player in thePlayers)
             {
-                /* intersection btw player model (not red box) and fan area [working] --> SharedFunctions.CheckIntersectSprites(player, theFanArea) */
-
-                //check intersection btw player red box and fan area
                 if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theButton))
                 {
+
                     if (player.playerIndex == 0 && theButton.hasPressed == false)
                     {
                         theButton.isPressedPlayer1 = true;
@@ -152,15 +220,122 @@ public class Level : GameObject
                         theButton.isPressedPlayer2 = false;
                     }
 
-                    if (theButton.isPressedPlayer1 == false && theButton.isPressedPlayer2 == false)
+                    if (theButton.isPressedPlayer1 == false && theButton.isPressedPlayer2 == false && !theButton.breakableIsPressing)
                     {
                         theButton.hasPressed = false;
+                    }
+                }
+            }
+
+            //BreakableIsPressing
+
+            foreach (Breakable theBreakable in breakableList)
+            {
+                if (SharedFunctions.CheckIntersectSpriteSprite(theBreakable, theButton))
+                {
+                    theButton.breakableIsPressing = true;
+                    theButton.hasPressed = true;
+                }
+
+                else
+                {
+                    theButton.breakableIsPressing = false;
+
+                }
+            }
+        }
+    }
+
+    void CheckCheckpoint()
+    {
+        foreach (Checkpoint theCheckpoint in checkpointList)
+        {
+            foreach (Player player in thePlayers)
+            {
+                if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theCheckpoint))
+                {
+                    player.spawnPoint = theCheckpoint.spawnPosition;
+                    Console.WriteLine("player spawn set to: " + player.spawnPoint.x + "|" + player.spawnPoint.y);
+                }
+            }
+        }
+    }
+
+    void CheckSpike()
+    {
+        foreach (Spike theSpike in spikeList)
+        {
+            foreach (Player player in thePlayers)
+            {
+                if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theSpike))
+                {
+                    SoundChannel sound = new Sound("player_die.mp3", false).Play();
+                    //Console.WriteLine("player touche spike move to: " + player.spawnPoint.x + "|" + player.spawnPoint.y);
+                    player.Position = player.spawnPoint;
+                    player.Velocity = new Vec2(0, 0);
+                }
+            }
+        }
+    }
+
+
+    void CheckGoal()
+    {
+        foreach (Goal theGoal in goalList)
+        {
+            foreach (Player player in thePlayers)
+            {
+                if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theGoal))
+                {
+                    if (player.GetPlyaerIndex() == 0)
+                    {
+                        Console.WriteLine("playe 1 entered");
+                        theGoal.player1Entered = true;
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("playe 2 entered");
+                        theGoal.player2Enterted = true;
+                    }
+
+                    if (theGoal.player1Entered && theGoal.player2Enterted)
+                    {
+                        theGoal.switchLevel();
+                    }
+                    return;
+                }
+
+                else
+                {
+                    if (player.GetPlyaerIndex() == 0)
+                    {
+                        theGoal.player1Entered = false;
+                    }
+
+                    else
+                    {
+                        theGoal.player2Enterted = false;
                     }
                 }
             }
         }
     }
 
+    void CheckBreakable()
+    {
+        foreach (Breakable theBreakable in breakableList)
+        {
+            foreach (Player player in thePlayers)
+            {
+                if (SharedFunctions.CheckIntersectSpriteDetectionRange(player, theBreakable))
+                {
+                    //  Console.WriteLine("Player velocity length: " + player.Velocity.Length());
+
+                }
+            }
+        }
+    }
 
     //Sets the game area player can look. AKA the game camera
     //Can set how far right and down player can see. (left stops at x < 0, top stops at y < 0)
@@ -172,12 +347,12 @@ public class Level : GameObject
         foreach (Player player in thePlayers)
         {
             //for now, camera only follow player1
-            if (player.playerIndex != 0)
+            if (player.GetPlyaerIndex() != 0)
             {
                 return;
             }
 
-            if (player.x + x > boundaryValueX && x > -1 * ((game.width * 6) - 800))
+            if (player.x + x > boundaryValueX && x > cameraMaxRight)
             {
                 x = boundaryValueX - player.x;
             }
@@ -195,7 +370,7 @@ public class Level : GameObject
             }
 
             //handling player moving down
-            if (player.y + y > boundaryValueY && y > -1 - (game.height * 2) - 100)
+            if (player.y + y > boundaryValueY && y > cameraMaxButtom)
             {
                 y = boundaryValueY - player.y;
             }
@@ -239,14 +414,15 @@ public class Level : GameObject
                      * Layer 0 represents wall tiles, layer 1 represents background tiles
                      */
 
-                // A wall tile. collision on
-                if (theLayer == 0)
+                    // A wall tile. collision on
+                    if (theLayer == 0)
                     {
                         theTile = new Tile(theTilesSet.Image.FileName, 1, 1, theTileNumber - theTilesSet.FirstGId,
                             theTilesSet.Columns, theTilesSet.Rows, -1, 1, 1, 10, false, true);
                         theTile.x = j * theTile.width;
                         theTile.y = (i) * theTile.height;
                         AddChild(theTile);
+
                         GameData.tileList.Add(theTile);
 
                     }
@@ -255,12 +431,11 @@ public class Level : GameObject
                     else if (theLayer == 1)
                     {
                         theTile = new Tile(theTilesSet.Image.FileName, 1, 1, theTileNumber - theTilesSet.FirstGId,
-                            theTilesSet.Columns, theTilesSet.Rows, -1, 1, 1, 10, false, false);
+                        theTilesSet.Columns, theTilesSet.Rows, -1, 1, 1, 10, false, false);
                         theTile.x = j * theTile.width;
                         theTile.y = i * theTile.height;
                         background.AddChild(theTile);
                     }
-                
                 }
             }
         }

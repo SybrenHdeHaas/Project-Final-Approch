@@ -18,8 +18,8 @@ public class EffectOpenCloseDoor : Effect
     //open or close the door
     public override void TryAction()
     {
-
-        /* //debug message to view the conent of doorlist
+        //debug message to view the conent of doorlist
+        /* 
         foreach (KeyValuePair<string, Door> theDoor in GameData.doorList)
         {
             Console.WriteLine("door idddd: " + theDoor.Value.theID);
@@ -28,6 +28,12 @@ public class EffectOpenCloseDoor : Effect
 
         theDoor.isOpened = !theDoor.isOpened;
         Console.WriteLine(theDoor.isOpened);
+    }
+
+    public override void TryActionOpposite()
+    {
+        theDoor.isOpened = !theDoor.isOpened;
+        Console.WriteLine("oppsite effect: " + theDoor.isOpened);
     }
 }
 

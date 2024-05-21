@@ -15,6 +15,8 @@ public class ColliderObject : GameObject
 
     public static bool wordy5 = false;
 
+    public static bool wordy6 = false;
+
     protected Vec2 position;
     protected Vec2 _oldPosition;
     protected Vec2 velocity;

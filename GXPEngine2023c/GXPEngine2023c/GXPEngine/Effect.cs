@@ -10,7 +10,6 @@ public class Effect
     public Effect()
     {
     }
-
     public virtual void TryAction()
     {
     }

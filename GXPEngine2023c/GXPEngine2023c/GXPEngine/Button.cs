@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GXPEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,10 +16,14 @@ public class Button : AnimationSpriteCustom
     public bool isPressedPlayer1;
     public bool isPressedPlayer2;
 
+    public bool breakableIsPressing;
+
     List<Effect> effects = new List<Effect>();
 
     TiledObject theObj;
     bool firstTime = true;
+
+    bool typeOneOppositeEffect;
 
     public Button(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
@@ -29,17 +34,27 @@ public class Button : AnimationSpriteCustom
 
     public Button(TiledObject obj = null) : base("player.png", 1, 1, obj)
     {
+        alpha = 0;
         isTypeOne = obj.GetBoolProperty("isTypeOne");
         hasPressed = false;
         theObj = obj;
     }
 
-    public void AddNewAction(String pEffectName, String pParameterStringOne="")
+    public void AddNewAction(String pEffectName, String pParameterStringOne = "")
     {
         switch (pEffectName)
         {
             case "action_doorOpenClose":
                 AddEffect(new EffectOpenCloseDoor(pParameterStringOne));
+                break;
+            case "action_fanTurnOnOff":
+                AddEffect(new EffectTurnOnOffFan(pParameterStringOne));
+                break;
+            case "action_level3IncreaseValue":
+                AddEffect(new EffectLevel3IncreaseValue(pParameterStringOne));
+                break;
+            case "action_level3IncreaseValue2":
+                AddEffect(new EffectLevel3IncreaseValue2(pParameterStringOne));
                 break;
         }
     }
@@ -47,6 +62,7 @@ public class Button : AnimationSpriteCustom
     //do all effects the button has
     public void Action()
     {
+
         foreach (Effect effect in effects)
         {
             effect.TryAction();
@@ -65,7 +81,6 @@ public class Button : AnimationSpriteCustom
     {
         effects.Add(theEffect);
     }
-
     void Update()
     {
         //We can't continue if the doors are not finished loading
@@ -88,20 +103,32 @@ public class Button : AnimationSpriteCustom
 
         if (isTypeOne)
         {
-            if (!isPressedPlayer1 && !isPressedPlayer2)
+            if (((isPressedPlayer1 || isPressedPlayer2) && hasPressed == false) || (breakableIsPressing && hasPressed == false))
             {
-              //  ActionOpposite();
+                hasPressed = true;
+                typeOneOppositeEffect = true;
+                //      Console.WriteLine("action");
+
+                SoundChannel buttonSound = new Sound("button_pressed.wav", false).Play();
+                Action();
+            }
+            //do opposite action if player no longer pressing the button
+            if (!isPressedPlayer1 && !isPressedPlayer2 && typeOneOppositeEffect && !breakableIsPressing)
+            {
+                typeOneOppositeEffect = false;
+                ActionOpposite();
+                SoundChannel buttonSound = new Sound("button_unpressed.wav", false).Play();
             }
         }
 
         else
         {
-            if ((isPressedPlayer1 || isPressedPlayer2) && hasPressed == false)
+            if (((isPressedPlayer1 || isPressedPlayer2) && hasPressed == false) || (breakableIsPressing && hasPressed == false))
             {
                 hasPressed = true;
+                SoundChannel buttonSound = new Sound("button_pressed.wav", false).Play();
                 Action();
             }
         }
     }
-
 }

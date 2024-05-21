@@ -6,27 +6,76 @@ using TiledMapParser;
 
 public class Breakable : AnimationSpriteCustom
 {
-    Vec2 thresholdVelocity; //if the player collides with this over this velocity amount, it's health will be damaged by 1
+    float thresholdVelocityLength; //the threshold length
     int theHealth;
+
+
+    public static Vec2 gravity = new Vec2(0, 1);
+
+    public Vec2 velocity;
+    public Vec2 position;
+    ColliderBreakable playerCollision; //handles the player's collision
+
+
+    public float Mass
+    {
+        get
+        {
+            return 4 * width / 2 * width / 2;
+        }
+    }
 
     public Breakable(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
-        thresholdVelocity.x = obj.GetFloatProperty("float_thresholdVelocityX");
-        thresholdVelocity.y = obj.GetFloatProperty("float_thresholdVelocityy");
+        thresholdVelocityLength = obj.GetFloatProperty("float_thresholdVelocityLength");
         theHealth = obj.GetIntProperty("int_theHealth");
+
+
+        playerCollision = new ColliderBreakable(this, new Vec2(0, 0), new Vec2(0, 0), width, height, true);
     }
 
-    public void tryDamage(Vec2 otherVelocity)
+    public void UpdatePos()
     {
-        if (otherVelocity.Length() > thresholdVelocity.Length())
+        position.x = x;
+        position.y = y;
+    }
+
+    public Boolean TryDamage(Vec2 otherVelocity)
+    {
+        //comparing player velocity length and the threshold length;
+        if (otherVelocity.Length() > thresholdVelocityLength)
         {
             theHealth--;
 
             if (theHealth < 0)
             {
-                //TODO: remove the wall
+                SoundChannel boxBreakSound = new Sound("box_break.wav", false).Play();
+                return true;
             }
         }
+
+        return false;
+    }
+
+
+    void UpdateCollision()
+    {
+        playerCollision.Velocity = velocity;
+        playerCollision.Position = position;
+
+    }
+
+    void Update()
+    {
+        velocity += gravity * 0.2f;
+        UpdateCollision();
+        playerCollision.Step();
+
+
+        velocity = playerCollision.Velocity;
+        position += velocity;
+
+        x = position.x;
+        y = position.y;
     }
 }
-

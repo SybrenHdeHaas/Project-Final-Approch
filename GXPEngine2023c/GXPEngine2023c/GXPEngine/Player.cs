@@ -47,6 +47,8 @@ public class Player : AnimationSpriteCustom
     private float[] inShellStats; //posx, posy, width, height of player in shell
     private float[] outShellStats; //posx, posy, width, height of player not in shell
 
+    public Vec2 spawnPoint; //the crood the player will move to if player dies
+
     public Boolean OnGround
     {
         get { return onGround; }
@@ -65,6 +67,19 @@ public class Player : AnimationSpriteCustom
         set { inshell = value; }
     }
 
+    public Vec2 Velocity
+    {
+        get { return velocity; }
+        set { velocity = value; }
+    }
+
+    public Vec2 Position
+    {
+        get { return position; }
+        set { position = value; }
+    }
+
+    public int GetPlyaerIndex() { return playerIndex; }
 
 
     public Player(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)

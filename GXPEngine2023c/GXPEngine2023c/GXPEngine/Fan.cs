@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GXPEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,21 +12,26 @@ public class Fan : AnimationSpriteCustom
     Vec2 pushVelocity; //any object impacted by fan would be applied with this velocity if the fan is on
     float theForce;
     int theDirection;
-    bool isOn = true;
+    public bool isOn;
 
-    //if there's image in Tiled for this object
+    bool isOnCurrent;
+
+    public SoundChannel fanSound;
+
+
     public Fan(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
         theForce = obj.GetFloatProperty("float_theForce", 1);
         theDirection = obj.GetIntProperty("int_theDirection", 1);
+        isOn = obj.GetBoolProperty("boolean_isOn");
     }
 
-    //if there's no image in Tiled for this object
-    public Fan(TiledObject obj = null) : base("player.png", 1, 1, obj)
+    public Fan(TiledObject obj = null) : base("Player.png", 1, 1, obj)
     {
         alpha = 0;
         theForce = obj.GetFloatProperty("float_theForce", 1);
         theDirection = obj.GetIntProperty("int_theDirection", 1);
+        isOn = obj.GetBoolProperty("boolean_isOn");
     }
 
     void CalculateVelocity()
@@ -48,15 +54,50 @@ public class Fan : AnimationSpriteCustom
         }
     }
 
+    void Update()
+    {
+        if (isOn)
+        {
+            SetAnimationCycle(1, 1);
+        }
+
+        else
+        {
+            SetAnimationCycle(0, 1);
+        }
+
+
+        if (isOnCurrent != isOn)
+        {
+            isOnCurrent = isOn;
+            if (isOn)
+            {
+                fanSound = new Sound("fan_loop.wav", true).Play();
+                fanSound.Volume = 3f;
+            }
+
+            else
+            {
+                if (fanSound != null)
+                {
+                    fanSound.Stop();
+                }
+            }
+        }
+
+    }
+
     public Vec2 GetVelocity()
     {
         if (isOn)
         {
+
             CalculateVelocity();
             return pushVelocity;
         }
 
-        else {
+        else
+        {
             return pushVelocityDefault;
         }
     }
