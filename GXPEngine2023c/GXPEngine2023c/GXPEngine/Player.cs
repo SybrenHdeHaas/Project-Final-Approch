@@ -107,9 +107,11 @@ public class Player : AnimationSpriteCustom
         detectionRange = new Detection(width, height, mass);
         AddChild(detectionRange);
 
-        float[] inShellStatsArray = {-64 / 2, (192 / 2) - 64, 64, 64};
+           float[] inShellStatsArray = {-64 / 2, (192 / 2) - 64, 64, 64};
+   //     float[] inShellStatsArray = {0, 0, 64, 64 };
         inShellStats = inShellStatsArray;
-        float[] outShellStatsArray = {-192 / 2, -192 / 2, 192, 192};
+               float[] outShellStatsArray = {-192 / 2, -192 / 2, 192, 192};
+     //   float[] outShellStatsArray = {0,0, 192, 192 };
         outShellStats = outShellStatsArray;
 
         playerHitBox.ChangeOffSetAndSize(outShellStats);
@@ -460,7 +462,7 @@ public class Player : AnimationSpriteCustom
     void UpdateCollision()
     {
         playerHitBox.playerCollision.Velocity = velocity;
-        playerHitBox.UpdateCollision(position);
+        playerHitBox.UpdateCollision(new Vec2(x, y));
     }
 
     void Update()

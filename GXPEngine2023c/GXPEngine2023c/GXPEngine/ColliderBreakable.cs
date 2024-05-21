@@ -41,7 +41,7 @@ public class ColliderBreakable : ColliderObject
                     {
                         timeOfImpact = Math.Abs((_oldPosition.x + width) - theTile.x) / Math.Abs(position.x - _oldPosition.x);
 
-                        if (wordy2)
+                        if (wordy4)
                         {
                             Console.WriteLine("right:" + timeOfImpact);
                         }
@@ -55,7 +55,7 @@ public class ColliderBreakable : ColliderObject
                     {
                         timeOfImpact = Math.Abs(_oldPosition.x - (theTile.x + theTile.width)) / Math.Abs(position.x - _oldPosition.x);
 
-                        if (wordy2)
+                        if (wordy4)
                         {
                             Console.WriteLine("left: " + timeOfImpact);
                         }
@@ -73,7 +73,7 @@ public class ColliderBreakable : ColliderObject
                     if (position.y < theTile.y)
                     {
                         timeOfImpact = Math.Abs((_oldPosition.y + height) - theTile.y) / Math.Abs(_oldPosition.y - position.y);
-                        if (wordy2)
+                        if (wordy4)
                         {
                             Console.WriteLine("BreakAble down:  " + timeOfImpact);
                         }
@@ -90,7 +90,7 @@ public class ColliderBreakable : ColliderObject
 
                         if (timeOfImpact <= 1 && timeOfImpact >= 0)
                         {
-                            if (wordy2)
+                            if (wordy4)
                             {
                                 Console.WriteLine("up: " + timeOfImpact);
                             }

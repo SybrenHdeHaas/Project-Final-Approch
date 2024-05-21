@@ -9,12 +9,10 @@ public class ColliderRect : ColliderObject
     public float Width
     {
         get { return width; }
-        set { width = value; }
     }
     public float Height
     {
         get { return height; }
-        set { height = value; }
     }
 
     private float width;
@@ -42,33 +40,12 @@ public class ColliderRect : ColliderObject
         */
     }
 
-
-    /*
-    public void AddOffset(Vec2 pPosition) 
+    public void ChangeWidthAndHeight(float pWidth, float pHeight)
     {
-        Position = pPosition + offset;
+        width = pWidth / 2;
+        height = pHeight / 2;
+        mass = 4 * width / 2 * height / 2 * _density;
     }
-
-    public void inShellChanges()
-    {
-        Console.WriteLine("inshell colliderRect");
-        offset.x = shellsStats[0];
-        offset.y = shellsStats[1];
-        width = (int)shellsStats[2];
-        height = (int)shellsStats[3];
-
-    }
-
-    public void outShellChanges()
-    {
-        offset.x = startStats[0];
-        offset.y = startStats[1];
-        width = (int)startStats[2];
-        height = (int)startStats[3];
-    }
-    */
-
-
 
     protected override CollisionInfo FindEarliestCollision() //Overriden from third step in colliderObject?
     {
@@ -77,7 +54,6 @@ public class ColliderRect : ColliderObject
             
             return FindLowestTOICollision();
         }
-        Console.WriteLine(width);
         MyGame myGame = (MyGame)game;
         CheckCollisionTiles(myGame);
         CheckCollisionHitbox(myGame);
@@ -178,7 +154,7 @@ public class ColliderRect : ColliderObject
         foreach (var player in GameData.playerList)
         {
             Hitbox theHitBox = player.playerHitBox;
-
+         
             // Skip if thisObject is a hitbox and the same as the player's hitbox
             if (thisObject is Hitbox hitbox && thisObject == theHitBox)
             {

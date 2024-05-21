@@ -73,6 +73,7 @@ public class Level : GameObject
         //find the player objects (should only be 2)
         foreach (Player thePlayer in FindObjectsOfType<Player>()) 
         {
+            Console.WriteLine(thePlayer.x + " | " +  thePlayer.y);
             thePlayer.UpdatePos();
             thePlayers.Add(thePlayer);
             thePlayer.spawnPoint = new Vec2(thePlayer.x, thePlayer.y); //the default player spawn point
@@ -139,6 +140,8 @@ public class Level : GameObject
         //Setting up the camera boundary (player at center for these values)
         boundaryValueX = game.width / 2;
         boundaryValueY = game.height / 2;
+
+        GameData.PrintCrood();
     }
 
     void Update()

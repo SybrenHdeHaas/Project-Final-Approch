@@ -32,4 +32,12 @@ public static class GameData
         level3Value2 = 0;
     }
 
+    public static void PrintCrood()
+    {
+        foreach (Tile theTile in tileList)
+        {
+            Console.WriteLine(theTile.x + " | " + theTile.y);
+        }
+    }
+
 }

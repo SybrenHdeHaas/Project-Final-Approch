@@ -25,9 +25,11 @@ public class Hitbox : Sprite
 
     public void UpdateCollision(Vec2 pPosition)
     {
-        playerCollision.Width = width;
-        playerCollision.Height = height;
-        playerCollision.Position = pPosition + new Vec2(x, y);
+        playerCollision.ChangeWidthAndHeight(width, height);
+        Player playerr = (Player)parent;
+        //       playerCollision.Position = pPosition + new Vec2(playerr.width, playerr.height / 2) + new Vec2(x, y
+        //Player theParent
+        playerCollision.Position = pPosition + new Vec2(playerr.width / 2, playerr.height / 2) + new Vec2(x, y);
     }
 
     public float GetX()
