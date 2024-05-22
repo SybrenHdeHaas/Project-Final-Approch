@@ -206,7 +206,7 @@
     <property name="string_theID" value="fan1"/>
    </properties>
   </object>
-  <object id="36" name="Player 1" type="Player" gid="98" x="998.667" y="210.001" width="64" height="64">
+  <object id="36" name="Player 1" type="Player" gid="98" x="63.0003" y="227.001" width="64" height="64">
    <properties>
     <property name="float_hitBoxHeight" type="float" value="50"/>
     <property name="float_hitBoxOffsetX" type="float" value="-20"/>
@@ -222,7 +222,7 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="38" name="Player 2" type="Player" gid="98" x="1063.83" y="226.636" width="64" height="64">
+  <object id="38" name="Player 2" type="Player" gid="98" x="134.163" y="232.969" width="64" height="64">
    <properties>
     <property name="float_hitBoxHeight" type="float" value="50"/>
     <property name="float_hitBoxOffsetX" type="float" value="-20"/>
