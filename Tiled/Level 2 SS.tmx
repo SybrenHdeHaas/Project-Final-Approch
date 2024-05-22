@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="32">
+ <editorsettings>
+  <export target="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneLevel2SS.tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="placeholder_tile.tsx"/>
+ <tileset firstgid="29" name="TileSheet_Final" tilewidth="32" tileheight="32" tilecount="96" columns="12">
+  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/TileSheet_Final.png" width="384" height="256"/>
+ </tileset>
+ <tileset firstgid="125" name="Player" tilewidth="64" tileheight="64" tilecount="2" columns="2">
+  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Player.png" width="128" height="64"/>
+ </tileset>
+ <tileset firstgid="127" name="Turtles_NoTrim" tilewidth="192" tileheight="192" tilecount="70" columns="10">
+  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Turtles_NoTrim.png" width="1920" height="1344"/>
+ </tileset>
+ <tileset firstgid="197" name="fanVerRight" tilewidth="32" tileheight="64" tilecount="2" columns="2">
+  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/fanVerRight.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="199" name="400x400Orange" tilewidth="400" tileheight="400" tilecount="1" columns="1">
+  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/400x400Orange.png" width="400" height="400"/>
+ </tileset>
+ <tileset firstgid="200" name="fanHoz" tilewidth="64" tileheight="32" tilecount="2" columns="2">
+  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/fanHoz.png" width="128" height="32"/>
+ </tileset>
+ <tileset firstgid="202" name="doorHoz" tilewidth="65" tileheight="33" tilecount="1" columns="1">
+  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/doorHoz.png" width="65" height="33"/>
+ </tileset>
+ <tileset firstgid="203" name="Door" tilewidth="32" tileheight="64" tilecount="1" columns="1">
+  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/Door.png" width="32" height="64"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="35" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+39,66,66,67,68,69,70,66,67,68,69,83,66,67,68,69,70,66,67,68,69,83,66,66,67,68,69,70,38,0,0,0,0,0,0,
+37,0,0,0,0,0,0,0,0,0,0,83,0,0,0,0,0,0,0,0,0,83,0,0,0,0,0,0,36,0,0,0,0,0,0,
+37,0,0,0,0,0,0,0,0,0,0,83,0,0,0,0,0,0,0,0,0,83,0,0,0,0,0,0,48,0,0,0,0,0,0,
+37,0,0,0,0,0,0,0,0,0,0,83,0,0,0,0,0,0,0,0,0,83,0,0,0,0,0,0,60,0,0,0,0,0,0,
+37,0,0,0,0,0,0,0,0,0,0,83,0,0,0,0,0,0,0,0,0,83,0,0,0,0,0,0,72,0,0,0,0,0,0,
+37,0,0,0,0,0,0,0,0,0,0,83,0,0,0,0,0,0,0,0,0,83,0,0,0,0,0,0,36,0,0,0,0,0,0,
+37,0,0,0,0,0,0,0,0,0,0,70,57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,48,0,0,0,0,0,0,
+37,34,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,60,0,0,0,0,0,0,
+37,45,42,43,47,0,0,0,54,55,56,57,46,54,54,55,56,42,54,55,56,59,0,0,0,0,0,0,72,0,0,0,0,0,0,
+0,0,0,112,0,0,0,0,0,0,0,0,83,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,84,0,0,0,0,0,0,
+0,0,0,112,0,0,0,0,0,0,0,0,83,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,65,66,67,38,0,0,0,
+0,0,0,41,47,0,0,0,46,0,0,0,83,0,0,41,43,47,0,0,0,0,0,0,0,0,0,0,0,0,0,60,0,0,0,
+0,0,0,0,49,0,0,0,69,0,0,0,83,0,0,48,83,49,0,0,0,0,0,0,0,0,0,0,0,0,0,72,0,0,0,
+0,0,0,0,61,0,0,0,100,0,0,0,83,0,0,60,83,61,0,0,0,0,0,0,0,0,0,0,0,0,0,84,0,0,0,
+0,0,0,0,73,0,0,0,100,0,0,0,68,0,0,48,83,1610612775,42,43,44,45,46,42,43,44,45,46,42,43,44,2684354598,0,0,0,
+0,0,0,0,85,0,0,0,112,0,0,0,0,0,0,60,70,70,67,68,69,67,68,67,68,69,67,68,67,68,69,70,0,0,0,
+0,0,0,0,49,34,33,31,1610612783,46,44,45,47,0,0,72,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,97,44,54,55,59,0,0,0,71,56,57,65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="2" name="Tile Layer 2" width="35" height="20">
+  <data encoding="csv">
+83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,83,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,83,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,83,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,83,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,83,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,83,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,83,
+0,0,32,33,35,0,0,0,29,30,31,32,33,95,31,107,108,32,33,107,108,0,0,0,0,0,0,0,0,83,83,83,83,83,83,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,83,
+83,83,83,83,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,83,
+83,83,83,83,0,0,0,0,32,0,0,0,0,0,0,29,95,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,
+83,83,83,83,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,77,78,79,0,83,83,83,
+83,83,83,83,0,0,0,0,33,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,89,90,91,0,83,83,83,
+83,83,83,83,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,31,32,33,34,30,31,32,33,35,101,102,103,0,83,83,83,
+83,83,83,83,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,
+83,83,83,83,0,0,0,0,30,0,32,33,34,0,0,0,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,
+83,83,83,83,0,0,0,0,0,0,0,0,0,0,0,0,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,
+83,83,83,83,0,0,0,0,0,83,83,83,0,0,0,0,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,83,
+67,68,68,69,67,67,67,68,68,68,68,69,68,68,68,69,68,68,68,68,68,69,68,69,68,69,69,68,70,70,67,67,68,68,68
+</data>
+ </layer>
+ <objectgroup id="3" name="Object Layer 1">
+  <object id="2" name="Button1" type="Button" x="416" y="256" width="32" height="32">
+   <properties>
+    <property name="isTypeOne" type="bool" value="false"/>
+    <property name="string_effectName" value="action_doorOpenClose"/>
+    <property name="string_effectName1" value=""/>
+    <property name="string_effectName2" value=""/>
+    <property name="string_para" value="door1"/>
+    <property name="string_para1" value=""/>
+    <property name="string_para2" value=""/>
+   </properties>
+  </object>
+  <object id="3" name="Button2" type="Button" x="512" y="352" width="32" height="32">
+   <properties>
+    <property name="isTypeOne" type="bool" value="false"/>
+    <property name="string_effectName" value="action_doorOpenClose"/>
+    <property name="string_effectName1" value="action_doorOpenClose"/>
+    <property name="string_effectName2" value=""/>
+    <property name="string_para" value="door3"/>
+    <property name="string_para1" value="door4"/>
+    <property name="string_para2" value=""/>
+   </properties>
+  </object>
+  <object id="7" name="Big Button2" type="Button" x="480" y="256" width="64" height="32">
+   <properties>
+    <property name="isTypeOne" type="bool" value="true"/>
+    <property name="string_effectName" value="action_fanTurnOnOff"/>
+    <property name="string_effectName1" value="action_fanTurnOnOff"/>
+    <property name="string_effectName2" value=""/>
+    <property name="string_para" value="fan1"/>
+    <property name="string_para1" value="fan2"/>
+    <property name="string_para2" value=""/>
+   </properties>
+  </object>
+  <object id="8" name="Big Button3" type="Button" x="608" y="256" width="64" height="32">
+   <properties>
+    <property name="isTypeOne" type="bool" value="true"/>
+    <property name="string_effectName" value="action_fanTurnOnOff"/>
+    <property name="string_effectName1" value="action_fanTurnOnOff"/>
+    <property name="string_effectName2" value="action_doorOpenClose"/>
+    <property name="string_para" value="fan3"/>
+    <property name="string_para1" value="fan4"/>
+    <property name="string_para2" value="door2"/>
+   </properties>
+  </object>
+  <object id="15" name="End" type="Goal" x="896" y="384" width="96" height="96">
+   <properties>
+    <property name="bool_mapIsMenu" type="bool" value="false"/>
+    <property name="string_theMapID" value="redoneLevel3SS.tmx"/>
+   </properties>
+  </object>
+  <object id="18" name="Player 2" type="Player" gid="127" x="68.6635" y="268.667" width="64" height="64">
+   <properties>
+    <property name="Height" type="int" value="64"/>
+    <property name="Width" type="int" value="64"/>
+    <property name="int_index" type="int" value="1"/>
+    <property name="int_nextFrameDelay" type="int" value="30"/>
+    <property name="int_numberOfFrame" type="int" value="-1"/>
+    <property name="int_singleFrameID" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="19" name="Player 1" type="Player" gid="127" x="137.337" y="267.334" width="64" height="64">
+   <properties>
+    <property name="Height" type="int" value="64"/>
+    <property name="Width" type="int" value="64"/>
+    <property name="int_index" type="int" value="0"/>
+    <property name="int_nextFrameDelay" type="int" value="30"/>
+    <property name="int_numberOfFrame" type="int" value="-1"/>
+    <property name="int_singleFrameID" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="20" name="Fan1" type="Fan" gid="197" x="130" y="384.667" width="32" height="64">
+   <properties>
+    <property name="boolean_isOn" type="bool" value="false"/>
+    <property name="float_theForce" type="float" value="4.5"/>
+    <property name="int_theDirection" type="int" value="2"/>
+    <property name="string_theID" value="fan1"/>
+   </properties>
+  </object>
+  <object id="21" name="Fan Area - fan3" type="FanArea" gid="199" x="173.667" y="561.666" width="69.3333" height="211.667">
+   <properties>
+    <property name="string_fanID" value="fan3"/>
+   </properties>
+  </object>
+  <object id="22" name="Fan2" type="Fan" gid="197" x="256.333" y="537.75" width="32" height="64">
+   <properties>
+    <property name="boolean_isOn" type="bool" value="false"/>
+    <property name="float_theForce" type="float" value="4.5"/>
+    <property name="int_theDirection" type="int" value="2"/>
+    <property name="string_theID" value="fan2"/>
+   </properties>
+  </object>
+  <object id="23" name="Fan3" type="Fan" gid="200" x="176.417" y="574.833" width="64" height="32">
+   <properties>
+    <property name="boolean_isOn" type="bool" value="false"/>
+    <property name="float_theForce" type="float" value="4.5"/>
+    <property name="int_theDirection" type="int" value="4"/>
+    <property name="string_theID" value="fan3"/>
+   </properties>
+  </object>
+  <object id="24" name="Fan4" type="Fan" gid="200" x="416" y="576.667" width="64" height="32">
+   <properties>
+    <property name="boolean_isOn" type="bool" value="false"/>
+    <property name="float_theForce" type="float" value="4.5"/>
+    <property name="int_theDirection" type="int" value="4"/>
+    <property name="string_theID" value="fan4"/>
+   </properties>
+  </object>
+  <object id="25" name="Door1" type="Door" gid="202" x="158.5" y="319.25" width="96.75" height="33">
+   <properties>
+    <property name="isOpened" type="bool" value="false"/>
+    <property name="string_theID" value="door1"/>
+   </properties>
+  </object>
+  <object id="26" name="Fan Area - fan1" type="FanArea" gid="199" x="171.833" y="369.833" width="207.333" height="44.834">
+   <properties>
+    <property name="string_fanID" value="fan1"/>
+   </properties>
+  </object>
+  <object id="27" name="Fan Area - fan2" type="FanArea" gid="199" x="291.833" y="529.583" width="126.166" height="44.834">
+   <properties>
+    <property name="string_fanID" value="fan2"/>
+   </properties>
+  </object>
+  <object id="28" name="Fan Area - fan4" type="FanArea" gid="199" x="421.833" y="539" width="54" height="207.334">
+   <properties>
+    <property name="string_fanID" value="fan4"/>
+   </properties>
+  </object>
+  <object id="29" name="Door2" type="Door" gid="202" x="416.125" y="417" width="64.75" height="33">
+   <properties>
+    <property name="isOpened" type="bool" value="false"/>
+    <property name="string_theID" value="door2"/>
+   </properties>
+  </object>
+  <object id="30" name="Door3" type="Door" gid="203" x="544" y="384.333" width="32" height="64">
+   <properties>
+    <property name="isOpened" type="bool" value="false"/>
+    <property name="string_theID" value="door3"/>
+   </properties>
+  </object>
+  <object id="31" name="Door4" type="Door" gid="203" x="671.5" y="288" width="32" height="64">
+   <properties>
+    <property name="isOpened" type="bool" value="false"/>
+    <property name="string_theID" value="door4"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

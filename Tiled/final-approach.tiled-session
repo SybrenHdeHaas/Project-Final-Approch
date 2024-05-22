@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map1.tmx",
+    "activeFile": "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -13,13 +13,126 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx": {
+            "scale": 0.4012760416666667,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 958.1932636770719,
+                "y": 599.3380491920306
+            }
+        },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx#BreakableWood": {
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx#Door": {
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx#doorHoz": {
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx#fanHoz": {
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx#fanVerRight": {
+            "scaleInDock": 1
+        },
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx#rr": {
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.6879017857142856,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 560.3997663703032,
+                "y": 544.4091115581804
+            }
+        },
+        "Level 2 SS.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx#Door": {
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx#Player": {
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx#doorHoz": {
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx#fanHoz": {
+            "scaleInDock": 1
+        },
+        "Level 2 SS.tmx#fanVerRight": {
+            "scaleInDock": 1
+        },
+        "Level1SS.tmx": {
+            "scale": 0.5599200581395348,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 670.6314491530925,
+                "y": 302.72178596923874
+            }
+        },
+        "Level1SS.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "Level1SS.tmx#BreakableWood": {
+            "scaleInDock": 1
+        },
+        "Level1SS.tmx#Door": {
+            "scaleInDock": 1
+        },
+        "Level1SS.tmx#Player": {
+            "scaleInDock": 1
+        },
+        "Level1SS.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "Level1SS.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1
+        },
         "Levels.tmx": {
             "scale": 0.33,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1486.3636363636363,
+                "x": 1480.3030303030303,
                 "y": 766.6666666666667
             }
+        },
+        "Levels.tmx#Turtles_NoTrim": {
+            "scaleInDock": 1
+        },
+        "MainMenu.tmx": {
+            "scale": 0.9630624999999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 400.2855474073594,
+                "y": 300.6035433837368
+            }
+        },
+        "MainMenu.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "TileSheet_Final.tsx": {
+            "scaleInDock": 1
         },
         "level_6.tmx": {
             "scale": 0.33,
@@ -34,10 +147,10 @@
                 2
             ],
             "scale": 1,
-            "selectedLayer": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 468.5,
-                "y": 430.5
+                "x": 761.5,
+                "y": 347.5
             }
         },
         "map1.tmx#Button": {
@@ -50,12 +163,19 @@
             "dynamicWrapping": false,
             "scaleInDock": 1
         },
+        "map1.tmx#SS_Tilset": {
+            "scaleInDock": 1
+        },
         "map1.tmx#Spike": {
             "dynamicWrapping": false
         },
         "map1.tmx#Tilesheet": {
             "dynamicWrapping": false,
             "scaleInDock": 1
+        },
+        "map1.tmx#Turtles_NoTrim": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.33
         },
         "map1.tmx#button": {
             "scaleInDock": 1
@@ -83,7 +203,8 @@
             "dynamicWrapping": true
         },
         "placeholder_tile.tsx": {
-            "dynamicWrapping": true
+            "dynamicWrapping": true,
+            "scaleInDock": 1
         },
         "placeholdertile1.tsx": {
             "scaleInDock": 1,
@@ -91,26 +212,31 @@
         }
     },
     "last.exportedFilePath": "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug",
+    "last.externalTilesetPath": "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/Tiled",
     "last.imagePath": "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug",
-    "map.height": 40,
+    "map.height": 30,
     "map.lastUsedExportFilter": "All Files (*)",
     "map.lastUsedFormat": "tmx",
-    "map.tileHeight": 64,
-    "map.tileWidth": 64,
+    "map.tileHeight": 20,
+    "map.tileWidth": 20,
     "map.width": 40,
     "openFiles": [
-        "map1.tmx"
+        "map1.tmx",
+        "Level1SS.tmx",
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx"
     ],
     "project": "final-approach.tiled-project",
-    "property.type": "string",
+    "property.type": "float",
     "recentFiles": [
         "map1.tmx",
+        "Level1SS.tmx",
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx",
         "placeholdertile1.tsx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 32,
-        "width": 32
+        "height": 64,
+        "width": 64
     }
 }

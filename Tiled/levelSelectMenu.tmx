@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="20" tileheight="20" infinite="0" nextlayerid="4" nextobjectid="7">
+ <editorsettings>
+  <export target="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/levelSelectMenu.tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" name="400x400Orange" tilewidth="400" tileheight="400" tilecount="1" columns="1">
+  <image source="../GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/400x400Orange.png" width="400" height="400"/>
+ </tileset>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="5" type="ButtonMenu" gid="1" x="178.834" y="298.166" width="69" height="63">
+   <properties>
+    <property name="bool_paraBool2" type="bool" value="false"/>
+    <property name="string_actionName" value="loadLevel"/>
+    <property name="string_stringPara1" value="Level1SS.tmx"/>
+   </properties>
+  </object>
+  <object id="6" type="ButtonMenu" gid="1" x="6.83333" y="54.8333" width="70.3333" height="53">
+   <properties>
+    <property name="bool_paraBool2" type="bool" value="true"/>
+    <property name="string_actionName" value="loadLevel"/>
+    <property name="string_stringPara1" value="MainMenu.tmx"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="3" name="Object Layer 2">
+  <object id="1" type="ButtonMenu" x="116.5" y="19" width="575" height="90">
+   <properties>
+    <property name="string_actionName" value="loadLevel"/>
+    <property name="string_stringPara1" value="map1.tmx"/>
+   </properties>
+   <text fontfamily="Segoe UI" pixelsize="45" wrap="1" color="#00ff00" halign="center">Select Level</text>
+  </object>
+  <object id="2" x="165.833" y="231" width="95" height="90">
+   <text fontfamily="Segoe UI" pixelsize="45" wrap="1" color="#00ff00" halign="center">1</text>
+  </object>
+  <object id="3" type="ButtonMenu" x="-0.166667" y="12.6667" width="84" height="39">
+   <properties>
+    <property name="string_actionName" value="loadLevel"/>
+    <property name="string_stringPara1" value="map1.tmx"/>
+   </properties>
+   <text fontfamily="Segoe UI" wrap="1" color="#00ff00" halign="center">Go Back</text>
+  </object>
+ </objectgroup>
+</map>

@@ -7,11 +7,11 @@ using System.Text;
 //physcis for possibly all gameobjects
 public class ColliderObject : GameObject
 {
-    public static float bounciness = 0.05f;
+    public static float bounciness = 0.001f;
     public static bool wordy = false; //if true, enable debug messages
     public static bool wordy1 = false; //if true, enable debug messages 1
     public static bool wordy2 = false; //if true, enable debug messages 1
-    public static bool wordy4 = true; //if true, enable debug messages 1
+    public static bool wordy4 = false; //if true, enable debug messages 1
 
     public static bool wordy5 = false;
 

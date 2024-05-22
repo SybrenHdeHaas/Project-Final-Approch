@@ -6,20 +6,25 @@ using System.CodeDom;
 public class Hitbox : Sprite
 {
     public float mass;
+
+    int OGWidth;
+    int OGHeight;
     public Hitbox(float offSetX, float offSetY, float mass) : base("Hitbox.png")
     {
         x = offSetX;
         y = offSetY;
         this.mass = mass;
         alpha = 0.5f;
+        OGWidth = width;
+        OGHeight = height;
     }
 
     public void ChangeOffSetAndSize(float[] theStats)
     {
         x = theStats[0];
         y = theStats[1];
-        width = (int)theStats[2];
-        height = (int)theStats[3];
+        width =  (int)theStats[2];
+        height =   (int)theStats[3];
     }
 
     public float GetX()

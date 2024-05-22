@@ -49,6 +49,9 @@ public class Player : AnimationSpriteCustom
 
     public Vec2 spawnPoint; //the crood the player will move to if player dies
 
+    private Boolean animationTypeActive = false;
+    int baseFrame;
+
     public Boolean OnGround
     {
         get { return onGround; }
@@ -89,26 +92,67 @@ public class Player : AnimationSpriteCustom
         mass = 4 * width * height;
 
 
+        float hitboxWorkingWidth = obj.GetFloatProperty("float_hitBoxWidth", width);
+        float hitboxWorkingHeight = obj.GetFloatProperty("float_hitBoxHeight", height);
+        float hitBoxOffsetX = obj.GetFloatProperty("float_hitBoxOffsetX", 0);
+        float hitBoxOffsetY = obj.GetFloatProperty("float_hitBoxOffsetY", 0);
+
+
+        float hitboxWorkingWidthShell = obj.GetFloatProperty("float_hitBoxShellWidth", 32);
+        float hitboxWorkingHeightShell = obj.GetFloatProperty("float_hitBoxShellHeight", 32);
+        float hitBoxShellOffsetX = obj.GetFloatProperty("float_hitBoxShellOffsetX", 0);
+        float hiYtBoxShellOffset = obj.GetFloatProperty("float_hitBoxShellOffsetY", 0);
+
+        if (hitboxWorkingHeight <= 0) 
+        {
+            hitboxWorkingHeight = height;
+        }
+        else
+        {
+            hitboxWorkingHeight *= 1;
+        }
+
+        if (hitboxWorkingWidth <= 0)
+        {
+            hitboxWorkingWidth = width;
+        }
+        else
+        {
+            hitboxWorkingWidth *= 1;
+        }
+
+
+        if (hitboxWorkingWidthShell < 0)
+        {
+            hitboxWorkingWidthShell = 32;
+        }
+
+        if (hitboxWorkingHeightShell < 0)
+        {
+            hitboxWorkingHeightShell = 32;
+        }
+
+        Console.WriteLine("float_hitBoxWidth: " + hitboxWorkingWidth);
+        Console.WriteLine("float_hitBoxHeight: " + hitboxWorkingHeight);
+
+
         //we no longer use dection range, but leaving this here just in case
-   //     detectionRange = new Detection(192, 192, mass);
-   //     AddChild(detectionRange);
+        //     detectionRange = new Detection(192, 192, mass);
+        //     AddChild(detectionRange);
 
         playerHitBox = new Hitbox(0, 0, mass); //the player's actual hit box.
         AddChild(playerHitBox);
 
-        float[] inShellStatsArray = { -64 / 2, (192 / 2) - 64, 64, 64 };
+        //placeholder offset: -32 / 2, (192 / 2) - 32
+        //placeholder offset shell: -192 / 2, -192 / 2
+
+        float[] inShellStatsArray = { hitBoxShellOffsetX, hiYtBoxShellOffset, hitboxWorkingWidthShell, hitboxWorkingHeightShell};   //hitbox posx, posy, width, height of player in shell
         inShellStats = inShellStatsArray;
-        float[] outShellStatsArray = { -192 / 2, -192 / 2, 192, 192 };
+        float[] outShellStatsArray = { hitBoxOffsetX, hitBoxOffsetY, hitboxWorkingWidth, hitboxWorkingHeight}; //hitbox posx, posy, width, height of player not in shell
         outShellStats = outShellStatsArray;
 
         playerHitBox.ChangeOffSetAndSize(outShellStats);
         playerCollision = new ColliderPlayer(playerHitBox, new Vec2(0, 0), new Vec2(0, 0), playerHitBox.width, playerHitBox.height, true);
-    }
-
-    public void UpdatePos()
-    {
-        position.x = x;
-        position.y = y;
     }
 
     public void ResetFanVelocityList()
@@ -297,14 +341,7 @@ public class Player : AnimationSpriteCustom
         }
     }
 
-    void UpdateCollision()
-    {
-        playerCollision.width = playerHitBox.width;
-        playerCollision.height = playerHitBox.height;
-        playerCollision.Position = position + new Vec2(playerHitBox.x, playerHitBox.y);
 
-        playerCollision.Velocity = velocity;
-    }
 
     private void VelocityFix()
     {
@@ -319,13 +356,111 @@ public class Player : AnimationSpriteCustom
         }
     }
 
+
+    //performing player animation
+    void AnimationController()
+    {
+        if (playerIndex == 0)
+        {
+            if (playerVelocity.x > 0)
+            {
+
+                if (!animationTypeActive)
+                {
+                    Console.WriteLine("activate animation left");
+                    SetAnimationCycle(60, 8);
+                    animationTypeActive = true;
+                    _mirrorX = false;
+                }
+            }
+
+            else if (playerVelocity.x < 0)
+            {
+                if (!animationTypeActive)
+                {
+                    Console.WriteLine("activate animation right");
+                    SetAnimationCycle(60, 8);
+                    animationTypeActive = true;
+                    _mirrorX = true;
+                }
+            }
+
+            if ((base.currentFrame - base._startFrame) == base.frameCount - 1)
+            {
+                if (!inshell) { baseFrame = 40; }
+                if (inshell) { baseFrame = 59; }
+                SetAnimationCycle(baseFrame, 1);
+                animationTypeActive = false;
+            }
+        }
+
+        if (playerIndex == 1)
+        {
+            if (playerVelocity.x > 0)
+            {
+                if (!animationTypeActive)
+                {
+                    Console.WriteLine("activate animation left");
+                    SetAnimationCycle(30, 10);
+                    animationTypeActive = true;
+                    _mirrorX = false;
+                }
+            }
+
+            else if (playerVelocity.x < 0)
+            {
+                if (!animationTypeActive)
+                {
+                    Console.WriteLine("activate animation right");
+                    SetAnimationCycle(30, 10);
+                    animationTypeActive = true;
+                    _mirrorX = true;
+                }
+            }
+
+            if ((base.currentFrame - base._startFrame) == base.frameCount - 1)
+            {
+                if (!inshell) { baseFrame = 0; }
+                if (inshell) { baseFrame = 25; }
+                SetAnimationCycle(baseFrame, 1);
+                animationTypeActive = false;
+            }
+        }
+        base.Update();
+    }
+
+    public void UpdatePos()
+    {
+        position.x = x;
+        position.y = y;
+    }
+
+    void UpdateCollision()
+    {
+        if (!inshell)
+        {
+            playerHitBox.ChangeOffSetAndSize(outShellStats);
+        }
+
+        else
+        {
+            playerHitBox.ChangeOffSetAndSize(inShellStats);
+        }
+            
+
+        playerCollision.width = playerHitBox.width;
+        playerCollision.height = playerHitBox.height;
+        playerCollision.Position = new Vec2(playerHitBox.GetX(), playerHitBox.GetY());
+
+        playerCollision.Velocity = velocity;
+    }
+
     void Update()
     {
         Move(movementDirection); //player movement accerlation
         ApplyForces(); //applying gravity, friction, and fan velocity
         TryAction(); //try perform kick and pickup if detection intersects
-                     //       AnimationController(); //performs animation
-
+        AnimationController(); //performs animation
 
         //if no movement lock, checks player input and shell state
         if (!movementLock)
