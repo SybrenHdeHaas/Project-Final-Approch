@@ -140,8 +140,19 @@ public class Player : AnimationSpriteCustom
         //     detectionRange = new Detection(192, 192, mass);
         //     AddChild(detectionRange);
 
-        playerHitBox = new Hitbox(0, 0, mass); //the player's actual hit box.
-        AddChild(playerHitBox);
+        //we no longer can make hitbox a child of player (would cause calculation errror if so)
+        if (playerIndex == 0)
+        {
+            playerHitBox = new Hitbox(mass, 0); //the player's actual hit box.
+        }
+
+        if (playerIndex == 1)
+        {
+            playerHitBox = new Hitbox(mass, 1); //the player's actual hit box.
+        }
+
+        MyGame myGame = (MyGame)game;
+        myGame.AddChild(playerHitBox);
 
         //placeholder offset: -32 / 2, (192 / 2) - 32
         //placeholder offset shell: -192 / 2, -192 / 2
@@ -151,7 +162,7 @@ public class Player : AnimationSpriteCustom
         float[] outShellStatsArray = { hitBoxOffsetX, hitBoxOffsetY, hitboxWorkingWidth, hitboxWorkingHeight}; //hitbox posx, posy, width, height of player not in shell
         outShellStats = outShellStatsArray;
 
-        playerHitBox.ChangeOffSetAndSize(outShellStats);
+        playerHitBox.ChangeOffSetAndSize(position, outShellStats);
         playerCollision = new ColliderPlayer(playerHitBox, new Vec2(0, 0), new Vec2(0, 0), playerHitBox.width, playerHitBox.height, true);
     }
 
@@ -298,7 +309,7 @@ public class Player : AnimationSpriteCustom
                 {
                     SetAnimationCycle(40, 1);
                     inshell = false;
-                    playerHitBox.ChangeOffSetAndSize(outShellStats);
+               //     playerHitBox.ChangeOffSetAndSize(outShellStats);
                     //       playerHitBox.playerCollision.outShellChanges();
                 }
             }
@@ -310,7 +321,7 @@ public class Player : AnimationSpriteCustom
                 {
                     SetAnimationCycle(50, 8);
                     inshell = true;
-                    playerHitBox.ChangeOffSetAndSize(inShellStats);
+              //      playerHitBox.ChangeOffSetAndSize(inShellStats);
                     //      playerHitBox.playerCollision.inShellChanges();
                 }
             }
@@ -323,7 +334,7 @@ public class Player : AnimationSpriteCustom
                 if (Input.GetKey(Key.I)) //player 2 inputs to go out of inShell state
                 {
                     inshell = false;
-                    playerHitBox.ChangeOffSetAndSize(outShellStats);
+                //    playerHitBox.ChangeOffSetAndSize(outShellStats);
                     //      playerHitBox.playerCollision.outShellChanges();
                 }
             }
@@ -334,7 +345,7 @@ public class Player : AnimationSpriteCustom
                 if (Input.GetKey(Key.K)) //player 2 inputs to go into inShell state
                 {
                     inshell = true;
-                    playerHitBox.ChangeOffSetAndSize(inShellStats);
+                //    playerHitBox.ChangeOffSetAndSize(inShellStats);
                     //    playerHitBox.playerCollision.inShellChanges();
                 }
             }
@@ -439,12 +450,12 @@ public class Player : AnimationSpriteCustom
     {
         if (!inshell)
         {
-            playerHitBox.ChangeOffSetAndSize(outShellStats);
+            playerHitBox.ChangeOffSetAndSize(position, outShellStats);
         }
 
         else
         {
-            playerHitBox.ChangeOffSetAndSize(inShellStats);
+            playerHitBox.ChangeOffSetAndSize(position, inShellStats);
         }
             
 

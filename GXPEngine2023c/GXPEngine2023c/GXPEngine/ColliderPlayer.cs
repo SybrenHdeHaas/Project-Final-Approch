@@ -438,9 +438,6 @@ public class ColliderPlayer : ColliderObject
 
     protected override void ResolveCollision(CollisionInfo earilstCollision)
     {
-        Player hitboxPArent = (Player)thisObject.parent;
-
-
         //earilstCollision is not used. Maybe for now.
 
         //solving all collisions
@@ -462,7 +459,13 @@ public class ColliderPlayer : ColliderObject
                         Console.WriteLine("resolving up");
                     }
 
-                    hitboxPArent.onCeiling = true;
+                    foreach (Player thePlayer in GameData.playerList)
+                    {
+                        if (thePlayer.playerIndex == thisObject.playerIndex)
+                        {
+                            thePlayer.onCeiling = true;
+                        }
+                    }
 
                     //         hitboxPArent.onGround = true;
                     position.y -= POI.y - position.y;
@@ -476,8 +479,14 @@ public class ColliderPlayer : ColliderObject
                         Console.WriteLine("resolving down");
                     }
 
-                    //      hitboxPArent.onCeiling = true;
-                    hitboxPArent.onGround = true;
+                    foreach (Player thePlayer in GameData.playerList)
+                    {
+                        if (thePlayer.playerIndex == thisObject.playerIndex)
+                        {
+                            thePlayer.onGround = true;
+                        }
+                    }
+
                     position.y += POI.y - position.y;
                     velocity.y = momentum.y;
                 }

@@ -6,23 +6,18 @@ using System.CodeDom;
 public class Hitbox : Sprite
 {
     public float mass;
-
-    int OGWidth;
-    int OGHeight;
-    public Hitbox(float offSetX, float offSetY, float mass) : base("Hitbox.png")
+    public int playerIndex;
+    public Hitbox(float mass, int playerIndex) : base("Hitbox.png")
     {
-        x = offSetX;
-        y = offSetY;
         this.mass = mass;
         alpha = 0.5f;
-        OGWidth = width;
-        OGHeight = height;
+        this.playerIndex = playerIndex;
     }
 
-    public void ChangeOffSetAndSize(float[] theStats)
+    public void ChangeOffSetAndSize(Vec2 playerPos, float[] theStats)
     {
-        x = theStats[0];
-        y = theStats[1];
+        x = playerPos.x + theStats[0];
+        y = playerPos.y + theStats[1];
         width =  (int)theStats[2];
         height =   (int)theStats[3];
     }
