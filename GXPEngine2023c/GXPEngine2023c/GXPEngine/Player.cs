@@ -550,18 +550,6 @@ public class Player : AnimationSpriteCustom
 
     void Update()
     {
-
-        if (playerIndex == 0)
-        {
-            if (onGround == false)
-            {
-                Console.WriteLine("float");
-            }
-            
-        }
-       
-
-
         Move(movementDirection); //player movement accerlation
         ApplyForces(); //applying gravity, friction, and fan velocity
 
