@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="36">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="39">
  <tileset firstgid="1" name="TileSheet_Final" tilewidth="32" tileheight="32" tilecount="96" columns="12">
   <image source="TileSheet_Final.png" width="384" height="256"/>
  </tileset>
@@ -144,16 +144,6 @@
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="14" name="Player 1" type="Player" gid="98" x="124.67" y="207.334" width="64" height="64">
-   <properties>
-    <property name="Height" type="int" value="10"/>
-    <property name="Width" type="int" value="10"/>
-    <property name="int_index" type="int" value="0"/>
-    <property name="int_nextFrameDelay" type="int" value="30"/>
-    <property name="int_numberOfFrame" type="int" value="-1"/>
-    <property name="int_singleFrameID" type="int" value="-1"/>
-   </properties>
-  </object>
   <object id="15" name="Fan Area - fan1" type="FanArea" gid="168" x="601.667" y="381.833" width="70.3333" height="153.334">
    <properties>
     <property name="string_fanID" value="fan1"/>
@@ -194,7 +184,7 @@
     <property name="string_para2" value=""/>
    </properties>
   </object>
-  <object id="28" name="Door1" type="Door" gid="170" x="797.333" y="289" width="98" height="33">
+  <object id="28" name="Door1" type="Door" gid="170" x="798.478" y="289" width="98.8136" height="33">
    <properties>
     <property name="isOpened" type="bool" value="false"/>
     <property name="string_theID" value="door1"/>
@@ -216,10 +206,36 @@
     <property name="string_theID" value="fan1"/>
    </properties>
   </object>
-  <object id="34" name="Box" type="Breakable" gid="97" x="377" y="85" width="32" height="32">
+  <object id="36" name="Player 1" type="Player" gid="98" x="998.667" y="210.001" width="64" height="64">
    <properties>
-    <property name="float_thresholdVelocityLength" type="float" value="5"/>
-    <property name="int_theHealth" type="int" value="1"/>
+    <property name="float_hitBoxHeight" type="float" value="50"/>
+    <property name="float_hitBoxOffsetX" type="float" value="-20"/>
+    <property name="float_hitBoxOffsetY" type="float" value="-15"/>
+    <property name="float_hitBoxShellHeight" type="float" value="20"/>
+    <property name="float_hitBoxShellOffsetX" type="float" value="-12"/>
+    <property name="float_hitBoxShellOffsetY" type="float" value="11"/>
+    <property name="float_hitBoxShellWidth" type="float" value="32"/>
+    <property name="float_hitBoxWidth" type="float" value="40"/>
+    <property name="int_index" type="int" value="0"/>
+    <property name="int_nextFrameDelay" type="int" value="30"/>
+    <property name="int_numberOfFrame" type="int" value="-1"/>
+    <property name="int_singleFrameID" type="int" value="-1"/>
+   </properties>
+  </object>
+  <object id="38" name="Player 2" type="Player" gid="98" x="1063.83" y="226.636" width="64" height="64">
+   <properties>
+    <property name="float_hitBoxHeight" type="float" value="50"/>
+    <property name="float_hitBoxOffsetX" type="float" value="-20"/>
+    <property name="float_hitBoxOffsetY" type="float" value="-15"/>
+    <property name="float_hitBoxShellHeight" type="float" value="20"/>
+    <property name="float_hitBoxShellOffsetX" type="float" value="-12"/>
+    <property name="float_hitBoxShellOffsetY" type="float" value="11"/>
+    <property name="float_hitBoxShellWidth" type="float" value="32"/>
+    <property name="float_hitBoxWidth" type="float" value="40"/>
+    <property name="int_index" type="int" value="1"/>
+    <property name="int_nextFrameDelay" type="int" value="30"/>
+    <property name="int_numberOfFrame" type="int" value="-1"/>
+    <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
  </objectgroup>

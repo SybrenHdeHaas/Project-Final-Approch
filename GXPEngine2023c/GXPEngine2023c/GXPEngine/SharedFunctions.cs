@@ -47,6 +47,21 @@ public static class SharedFunctions
         }
     }
 
+
+    public static bool CheckIntersetSpriteBothTopLeftCorner(Sprite thisObject, Sprite thatObject)
+    {
+        float xOverlap = Math.Min(thisObject.x + thisObject.width, thatObject.x + thatObject.width) - Math.Max(thisObject.x, thatObject.x);
+        float yOverlap = Math.Min(thisObject.y + thisObject.height, thatObject.y + thatObject.height) - Math.Max(thisObject.y, thatObject.y);
+        
+        if (xOverlap > 0 && yOverlap > 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+
     public static bool CheckIntersectSpriteSprite(Sprite thisObject, Sprite thatObject)
     {
         // Calculate half-width and half-height for each rectangle

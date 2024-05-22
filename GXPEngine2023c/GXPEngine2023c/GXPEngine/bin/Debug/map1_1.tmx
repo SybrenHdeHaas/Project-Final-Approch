@@ -125,7 +125,7 @@
     <property name="string_fanID" value="fan1"/>
    </properties>
   </object>
-  <object id="23" name="Player 2" type="Player" gid="4" x="693" y="140" width="64" height="64">
+  <object id="23" name="Player 2" type="Player" gid="4" x="719.667" y="185.333" width="64" height="64">
    <properties>
     <property name="float_hitBoxHeight" type="float" value="15"/>
     <property name="float_hitBoxOffsetX" type="float" value="-32"/>
@@ -188,23 +188,22 @@
     <property name="int_theHealth" type="int" value="3"/>
    </properties>
   </object>
-  <object id="49" name="Player 1" type="Player" gid="84" x="823.667" y="179" width="64" height="64">
+  <object id="49" name="Player 1" type="Player" gid="84" x="859.667" y="171.334" width="64" height="64">
    <properties>
-    <property name="float_hitBoxHeight" type="float" value="64"/>
-    <property name="float_hitBoxOffsetX" type="float" value="0"/>
-    <property name="float_hitBoxOffsetY" type="float" value="0"/>
-    <property name="float_hitBoxShellHeight" type="float" value="32"/>
-    <property name="float_hitBoxShellOffsetX" type="float" value="0"/>
-    <property name="float_hitBoxShellOffsetY" type="float" value="0"/>
+    <property name="float_hitBoxHeight" type="float" value="50"/>
+    <property name="float_hitBoxOffsetX" type="float" value="-20"/>
+    <property name="float_hitBoxOffsetY" type="float" value="-15"/>
+    <property name="float_hitBoxShellHeight" type="float" value="20"/>
+    <property name="float_hitBoxShellOffsetX" type="float" value="-12"/>
+    <property name="float_hitBoxShellOffsetY" type="float" value="11"/>
     <property name="float_hitBoxShellWidth" type="float" value="32"/>
-    <property name="float_hitBoxWidth" type="float" value="64"/>
+    <property name="float_hitBoxWidth" type="float" value="40"/>
     <property name="int_index" type="int" value="0"/>
     <property name="int_nextFrameDelay" type="int" value="30"/>
     <property name="int_numberOfFrame" type="int" value="-1"/>
     <property name="int_singleFrameID" type="int" value="-1"/>
    </properties>
   </object>
-  <object id="54" gid="85" x="846" y="46" width="192" height="192"/>
  </objectgroup>
  <objectgroup id="3" name="Object Layer 2"/>
 </map>

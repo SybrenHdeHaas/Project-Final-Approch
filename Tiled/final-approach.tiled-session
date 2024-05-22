@@ -14,11 +14,14 @@
             "scaleInEditor": 1
         },
         "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx": {
-            "scale": 0.4012760416666667,
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 3,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 958.1932636770719,
-                "y": 599.3380491920306
+                "x": 816.1666666666666,
+                "y": 267.5
             }
         },
         "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx#400x400Orange": {
@@ -52,11 +55,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.6879017857142856,
+            "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 560.3997663703032,
-                "y": 544.4091115581804
+                "x": 257.75,
+                "y": 342.75
             }
         },
         "Level 2 SS.tmx#400x400Orange": {
@@ -87,8 +90,8 @@
             "scale": 0.5599200581395348,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 670.6314491530925,
-                "y": 302.72178596923874
+                "x": 686.7051723019016,
+                "y": 321.47446297618274
             }
         },
         "Level1SS.tmx#400x400Orange": {
@@ -132,6 +135,7 @@
             "scaleInDock": 1
         },
         "TileSheet_Final.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "level_6.tmx": {
@@ -149,8 +153,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 761.5,
-                "y": 347.5
+                "x": 1274.5,
+                "y": 1674
             }
         },
         "map1.tmx#Button": {
@@ -209,6 +213,44 @@
         "placeholdertile1.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "real_DemoLevel.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 256.33333333333337,
+                "y": 227
+            }
+        },
+        "real_DemoLevel.tmx#400x400Orange": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#BreakableWood": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#Door": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#TileSheet_Final": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#Turtles_NoTrim": {
+            "scaleInDock": 0.25
+        },
+        "real_DemoLevel.tmx#doorHoz": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#fanHoz": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#fanVerRight": {
+            "scaleInDock": 1
+        },
+        "real_DemoLevel.tmx#rr": {
+            "scaleInDock": 1
         }
     },
     "last.exportedFilePath": "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug",
@@ -228,9 +270,9 @@
     "project": "final-approach.tiled-project",
     "property.type": "float",
     "recentFiles": [
+        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx",
         "map1.tmx",
         "Level1SS.tmx",
-        "C:/Users/seanb/Documents/Github Projects/Shared/Project-Final-Approch/GXPEngine2023c/GXPEngine2023c/GXPEngine/bin/Debug/redoneDemoLevel1.tmx",
         "placeholdertile1.tsx"
     ],
     "tileset.embedInMap": true,

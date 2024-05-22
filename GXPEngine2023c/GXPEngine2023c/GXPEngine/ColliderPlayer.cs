@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 
-//physcis for a ball object
+//collision calculation and related for player (we use hitbox as the collider for player)
 public class ColliderPlayer : ColliderObject
 {
     Hitbox thisObject;
@@ -102,7 +102,7 @@ public class ColliderPlayer : ColliderObject
         }
     }
 
-    //AABB collision detection with this and tile
+    //AABB collision check with other player
     protected void CheckCollisionHitBox(MyGame myGame)
     {
         //checking the bricks
@@ -191,7 +191,7 @@ public class ColliderPlayer : ColliderObject
     }
 
 
-    //AABB collision detection with THIS and tile
+    //AABB collision check with door object
     protected void CheckCollisionDoor(MyGame myGame) //possible fourth step
     {
         //checking the bricks
@@ -315,7 +315,7 @@ public class ColliderPlayer : ColliderObject
     }
 
 
-    //AABB collision detection with THIS and tile
+    //AABB collision check with breakable, if detected, breakable would be pushed
     protected void CheckCollisionBreakable(MyGame myGame) //possible fourth step
     {
         //checking the bricks
@@ -432,22 +432,18 @@ public class ColliderPlayer : ColliderObject
             }
         }
     }
-
-
-
-
     protected override void ResolveCollision(CollisionInfo earilstCollision)
     {
-        //earilstCollision is not used. Maybe for now.
-
         //solving all collisions
         foreach (CollisionInfo col in _collisionList)
         {
+           
+          
             //collision with a tile
             if (col.other is Tile)
             {
-
                 Tile theTile = (Tile)col.other;
+
                 Vec2 centerOfMass = (Mass * velocity + theTile.Mass * new Vec2(0, 0)) / (Mass + theTile.Mass);
                 Vec2 momentum = -bounciness * velocity;
                 Vec2 POI = _oldPosition + (col.timeOfImpact * velocity);
@@ -464,15 +460,15 @@ public class ColliderPlayer : ColliderObject
                         if (thePlayer.playerIndex == thisObject.playerIndex)
                         {
                             thePlayer.onCeiling = true;
+                            
                         }
                     }
 
-                    //         hitboxPArent.onGround = true;
                     position.y -= POI.y - position.y;
                     velocity.y = momentum.y;
                 }
 
-                else if (col.AABBDirection == 2)
+                if (col.AABBDirection == 2)
                 {
                     if (wordy4)
                     {
@@ -491,7 +487,7 @@ public class ColliderPlayer : ColliderObject
                     velocity.y = momentum.y;
                 }
 
-                else if (col.AABBDirection == 4)
+                if (col.AABBDirection == 4)
                 {
                     if (wordy4)
                     {
@@ -502,7 +498,7 @@ public class ColliderPlayer : ColliderObject
                     velocity.x = momentum.x;
                 }
 
-                else if (col.AABBDirection == 3)
+                if (col.AABBDirection == 3)
                 {
                     if (wordy4)
                     {
@@ -512,10 +508,11 @@ public class ColliderPlayer : ColliderObject
                     position.x += position.x - POI.x;
                     velocity.x = momentum.x;
                 }
+
             }
 
             //collision with detection
-            if (col.other is Hitbox)
+            else if (col.other is Hitbox)
             {
                 Hitbox theHitbox = (Hitbox)col.other;
                 Vec2 centerOfMass = (Mass * velocity + theHitbox.mass * new Vec2(0, 0)) / (Mass + theHitbox.mass);
@@ -568,7 +565,7 @@ public class ColliderPlayer : ColliderObject
             }
 
 
-            if (col.other is Door)
+            else if (col.other is Door)
             {
                 Door theDoor = (Door)col.other;
                 Vec2 centerOfMass = (Mass * velocity + theDoor.Mass * new Vec2(0, 0)) / (Mass + theDoor.Mass);
@@ -582,6 +579,14 @@ public class ColliderPlayer : ColliderObject
                         Console.WriteLine("resolving up");
                     }
 
+                    foreach (Player thePlayer in GameData.playerList)
+                    {
+                        if (thePlayer.playerIndex == thisObject.playerIndex)
+                        {
+                            thePlayer.onCeiling = true;
+                        }
+                    }
+
                     position.y -= POI.y - position.y;
                     velocity.y = momentum.y;
                 }
@@ -593,8 +598,28 @@ public class ColliderPlayer : ColliderObject
                         Console.WriteLine("resolving down");
                     }
 
+                    foreach (Player thePlayer in GameData.playerList)
+                    {
+                        if (thePlayer.playerIndex == thisObject.playerIndex)
+                        {
+                            thePlayer.onDoor = true;
+
+                        }
+                    }
+
                     position.y += POI.y - position.y;
                     velocity.y = momentum.y;
+                }
+
+                else if (col.AABBDirection == 4)
+                {
+                    if (wordy4)
+                    {
+                        Console.WriteLine("resolving right");
+                    }
+
+                    position.x -= position.x - POI.x;
+                    velocity.x = momentum.x;
                 }
 
                 else if (col.AABBDirection == 3)
@@ -607,23 +632,10 @@ public class ColliderPlayer : ColliderObject
                     position.x += position.x - POI.x;
                     velocity.x = momentum.x;
                 }
-
-
-
-                else if (col.AABBDirection == 4)
-                {
-                    if (wordy4)
-                    {
-                        Console.WriteLine("resolving right");
-                    }
-
-                    position.x -= position.x - POI.x;
-                    velocity.x = momentum.x;
-                }
             }
 
 
-            if (col.other is Breakable)
+            else if (col.other is Breakable)
             {
                 Breakable theBreakable = (Breakable)col.other;
                 Vec2 centerOfMass = (Mass * velocity + theBreakable.Mass * theBreakable.velocity) / (Mass + theBreakable.Mass);
@@ -690,7 +702,19 @@ public class ColliderPlayer : ColliderObject
 
                 if (col.AABBDirection >= 0 && col.AABBDirection <= 4)
                 {
-                    Player thePlayer = (Player)thisObject.parent;
+                    Player thePlayer = null;
+                    foreach (Player thePlayerr in GameData.playerList)
+                    {
+                        if (thePlayerr.playerIndex == thisObject.playerIndex)
+                        {
+                            thePlayer = thePlayerr;
+                        }
+                    }
+
+                    if (thePlayer == null)
+                    {
+                        Console.WriteLine("null player should not happen");
+                    }
 
                     if (theBreakable.TryDamage(thePlayer.Velocity) == true)
                     {
@@ -708,6 +732,8 @@ public class ColliderPlayer : ColliderObject
         MyGame myGame = (MyGame)game;
         CheckCollisionTiles(myGame);
         CheckCollisionHitBox(myGame);
+        CheckCollisionDoor(myGame);
+        CheckCollisionBreakable(myGame);
 
         return FindLowestTOICollision();
     }

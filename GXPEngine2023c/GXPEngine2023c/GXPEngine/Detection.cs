@@ -6,6 +6,7 @@ using System.Threading;
 //handles player-to-player detection
 public class Detection : Sprite
 {
+    /*
     private string collisionDirection;
     public string getCollisionDirection() { return collisionDirection; }
     Player player;
@@ -16,121 +17,47 @@ public class Detection : Sprite
     private Detection dete;
     public Detection GetDete() { return dete; }
     public Player GetPlayer() { return player; }
-    float mass;
-    public Detection(int objWidth, int objHeight, float mass) : base("detector.png")
+    */
+
+    int extraWidth;
+    int extraHeight;
+    public DetectionInfo theDetectionInfo;
+
+    public Detection(int extraWidth = 20, int extraHeight = 20) : base("detector.png")
     {
-        width = objWidth + 30;
-        height = objHeight + 30;
-        x = -width / 2;
-        y = -height / 2;
-
-        startStats[0] = x;
-        startStats[1] = y;
-        startStats[2] = width;
-        startStats[3] = height;
-
-        shellsStats[0] = x;
-        shellsStats[1] = 16;
-        shellsStats[2] = width;
-        shellsStats[3] = height / 3;
-
-        this.mass = mass;
-        visible = true;
+        this.extraWidth = extraWidth;
+        this.extraHeight = extraHeight;
+        theDetectionInfo = new DetectionInfo();
     }
 
-    void CastPlayer() { player = parent as Player; }
-
-    public void inShellChanges()
+    public void ChangeOffSetAndSize(Vec2 playerPos, float[] theStats)
     {
-        x = shellsStats[0];
-        y = shellsStats[1];
-        width = (int)shellsStats[2];
-        height = (int)shellsStats[3];
-
+        x = playerPos.x + theStats[0] - extraWidth / 2;
+        y = playerPos.y + theStats[1] - extraHeight / 2;
+        width = (int)theStats[2] + extraWidth;
+        height = (int)theStats[3] + extraHeight;
     }
-
-    public void outShellChanges()
+    public void PlayerInteractCheck()
     {
-        x = startStats[0];
-        y = startStats[1];
-        width = (int)startStats[2];
-        height = (int)startStats[3];
-    }
-
-    Boolean FloorCheck()
-    {
-        GameObject[] colls = GetCollisions();
-
-        foreach (GameObject coll in colls)
+        foreach (Player thePlayer in GameData.playerList)
         {
-            if (coll is Tile)
+            if (thePlayer.detectionRange != this)
             {
-                if (coll.y > player.y) { return player.OnGround = true; }
-            }
-
-        }
-        return player.OnGround = false;
-    }
-
-    Boolean CeilingCheck()
-    {
-        GameObject[] colls = GetCollisions();
-        foreach (GameObject coll in colls)
-        {
-            if (coll is Tile)
-            {
-                if (coll.y < player.y) { return player.OnCeiling = true; }
-            }
-        }
-
-        return player.OnCeiling = false;
-    }
-
-    public Boolean PlayerInteractCheck()
-    {
-        GameObject[] colls = GetCollisions();
-        foreach (GameObject coll in colls)
-        {
-            if (coll is Detection)
-            {
-                dete = (Detection)coll;
-
-                if (dete.player == null)
+                if (SharedFunctions.CheckIntersetSpriteBothTopLeftCorner(this, thePlayer.detectionRange))
                 {
-                    return false;
+                    theDetectionInfo.UpdateInfo(true, thePlayer);   
                 }
 
-                if (dete.player.InShell == true)
+                else
                 {
-
-                    return true;
+                    theDetectionInfo.UpdateInfo(false, null);
                 }
-
             }
         }
-        return false;
+
     }
 
-    void CollisionCheck()
-    {
-        collisionSides[0] = false;
-        collisionSides[1] = false;
-        collisionSides[2] = false;
-        collisionSides[3] = false;
 
-        GameObject[] colls = GetCollisions();
-        foreach (GameObject coll in colls)
-        {
-            if (coll is Tile)
-            {
-                if (coll.y < player.y) { collisionSides[0] = true; }
-                if (coll.y > player.y) { collisionSides[1] = true; }
-                if (coll.x < player.x) { collisionSides[2] = true; }
-                if (coll.x > player.x) { collisionSides[3] = true; }
-
-            }
-        }
-    }
     void ToggleVisable()
     {
 
@@ -139,14 +66,5 @@ public class Detection : Sprite
             if (visible) { visible = false; } else visible = true;
         }
 
-    }
-    void Update()
-    {
-        ToggleVisable();
-        CastPlayer();
-        FloorCheck();
-        CeilingCheck();
-        CollisionCheck();
-        PlayerInteractCheck();
     }
 }

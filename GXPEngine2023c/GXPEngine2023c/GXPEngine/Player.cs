@@ -12,14 +12,13 @@ public class Player : AnimationSpriteCustom
 {
     private float maxSpeed = 2;
 
-    private Boolean inshell;
-
+    private Boolean inshell; //true = player is in inshell state
     private Vec2 playerVelocity; //velocity of player movement
     private Vec2 velocity; //overall velocity (playerVelocity + other impacts of velocity)
     private Vec2 acceleration;
 
     public int playerIndex; //renamed from index to playerIndex for better naming. 0 = player1, 1 = player2
-    Detection detectionRange;
+    public Detection detectionRange;
     public Hitbox playerHitBox;
     List<Vec2> fanVelocityList = new List<Vec2>();
     Vec2 fanVelocity;
@@ -30,8 +29,8 @@ public class Player : AnimationSpriteCustom
     public float mass;
 
     private Boolean[] movementDirection = new Boolean[3]; //stores player input (left, right, up). false means no input in that direction
-    private Vec2 frictionForce;
-    private Vec2 playerForce;
+    private Vec2 frictionForce; //overall velocity (playerVelocity + other impacts of velocity)
+    private Vec2 playerForce; //velocity of player movement
 
     private float friction; //speed loss X
     private float drag = 0.2f; //speed loss Y
@@ -42,7 +41,9 @@ public class Player : AnimationSpriteCustom
     private Boolean movementLock = false; //if true, ignore inputs
 
     public Boolean onGround = false;
+    public Boolean onDoor = false;
     public Boolean onCeiling = false;
+    public Boolean canDoAction = false; //if true, player can kick and pickup/throw aka detection intersected
 
     private float[] inShellStats; //posx, posy, width, height of player in shell
     private float[] outShellStats; //posx, posy, width, height of player not in shell
@@ -51,6 +52,13 @@ public class Player : AnimationSpriteCustom
 
     private Boolean animationTypeActive = false;
     int baseFrame;
+
+    private Vec2 kickForce;
+    private Vec2 throwForce;
+    float kickStrenghtX = 30;
+    float kickStrengthY = 0;
+    float throwStrenghtX = 30;
+    float throwStrengthY = -30;
 
     public Boolean OnGround
     {
@@ -81,9 +89,7 @@ public class Player : AnimationSpriteCustom
         get { return position; }
         set { position = value; }
     }
-
     public int GetPlyaerIndex() { return playerIndex; }
-
 
     public Player(string filenName, int rows, int columns, TiledObject obj = null) : base(filenName, rows, columns, obj)
     {
@@ -91,56 +97,43 @@ public class Player : AnimationSpriteCustom
         SetAnimationCycle(0, 1);
         mass = 4 * width * height;
 
-
-        float hitboxWorkingWidth = obj.GetFloatProperty("float_hitBoxWidth", width);
-        float hitboxWorkingHeight = obj.GetFloatProperty("float_hitBoxHeight", height);
+        //get data about the hitbox (width, height, position) when player is not in shell from Tiled
+        float hitboxWidth = obj.GetFloatProperty("float_hitBoxWidth", width);
+        float hitboxHeight = obj.GetFloatProperty("float_hitBoxHeight", height);
         float hitBoxOffsetX = obj.GetFloatProperty("float_hitBoxOffsetX", 0);
         float hitBoxOffsetY = obj.GetFloatProperty("float_hitBoxOffsetY", 0);
 
-
-        float hitboxWorkingWidthShell = obj.GetFloatProperty("float_hitBoxShellWidth", 32);
-        float hitboxWorkingHeightShell = obj.GetFloatProperty("float_hitBoxShellHeight", 32);
+        //get data about the hitbox (width, height, position) when player is in shell from Tiled
+        float hitboxWidthShell = obj.GetFloatProperty("float_hitBoxShellWidth", 32);
+        float hitboxHeightShell = obj.GetFloatProperty("float_hitBoxShellHeight", 32);
         float hitBoxShellOffsetX = obj.GetFloatProperty("float_hitBoxShellOffsetX", 0);
         float hiYtBoxShellOffset = obj.GetFloatProperty("float_hitBoxShellOffsetY", 0);
 
-        if (hitboxWorkingHeight <= 0) 
+        //negative height is not allowed
+        if (hitboxHeight < 0) 
         {
-            hitboxWorkingHeight = height;
-        }
-        else
-        {
-            hitboxWorkingHeight *= 1;
+            hitboxHeight = height;
         }
 
-        if (hitboxWorkingWidth <= 0)
+        //negative width is not allowed
+        if (hitboxWidth < 0)
         {
-            hitboxWorkingWidth = width;
-        }
-        else
-        {
-            hitboxWorkingWidth *= 1;
+            hitboxWidth = width;
         }
 
-
-        if (hitboxWorkingWidthShell < 0)
+        //negative height is not allowed
+        if (hitboxWidthShell < 0)
         {
-            hitboxWorkingWidthShell = 32;
+            hitboxWidthShell = 32;
         }
 
-        if (hitboxWorkingHeightShell < 0)
+        //negative width is not allowed
+        if (hitboxHeightShell < 0)
         {
-            hitboxWorkingHeightShell = 32;
+            hitboxHeightShell = 32;
         }
 
-        Console.WriteLine("float_hitBoxWidth: " + hitboxWorkingWidth);
-        Console.WriteLine("float_hitBoxHeight: " + hitboxWorkingHeight);
-
-
-        //we no longer use dection range, but leaving this here just in case
-        //     detectionRange = new Detection(192, 192, mass);
-        //     AddChild(detectionRange);
-
-        //we no longer can make hitbox a child of player (would cause calculation errror if so)
+        //creating hitbox
         if (playerIndex == 0)
         {
             playerHitBox = new Hitbox(mass, 0); //the player's actual hit box.
@@ -151,18 +144,21 @@ public class Player : AnimationSpriteCustom
             playerHitBox = new Hitbox(mass, 1); //the player's actual hit box.
         }
 
+        //we no longer can make hitbox a child of player (would cause calculation errror if so), thus make it a child of myGame
         MyGame myGame = (MyGame)game;
         myGame.AddChild(playerHitBox);
 
-        //placeholder offset: -32 / 2, (192 / 2) - 32
-        //placeholder offset shell: -192 / 2, -192 / 2
+        //creating derectionRange, works similar to hitbox but only deal with player intersection check instead
+        detectionRange = new Detection(20,20);
+        myGame.AddChild(detectionRange);
 
-        float[] inShellStatsArray = { hitBoxShellOffsetX, hiYtBoxShellOffset, hitboxWorkingWidthShell, hitboxWorkingHeightShell};   //hitbox posx, posy, width, height of player in shell
+        //adding data
+        float[] inShellStatsArray = { hitBoxShellOffsetX, hiYtBoxShellOffset, hitboxWidthShell, hitboxHeightShell};   //hitbox posx, posy, width, height of player in shell
         inShellStats = inShellStatsArray;
-        float[] outShellStatsArray = { hitBoxOffsetX, hitBoxOffsetY, hitboxWorkingWidth, hitboxWorkingHeight}; //hitbox posx, posy, width, height of player not in shell
+        float[] outShellStatsArray = { hitBoxOffsetX, hitBoxOffsetY, hitboxWidth, hitboxHeight}; //hitbox posx, posy, width, height of player not in shell
         outShellStats = outShellStatsArray;
 
-        playerHitBox.ChangeOffSetAndSize(position, outShellStats);
+        //adding collision calculator
         playerCollision = new ColliderPlayer(playerHitBox, new Vec2(0, 0), new Vec2(0, 0), playerHitBox.width, playerHitBox.height, true);
     }
 
@@ -199,7 +195,7 @@ public class Player : AnimationSpriteCustom
         frictionForce.y = -drag * playerVelocity.y;
 
         //don't apply gravity if player is on ground
-        if (!onGround || onCeiling) { gravity = 1f; }
+        if (!onGround) { gravity = 1f; }
         if (onGround) { gravity = 0f; }
 
         gravityForce.y = gravity;
@@ -211,11 +207,7 @@ public class Player : AnimationSpriteCustom
         velocity = playerVelocity + fanVelocity;
     }
 
-    private void TryAction()
-    {
-    }
-
-
+    //updates movement acceleration based on the inputs
     private void Move(bool[] playerInput)
     {
         float accelerationX = 0;
@@ -264,7 +256,7 @@ public class Player : AnimationSpriteCustom
                         movementDirection[1] = true;
                     }
                     else { movementDirection[1] = false; }
-                    if (Input.GetKeyDown(Key.W) && onGround && !onCeiling)
+                    if (Input.GetKeyDown(Key.W) && ((onGround && !onCeiling) || onDoor))
                     {
                         SoundChannel sound = new Sound("jump.wav", false).Play();
                         movementDirection[2] = true;
@@ -285,7 +277,7 @@ public class Player : AnimationSpriteCustom
                         movementDirection[1] = true;
                     }
                     else { movementDirection[1] = false; }
-                    if (Input.GetKeyDown(Key.I) && onGround && !onCeiling)
+                    if (Input.GetKeyDown(Key.I) && ((onGround && !onCeiling) || onDoor))
                     {
                         SoundChannel sound = new Sound("jump.wav", false).Play();
                         movementDirection[2] = true;
@@ -305,12 +297,11 @@ public class Player : AnimationSpriteCustom
         {
             if (inshell)
             {
-                if (Input.GetKey(Key.W)) //player 1 inputs to go out of inShell state
+                if (Input.GetKey(Key.W) && !OnCeiling) //player 1 inputs to go out of inShell state
                 {
                     SetAnimationCycle(40, 1);
+                    velocity += new Vec2(0, -20); //need to move the player a bit up to fix error which player falls off the map
                     inshell = false;
-               //     playerHitBox.ChangeOffSetAndSize(outShellStats);
-                    //       playerHitBox.playerCollision.outShellChanges();
                 }
             }
 
@@ -321,8 +312,6 @@ public class Player : AnimationSpriteCustom
                 {
                     SetAnimationCycle(50, 8);
                     inshell = true;
-              //      playerHitBox.ChangeOffSetAndSize(inShellStats);
-                    //      playerHitBox.playerCollision.inShellChanges();
                 }
             }
         }
@@ -331,11 +320,10 @@ public class Player : AnimationSpriteCustom
         {
             if (inshell)
             {
-                if (Input.GetKey(Key.I)) //player 2 inputs to go out of inShell state
+                if (Input.GetKey(Key.I) && !OnCeiling) //player 2 inputs to go out of inShell state
                 {
+                    velocity += new Vec2(0, -20); //need to move the player a bit up to fix error which player falls off the map
                     inshell = false;
-                //    playerHitBox.ChangeOffSetAndSize(outShellStats);
-                    //      playerHitBox.playerCollision.outShellChanges();
                 }
             }
 
@@ -345,10 +333,102 @@ public class Player : AnimationSpriteCustom
                 if (Input.GetKey(Key.K)) //player 2 inputs to go into inShell state
                 {
                     inshell = true;
-                //    playerHitBox.ChangeOffSetAndSize(inShellStats);
-                    //    playerHitBox.playerCollision.inShellChanges();
                 }
             }
+        }
+    }
+
+
+    private void Kick()
+    {
+        SoundChannel sound = new Sound("kick.wav", false).Play();
+        sound.Volume = 1.3f;
+
+        //kick force change depending on player direction
+        if (_mirrorX)
+        {
+            kickForce = new Vec2(-kickStrenghtX, kickStrengthY);
+        }
+
+        else
+        {
+            kickForce = new Vec2(kickStrenghtX, kickStrengthY);
+        }
+
+        //Get the player getting kicked
+        Player theOtherPlayer = (Player)detectionRange.theDetectionInfo.theObject;
+
+        //if that player is in shell, apply force
+        if (theOtherPlayer.inshell)
+        {
+            theOtherPlayer.velocity = kickForce;
+            theOtherPlayer.UpdateCollision(); //updates collision hitbox info
+            theOtherPlayer.playerCollision.Step(); //performs collision
+            theOtherPlayer.position += theOtherPlayer.playerCollision.Velocity;
+            theOtherPlayer.x = theOtherPlayer.position.x;
+            theOtherPlayer.y = theOtherPlayer.position.y;
+        }
+    }
+    private void Throw()
+    {
+        SoundChannel sound = new Sound("throw.wav", false).Play();
+
+        throwForce = new Vec2(throwStrenghtX, throwStrengthY);
+
+        //get the player getting throwed
+        Player theOtherPlayer = (Player)detectionRange.theDetectionInfo.theObject;
+
+        //if that player is in shell, apply force
+        if (theOtherPlayer.inshell)
+        {
+            theOtherPlayer.velocity = throwForce;
+            theOtherPlayer.UpdateCollision(); //updates collision hitbox info
+            theOtherPlayer.playerCollision.Step(); //performs collision
+            theOtherPlayer.position += theOtherPlayer.playerCollision.Velocity;
+            theOtherPlayer.x = theOtherPlayer.position.x;
+            theOtherPlayer.y = theOtherPlayer.position.y;
+        }
+    }
+
+    //determine if player can kick or pickup/throw
+    private void Action()
+    {
+        detectionRange.PlayerInteractCheck();
+        canDoAction = detectionRange.theDetectionInfo.intersected;
+
+        if (Input.GetKeyDown(Key.Q) && canDoAction)
+        {
+            Kick();
+        }
+
+        if (canDoAction)
+        {
+            if (Input.GetKey(Key.O)) { Pickup(true); }
+            else { Pickup(false); }
+        }
+    }
+
+    private void Pickup(Boolean pickedUp)
+    {
+        Player interactPlayer = (Player)detectionRange.theDetectionInfo.theObject;
+
+
+        if (pickedUp && interactPlayer.inshell)
+        {
+            SoundChannel sound = new Sound("pick sound.mp3", false).Play();
+            interactPlayer.movementLock = true;
+
+            interactPlayer.position.x = x;
+            interactPlayer.position.y = y + -height;
+
+        }
+        else { interactPlayer.movementLock = false; interactPlayer.velocity += velocity; }
+
+
+        if (Input.GetKeyDown(Key.U))
+        {
+            interactPlayer.movementLock = false;
+            Throw();
         }
     }
 
@@ -451,11 +531,13 @@ public class Player : AnimationSpriteCustom
         if (!inshell)
         {
             playerHitBox.ChangeOffSetAndSize(position, outShellStats);
+            detectionRange.ChangeOffSetAndSize(position, outShellStats);
         }
 
         else
         {
             playerHitBox.ChangeOffSetAndSize(position, inShellStats);
+            detectionRange.ChangeOffSetAndSize(position, inShellStats);
         }
             
 
@@ -468,9 +550,29 @@ public class Player : AnimationSpriteCustom
 
     void Update()
     {
+
+        if (playerIndex == 0)
+        {
+            if (onGround == false)
+            {
+                Console.WriteLine("float");
+            }
+            
+        }
+       
+
+
         Move(movementDirection); //player movement accerlation
         ApplyForces(); //applying gravity, friction, and fan velocity
-        TryAction(); //try perform kick and pickup if detection intersects
+
+        canDoAction = false;
+
+        if (!InShell)
+        {
+            Action();
+        }
+        
+
         AnimationController(); //performs animation
 
         //if no movement lock, checks player input and shell state
@@ -481,8 +583,9 @@ public class Player : AnimationSpriteCustom
         }
 
         //We will let player collision decide if the player is on ground or on ceiliing or neither
-        onCeiling = false;
         onGround = false;
+        onCeiling = false;
+        onDoor = false;
 
         UpdateCollision(); //updates collision hitbox info
         playerCollision.Step(); //performs collision
